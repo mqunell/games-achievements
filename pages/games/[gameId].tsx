@@ -30,8 +30,11 @@ export default function Game({ achievements }) {
 
 			<h1 className="text-lg underline">Achievements</h1>
 			<ul>
-				{achievements &&
-					achievements.map((ach: Achievement) => <li key={ach.apiName}>{ach.name}</li>)}
+				{achievements.length ? (
+					achievements.map((ach: Achievement) => <li key={ach.apiName}>{ach.name}</li>)
+				) : (
+					<p>None</p>
+				)}
 			</ul>
 		</div>
 	);

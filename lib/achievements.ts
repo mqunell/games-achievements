@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 const API_KEY = process.env.STEAM_API_KEY;
 const USER_ID = process.env.STEAM_USER_ID;
@@ -34,7 +34,15 @@ export interface Achievement {
 }
 
 export async function getAchievements(gameId: GameId): Promise<Achievement[]> {
-	const myAchsRes = await axios.get(myAchsUrl(gameId));
+	let myAchsRes: AxiosResponse;
+
+	// Games without achievements give status 400 errors
+	try {
+		myAchsRes = await axios.get(myAchsUrl(gameId));
+	} catch (error) {
+		return [];
+	}
+
 	const globalAchsRes = await axios.get(globalAchsUrl(gameId));
 
 	const myAchs = myAchsRes.data.playerstats.achievements;
