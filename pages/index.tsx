@@ -1,8 +1,13 @@
 import Head from 'next/head';
-import Link from 'next/link';
-import { getUsers } from '../lib/users';
+import { GetStaticProps } from 'next';
+import { Game, getGames } from '../lib/games';
 
-export default function Home() {
+export const getStaticProps: GetStaticProps = async (context) => {
+	const games = await getGames();
+	return { props: { games }, revalidate: 60 };
+};
+
+export default function Home({ games }) {
 	return (
 		<div className="flex flex-col gap-2 p-8">
 			<Head>
@@ -11,19 +16,10 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<HomeLink url="/demos/static-generation" text="Static Generation" />
-			<HomeLink url="/demos/server-side-rendering" text="Server-side Rendering" />
-			<HomeLink url="/demos/client-side-rendering" text="Client-side Rendering" />
-
-			<p>../lib/users: {getUsers().toString()}</p>
+			<h1 className="text-lg underline">Games</h1>
+			<ul>
+				{games && games.map((game: Game) => <li key={game.gameId}>{game.name}</li>)}
+			</ul>
 		</div>
 	);
 }
-
-const HomeLink = ({ url, text }: { url: string; text: string }) => {
-	return (
-		<Link href={url}>
-			<a className="text-blue-500 hover:underline">{text}</a>
-		</Link>
-	);
-};
