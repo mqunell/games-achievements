@@ -1,8 +1,9 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import { GetStaticProps } from 'next';
 import { Game, getGames } from '../lib/games';
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async () => {
 	const games = await getGames();
 	return { props: { games }, revalidate: 60 };
 };
@@ -18,7 +19,14 @@ export default function Home({ games }) {
 
 			<h1 className="text-lg underline">Games</h1>
 			<ul>
-				{games && games.map((game: Game) => <li key={game.gameId}>{game.name}</li>)}
+				{games &&
+					games.map((game: Game) => (
+						<li key={game.gameId}>
+							<Link href={`/games/${game.gameId}`}>
+								<a>{game.name}</a>
+							</Link>
+						</li>
+					))}
 			</ul>
 		</div>
 	);

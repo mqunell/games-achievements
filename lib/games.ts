@@ -22,7 +22,7 @@ interface ApiGame {
 }
 
 export interface Game {
-	gameId: number;
+	gameId: string;
 	name: string;
 	playtimeRecent: number;
 	playtimeTotal: number;
@@ -35,7 +35,7 @@ export async function getGames(): Promise<Game[]> {
 	const gamesRes = await axios.get(gamesUrl);
 	const games = gamesRes.data.response.games
 		.map((game: ApiGame) => ({
-			gameId: game.appid,
+			gameId: game.appid.toString(),
 			name: game.name,
 			playtimeRecent: game.playtime_2weeks || 0,
 			playtimeTotal: game.playtime_forever,
