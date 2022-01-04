@@ -32,7 +32,7 @@ function GameLink({ game }: { game: Game }) {
 	return (
 		<Link href={`/games/${gameId}`}>
 			<a>
-				<div className="flex flex-col items-center w-[150px] px-4 py-4 gap-2 text-black text-center bg-white rounded cursor-pointer">
+				<div className="flex flex-col items-center w-[150px] p-4 gap-2 text-black text-center bg-white rounded cursor-pointer">
 					<Image src={iconUrl} alt={`${name} icon`} width={32} height={32} />
 					<h2 className="max-w-full text-lg truncate">{name}</h2>
 				</div>

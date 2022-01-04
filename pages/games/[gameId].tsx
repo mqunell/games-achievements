@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { getGames } from '../../lib/games';
 import { Achievement, getAchievements } from '../../lib/achievements';
+import classNames from 'classnames';
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	const games = await getGames();
@@ -21,21 +22,55 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 export default function Game({ achievements }) {
 	return (
-		<div className="flex flex-col gap-2 p-8">
+		<div className="flex flex-col items-center gap-2 p-8">
 			<Head>
 				<title>Next.js App</title>
 				<meta name="description" content="Next.js App" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<h1 className="text-lg underline">Achievements</h1>
-			<ul>
-				{achievements.length ? (
-					achievements.map((ach: Achievement) => <li key={ach.apiName}>{ach.name}</li>)
+			<h1 className="text-2xl">Achievements</h1>
+			<div className="flex flex-col gap-8 w-80">
+				{achievements ? (
+					achievements.map((ach: Achievement) => (
+						<AchievementCard key={ach.apiName} achievement={ach} />
+					))
 				) : (
 					<p>None</p>
 				)}
-			</ul>
+			</div>
+		</div>
+	);
+}
+
+function AchievementCard({ achievement }) {
+	const { name, description, completed, completedTime, globalCompleted } = achievement;
+
+	return (
+		<div className="grid grid-cols-[1fr]">
+			<div className="row-start-1 col-start-1 flex flex-col w-full pt-4 gap-1 text-black text-center bg-white rounded overflow-hidden">
+				<h2 className="px-4 text-lg font-semibold">{name}</h2>
+				<p className="px-4">{description}</p>
+
+				<div className="mt-2 bg-blue-200">
+					<div className="p-1.5 bg-blue-600" style={{ width: globalCompleted + '%' }}>
+						<p className="w-max px-1.5 py-0.5 text-xs bg-white border border-black rounded">
+							{globalCompleted.toFixed(1)}%
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div className="row-start-1 col-start-1 relative">
+				<div
+					className={classNames(
+						'absolute -top-2 -right-3 w-max h-max px-2 py-0.5',
+						completed ? 'bg-green-600' : 'bg-red-600'
+					)}
+				>
+					☑
+				</div>
+			</div>
 		</div>
 	);
 }
