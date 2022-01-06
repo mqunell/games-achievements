@@ -1,8 +1,9 @@
 import Head from 'next/head';
 import { GetStaticPaths, GetStaticProps } from 'next';
+import classNames from 'classnames';
+import { BadgeCheckIcon } from '@heroicons/react/solid';
 import { getGames } from '../../lib/games';
 import { Achievement, getAchievements } from '../../lib/achievements';
-import classNames from 'classnames';
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	const games = await getGames();
@@ -22,7 +23,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 export default function Game({ achievements }) {
 	return (
-		<div className="flex flex-col items-center gap-2 p-8">
+		<div className="flex flex-col items-center gap-4 p-8">
 			<Head>
 				<title>Next.js App</title>
 				<meta name="description" content="Next.js App" />
@@ -48,11 +49,20 @@ function AchievementCard({ achievement }) {
 
 	return (
 		<div className="grid grid-cols-[1fr]">
-			<div className="row-start-1 col-start-1 flex flex-col w-full pt-4 gap-1 text-black text-center bg-white rounded overflow-hidden">
+			{/* Card */}
+			<div className="row-start-1 col-start-1 flex flex-col items-center w-full pt-4 gap-1 text-black text-center bg-white rounded overflow-hidden">
+				{/* Text */}
 				<h2 className="px-4 text-lg font-semibold">{name}</h2>
-				<p className="px-4">{description}</p>
+				<p className={classNames('px-4', { italic: !description })}>
+					{description || 'Description not provided'}
+				</p>
+				<div className="w-8 my-2 border-b border-black"></div>
+				<p className="text-sm">
+					{new Date(completedTime * 1000).toLocaleString('en-US')}
+				</p>
 
-				<div className="mt-2 bg-blue-200">
+				{/* Completion bar */}
+				<div className="w-full mt-2 bg-blue-200">
 					<div className="p-1.5 bg-blue-600" style={{ width: globalCompleted + '%' }}>
 						<p className="w-max px-1.5 py-0.5 text-xs bg-white border border-black rounded">
 							{globalCompleted.toFixed(1)}%
@@ -61,16 +71,14 @@ function AchievementCard({ achievement }) {
 				</div>
 			</div>
 
-			<div className="row-start-1 col-start-1 relative">
-				<div
-					className={classNames(
-						'absolute -top-2 -right-3 w-max h-max px-2 py-0.5',
-						completed ? 'bg-green-600' : 'bg-red-600'
-					)}
-				>
-					☑
+			{/* Checkmark overlay */}
+			{completed && (
+				<div className="row-start-1 col-start-1 relative">
+					<div className="absolute -top-3 -right-4 w-max h-max p-1.5 bg-green-500 rounded-full">
+						<BadgeCheckIcon className="w-8 h-8 text-white" />
+					</div>
 				</div>
-			</div>
+			)}
 		</div>
 	);
 }
