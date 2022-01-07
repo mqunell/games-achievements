@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import Head from 'next/head';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import classNames from 'classnames';
@@ -47,8 +48,33 @@ export default function Game({ achievements }) {
 function AchievementCard({ achievement }) {
 	const { name, description, completed, completedTime, globalCompleted } = achievement;
 
+	const [isVisible, setVisible] = useState(false);
+	const domRef = useRef<HTMLDivElement>();
+
+	useEffect(() => {
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					setVisible(entry.isIntersecting);
+				}
+			});
+		});
+
+		observer.observe(domRef.current);
+
+		return () => observer.unobserve(domRef.current);
+	}, []);
+
 	return (
-		<div className="grid grid-cols-[1fr]">
+		/* Container - Card and Checkmark sit in the same grid cell */
+		<div
+			className={classNames(
+				'grid grid-cols-[1fr]',
+				'opacity-0 translate-y-4 transition-[opacity_translate] duration-500',
+				{ 'opacity-100 translate-y-0': isVisible }
+			)}
+			ref={domRef}
+		>
 			{/* Card */}
 			<div className="row-start-1 col-start-1 flex flex-col items-center w-full pt-4 gap-1 text-black text-center bg-white rounded overflow-hidden">
 				{/* Text */}
@@ -63,7 +89,14 @@ function AchievementCard({ achievement }) {
 
 				{/* Completion bar */}
 				<div className="w-full mt-2 bg-blue-200">
-					<div className="p-1.5 bg-blue-600" style={{ width: globalCompleted + '%' }}>
+					<div
+						className={classNames(
+							'p-1.5 bg-blue-600',
+							'scale-x-0 transition-transform origin-left duration-500 delay-500',
+							{ 'scale-x-100': isVisible }
+						)}
+						style={{ width: globalCompleted + '%' }}
+					>
 						<p className="w-max px-1.5 py-0.5 text-xs bg-white border border-black rounded">
 							{globalCompleted.toFixed(1)}%
 						</p>
@@ -73,8 +106,14 @@ function AchievementCard({ achievement }) {
 
 			{/* Checkmark overlay */}
 			{completed && (
-				<div className="row-start-1 col-start-1 relative">
-					<div className="absolute -top-3 -right-4 w-max h-max p-1.5 bg-green-500 rounded-full">
+				<div className={classNames('row-start-1 col-start-1 relative')}>
+					<div
+						className={classNames(
+							'absolute -top-3 -right-4 w-max h-max p-1.5 bg-green-500 rounded-full',
+							'scale-0 transition-transform duration-500 delay-500',
+							{ 'scale-100': isVisible }
+						)}
+					>
 						<BadgeCheckIcon className="w-8 h-8 text-white" />
 					</div>
 				</div>
