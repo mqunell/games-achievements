@@ -80,12 +80,12 @@ function AchievementCard({ achievement }) {
 				<div className={classNames('row-start-1 col-start-1 relative')}>
 					<div
 						className={classNames(
-							'absolute -top-3 -right-4 w-max h-max p-1.5 bg-green-500 rounded-full z-10',
+							'absolute -top-3 -right-4 w-max h-max bg-green-500 rounded-full z-10',
 							'scale-0 transition-transform duration-500 delay-500',
 							{ 'scale-100': isVisible }
 						)}
 					>
-						<BadgeCheckIcon className="w-8 h-8 text-white" />
+						<BadgeCheckIcon className="w-8 h-8 m-1.5 text-white" />
 					</div>
 				</div>
 			)}
