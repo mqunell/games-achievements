@@ -75,20 +75,43 @@ function AchievementCard({ achievement }) {
 			)}
 			ref={domRef}
 		>
-			{/* Card */}
-			<div className="row-start-1 col-start-1 flex flex-col items-center w-full pt-4 gap-1 text-black text-center bg-white rounded overflow-hidden">
+			{/* Checkmark overlay */}
+			{completed && (
+				<div className={classNames('row-start-1 col-start-1 relative')}>
+					<div
+						className={classNames(
+							'absolute -top-3 -right-4 w-max h-max p-1.5 bg-green-500 rounded-full z-10',
+							'scale-0 transition-transform duration-500 delay-500',
+							{ 'scale-100': isVisible }
+						)}
+					>
+						<BadgeCheckIcon className="w-8 h-8 text-white" />
+					</div>
+				</div>
+			)}
+
+			{/* Card text and bar */}
+			<div className="row-start-1 col-start-1 relative flex flex-col text-black text-center bg-white rounded overflow-hidden">
 				{/* Text */}
-				<h2 className="px-4 text-lg font-semibold">{name}</h2>
-				<p className={classNames('px-4', { italic: !description })}>
-					{description || 'Description not provided'}
-				</p>
-				<div className="w-8 my-2 border-b border-black"></div>
-				<p className="text-sm">
-					{new Date(completedTime * 1000).toLocaleString('en-US')}
-				</p>
+				<div className="flex flex-col items-center gap-1 p-4">
+					<h2 className="text-lg font-semibold">{name}</h2>
+					{description ? (
+						<p>{description}</p>
+					) : (
+						<p className="italic">Description not provided</p>
+					)}
+					{completed && (
+						<>
+							<hr className="w-1/6 my-2 border-black" />
+							<p className="text-sm">
+								{new Date(completedTime * 1000).toLocaleString('en-US')}
+							</p>
+						</>
+					)}
+				</div>
 
 				{/* Completion bar */}
-				<div className="w-full mt-2 bg-blue-200">
+				<div className="w-full bg-blue-200">
 					<div
 						className={classNames(
 							'p-1.5 bg-blue-600',
@@ -103,21 +126,6 @@ function AchievementCard({ achievement }) {
 					</div>
 				</div>
 			</div>
-
-			{/* Checkmark overlay */}
-			{completed && (
-				<div className={classNames('row-start-1 col-start-1 relative')}>
-					<div
-						className={classNames(
-							'absolute -top-3 -right-4 w-max h-max p-1.5 bg-green-500 rounded-full',
-							'scale-0 transition-transform duration-500 delay-500',
-							{ 'scale-100': isVisible }
-						)}
-					>
-						<BadgeCheckIcon className="w-8 h-8 text-white" />
-					</div>
-				</div>
-			)}
 		</div>
 	);
 }
