@@ -69,7 +69,7 @@ function AchievementCard({ achievement }) {
 		/* Container - Card and Checkmark sit in the same grid cell */
 		<div
 			className={classNames(
-				'grid grid-cols-[1fr]',
+				'grid',
 				'opacity-0 translate-y-4 transition-[opacity_translate] duration-500',
 				{ 'opacity-100 translate-y-0': isVisible }
 			)}
