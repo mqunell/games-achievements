@@ -95,11 +95,7 @@ function AchievementCard({ achievement }) {
 				{/* Text */}
 				<div className="flex flex-col items-center gap-1 p-4">
 					<h2 className="text-lg font-semibold">{name}</h2>
-					{description ? (
-						<p>{description}</p>
-					) : (
-						<p className="italic">Description not provided</p>
-					)}
+					{description ? <p>{description}</p> : <p className="italic">Hidden</p>}
 					{completed && (
 						<>
 							<hr className="w-1/6 my-2 border-black" />
