@@ -31,7 +31,7 @@ export interface Game {
 }
 
 export async function getGames(): Promise<Game[]> {
-	// Get my games and map to custom data, filter to playtime > 60, sort by playtime desc
+	// Get my games and map to custom data, filter to playtime > 180 minutes, sort by playtime desc
 	const gamesRes = await axios.get(gamesUrl);
 	const games = gamesRes.data.response.games
 		.map((game: ApiGame) => ({
@@ -42,7 +42,7 @@ export async function getGames(): Promise<Game[]> {
 			iconUrl: buildIconLogoUrl(game.appid, game.img_icon_url),
 			logoUrl: buildIconLogoUrl(game.appid, game.img_logo_url),
 		}))
-		.filter((game: Game) => game.playtimeTotal > 60)
+		.filter((game: Game) => game.playtimeTotal > 180)
 		.sort((a: Game, b: Game) => (a.playtimeTotal > b.playtimeTotal ? -1 : 1));
 
 	return games;
