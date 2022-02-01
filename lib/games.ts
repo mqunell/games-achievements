@@ -1,4 +1,5 @@
 import axios from 'axios';
+import fs from 'fs';
 
 const API_KEY = process.env.STEAM_API_KEY;
 const USER_ID = process.env.STEAM_USER_ID;
@@ -30,8 +31,12 @@ export interface Game {
 	logoUrl: string; // Full URL
 }
 
+/**
+ * Gets all games from the API then maps to custom data, filters to playtime > 180 minutes, and sorts by playtime desc.
+ * Also writes all games to a JSON file as a cache for SSG since getStaticPaths() can't pass extra data to getStaticProps()
+ * @returns All games for my account
+ */
 export async function getGames(): Promise<Game[]> {
-	// Get my games and map to custom data, filter to playtime > 180 minutes, sort by playtime desc
 	const gamesRes = await axios.get(gamesUrl);
 	const games = gamesRes.data.response.games
 		.map((game: ApiGame) => ({
@@ -45,5 +50,17 @@ export async function getGames(): Promise<Game[]> {
 		.filter((game: Game) => game.playtimeTotal > 180)
 		.sort((a: Game, b: Game) => (a.playtimeTotal > b.playtimeTotal ? -1 : 1));
 
+	fs.writeFileSync('games-cache.json', JSON.stringify(games));
+
 	return games;
+}
+
+/**
+ * Get a Game from the JSON cache file for getStaticProps() to pass to the component
+ * @param gameId A game ID
+ * @returns An individual game
+ */
+export async function getGame(gameId: string): Promise<Game> {
+	const gamesCache: Game[] = JSON.parse(fs.readFileSync('games-cache.json').toString());
+	return gamesCache.find((game: Game) => game.gameId === gameId);
 }

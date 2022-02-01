@@ -21,8 +21,8 @@ export default function Home({ games }) {
 	return (
 		<div className="flex flex-col items-center gap-4 p-8">
 			<Head>
-				<title>Next.js App</title>
-				<meta name="description" content="Next.js App" />
+				<title>Steam Games and Achievements</title>
+				<meta name="description" content="Steam games and achievements" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 

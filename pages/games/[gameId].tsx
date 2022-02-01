@@ -3,8 +3,13 @@ import Head from 'next/head';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import classNames from 'classnames';
 import { BadgeCheckIcon } from '@heroicons/react/solid';
-import { getGames } from '../../lib/games';
+import { Game, getGames, getGame } from '../../lib/games';
 import { Achievement, getAchievements } from '../../lib/achievements';
+
+interface GameAchievementProps {
+	game: Game;
+	achievements: Achievement[];
+}
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	const games = await getGames();
@@ -17,21 +22,23 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const gameId = params.gameId as string;
+
+	const game = await getGame(gameId);
 	const achievements = await getAchievements(gameId);
 
-	return { props: { achievements }, revalidate: 60 };
+	return { props: { game, achievements }, revalidate: 3600 };
 };
 
-export default function Game({ achievements }) {
+export default function GameAchievements({ game, achievements }: GameAchievementProps) {
 	return (
 		<div className="flex flex-col items-center gap-4 p-8">
 			<Head>
-				<title>Next.js App</title>
-				<meta name="description" content="Next.js App" />
+				<title>{game.name} Achievements</title>
+				<meta name="description" content={`${game.name} achievements`} />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<h1 className="text-2xl">Achievements</h1>
+			<h1 className="text-2xl text-center">{game.name}</h1>
 			<div className="flex flex-col gap-8 w-80">
 				{achievements ? (
 					achievements.map((ach: Achievement) => (
@@ -70,8 +77,8 @@ function AchievementCard({ achievement }) {
 		<div
 			className={classNames(
 				'grid',
-				'opacity-0 translate-y-4 transition-[opacity_translate] duration-500',
-				{ 'opacity-100 translate-y-0': isVisible }
+				'opacity-0 translate-y-8 transition-[opacity_translate] duration-500',
+				{ 'opacity-100 !translate-y-0': isVisible }
 			)}
 			ref={domRef}
 		>
