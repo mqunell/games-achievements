@@ -67,9 +67,10 @@ function AchievementCard({ achievement }) {
 			});
 		});
 
-		observer.observe(domRef.current);
+		const node = domRef.current;
 
-		return () => observer.unobserve(domRef.current);
+		observer.observe(node);
+		return () => observer.unobserve(node);
 	}, []);
 
 	return (
