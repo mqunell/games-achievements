@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import Head from 'next/head';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import classNames from 'classnames';
+import { Disclosure } from '@headlessui/react';
 import { BadgeCheckIcon } from '@heroicons/react/solid';
 import { Game, getGames, getGame } from '../../lib/games';
 import { Achievement, getAchievements } from '../../lib/achievements';
@@ -42,7 +43,7 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 	};
 
 	return (
-		<div className="flex flex-col items-center gap-6 p-8">
+		<div className="flex flex-col items-center gap-6 w-80 mx-auto my-8">
 			<Head>
 				<title>{game.name} Achievements</title>
 				<meta name="description" content={`${game.name} achievements`} />
@@ -51,22 +52,38 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 
 			<h1 className="text-2xl text-center">{game.name}</h1>
 
-			<div className="flex justify-between w-80">
-				<button
-					className="px-2 py-1 bg-blue-600 rounded"
-					onClick={() => toggleFilter('completed')}
-				>
-					Toggle Completed
-				</button>
-				<button
-					className="px-2 py-1 bg-blue-600 rounded"
-					onClick={() => toggleFilter('uncompleted')}
-				>
-					Toggle Uncompleted
-				</button>
+			<div className="w-full p-2 bg-white rounded">
+				<div className="w-full rounded">
+					<Disclosure>
+						<Disclosure.Button className="w-full py-2 bg-blue-600 rounded">
+							Filters &amp; Sorting
+						</Disclosure.Button>
+
+						<Disclosure.Panel className="pt-2 text-black">
+							<div className="grid grid-cols-2 gap-2 w-full text-white">
+								<button
+									className="px-2 py-1 bg-green-500 rounded"
+									onClick={() => toggleFilter('completed')}
+								>
+									Toggle
+									<br />
+									Completed
+								</button>
+								<button
+									className="px-2 py-1 bg-green-500 rounded"
+									onClick={() => toggleFilter('uncompleted')}
+								>
+									Toggle
+									<br />
+									Uncompleted
+								</button>
+							</div>
+						</Disclosure.Panel>
+					</Disclosure>
+				</div>
 			</div>
 
-			<div className="flex flex-col w-80">
+			<div className="flex flex-col w-full">
 				{achievements ? (
 					achievements.map((ach: Achievement) => (
 						<AchievementCard key={ach.apiName} achievement={ach} filters={filters} />
