@@ -30,8 +30,19 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export default function GameAchievements({ game, achievements }: GameAchievementProps) {
+	const [filters, setFilters] = useState({
+		completed: true,
+		uncompleted: true,
+	});
+
+	const toggleFilter = (key: 'completed' | 'uncompleted') => {
+		const newFilters = { ...filters };
+		newFilters[key] = !newFilters[key];
+		setFilters(newFilters);
+	};
+
 	return (
-		<div className="flex flex-col items-center gap-4 p-8">
+		<div className="flex flex-col items-center gap-6 p-8">
 			<Head>
 				<title>{game.name} Achievements</title>
 				<meta name="description" content={`${game.name} achievements`} />
@@ -39,10 +50,26 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 			</Head>
 
 			<h1 className="text-2xl text-center">{game.name}</h1>
-			<div className="flex flex-col gap-8 w-80">
+
+			<div className="flex justify-between w-80">
+				<button
+					className="px-2 py-1 bg-blue-600 rounded"
+					onClick={() => toggleFilter('completed')}
+				>
+					Toggle Completed
+				</button>
+				<button
+					className="px-2 py-1 bg-blue-600 rounded"
+					onClick={() => toggleFilter('uncompleted')}
+				>
+					Toggle Uncompleted
+				</button>
+			</div>
+
+			<div className="flex flex-col w-80">
 				{achievements ? (
 					achievements.map((ach: Achievement) => (
-						<AchievementCard key={ach.apiName} achievement={ach} />
+						<AchievementCard key={ach.apiName} achievement={ach} filters={filters} />
 					))
 				) : (
 					<p>None</p>
@@ -52,13 +79,25 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 	);
 }
 
-function AchievementCard({ achievement }) {
+function AchievementCard({ achievement, filters }) {
 	const { name, description, completed, completedTime, globalCompleted } = achievement;
 
-	const [isVisible, setVisible] = useState(false);
+	// The HTML node
 	const domRef = useRef<HTMLDivElement>();
 
+	// Scrolled into view
+	const [isVisible, setVisible] = useState(false);
+
+	// Filtered in
+	const initialHeight = useRef<number>();
+	const [isFiltered, setFiltered] = useState(true);
+
+	// Store the initial (full) height and create/attach the observer
 	useEffect(() => {
+		const node = domRef.current;
+
+		initialHeight.current = node.clientHeight;
+
 		const observer = new IntersectionObserver((entries) => {
 			entries.forEach((entry) => {
 				if (entry.isIntersecting) {
@@ -67,19 +106,23 @@ function AchievementCard({ achievement }) {
 			});
 		});
 
-		const node = domRef.current;
-
 		observer.observe(node);
 		return () => observer.unobserve(node);
 	}, []);
+
+	// Call setFiltered() when the filters prop changes to cause a component re-render
+	useEffect(() => {
+		setFiltered(filters[completed ? 'completed' : 'uncompleted']);
+	}, [filters, completed]);
 
 	return (
 		/* Container - Card and Checkmark sit in the same grid cell */
 		<div
 			className={classNames(
-				'grid',
-				'opacity-0 translate-y-8 transition-[opacity_translate] duration-500',
-				{ 'opacity-100 !translate-y-0': isVisible }
+				`grid h-[${initialHeight.current} px] mb-8`,
+				'opacity-0 translate-y-8 transition-[height_opacity_translate] duration-500',
+				{ 'opacity-100 !translate-y-0': isVisible },
+				{ 'h-0 mb-0 overflow-hidden': !isFiltered }
 			)}
 			ref={domRef}
 		>
