@@ -27,7 +27,7 @@ export default function Home({ games }) {
 			</Head>
 
 			<h1 className="text-2xl">Games</h1>
-			<div className="flex flex-col gap-6 w-68">
+			<div className="w-68 flex flex-col gap-6">
 				{games && games.map((game: Game) => <GameLink key={game.gameId} game={game} />)}
 			</div>
 		</div>
@@ -40,18 +40,18 @@ function GameLink({ game }: { game: Game }) {
 	return (
 		<Link href={`/games/${gameId}`}>
 			<a>
-				<div className="flex flex-col items-center p-4 gap-2 text-black text-center bg-white rounded cursor-pointer">
-					<div className="relative w-[184px] h-[69px] shadow-md">
+				<div className="flex cursor-pointer flex-col items-center gap-2 rounded bg-white p-4 text-center text-black">
+					<div className="relative h-[69px] w-[184px] shadow-md">
 						<Image src={logoUrl} alt={`${name} logo`} layout="fill" />
 					</div>
-					<h2 className="max-w-full text-lg font-semibold truncate">{name}</h2>
+					<h2 className="max-w-full truncate text-lg font-semibold">{name}</h2>
 					<div className="flex items-center gap-1">
-						<ClockIcon className="w-4 h-4" />
+						<ClockIcon className="h-4 w-4" />
 						<p>Total: {formatTime(playtimeTotal)}</p>
 					</div>
 					{playtimeRecent > 0 && (
 						<div className="flex items-center gap-1">
-							<ClockIcon className="w-4 h-4" />
+							<ClockIcon className="h-4 w-4" />
 							<p>Recent: {formatTime(playtimeRecent)}</p>
 						</div>
 					)}

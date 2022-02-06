@@ -43,26 +43,28 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 	};
 
 	return (
-		<div className="flex flex-col items-center gap-6 w-80 mx-auto my-8">
+		<div className="mx-auto my-8 flex w-80 flex-col items-center gap-6">
 			<Head>
 				<title>{game.name} Achievements</title>
 				<meta name="description" content={`${game.name} achievements`} />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<h1 className="text-2xl text-center">{game.name}</h1>
+			{/* Title */}
+			<h1 className="text-center text-2xl">{game.name}</h1>
 
-			<div className="w-full p-2 bg-white rounded">
+			{/* Filters and sorting */}
+			<div className="w-full rounded bg-white p-2">
 				<div className="w-full rounded">
 					<Disclosure>
-						<Disclosure.Button className="w-full py-2 bg-blue-600 rounded">
+						<Disclosure.Button className="w-full rounded bg-blue-600 py-2">
 							Filters &amp; Sorting
 						</Disclosure.Button>
 
 						<Disclosure.Panel className="pt-2 text-black">
-							<div className="grid grid-cols-2 gap-2 w-full text-white">
+							<div className="grid w-full grid-cols-2 gap-2 text-white">
 								<button
-									className="px-2 py-1 bg-green-500 rounded"
+									className="rounded bg-green-500 px-2 py-1"
 									onClick={() => toggleFilter('completed')}
 								>
 									Toggle
@@ -70,7 +72,7 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 									Completed
 								</button>
 								<button
-									className="px-2 py-1 bg-green-500 rounded"
+									className="rounded bg-green-500 px-2 py-1"
 									onClick={() => toggleFilter('uncompleted')}
 								>
 									Toggle
@@ -83,7 +85,8 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 				</div>
 			</div>
 
-			<div className="flex flex-col w-full">
+			{/* Achievements */}
+			<div className="flex w-full flex-col">
 				{achievements ? (
 					achievements.map((ach: Achievement) => (
 						<AchievementCard key={ach.apiName} achievement={ach} filters={filters} />
@@ -137,36 +140,36 @@ function AchievementCard({ achievement, filters }) {
 		<div
 			className={classNames(
 				`grid h-[${initialHeight.current} px] mb-8`,
-				'opacity-0 translate-y-8 transition-[height_opacity_translate] duration-500',
-				{ 'opacity-100 !translate-y-0': isVisible },
-				{ 'h-0 mb-0 overflow-hidden': !isFiltered }
+				'translate-y-8 opacity-0 transition-[height_opacity_translate] duration-500',
+				{ '!translate-y-0 opacity-100': isVisible },
+				{ 'mb-0 h-0 overflow-hidden': !isFiltered }
 			)}
 			ref={domRef}
 		>
 			{/* Checkmark overlay */}
 			{completed && (
-				<div className={classNames('row-start-1 col-start-1 relative')}>
+				<div className={classNames('relative col-start-1 row-start-1')}>
 					<div
 						className={classNames(
-							'absolute -top-3 -right-4 w-max h-max bg-green-500 rounded-full z-10',
-							'scale-0 transition-transform duration-500 delay-500',
+							'absolute -top-3 -right-4 z-10 h-max w-max rounded-full bg-green-500',
+							'scale-0 transition-transform delay-500 duration-500',
 							{ 'scale-100': isVisible }
 						)}
 					>
-						<BadgeCheckIcon className="w-8 h-8 m-1.5 text-white" />
+						<BadgeCheckIcon className="m-1.5 h-8 w-8 text-white" />
 					</div>
 				</div>
 			)}
 
 			{/* Card text and bar */}
-			<div className="row-start-1 col-start-1 relative flex flex-col text-black text-center bg-white rounded overflow-hidden">
+			<div className="relative col-start-1 row-start-1 flex flex-col overflow-hidden rounded bg-white text-center text-black">
 				{/* Text */}
 				<div className="flex flex-col items-center gap-1 p-4">
 					<h2 className="text-lg font-semibold">{name}</h2>
 					{description ? <p>{description}</p> : <p className="italic">Hidden</p>}
 					{completed && (
 						<>
-							<hr className="w-1/6 my-2 border-black" />
+							<hr className="my-2 w-1/6 border-black" />
 							<p className="text-sm">
 								{new Date(completedTime * 1000).toLocaleString('en-US')}
 							</p>
@@ -178,13 +181,13 @@ function AchievementCard({ achievement, filters }) {
 				<div className="w-full bg-blue-200">
 					<div
 						className={classNames(
-							'p-1.5 bg-blue-600',
-							'scale-x-0 transition-transform origin-left duration-500 delay-500',
+							'bg-blue-600 p-1.5',
+							'origin-left scale-x-0 transition-transform delay-500 duration-500',
 							{ 'scale-x-100': isVisible }
 						)}
 						style={{ width: globalCompleted + '%' }}
 					>
-						<p className="w-max px-1.5 py-0.5 text-xs bg-white border border-black rounded">
+						<p className="w-max rounded border border-black bg-white px-1.5 py-0.5 text-xs">
 							{globalCompleted.toFixed(1)}%
 						</p>
 					</div>
