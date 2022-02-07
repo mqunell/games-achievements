@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import Head from 'next/head';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import classNames from 'classnames';
-import { Disclosure } from '@headlessui/react';
+import { Disclosure, Switch } from '@headlessui/react';
 import { BadgeCheckIcon } from '@heroicons/react/solid';
 import { Game, getGames, getGame } from '../../lib/games';
 import { Achievement, getAchievements } from '../../lib/achievements';
@@ -27,7 +27,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const game = await getGame(gameId);
 	const achievements = await getAchievements(gameId);
 
-	return { props: { game, achievements }, revalidate: 3600 };
+	return { props: { game, achievements }, revalidate: 60 };
 };
 
 export default function GameAchievements({ game, achievements }: GameAchievementProps) {
@@ -41,6 +41,28 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 		newFilters[key] = !newFilters[key];
 		setFilters(newFilters);
 	};
+
+	const toggleButton = (option: 'completed' | 'uncompleted') => (
+		<Switch.Group key={`toggle-${option}`}>
+			<div className="flex items-center gap-1">
+				<Switch
+					checked={filters[option]}
+					onChange={() => toggleFilter(option)}
+					className={`${
+						filters[option] ? 'bg-blue-600' : 'bg-black'
+					} relative inline-flex h-6 w-10 items-center rounded-full transition-colors duration-500`}
+				>
+					<span className="sr-only">Show {option}</span>
+					<span
+						className={`${
+							filters[option] ? 'translate-x-5' : 'translate-x-1'
+						} inline-block h-4 w-4 transform rounded-full bg-white transition duration-500`}
+					/>
+				</Switch>
+				<Switch.Label className="text-black">Show {option}</Switch.Label>
+			</div>
+		</Switch.Group>
+	);
 
 	return (
 		<div className="mx-auto my-8 flex w-80 flex-col items-center gap-6">
@@ -62,23 +84,9 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 						</Disclosure.Button>
 
 						<Disclosure.Panel className="pt-2 text-black">
-							<div className="grid w-full grid-cols-2 gap-2 text-white">
-								<button
-									className="rounded bg-green-500 px-2 py-1"
-									onClick={() => toggleFilter('completed')}
-								>
-									Toggle
-									<br />
-									Completed
-								</button>
-								<button
-									className="rounded bg-green-500 px-2 py-1"
-									onClick={() => toggleFilter('uncompleted')}
-								>
-									Toggle
-									<br />
-									Uncompleted
-								</button>
+							<div className="flex w-full flex-col gap-2 text-white">
+								{toggleButton('completed')}
+								{toggleButton('uncompleted')}
 							</div>
 						</Disclosure.Panel>
 					</Disclosure>
