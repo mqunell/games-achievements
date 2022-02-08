@@ -6,8 +6,8 @@ import { Achievement } from '../lib/achievements';
 interface AchievementCardProps {
 	achievement: Achievement;
 	filters: {
-		completed: boolean;
-		uncompleted: boolean;
+		showCompleted: boolean;
+		showUncompleted: boolean;
 	};
 }
 
@@ -44,7 +44,7 @@ export default function AchievementCard({ achievement, filters }: AchievementCar
 
 	// Call setFiltered() when the filters prop changes to cause a component re-render
 	useEffect(() => {
-		setFiltered(filters[completed ? 'completed' : 'uncompleted']);
+		setFiltered(filters[completed ? 'showCompleted' : 'showUncompleted']);
 	}, [filters, completed]);
 
 	return (
