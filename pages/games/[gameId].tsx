@@ -32,6 +32,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export default function GameAchievements({ game, achievements }: GameAchievementProps) {
+	// Display state
+	const [showTime, setShowTime] = useState(true);
+	const [showGlobal, setShowGlobal] = useState(true);
+
 	// Filter state
 	const [showCompleted, setShowCompleted] = useState(true);
 	const [showUncompleted, setShowUncompleted] = useState(true);
@@ -52,8 +56,13 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 	useEffect(() => {
 		const { field, direction } = sortBy;
 
-		if (field === 'completedTime' && showUncompleted) {
+		if (field === 'completedTime') {
+			setShowTime(true);
 			setShowUncompleted(false);
+		}
+
+		if (field === 'globalCompleted') {
+			setShowGlobal(true);
 		}
 
 		const sorted = [...achievements].sort((a, b) =>
@@ -105,6 +114,20 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 
 						<Disclosure.Panel className="pt-2 text-black">
 							<div className="flex w-full flex-col gap-2 text-white">
+								<p className="font-semibold text-black">Display</p>
+								<Toggle
+									text={'Completion time'}
+									checked={showTime}
+									onClick={() => setShowTime(!showTime)}
+								/>
+								<Toggle
+									text={'Global completion %'}
+									checked={showGlobal}
+									onClick={() => setShowGlobal(!showGlobal)}
+								/>
+
+								<hr className="mt-3 mb-1" />
+
 								<p className="font-semibold text-black">Filters</p>
 								<Toggle
 									text={'Completed achievements'}
@@ -134,6 +157,7 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 						<AchievementCard
 							key={ach.apiName}
 							achievement={ach}
+							displayOptions={{ showTime, showGlobal }}
 							filters={{ showCompleted, showUncompleted }}
 						/>
 					))
