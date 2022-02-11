@@ -44,10 +44,12 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 	const [sortedAchievements, setSortedAchievements] = useState(achievements);
 
 	const sortOptions = [
-		{ text: 'Global completion % (highest)', field: 'globalCompleted', direction: -1 },
-		{ text: 'Global completion % (lowest)', field: 'globalCompleted', direction: 1 },
+		{ text: 'Alphabetical (a-z)', field: 'name', direction: 1 },
+		{ text: 'Alphabetical (z-a)', field: 'name', direction: -1 },
 		{ text: 'Completion time (newest)', field: 'completedTime', direction: -1 },
 		{ text: 'Completion time (oldest)', field: 'completedTime', direction: 1 },
+		{ text: 'Global completion % (highest)', field: 'globalCompleted', direction: -1 },
+		{ text: 'Global completion % (lowest)', field: 'globalCompleted', direction: 1 },
 	];
 
 	const [sortBy, setSortBy] = useState(sortOptions[0]);
@@ -56,6 +58,7 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 	useEffect(() => {
 		const { field, direction } = sortBy;
 
+		// Set toggles based on sort field
 		if (field === 'completedTime') {
 			setShowTime(true);
 			setShowUncompleted(false);
@@ -65,6 +68,7 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 			setShowGlobal(true);
 		}
 
+		// Sort the achievements
 		const sorted = [...achievements].sort((a, b) =>
 			a[field] < b[field] ? direction * -1 : direction
 		);
