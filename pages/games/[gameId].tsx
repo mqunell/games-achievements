@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import Head from 'next/head';
 import { GetStaticPaths, GetStaticProps } from 'next';
+import Head from 'next/head';
 import { Disclosure, Listbox } from '@headlessui/react';
 import { SelectorIcon } from '@heroicons/react/solid';
 import { Game, getGames, getGame } from '../../lib/games';
 import { Achievement, getAchievements } from '../../lib/achievements';
 import AchievementCard from '../../components/AchievementCard';
 import Toggle from '../../components/Toggle';
+import GameCard from '../../components/GameCard';
 
 interface GameAchievementProps {
 	game: Game;
@@ -52,7 +53,7 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 		{ text: 'Global completion % (lowest)', field: 'globalCompleted', direction: 1 },
 	];
 
-	const [sortBy, setSortBy] = useState(sortOptions[0]);
+	const [sortBy, setSortBy] = useState(sortOptions[4]);
 
 	// Sort dropdown click handler
 	useEffect(() => {
@@ -98,15 +99,15 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 	);
 
 	return (
-		<div className="mx-auto my-8 flex w-80 flex-col items-center gap-6">
+		<div className="mx-auto my-8 flex w-80 flex-col items-center gap-8">
 			<Head>
 				<title>{game.name} Achievements</title>
 				<meta name="description" content={`${game.name} achievements`} />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			{/* Title */}
-			<h1 className="text-center text-2xl">{game.name}</h1>
+			{/* Heading image and data */}
+			<GameCard game={game} size="large" />
 
 			{/* Display options */}
 			<div className="w-full rounded bg-white p-3">

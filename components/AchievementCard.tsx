@@ -62,7 +62,7 @@ export default function AchievementCard({
 				`grid h-[${initialHeight.current} px] mb-8`,
 				'translate-y-8 opacity-0 transition-[height_opacity_translate] duration-500',
 				{ '!translate-y-0 opacity-100': isVisible },
-				{ 'mb-0 h-0 overflow-hidden': !isFiltered }
+				{ '!mb-0 h-0 overflow-hidden': !isFiltered }
 			)}
 			ref={domRef}
 		>

@@ -1,20 +1,12 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import Image from 'next/image';
 import { GetStaticProps } from 'next';
-import { ClockIcon } from '@heroicons/react/solid';
 import { Game, getGames } from '../lib/games';
+import GameCard from '../components/GameCard';
 
 export const getStaticProps: GetStaticProps = async () => {
 	const games = await getGames();
 	return { props: { games }, revalidate: 60 };
-};
-
-const formatTime = (minutes: number) => {
-	const hours = Math.trunc(minutes / 60).toString();
-	const mins = (minutes % 60).toString().padStart(2, '0');
-
-	return `${hours}:${mins}`;
 };
 
 export default function Home({ games }) {
@@ -28,35 +20,15 @@ export default function Home({ games }) {
 
 			<h1 className="text-2xl">Games</h1>
 			<div className="w-68 flex flex-col gap-6">
-				{games && games.map((game: Game) => <GameLink key={game.gameId} game={game} />)}
+				{games &&
+					games.map((game: Game) => (
+						<Link key={game.gameId} href={`/games/${game.gameId}`}>
+							<a>
+								<GameCard game={game} size="small" />
+							</a>
+						</Link>
+					))}
 			</div>
 		</div>
-	);
-}
-
-function GameLink({ game }: { game: Game }) {
-	const { gameId, name, playtimeRecent, playtimeTotal, iconUrl, logoUrl } = game;
-
-	return (
-		<Link href={`/games/${gameId}`}>
-			<a>
-				<div className="flex cursor-pointer flex-col items-center gap-2 rounded bg-white p-4 text-center text-black">
-					<div className="relative h-[69px] w-[184px] shadow-md">
-						<Image src={logoUrl} alt={`${name} logo`} layout="fill" />
-					</div>
-					<h2 className="max-w-full truncate text-lg font-semibold">{name}</h2>
-					<div className="flex items-center gap-1">
-						<ClockIcon className="h-4 w-4" />
-						<p>Total: {formatTime(playtimeTotal)}</p>
-					</div>
-					{playtimeRecent > 0 && (
-						<div className="flex items-center gap-1">
-							<ClockIcon className="h-4 w-4" />
-							<p>Recent: {formatTime(playtimeRecent)}</p>
-						</div>
-					)}
-				</div>
-			</a>
-		</Link>
 	);
 }
