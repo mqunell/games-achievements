@@ -75,7 +75,7 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 		);
 
 		setSortedAchievements(sorted);
-	}, [sortBy]);
+	}, [sortBy, achievements]);
 
 	// Sort dropdown component
 	const sortDropdown = () => (

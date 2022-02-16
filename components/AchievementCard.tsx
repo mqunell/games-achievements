@@ -71,12 +71,12 @@ export default function AchievementCard({
 				<div className={classNames('relative col-start-1 row-start-1')}>
 					<div
 						className={classNames(
-							'absolute -top-3 -right-4 z-10 h-max w-max rounded-full bg-green-500',
+							'absolute -top-3 -right-4 z-10 h-max w-max rounded-full bg-green-500 p-1.5',
 							'scale-0 transition-transform delay-500 duration-500',
 							{ 'scale-100': isVisible }
 						)}
 					>
-						<BadgeCheckIcon className="m-1.5 h-8 w-8 text-white" />
+						<BadgeCheckIcon className="h-8 w-8 text-white" />
 					</div>
 				</div>
 			)}

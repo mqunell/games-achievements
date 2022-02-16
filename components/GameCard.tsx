@@ -1,11 +1,17 @@
 import Image from 'next/image';
 import classNames from 'classnames';
-import { ClockIcon } from '@heroicons/react/solid';
+import { CheckCircleIcon, ClockIcon } from '@heroicons/react/solid';
 import { Game } from '../lib/games';
 
 interface GameCardProps {
 	game: Game;
 	size: 'small' | 'large';
+}
+
+interface IconTextProps {
+	icon: React.ElementType;
+	text: string;
+	italic?: boolean;
 }
 
 const formatTime = (minutes: number) => {
@@ -15,8 +21,26 @@ const formatTime = (minutes: number) => {
 	return `${hours}:${mins}`;
 };
 
+function IconText({ icon, text, italic = false }: IconTextProps) {
+	const Icon = icon;
+
+	return (
+		<div className="flex items-center gap-1.5">
+			<div className="rounded-full bg-green-500 p-0.5">
+				<Icon className="h-5 w-5 text-white" />
+			</div>
+			<p className={classNames('text-lg', { italic: italic })}>{text}</p>
+		</div>
+	);
+}
+
 export default function GameCard({ game, size }: GameCardProps) {
-	const { name, playtimeRecent, playtimeTotal, logoUrl } = game;
+	const { name, playtimeRecent, playtimeTotal, logoUrl, achievementCounts } = game;
+	const { completed, total } = achievementCounts;
+
+	// Show one decimal place unless x.0%
+	let percentage = ((completed / total) * 100).toFixed(1);
+	if (percentage.endsWith('.0')) percentage = percentage.slice(0, -2);
 
 	return (
 		/* Container */
@@ -41,24 +65,28 @@ export default function GameCard({ game, size }: GameCardProps) {
 			{/* Title */}
 			<h1
 				className={classNames('font-semibold', {
-					'max-w-full truncate text-lg': size === 'small',
+					'max-w-full truncate text-xl': size === 'small',
 					'text-2xl': size === 'large',
 				})}
 			>
 				{name}
 			</h1>
 
+			<hr className="my-1 w-full" />
+
+			{/* Achievements */}
+			<IconText
+				icon={CheckCircleIcon}
+				text={total > 0 ? `${completed}/${total} - ${percentage}%` : 'No Achievements'}
+				italic={total === 0}
+			/>
+
 			{/* Playtime */}
 			<div className="flex flex-col items-center">
-				<div className="flex items-center gap-1">
-					<ClockIcon className="h-4 w-4" />
-					<p>Total: {formatTime(playtimeTotal)}</p>
-				</div>
+				<IconText icon={ClockIcon} text={`Total: ${formatTime(playtimeTotal)}`} />
+
 				{playtimeRecent > 0 && (
-					<div className="flex items-center gap-1">
-						<ClockIcon className="h-4 w-4" />
-						<p>Recent: {formatTime(playtimeRecent)}</p>
-					</div>
+					<IconText icon={ClockIcon} text={`Recent: ${formatTime(playtimeRecent)}`} />
 				)}
 			</div>
 		</div>
