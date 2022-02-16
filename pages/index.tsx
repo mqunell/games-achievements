@@ -19,7 +19,7 @@ export default function Home({ games }) {
 			</Head>
 
 			<h1 className="text-2xl">Games</h1>
-			<div className="w-68 flex flex-col gap-6">
+			<div className="flex w-80 flex-col gap-6">
 				{games &&
 					games.map((game: Game) => (
 						<Link key={game.gameId} href={`/games/${game.gameId}`}>

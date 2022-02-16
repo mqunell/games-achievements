@@ -1,28 +1,6 @@
-import axios, { AxiosResponse } from 'axios';
-
-const API_KEY = process.env.STEAM_API_KEY;
-const USER_ID = process.env.STEAM_USER_ID;
-
-type GameId = string;
-
-const myAchsUrl = (gameId: GameId) =>
-	`http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key=${API_KEY}&steamid=${USER_ID}&appid=${gameId}&l=english`;
-
-const globalAchsUrl = (gameId: GameId) =>
-	`http://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v0002/?gameid=${gameId}&l=english`;
-
-interface ApiMyAchievement {
-	apiname: string;
-	achieved: number;
-	unlocktime: number;
-	name: string;
-	description: string;
-}
-
-interface ApiGlobalAchievement {
-	name: string;
-	percent: number;
-}
+import fs from 'fs';
+import { gamesCacheFile } from './init';
+import { Game, GameId } from './games';
 
 export interface Achievement {
 	name: string;
@@ -34,34 +12,9 @@ export interface Achievement {
 }
 
 export async function getAchievements(gameId: GameId): Promise<Achievement[]> {
-	let myAchsRes: AxiosResponse;
+	const gamesCache: Game[] = JSON.parse(fs.readFileSync(gamesCacheFile).toString());
 
-	// Games without achievements give status 400 errors
-	try {
-		myAchsRes = await axios.get(myAchsUrl(gameId));
-	} catch (error) {
-		return [];
-	}
+	const game = gamesCache.find((gc) => gc.gameId === gameId);
 
-	const globalAchsRes = await axios.get(globalAchsUrl(gameId));
-
-	const myAchs = myAchsRes.data.playerstats.achievements;
-	const globalAchs = globalAchsRes.data.achievementpercentages.achievements;
-
-	const achievements = myAchs
-		.map((myAch: ApiMyAchievement) => ({
-			name: myAch.name,
-			apiName: myAch.apiname,
-			description: myAch.description,
-			completed: myAch.achieved === 1,
-			completedTime: myAch.unlocktime,
-			globalCompleted: globalAchs.find(
-				(globalAch: ApiGlobalAchievement) => globalAch.name === myAch.apiname
-			).percent,
-		}))
-		.sort((a: Achievement, b: Achievement) =>
-			a.globalCompleted > b.globalCompleted ? -1 : 1
-		);
-
-	return achievements;
+	return game.achievements;
 }
