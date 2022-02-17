@@ -6,8 +6,8 @@ import { SelectorIcon } from '@heroicons/react/solid';
 import { Game, getGames, getGame } from '../../lib/games';
 import { Achievement, getAchievements } from '../../lib/achievements';
 import AchievementCard from '../../components/AchievementCard';
-import Toggle from '../../components/Toggle';
 import GameCard from '../../components/GameCard';
+import Toggle from '../../components/Toggle';
 
 interface GameAchievementProps {
 	game: Game;
@@ -77,27 +77,6 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 		setSortedAchievements(sorted);
 	}, [sortBy, achievements]);
 
-	// Sort dropdown component
-	const sortDropdown = () => (
-		<Listbox value={sortBy} onChange={setSortBy}>
-			<Listbox.Button className="flex items-center justify-between rounded bg-green-500 py-1 px-2 text-white">
-				<span>{sortBy.text}</span>
-				<SelectorIcon className="h-5 w-5 text-white" aria-hidden="true" />
-			</Listbox.Button>
-			<Listbox.Options className="flex flex-col gap-[1px] overflow-hidden rounded border border-green-500 bg-black text-white">
-				{sortOptions.map((option) => (
-					<Listbox.Option
-						key={`${option.field}${option.direction}`}
-						value={option}
-						className="bg-green-500 py-1 px-2"
-					>
-						{option.text}
-					</Listbox.Option>
-				))}
-			</Listbox.Options>
-		</Listbox>
-	);
-
 	return (
 		<div className="mx-auto my-8 flex w-80 flex-col items-center gap-8">
 			<Head>
@@ -111,48 +90,62 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 
 			{/* Display options */}
 			<div className="w-full rounded bg-white p-3">
-				<div className="w-full rounded">
-					<Disclosure>
-						<Disclosure.Button className="w-full rounded bg-blue-600 py-2">
-							Display options
-						</Disclosure.Button>
+				<Disclosure>
+					<Disclosure.Button className="w-full rounded bg-blue-600 py-2">
+						Display options
+					</Disclosure.Button>
 
-						<Disclosure.Panel className="pt-2 text-black">
-							<div className="flex w-full flex-col gap-2 text-white">
-								<p className="font-semibold text-black">Display</p>
-								<Toggle
-									text={'Completion time'}
-									checked={showTime}
-									onClick={() => setShowTime(!showTime)}
-								/>
-								<Toggle
-									text={'Global completion %'}
-									checked={showGlobal}
-									onClick={() => setShowGlobal(!showGlobal)}
-								/>
+					<Disclosure.Panel className="pt-2 text-black">
+						<div className="flex w-full flex-col gap-2 text-white">
+							<p className="font-semibold text-black">Display</p>
+							<Toggle
+								text="Completion time"
+								checked={showTime}
+								onClick={() => setShowTime(!showTime)}
+							/>
+							<Toggle
+								text="Global completion %"
+								checked={showGlobal}
+								onClick={() => setShowGlobal(!showGlobal)}
+							/>
 
-								<hr className="mt-3 mb-1" />
+							<hr className="mt-3 mb-1" />
 
-								<p className="font-semibold text-black">Filters</p>
-								<Toggle
-									text={'Completed achievements'}
-									checked={showCompleted}
-									onClick={() => setShowCompleted(!showCompleted)}
-								/>
-								<Toggle
-									text={'Uncompleted achievements'}
-									checked={showUncompleted}
-									onClick={() => setShowUncompleted(!showUncompleted)}
-								/>
+							<p className="font-semibold text-black">Filters</p>
+							<Toggle
+								text="Completed achievements"
+								checked={showCompleted}
+								onClick={() => setShowCompleted(!showCompleted)}
+							/>
+							<Toggle
+								text="Uncompleted achievements"
+								checked={showUncompleted}
+								onClick={() => setShowUncompleted(!showUncompleted)}
+							/>
 
-								<hr className="mt-3 mb-1" />
+							<hr className="mt-3 mb-1" />
 
-								<p className="font-semibold text-black">Sorting</p>
-								{sortDropdown()}
-							</div>
-						</Disclosure.Panel>
-					</Disclosure>
-				</div>
+							<p className="font-semibold text-black">Sorting</p>
+							<Listbox value={sortBy} onChange={setSortBy}>
+								<Listbox.Button className="flex items-center justify-between rounded bg-green-500 py-1 px-2 text-white">
+									<span>{sortBy.text}</span>
+									<SelectorIcon className="h-5 w-5 text-white" aria-hidden="true" />
+								</Listbox.Button>
+								<Listbox.Options className="flex flex-col gap-[1px] overflow-hidden rounded border border-green-500 bg-black text-white">
+									{sortOptions.map((option) => (
+										<Listbox.Option
+											key={`${option.field}${option.direction}`}
+											value={option}
+											className="bg-green-500 py-1 px-2"
+										>
+											{option.text}
+										</Listbox.Option>
+									))}
+								</Listbox.Options>
+							</Listbox>
+						</div>
+					</Disclosure.Panel>
+				</Disclosure>
 			</div>
 
 			{/* Achievements */}
