@@ -94,23 +94,30 @@ async function getAchievements(gameId: string): Promise<Achievement[]> {
 	}
 
 	// Games with stats but no achievements don't have achievements field
-	const myAchs = myAchsRes.data.playerstats.achievements;
+	const myAchs: ApiMyAchievement[] = myAchsRes.data.playerstats.achievements;
 	if (!myAchs) return [];
 
 	// Global achievements stats
 	const globalAchsRes = await axios.get(globalAchsUrl(gameId));
 	const globalAchs = globalAchsRes.data.achievementpercentages.achievements;
 
-	const achievements = myAchs.map((myAch: ApiMyAchievement) => ({
-		name: myAch.name,
-		apiName: myAch.apiname,
-		description: myAch.description,
-		completed: myAch.achieved === 1,
-		completedTime: myAch.unlocktime,
-		globalCompleted: globalAchs.find(
-			(globalAch: ApiGlobalAchievement) => globalAch.name === myAch.apiname
-		).percent,
-	}));
+	// Filter achievements to those that exist both on my account and globally (to handle Payday 2's fake achievements) and map to Achievement[]
+	const achievements = myAchs
+		.filter((myAch: ApiMyAchievement) =>
+			globalAchs.find(
+				(globalAch: ApiGlobalAchievement) => globalAch.name === myAch.apiname
+			)
+		)
+		.map((myAch: ApiMyAchievement) => ({
+			name: myAch.name,
+			apiName: myAch.apiname,
+			description: myAch.description,
+			completed: myAch.achieved === 1,
+			completedTime: myAch.unlocktime,
+			globalCompleted: globalAchs.find(
+				(globalAch: ApiGlobalAchievement) => globalAch.name === myAch.apiname
+			).percent,
+		}));
 
 	return achievements;
 }
