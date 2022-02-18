@@ -9,7 +9,7 @@ interface SortOption {
 
 interface SelectProps {
 	sortBy: SortOption;
-	setSortBy: Function;
+	setSortBy: (value: SortOption) => void;
 	sortOptions: SortOption[];
 }
 
