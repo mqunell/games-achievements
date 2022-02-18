@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
-import { Disclosure, Listbox } from '@headlessui/react';
-import { SelectorIcon } from '@heroicons/react/solid';
 import { Game, getGames, getGame } from '../../lib/games';
 import { Achievement, getAchievements } from '../../lib/achievements';
 import AchievementCard from '../../components/AchievementCard';
+import DisplayOptions from '../../components/DisplayOptions';
 import GameCard from '../../components/GameCard';
+import Select from '../../components/Select';
 import Toggle from '../../components/Toggle';
 
 interface GameAchievementProps {
@@ -89,64 +89,38 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 			<GameCard game={game} size="large" />
 
 			{/* Display options */}
-			<div className="w-full rounded bg-white p-3">
-				<Disclosure>
-					<Disclosure.Button className="w-full rounded bg-blue-600 py-2">
-						Display options
-					</Disclosure.Button>
+			<DisplayOptions>
+				<p className="font-semibold text-black">Display</p>
+				<Toggle
+					text="Completion time"
+					checked={showTime}
+					onClick={() => setShowTime(!showTime)}
+				/>
+				<Toggle
+					text="Global completion %"
+					checked={showGlobal}
+					onClick={() => setShowGlobal(!showGlobal)}
+				/>
 
-					<Disclosure.Panel className="pt-2 text-black">
-						<div className="flex w-full flex-col gap-2 text-white">
-							<p className="font-semibold text-black">Display</p>
-							<Toggle
-								text="Completion time"
-								checked={showTime}
-								onClick={() => setShowTime(!showTime)}
-							/>
-							<Toggle
-								text="Global completion %"
-								checked={showGlobal}
-								onClick={() => setShowGlobal(!showGlobal)}
-							/>
+				<hr className="mt-3 mb-1" />
 
-							<hr className="mt-3 mb-1" />
+				<p className="font-semibold text-black">Filters</p>
+				<Toggle
+					text="Completed achievements"
+					checked={showCompleted}
+					onClick={() => setShowCompleted(!showCompleted)}
+				/>
+				<Toggle
+					text="Uncompleted achievements"
+					checked={showUncompleted}
+					onClick={() => setShowUncompleted(!showUncompleted)}
+				/>
 
-							<p className="font-semibold text-black">Filters</p>
-							<Toggle
-								text="Completed achievements"
-								checked={showCompleted}
-								onClick={() => setShowCompleted(!showCompleted)}
-							/>
-							<Toggle
-								text="Uncompleted achievements"
-								checked={showUncompleted}
-								onClick={() => setShowUncompleted(!showUncompleted)}
-							/>
+				<hr className="mt-3 mb-1" />
 
-							<hr className="mt-3 mb-1" />
-
-							<p className="font-semibold text-black">Sorting</p>
-							<Listbox value={sortBy} onChange={setSortBy}>
-								<Listbox.Button className="flex items-center justify-between rounded bg-green-500 py-1 px-2 text-white">
-									<span>{sortBy.text}</span>
-									<SelectorIcon className="h-5 w-5 text-white" aria-hidden="true" />
-								</Listbox.Button>
-								<Listbox.Options className="flex flex-col gap-[1px] overflow-hidden rounded border border-green-500 bg-black text-white">
-									{sortOptions.map((option) => (
-										<Listbox.Option
-											key={`${option.field}${option.direction}`}
-											value={option}
-											className="bg-green-500 py-1 px-2"
-										>
-											{option.text}
-										</Listbox.Option>
-									))}
-								</Listbox.Options>
-							</Listbox>
-						</div>
-					</Disclosure.Panel>
-				</Disclosure>
-			</div>
+				<p className="font-semibold text-black">Sorting</p>
+				<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={sortOptions} />
+			</DisplayOptions>
 
 			{/* Achievements */}
 			<div className="flex w-full flex-col">

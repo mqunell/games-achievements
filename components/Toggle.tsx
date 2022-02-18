@@ -6,6 +6,9 @@ interface ToggleProps {
 	onClick: Function;
 }
 
+/**
+ * Styled implementation of Headless UI's Switch
+ */
 export default function Toggle({ text, checked, onClick }: ToggleProps) {
 	return (
 		<Switch.Group key={`toggle-${text}`}>
