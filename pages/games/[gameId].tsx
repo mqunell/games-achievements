@@ -78,7 +78,7 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 	}, [sortBy, achievements]);
 
 	return (
-		<div className="mx-auto my-8 flex w-80 flex-col items-center gap-8">
+		<div className="mx-auto my-8 flex w-80 flex-col items-center gap-6">
 			<Head>
 				<title>{game.name} Achievements</title>
 				<meta name="description" content={`${game.name} achievements`} />

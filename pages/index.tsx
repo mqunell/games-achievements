@@ -5,6 +5,7 @@ import { GetStaticProps } from 'next';
 import { Game, getGames } from '../lib/games';
 import DisplayOptions from '../components/DisplayOptions';
 import GameCard from '../components/GameCard';
+import InputRange from '../components/InputRange';
 import Select from '../components/Select';
 import Toggle from '../components/Toggle';
 
@@ -17,6 +18,10 @@ export default function Home({ games }) {
 	// Display state
 	const [showProgress, setShowProgress] = useState(true);
 	const [showPlaytime, setShowPlaytime] = useState(true);
+
+	// Filter state
+	const [filterPerc, setFilterPerc] = useState(0);
+	const [filterTime, setFilterTime] = useState(0);
 
 	// Sort state
 	const [sortedGames, setSortedGames] = useState(games);
@@ -51,7 +56,7 @@ export default function Home({ games }) {
 	}, [sortBy, games]);
 
 	return (
-		<div className="mx-auto my-8 flex w-80 flex-col items-center gap-4">
+		<div className="mx-auto my-8 flex w-80 flex-col items-center gap-6">
 			<Head>
 				<title>Steam Games and Achievements</title>
 				<meta name="description" content="Steam games and achievements" />
@@ -79,25 +84,35 @@ export default function Home({ games }) {
 
 				<hr className="mt-3 mb-1" />
 
-				{/* todo: filter based on # hours, completion %, etc */}
-				{/* <p className="font-semibold text-black">Filters</p>
+				<p className="font-semibold text-black">Filters</p>
+				<InputRange
+					title="Minimum completion %"
+					value={filterPerc}
+					setValue={setFilterPerc}
+				/>
+				<InputRange
+					title="Minimum total playtime (hours)"
+					value={filterTime}
+					setValue={setFilterTime}
+				/>
 
-				<hr className="mt-3 mb-1" /> */}
+				<hr className="mt-3 mb-1" />
 
 				<p className="font-semibold text-black">Sorting</p>
 				<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={sortOptions} />
 			</DisplayOptions>
 
 			{/* GameCards */}
-			<div className="flex w-full flex-col gap-6">
+			<div className="flex w-full flex-col">
 				{sortedGames &&
 					sortedGames.map((game: Game) => (
 						<Link key={game.gameId} href={`/games/${game.gameId}`}>
-							<a>
+							<a className="cursor-pointer">
 								<GameCard
 									game={game}
 									size="small"
 									displayOptions={{ showProgress, showPlaytime }}
+									filters={{ filterPerc, filterTime }}
 								/>
 							</a>
 						</Link>

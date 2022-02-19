@@ -11,6 +11,10 @@ interface GameCardProps {
 		showProgress: boolean;
 		showPlaytime: boolean;
 	};
+	filters?: {
+		filterPerc: number;
+		filterTime: number;
+	};
 }
 
 interface IconTextProps {
@@ -43,10 +47,12 @@ export default function GameCard({
 	game,
 	size,
 	displayOptions = { showProgress: true, showPlaytime: true },
+	filters = { filterPerc: 0, filterTime: 0 },
 }: GameCardProps) {
 	const { name, playtimeRecent, playtimeTotal, logoUrl, achievementCounts } = game;
 	const { completed, total } = achievementCounts;
 
+	// displayOptions state
 	const [showProgress, setShowProgress] = useState(displayOptions.showProgress);
 	const [showPlaytime, setShowPlaytime] = useState(displayOptions.showPlaytime);
 
@@ -54,6 +60,17 @@ export default function GameCard({
 		setShowProgress(displayOptions.showProgress);
 		setShowPlaytime(displayOptions.showPlaytime);
 	}, [displayOptions]);
+
+	// Filtered in
+	const [isFiltered, setFiltered] = useState(true);
+
+	// Call setFiltered() when the filters prop changes to cause a component re-render
+	useEffect(() => {
+		const validPerc = (completed / total) * 100 >= filters.filterPerc;
+		const validTime = playtimeTotal >= filters.filterTime * 60;
+
+		setFiltered(validPerc && validTime);
+	}, [filters, completed, total, playtimeTotal]);
 
 	// Show one decimal place unless x.0%
 	let percentage = ((completed / total) * 100).toFixed(1);
@@ -64,9 +81,8 @@ export default function GameCard({
 		<div
 			className={classNames(
 				'flex flex-col items-center gap-2 rounded bg-white p-4 text-center text-black',
-				{
-					'cursor-pointer': size === 'small',
-				}
+				{ 'mb-6': size === 'small' && isFiltered },
+				{ hidden: !isFiltered }
 			)}
 		>
 			{/* Logo image */}
