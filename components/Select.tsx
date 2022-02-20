@@ -21,7 +21,7 @@ export default function Select({ sortBy, setSortBy, sortOptions }: SelectProps) 
 		<Listbox value={sortBy} onChange={setSortBy}>
 			<Listbox.Button className="flex items-center justify-between rounded bg-green-500 py-1 px-2 text-white">
 				<span>{sortBy.text}</span>
-				<SelectorIcon className="h-5 w-5 text-white" aria-hidden="true" />
+				<SelectorIcon className="h-5 w-5" aria-hidden="true" />
 			</Listbox.Button>
 			<Listbox.Options className="flex flex-col gap-[1px] overflow-hidden rounded border border-green-500 bg-black text-white">
 				{sortOptions.map((option) => (

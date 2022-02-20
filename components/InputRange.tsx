@@ -6,7 +6,7 @@ interface InputRangeProps {
 
 export default function InputRange({ title, value, setValue }: InputRangeProps) {
 	return (
-		<label className="grid grid-cols-[1fr_28px] gap-x-2 text-black">
+		<label className="grid grid-cols-[1fr_28px] gap-x-2">
 			<span className="col-span-2">{title}</span>
 			<input
 				className="w-full"

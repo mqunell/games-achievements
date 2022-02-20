@@ -90,7 +90,7 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 
 			{/* Display options */}
 			<DisplayOptions>
-				<p className="font-semibold text-black">Display</p>
+				<p className="font-semibold">Display</p>
 				<Toggle
 					text="Completion time"
 					checked={showTime}
@@ -104,7 +104,7 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 
 				<hr className="mt-3 mb-1" />
 
-				<p className="font-semibold text-black">Filters</p>
+				<p className="font-semibold">Filters</p>
 				<Toggle
 					text="Completed achievements"
 					checked={showCompleted}
@@ -118,7 +118,7 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 
 				<hr className="mt-3 mb-1" />
 
-				<p className="font-semibold text-black">Sorting</p>
+				<p className="font-semibold">Sorting</p>
 				<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={sortOptions} />
 			</DisplayOptions>
 

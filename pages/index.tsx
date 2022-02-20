@@ -65,12 +65,12 @@ export default function Home({ games }) {
 
 			{/* Heading */}
 			<div className="w-full rounded bg-white p-4">
-				<h1 className="text-center text-2xl font-bold text-black">Games</h1>
+				<h1 className="text-center text-2xl font-bold">Games</h1>
 			</div>
 
 			{/* Display options */}
 			<DisplayOptions>
-				<p className="font-semibold text-black">Display</p>
+				<p className="font-semibold">Display</p>
 				<Toggle
 					text="Achievement progress"
 					checked={showProgress}
@@ -84,7 +84,7 @@ export default function Home({ games }) {
 
 				<hr className="mt-3 mb-1" />
 
-				<p className="font-semibold text-black">Filters</p>
+				<p className="font-semibold">Filters</p>
 				<InputRange
 					title="Minimum completion %"
 					value={filterPerc}
@@ -98,7 +98,7 @@ export default function Home({ games }) {
 
 				<hr className="mt-3 mb-1" />
 
-				<p className="font-semibold text-black">Sorting</p>
+				<p className="font-semibold">Sorting</p>
 				<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={sortOptions} />
 			</DisplayOptions>
 

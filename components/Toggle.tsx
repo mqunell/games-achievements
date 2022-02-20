@@ -27,7 +27,7 @@ export default function Toggle({ text, checked, onClick }: ToggleProps) {
 						} inline-block h-4 w-4 transform rounded-full bg-white transition duration-500`}
 					/>
 				</Switch>
-				<Switch.Label className="text-black">{text}</Switch.Label>
+				<Switch.Label>{text}</Switch.Label>
 			</div>
 		</Switch.Group>
 	);

@@ -80,7 +80,7 @@ export default function GameCard({
 		/* Container */
 		<div
 			className={classNames(
-				'flex flex-col items-center gap-2 rounded bg-white p-4 text-center text-black',
+				'flex flex-col items-center gap-2 rounded bg-white p-4 text-center',
 				{ 'mb-6': size === 'small' && isFiltered },
 				{ hidden: !isFiltered }
 			)}
