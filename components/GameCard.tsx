@@ -11,7 +11,7 @@ interface GameCardProps {
 		showProgress: boolean;
 		showPlaytime: boolean;
 	};
-	isFiltered: boolean;
+	isFiltered?: boolean;
 }
 
 interface IconTextProps {
