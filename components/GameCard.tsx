@@ -66,7 +66,9 @@ export default function GameCard({
 
 	// Call setFiltered() when the filters prop changes to cause a component re-render
 	useEffect(() => {
-		const validPerc = (completed / total) * 100 >= filters.filterPerc;
+		// Show games without achievements
+		const validPerc =
+			filters.filterPerc > 0 ? (completed / total) * 100 >= filters.filterPerc : true;
 		const validTime = playtimeTotal >= filters.filterTime * 60;
 
 		setFiltered(validPerc && validTime);

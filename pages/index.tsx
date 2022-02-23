@@ -11,7 +11,7 @@ import Toggle from '../components/Toggle';
 
 export const getStaticProps: GetStaticProps = async () => {
 	const games = await getGames();
-	return { props: { games }, revalidate: 60 };
+	return { props: { games }, revalidate: 600 };
 };
 
 export default function Home({ games }) {
@@ -22,6 +22,15 @@ export default function Home({ games }) {
 	// Filter state
 	const [filterPerc, setFilterPerc] = useState(0);
 	const [filterTime, setFilterTime] = useState(0);
+
+	const numFiltered = games.filter((game: Game) => {
+		const { completed, total } = game.achievementCounts;
+
+		const validPerc = filterPerc > 0 ? (completed / total) * 100 >= filterPerc : true; // Show games without achievements
+		const validTime = game.playtimeTotal >= filterTime * 60;
+
+		return validPerc && validTime;
+	}).length;
 
 	// Sort state
 	const [sortedGames, setSortedGames] = useState(games);
@@ -65,7 +74,9 @@ export default function Home({ games }) {
 
 			{/* Heading */}
 			<div className="w-full rounded bg-white p-4">
-				<h1 className="text-center text-2xl font-bold">Games</h1>
+				<h1 className="text-center text-2xl font-bold">
+					{numFiltered}/{games.length} Games
+				</h1>
 			</div>
 
 			{/* Display options */}

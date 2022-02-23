@@ -52,26 +52,30 @@ export async function initGamesAchievements() {
 	const gamesRes: AxiosResponse = await axios.get(gamesUrl);
 	const apiGames = gamesRes.data.response.games;
 
-	// Map the ApiGame[] to full Game[] objects
-	const games: Game[] = apiGames.map(async (apiGame: ApiGame) => {
-		const { appid, name, playtime_2weeks, playtime_forever, img_logo_url } = apiGame;
+	// Filter games like SKSE and map the ApiGame[] to full Game[] objects
+	const games: Game[] = apiGames
+		.filter((apiGame: ApiGame) => {
+			return ![359050, 365720, 469820, 489830, 1053680].includes(apiGame.appid);
+		})
+		.map(async (apiGame: ApiGame) => {
+			const { appid, name, playtime_2weeks, playtime_forever, img_logo_url } = apiGame;
 
-		const gameId = appid.toString();
-		const achievements = await getAchievements(gameId);
+			const gameId = appid.toString();
+			const achievements = await getAchievements(gameId);
 
-		return {
-			gameId,
-			name: name,
-			playtimeRecent: playtime_2weeks || 0,
-			playtimeTotal: playtime_forever,
-			logoUrl: `http://media.steampowered.com/steamcommunity/public/images/apps/${gameId}/${img_logo_url}.jpg`,
-			achievements,
-			achievementCounts: {
-				total: achievements.length,
-				completed: achievements.filter((ach) => ach.completed).length,
-			},
-		};
-	});
+			return {
+				gameId,
+				name: name,
+				playtimeRecent: playtime_2weeks || 0,
+				playtimeTotal: playtime_forever,
+				logoUrl: `http://media.steampowered.com/steamcommunity/public/images/apps/${gameId}/${img_logo_url}.jpg`,
+				achievements,
+				achievementCounts: {
+					total: achievements.length,
+					completed: achievements.filter((ach) => ach.completed).length,
+				},
+			};
+		});
 
 	// Await the Game[] promises (due to the inner Achievement[])
 	const gamesCache = await Promise.all(games);

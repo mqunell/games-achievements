@@ -29,7 +29,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const game = await getGame(gameId);
 	const achievements = await getAchievements(gameId);
 
-	return { props: { game, achievements }, revalidate: 60 };
+	return { props: { game, achievements }, revalidate: 600 };
 };
 
 export default function GameAchievements({ game, achievements }: GameAchievementProps) {

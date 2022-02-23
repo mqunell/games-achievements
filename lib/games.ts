@@ -34,7 +34,7 @@ export async function getGames(): Promise<Game[]> {
 			const { achievements, ...data } = game;
 			return data;
 		})
-		.filter((game: Game) => game.playtimeTotal > 180)
+		.filter((game: Game) => game.playtimeTotal > 0)
 		.sort((a: Game, b: Game) => (a.playtimeTotal > b.playtimeTotal ? -1 : 1));
 
 	return games;
