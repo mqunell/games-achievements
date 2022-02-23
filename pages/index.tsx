@@ -23,14 +23,16 @@ export default function Home({ games }) {
 	const [filterPerc, setFilterPerc] = useState(0);
 	const [filterTime, setFilterTime] = useState(0);
 
-	const numFiltered = games.filter((game: Game) => {
+	const isFiltered = (game: Game) => {
 		const { completed, total } = game.achievementCounts;
 
 		const validPerc = filterPerc > 0 ? (completed / total) * 100 >= filterPerc : true; // Show games without achievements
 		const validTime = game.playtimeTotal >= filterTime * 60;
 
 		return validPerc && validTime;
-	}).length;
+	};
+
+	const numFiltered = games.filter((game: Game) => isFiltered(game)).length;
 
 	// Sort state
 	const [sortedGames, setSortedGames] = useState(games);
@@ -123,7 +125,7 @@ export default function Home({ games }) {
 									game={game}
 									size="small"
 									displayOptions={{ showProgress, showPlaytime }}
-									filters={{ filterPerc, filterTime }}
+									isFiltered={isFiltered(game)}
 								/>
 							</a>
 						</Link>

@@ -11,10 +11,7 @@ interface GameCardProps {
 		showProgress: boolean;
 		showPlaytime: boolean;
 	};
-	filters?: {
-		filterPerc: number;
-		filterTime: number;
-	};
+	isFiltered: boolean;
 }
 
 interface IconTextProps {
@@ -47,7 +44,7 @@ export default function GameCard({
 	game,
 	size,
 	displayOptions = { showProgress: true, showPlaytime: true },
-	filters = { filterPerc: 0, filterTime: 0 },
+	isFiltered = true,
 }: GameCardProps) {
 	const { name, playtimeRecent, playtimeTotal, logoUrl, achievementCounts } = game;
 	const { completed, total } = achievementCounts;
@@ -60,19 +57,6 @@ export default function GameCard({
 		setShowProgress(displayOptions.showProgress);
 		setShowPlaytime(displayOptions.showPlaytime);
 	}, [displayOptions]);
-
-	// Filtered in
-	const [isFiltered, setFiltered] = useState(true);
-
-	// Call setFiltered() when the filters prop changes to cause a component re-render
-	useEffect(() => {
-		// Show games without achievements
-		const validPerc =
-			filters.filterPerc > 0 ? (completed / total) * 100 >= filters.filterPerc : true;
-		const validTime = playtimeTotal >= filters.filterTime * 60;
-
-		setFiltered(validPerc && validTime);
-	}, [filters, completed, total, playtimeTotal]);
 
 	// Show one decimal place unless x.0%
 	let percentage = ((completed / total) * 100).toFixed(1);
