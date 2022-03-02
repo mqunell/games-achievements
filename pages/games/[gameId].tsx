@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Game, getGames, getGame } from '../../lib/games';
 import { Achievement, getAchievements } from '../../lib/achievements';
 import AchievementCard from '../../components/AchievementCard';
@@ -33,6 +34,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export default function GameAchievements({ game, achievements }: GameAchievementProps) {
+	const [displayedAchievements, setDisplayedAchievements] = useState([]);
+
 	// Display state
 	const [showTime, setShowTime] = useState(true);
 	const [showGlobal, setShowGlobal] = useState(true);
@@ -42,8 +45,6 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 	const [showUncompleted, setShowUncompleted] = useState(true);
 
 	// Sort state
-	const [sortedAchievements, setSortedAchievements] = useState(achievements);
-
 	const sortOptions = [
 		{ text: 'Alphabetical (a-z)', field: 'name', direction: 1 },
 		{ text: 'Alphabetical (z-a)', field: 'name', direction: -1 },
@@ -55,7 +56,7 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 
 	const [sortBy, setSortBy] = useState(sortOptions[4]);
 
-	// Sort dropdown click handler
+	// Filtering and sorting
 	useEffect(() => {
 		const { field, direction } = sortBy;
 
@@ -63,19 +64,17 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 		if (field === 'completedTime') {
 			setShowTime(true);
 			setShowUncompleted(false);
-		}
-
-		if (field === 'globalCompleted') {
+		} else if (field === 'globalCompleted') {
 			setShowGlobal(true);
 		}
 
-		// Sort the achievements
-		const sorted = [...achievements].sort((a, b) =>
-			a[field] < b[field] ? direction * -1 : direction
-		);
+		// Filter and sort achievements
+		const displayed = achievements
+			.filter((ach) => (ach.completed ? showCompleted : showUncompleted))
+			.sort((a, b) => (a[field] < b[field] ? direction * -1 : direction));
 
-		setSortedAchievements(sorted);
-	}, [sortBy, achievements]);
+		setDisplayedAchievements(displayed);
+	}, [sortBy, showCompleted, showUncompleted, achievements]);
 
 	return (
 		<div className="mx-auto my-8 flex w-80 flex-col items-center gap-6">
@@ -123,20 +122,21 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 			</DisplayOptions>
 
 			{/* Achievements */}
-			<div className="flex w-full flex-col">
-				{sortedAchievements ? (
-					sortedAchievements.map((ach: Achievement) => (
-						<AchievementCard
-							key={ach.apiName}
-							achievement={ach}
-							displayOptions={{ showTime, showGlobal }}
-							filters={{ showCompleted, showUncompleted }}
-						/>
-					))
-				) : (
-					<p>None</p>
-				)}
-			</div>
+			<motion.div layout className="-z-10 flex w-full flex-col gap-8">
+				<AnimatePresence>
+					{displayedAchievements ? (
+						displayedAchievements.map((ach: Achievement) => (
+							<AchievementCard
+								key={ach.apiName}
+								achievement={ach}
+								displayOptions={{ showTime, showGlobal }}
+							/>
+						))
+					) : (
+						<p>None</p>
+					)}
+				</AnimatePresence>
+			</motion.div>
 		</div>
 	);
 }

@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
-import classNames from 'classnames';
+import { motion } from 'framer-motion';
 import { BadgeCheckIcon } from '@heroicons/react/solid';
 import { Achievement } from '../lib/achievements';
 
@@ -9,28 +8,23 @@ interface AchievementCardProps {
 		showTime: boolean;
 		showGlobal: boolean;
 	};
-	filters: {
-		showCompleted: boolean;
-		showUncompleted: boolean;
-	};
 }
 
 export default function AchievementCard({
 	achievement,
 	displayOptions,
-	filters,
 }: AchievementCardProps) {
 	const { name, description, completed, completedTime, globalCompleted } = achievement;
 
-	// Call setFiltered() when the filters prop changes to cause a component re-render
-	const [isFiltered, setFiltered] = useState(true);
-	useEffect(() => {
-		setFiltered(filters[completed ? 'showCompleted' : 'showUncompleted']);
-	}, [filters, completed]);
-
 	/* Container - Card and Checkmark sit in the same grid cell */
 	return (
-		<div className={classNames('mb-8 grid', !isFiltered && 'hidden')}>
+		<motion.div
+			layout="position"
+			initial={{ opacity: 0 }}
+			animate={{ opacity: 1 }}
+			exit={{ opacity: 0 }}
+			transition={{ duration: 0.5 }}
+		>
 			{/* Checkmark overlay */}
 			{completed && (
 				<div className="relative col-start-1 row-start-1">
@@ -67,6 +61,6 @@ export default function AchievementCard({
 					</div>
 				)}
 			</div>
-		</div>
+		</motion.div>
 	);
 }
