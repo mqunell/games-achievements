@@ -62,7 +62,12 @@ export default function GameCard({
 
 	return (
 		/* Container */
-		<div className="flex flex-col items-center gap-2 rounded bg-white p-4 text-center">
+		<div
+			className={classNames(
+				'flex w-80 flex-col items-center gap-2 rounded bg-white p-4 text-center',
+				{ 'h-full': size === 'small' }
+			)}
+		>
 			{/* Logo image */}
 			<div
 				className={classNames('relative shadow-md', {
@@ -99,7 +104,7 @@ export default function GameCard({
 				<div className="flex flex-col items-center">
 					<IconText icon={ClockIcon} text={`Total: ${formatTime(playtimeTotal)}`} />
 
-					{playtimeRecent > 0 && (
+					{playtimeRecent > 0 && size === 'large' && (
 						<IconText icon={ClockIcon} text={`Recent: ${formatTime(playtimeRecent)}`} />
 					)}
 				</div>

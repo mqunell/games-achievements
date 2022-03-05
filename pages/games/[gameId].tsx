@@ -77,52 +77,54 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 	}, [sortBy, showCompleted, showUncompleted, achievements]);
 
 	return (
-		<div className="mx-auto my-8 flex w-80 flex-col items-center gap-6">
+		<div className="flex flex-col items-center gap-6 p-8 md:flex-row md:items-start">
 			<Head>
 				<title>{game.name} Achievements</title>
 				<meta name="description" content={`${game.name} achievements`} />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			{/* Heading image and data */}
-			<GameCard game={game} size="large" />
+			<div className="flex w-80 flex-col gap-6">
+				{/* Heading image and data */}
+				<GameCard game={game} size="large" />
 
-			{/* Display options */}
-			<DisplayOptions>
-				<p className="font-semibold">Display</p>
-				<Toggle
-					text="Completion time"
-					checked={showTime}
-					onClick={() => setShowTime(!showTime)}
-				/>
-				<Toggle
-					text="Global completion %"
-					checked={showGlobal}
-					onClick={() => setShowGlobal(!showGlobal)}
-				/>
+				{/* Display options */}
+				<DisplayOptions>
+					<p className="font-semibold">Display</p>
+					<Toggle
+						text="Completion time"
+						checked={showTime}
+						onClick={() => setShowTime(!showTime)}
+					/>
+					<Toggle
+						text="Global completion %"
+						checked={showGlobal}
+						onClick={() => setShowGlobal(!showGlobal)}
+					/>
 
-				<hr className="mt-3 mb-1" />
+					<hr className="mt-3 mb-1" />
 
-				<p className="font-semibold">Filters</p>
-				<Toggle
-					text="Completed achievements"
-					checked={showCompleted}
-					onClick={() => setShowCompleted(!showCompleted)}
-				/>
-				<Toggle
-					text="Uncompleted achievements"
-					checked={showUncompleted}
-					onClick={() => setShowUncompleted(!showUncompleted)}
-				/>
+					<p className="font-semibold">Filters</p>
+					<Toggle
+						text="Completed achievements"
+						checked={showCompleted}
+						onClick={() => setShowCompleted(!showCompleted)}
+					/>
+					<Toggle
+						text="Uncompleted achievements"
+						checked={showUncompleted}
+						onClick={() => setShowUncompleted(!showUncompleted)}
+					/>
 
-				<hr className="mt-3 mb-1" />
+					<hr className="mt-3 mb-1" />
 
-				<p className="font-semibold">Sorting</p>
-				<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={sortOptions} />
-			</DisplayOptions>
+					<p className="font-semibold">Sorting</p>
+					<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={sortOptions} />
+				</DisplayOptions>
+			</div>
 
 			{/* Achievements */}
-			<div className="flex w-full flex-col gap-8">
+			<div className="flex w-80 flex-col gap-8 md:grid md:flex-grow md:grid-cols-cards md:justify-center">
 				<AnimatePresence>
 					{displayedAchievements ? (
 						displayedAchievements.map((ach: Achievement) => (

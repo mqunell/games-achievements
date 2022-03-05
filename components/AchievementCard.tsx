@@ -1,4 +1,5 @@
 import { BadgeCheckIcon } from '@heroicons/react/solid';
+import classNames from 'classnames';
 import { Achievement } from '../lib/achievements';
 
 interface AchievementCardProps {
@@ -17,7 +18,7 @@ export default function AchievementCard({
 
 	return (
 		/* Container - Card and Checkmark sit in the same grid cell */
-		<div className="grid">
+		<div className="grid h-full">
 			{/* Checkmark overlay */}
 			{completed && (
 				<div className="relative col-start-1 row-start-1">
@@ -30,9 +31,12 @@ export default function AchievementCard({
 			{/* Card text and bar */}
 			<div className="relative col-start-1 row-start-1 flex flex-col overflow-hidden rounded bg-white text-center">
 				{/* Text */}
-				<div className="flex flex-col items-center gap-1 p-4">
+				<div className="flex h-full flex-col items-center gap-1 p-4">
 					<h2 className="text-lg font-semibold">{name}</h2>
-					{description ? <p>{description}</p> : <p className="italic">Hidden</p>}
+					<p className={classNames('mb-auto', { italic: !description })}>
+						{description || 'Hidden'}
+					</p>
+
 					{completed && displayOptions.showTime && (
 						<>
 							<hr className="my-2 w-1/6 border-black" />

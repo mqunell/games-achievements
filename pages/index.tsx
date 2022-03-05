@@ -64,56 +64,58 @@ export default function Home({ games }) {
 	}, [sortBy, filterPerc, filterTime, games]);
 
 	return (
-		<div className="mx-auto my-8 flex w-80 flex-col items-center gap-6">
+		<div className="flex flex-col items-center gap-6 p-8 md:flex-row md:items-start">
 			<Head>
 				<title>Steam Games and Achievements</title>
 				<meta name="description" content="Steam games and achievements" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			{/* Heading */}
-			<div className="w-full rounded bg-white p-4">
-				<h1 className="text-center text-2xl font-bold">
-					{displayedGames.length}/{games.length} Games
-				</h1>
+			<div className="flex w-80 flex-col gap-6">
+				{/* Heading */}
+				<div className="w-full rounded bg-white p-4">
+					<h1 className="text-center text-2xl font-bold">
+						{displayedGames.length}/{games.length} Games
+					</h1>
+				</div>
+
+				{/* Display options */}
+				<DisplayOptions>
+					<p className="font-semibold">Display</p>
+					<Toggle
+						text="Achievement progress"
+						checked={showProgress}
+						onClick={() => setShowProgress(!showProgress)}
+					/>
+					<Toggle
+						text="Playtime"
+						checked={showPlaytime}
+						onClick={() => setShowPlaytime(!showPlaytime)}
+					/>
+
+					<hr className="mt-3 mb-1" />
+
+					<p className="font-semibold">Filters</p>
+					<InputRange
+						title="Minimum completion %"
+						value={filterPerc}
+						setValue={setFilterPerc}
+					/>
+					<InputRange
+						title="Minimum total playtime (hours)"
+						value={filterTime}
+						setValue={setFilterTime}
+					/>
+
+					<hr className="mt-3 mb-1" />
+
+					<p className="font-semibold">Sorting</p>
+					<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={sortOptions} />
+				</DisplayOptions>
 			</div>
 
-			{/* Display options */}
-			<DisplayOptions>
-				<p className="font-semibold">Display</p>
-				<Toggle
-					text="Achievement progress"
-					checked={showProgress}
-					onClick={() => setShowProgress(!showProgress)}
-				/>
-				<Toggle
-					text="Playtime"
-					checked={showPlaytime}
-					onClick={() => setShowPlaytime(!showPlaytime)}
-				/>
-
-				<hr className="mt-3 mb-1" />
-
-				<p className="font-semibold">Filters</p>
-				<InputRange
-					title="Minimum completion %"
-					value={filterPerc}
-					setValue={setFilterPerc}
-				/>
-				<InputRange
-					title="Minimum total playtime (hours)"
-					value={filterTime}
-					setValue={setFilterTime}
-				/>
-
-				<hr className="mt-3 mb-1" />
-
-				<p className="font-semibold">Sorting</p>
-				<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={sortOptions} />
-			</DisplayOptions>
-
 			{/* GameCards */}
-			<div className="flex w-full flex-col gap-6">
+			<div className="flex w-80 flex-col gap-6 md:grid md:flex-grow md:grid-cols-cards md:justify-center">
 				<AnimatePresence>
 					{displayedGames &&
 						displayedGames.map((game: Game) => (
