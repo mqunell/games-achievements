@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Game, getGames, getGame } from '../../lib/games';
 import { Achievement, getAchievements } from '../../lib/achievements';
 import AchievementCard from '../../components/AchievementCard';
@@ -122,21 +122,29 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 			</DisplayOptions>
 
 			{/* Achievements */}
-			<motion.div layout className="-z-10 flex w-full flex-col gap-8">
+			<div className="flex w-full flex-col gap-8">
 				<AnimatePresence>
 					{displayedAchievements ? (
 						displayedAchievements.map((ach: Achievement) => (
-							<AchievementCard
+							<motion.div
+								layout="position"
+								initial={{ opacity: 0 }}
+								animate={{ opacity: 1 }}
+								exit={{ opacity: 0 }}
+								transition={{ duration: 0.5 }}
 								key={ach.apiName}
-								achievement={ach}
-								displayOptions={{ showTime, showGlobal }}
-							/>
+							>
+								<AchievementCard
+									achievement={ach}
+									displayOptions={{ showTime, showGlobal }}
+								/>
+							</motion.div>
 						))
 					) : (
 						<p>None</p>
 					)}
 				</AnimatePresence>
-			</motion.div>
+			</div>
 		</div>
 	);
 }

@@ -11,7 +11,6 @@ interface GameCardProps {
 		showProgress: boolean;
 		showPlaytime: boolean;
 	};
-	isFiltered?: boolean;
 }
 
 interface IconTextProps {
@@ -44,7 +43,6 @@ export default function GameCard({
 	game,
 	size,
 	displayOptions = { showProgress: true, showPlaytime: true },
-	isFiltered = true,
 }: GameCardProps) {
 	const { name, playtimeRecent, playtimeTotal, logoUrl, achievementCounts } = game;
 	const { completed, total } = achievementCounts;
@@ -64,13 +62,7 @@ export default function GameCard({
 
 	return (
 		/* Container */
-		<div
-			className={classNames(
-				'flex flex-col items-center gap-2 rounded bg-white p-4 text-center',
-				{ 'mb-6': size === 'small' && isFiltered },
-				{ hidden: !isFiltered }
-			)}
-		>
+		<div className="flex flex-col items-center gap-2 rounded bg-white p-4 text-center">
 			{/* Logo image */}
 			<div
 				className={classNames('relative shadow-md', {

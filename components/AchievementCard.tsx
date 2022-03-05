@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { BadgeCheckIcon } from '@heroicons/react/solid';
 import { Achievement } from '../lib/achievements';
 
@@ -16,15 +15,9 @@ export default function AchievementCard({
 }: AchievementCardProps) {
 	const { name, description, completed, completedTime, globalCompleted } = achievement;
 
-	/* Container - Card and Checkmark sit in the same grid cell */
 	return (
-		<motion.div
-			layout="position"
-			initial={{ opacity: 0 }}
-			animate={{ opacity: 1 }}
-			exit={{ opacity: 0 }}
-			transition={{ duration: 0.5 }}
-		>
+		/* Container - Card and Checkmark sit in the same grid cell */
+		<div className="grid">
 			{/* Checkmark overlay */}
 			{completed && (
 				<div className="relative col-start-1 row-start-1">
@@ -61,6 +54,6 @@ export default function AchievementCard({
 					</div>
 				)}
 			</div>
-		</motion.div>
+		</div>
 	);
 }

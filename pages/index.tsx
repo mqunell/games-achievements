@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { GetStaticProps } from 'next';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Game, getGames } from '../lib/games';
 import DisplayOptions from '../components/DisplayOptions';
 import GameCard from '../components/GameCard';
@@ -15,6 +16,8 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 export default function Home({ games }) {
+	const [displayedGames, setDisplayedGames] = useState([]);
+
 	// Display state
 	const [showProgress, setShowProgress] = useState(true);
 	const [showPlaytime, setShowPlaytime] = useState(true);
@@ -23,20 +26,7 @@ export default function Home({ games }) {
 	const [filterPerc, setFilterPerc] = useState(0);
 	const [filterTime, setFilterTime] = useState(0);
 
-	const isFiltered = (game: Game) => {
-		const { completed, total } = game.achievementCounts;
-
-		const validPerc = filterPerc > 0 ? (completed / total) * 100 >= filterPerc : true; // Show games without achievements
-		const validTime = game.playtimeTotal >= filterTime * 60;
-
-		return validPerc && validTime;
-	};
-
-	const numFiltered = games.filter((game: Game) => isFiltered(game)).length;
-
 	// Sort state
-	const [sortedGames, setSortedGames] = useState(games);
-
 	const sortOptions = [
 		{ text: 'Alphabetical (a-z)', field: 'name', direction: 1 },
 		{ text: 'Alphabetical (z-a)', field: 'name', direction: -1 },
@@ -49,7 +39,7 @@ export default function Home({ games }) {
 
 	const [sortBy, setSortBy] = useState(sortOptions[2]);
 
-	// Sort dropdown click handler
+	// Filtering and sorting
 	useEffect(() => {
 		const { field, direction } = sortBy;
 
@@ -58,13 +48,20 @@ export default function Home({ games }) {
 			setShowPlaytime(true);
 		}
 
-		// Sort the games
-		const sorted = [...games].sort((a, b) =>
-			a[field] < b[field] ? direction * -1 : direction
-		);
+		// Filter and sort the games
+		const displayed = games
+			.filter((game: Game) => {
+				const { completed, total } = game.achievementCounts;
 
-		setSortedGames(sorted);
-	}, [sortBy, games]);
+				const validPerc = filterPerc > 0 ? (completed / total) * 100 >= filterPerc : true; // Show games without achievements
+				const validTime = game.playtimeTotal >= filterTime * 60;
+
+				return validPerc && validTime;
+			})
+			.sort((a: Game, b: Game) => (a[field] < b[field] ? direction * -1 : direction));
+
+		setDisplayedGames(displayed);
+	}, [sortBy, filterPerc, filterTime, games]);
 
 	return (
 		<div className="mx-auto my-8 flex w-80 flex-col items-center gap-6">
@@ -77,7 +74,7 @@ export default function Home({ games }) {
 			{/* Heading */}
 			<div className="w-full rounded bg-white p-4">
 				<h1 className="text-center text-2xl font-bold">
-					{numFiltered}/{games.length} Games
+					{displayedGames.length}/{games.length} Games
 				</h1>
 			</div>
 
@@ -116,20 +113,28 @@ export default function Home({ games }) {
 			</DisplayOptions>
 
 			{/* GameCards */}
-			<div className="flex w-full flex-col">
-				{sortedGames &&
-					sortedGames.map((game: Game) => (
-						<Link key={game.gameId} href={`/games/${game.gameId}`}>
-							<a className="cursor-pointer">
-								<GameCard
-									game={game}
-									size="small"
-									displayOptions={{ showProgress, showPlaytime }}
-									isFiltered={isFiltered(game)}
-								/>
-							</a>
-						</Link>
-					))}
+			<div className="flex w-full flex-col gap-6">
+				<AnimatePresence>
+					{displayedGames &&
+						displayedGames.map((game: Game) => (
+							<Link href={`/games/${game.gameId}`} passHref key={game.gameId}>
+								<motion.a
+									className="cursor-pointer"
+									layout="position"
+									initial={{ opacity: 0 }}
+									animate={{ opacity: 1 }}
+									exit={{ opacity: 0 }}
+									transition={{ duration: 0.5 }}
+								>
+									<GameCard
+										game={game}
+										size="small"
+										displayOptions={{ showProgress, showPlaytime }}
+									/>
+								</motion.a>
+							</Link>
+						))}
+				</AnimatePresence>
 			</div>
 		</div>
 	);
