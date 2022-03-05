@@ -15,6 +15,16 @@ export const getStaticProps: GetStaticProps = async () => {
 	return { props: { games }, revalidate: 600 };
 };
 
+const sortOptions = [
+	{ text: 'Alphabetical (a-z)', field: 'name', direction: 1 },
+	{ text: 'Alphabetical (z-a)', field: 'name', direction: -1 },
+	{ text: 'Total playtime (highest)', field: 'playtimeTotal', direction: -1 },
+	{ text: 'Total playtime (lowest)', field: 'playtimeTotal', direction: 1 },
+	{ text: 'Recent playtime (highest)', field: 'playtimeRecent', direction: -1 },
+	{ text: 'Recent playtime (lowest)', field: 'playtimeRecent', direction: 1 },
+	// todo: add achievement % sorting
+];
+
 export default function Home({ games }) {
 	const [displayedGames, setDisplayedGames] = useState([]);
 
@@ -27,16 +37,6 @@ export default function Home({ games }) {
 	const [filterTime, setFilterTime] = useState(0);
 
 	// Sort state
-	const sortOptions = [
-		{ text: 'Alphabetical (a-z)', field: 'name', direction: 1 },
-		{ text: 'Alphabetical (z-a)', field: 'name', direction: -1 },
-		{ text: 'Total playtime (highest)', field: 'playtimeTotal', direction: -1 },
-		{ text: 'Total playtime (lowest)', field: 'playtimeTotal', direction: 1 },
-		{ text: 'Recent playtime (highest)', field: 'playtimeRecent', direction: -1 },
-		{ text: 'Recent playtime (lowest)', field: 'playtimeRecent', direction: 1 },
-		// todo: add achievement % sorting
-	];
-
 	const [sortBy, setSortBy] = useState(sortOptions[2]);
 
 	// Filtering and sorting

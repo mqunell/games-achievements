@@ -33,6 +33,15 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	return { props: { game, achievements }, revalidate: 600 };
 };
 
+const sortOptions = [
+	{ text: 'Alphabetical (a-z)', field: 'name', direction: 1 },
+	{ text: 'Alphabetical (z-a)', field: 'name', direction: -1 },
+	{ text: 'Completion time (newest)', field: 'completedTime', direction: -1 },
+	{ text: 'Completion time (oldest)', field: 'completedTime', direction: 1 },
+	{ text: 'Global completion % (highest)', field: 'globalCompleted', direction: -1 },
+	{ text: 'Global completion % (lowest)', field: 'globalCompleted', direction: 1 },
+];
+
 export default function GameAchievements({ game, achievements }: GameAchievementProps) {
 	const [displayedAchievements, setDisplayedAchievements] = useState([]);
 
@@ -45,14 +54,6 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 	const [showUncompleted, setShowUncompleted] = useState(true);
 
 	// Sort state
-	const sortOptions = [
-		{ text: 'Alphabetical (a-z)', field: 'name', direction: 1 },
-		{ text: 'Alphabetical (z-a)', field: 'name', direction: -1 },
-		{ text: 'Completion time (newest)', field: 'completedTime', direction: -1 },
-		{ text: 'Completion time (oldest)', field: 'completedTime', direction: 1 },
-		{ text: 'Global completion % (highest)', field: 'globalCompleted', direction: -1 },
-		{ text: 'Global completion % (lowest)', field: 'globalCompleted', direction: 1 },
-	];
 
 	const [sortBy, setSortBy] = useState(sortOptions[4]);
 
