@@ -52,7 +52,7 @@ export async function initGamesAchievements() {
 	const gamesRes: AxiosResponse = await axios.get(gamesUrl);
 	const apiGames = gamesRes.data.response.games;
 
-	// Filter games like SKSE and map the ApiGame[] to full Game[] objects
+	// Filter out games like SKSE and map the ApiGame[] to full Game[] objects
 	const games: Game[] = apiGames
 		.filter((apiGame: ApiGame) => {
 			return ![359050, 365720, 469820, 489830, 1053680].includes(apiGame.appid);
@@ -68,7 +68,7 @@ export async function initGamesAchievements() {
 				name: name,
 				playtimeRecent: playtime_2weeks || 0,
 				playtimeTotal: playtime_forever,
-				logoUrl: `http://media.steampowered.com/steamcommunity/public/images/apps/${gameId}/${img_logo_url}.jpg`,
+				logoUrl: `https://steamcdn-a.akamaihd.net/steam/apps/${gameId}/header.jpg`,
 				achievements,
 				achievementCounts: {
 					total: achievements.length,
