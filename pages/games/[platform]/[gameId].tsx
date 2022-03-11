@@ -45,7 +45,7 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 	const [displayedAchievements, setDisplayedAchievements] = useState([]);
 
 	// Display state
-	const [showTime, setShowTime] = useState(true);
+	const [showTime, setShowTime] = useState(game.platform !== 'Xbox'); // Xbox achievements don't have completion dates
 	const [showGlobal, setShowGlobal] = useState(true);
 
 	// Filter state
@@ -53,7 +53,6 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 	const [showUncompleted, setShowUncompleted] = useState(true);
 
 	// Sort state
-
 	const [sortBy, setSortBy] = useState(sortOptions[4]);
 
 	// Filtering and sorting
