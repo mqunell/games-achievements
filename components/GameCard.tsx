@@ -65,7 +65,7 @@ export default function GameCard({
 		<div
 			className={classNames(
 				'flex w-80 flex-col items-center gap-2 rounded bg-white p-4 text-center',
-				{ 'h-full': size === 'small' }
+				{ 'h-full transform duration-150 hover:scale-105': size === 'small' }
 			)}
 		>
 			{/* Logo image */}
@@ -79,9 +79,9 @@ export default function GameCard({
 			</div>
 
 			{/* Title */}
-			<div className="mt-1 flex items-center gap-2">
+			<div className="mt-1 flex max-w-full items-center gap-2 ">
 				<div
-					className={classNames('relative', {
+					className={classNames('relative shrink-0', {
 						'h-5 w-5': size === 'small',
 						'h-6 w-6': size === 'large',
 					})}
@@ -94,7 +94,7 @@ export default function GameCard({
 				</div>
 				<h1
 					className={classNames('font-semibold', {
-						'max-w-full truncate text-xl': size === 'small',
+						'truncate text-xl': size === 'small',
 						'text-2xl': size === 'large',
 					})}
 				>
