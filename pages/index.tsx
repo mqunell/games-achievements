@@ -119,7 +119,11 @@ export default function Home({ games }) {
 				<AnimatePresence>
 					{displayedGames &&
 						displayedGames.map((game: Game) => (
-							<Link href={`/games/${game.gameId}`} passHref key={game.gameId}>
+							<Link
+								href={`/games/${game.platform}/${game.name}`}
+								passHref
+								key={`${game.gameId}-${game.platform}`}
+							>
 								<motion.a
 									className="cursor-pointer"
 									layout="position"

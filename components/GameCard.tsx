@@ -71,22 +71,36 @@ export default function GameCard({
 			{/* Logo image */}
 			<div
 				className={classNames('relative shadow-md', {
-					'h-[69px] w-[184px]': size === 'small',
-					'h-[108px] w-[288px]': size === 'large',
+					'h-[86px] w-[184px]': size === 'small',
+					'h-[135px] w-[288px]': size === 'large',
 				})}
 			>
 				<Image src={logoUrl} alt={`${name} logo`} layout="fill" />
 			</div>
 
 			{/* Title */}
-			<h1
-				className={classNames('font-semibold', {
-					'max-w-full truncate text-xl': size === 'small',
-					'text-2xl': size === 'large',
-				})}
-			>
-				{name}
-			</h1>
+			<div className="mt-1 flex items-center gap-2">
+				<div
+					className={classNames('relative', {
+						'h-5 w-5': size === 'small',
+						'h-6 w-6': size === 'large',
+					})}
+				>
+					{game.platform === 'Steam' ? (
+						<Image src="/Steam.svg" alt="Steam logo" layout="fill" />
+					) : (
+						<Image src="/Xbox.svg" alt="Xbox logo" layout="fill" />
+					)}
+				</div>
+				<h1
+					className={classNames('font-semibold', {
+						'max-w-full truncate text-xl': size === 'small',
+						'text-2xl': size === 'large',
+					})}
+				>
+					{name}
+				</h1>
+			</div>
 
 			{(showProgress || showPlaytime) && <hr className="my-1 w-full" />}
 
@@ -104,7 +118,7 @@ export default function GameCard({
 				<div className="flex flex-col items-center">
 					<IconText icon={ClockIcon} text={`Total: ${formatTime(playtimeTotal)}`} />
 
-					{playtimeRecent > 0 && size === 'large' && (
+					{playtimeRecent > 0 && (
 						<IconText icon={ClockIcon} text={`Recent: ${formatTime(playtimeRecent)}`} />
 					)}
 				</div>

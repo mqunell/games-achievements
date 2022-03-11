@@ -2,13 +2,12 @@ import { useEffect, useState } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Game, getGames, getGame } from '../../lib/games';
-import { Achievement, getAchievements } from '../../lib/achievements';
-import AchievementCard from '../../components/AchievementCard';
-import DisplayOptions from '../../components/DisplayOptions';
-import GameCard from '../../components/GameCard';
-import Select from '../../components/Select';
-import Toggle from '../../components/Toggle';
+import { Game, Achievement, getGames, getGame } from '../../../lib/games';
+import AchievementCard from '../../../components/AchievementCard';
+import DisplayOptions from '../../../components/DisplayOptions';
+import GameCard from '../../../components/GameCard';
+import Select from '../../../components/Select';
+import Toggle from '../../../components/Toggle';
 
 interface GameAchievementProps {
 	game: Game;
@@ -17,18 +16,18 @@ interface GameAchievementProps {
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	const games = await getGames();
-	const paths = games.map(({ gameId }) => ({
-		params: { gameId },
+	const paths = games.map(({ platform, name }) => ({
+		params: { platform, name },
 	}));
 
 	return { paths, fallback: false };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const gameId = params.gameId as string;
+	const platform = params.platform as string;
+	const name = params.name as string;
 
-	const game = await getGame(gameId);
-	const achievements = await getAchievements(gameId);
+	const { achievements, ...game } = getGame(platform, name);
 
 	return { props: { game, achievements }, revalidate: 600 };
 };

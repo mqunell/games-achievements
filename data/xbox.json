@@ -1,0 +1,535 @@
+[
+	{
+		"platform": "Xbox",
+		"gameId": "361420",
+		"name": "ASTRONEER",
+		"playtimeRecent": 0,
+		"playtimeTotal": 3799,
+		"logoUrl": "https://steamcdn-a.akamaihd.net/steam/apps/361420/header.jpg",
+		"achievements": [
+			{
+				"name": "EXO Dynamics Training Seal of Approval",
+				"apiName": "TutorialDone",
+				"description": "Complete the training missions.",
+				"completed": true,
+				"globalCompleted": 40.20000076293945
+			},
+			{
+				"name": "Up By the Roots",
+				"apiName": "HazardUprooted",
+				"description": "Dig up a hazard.",
+				"completed": true,
+				"globalCompleted": 57.79999923706055
+			},
+			{
+				"name": "Pursuit of Knowledge",
+				"apiName": "ResearchChamber",
+				"description": "Research an item in the Research Chamber.",
+				"completed": true,
+				"globalCompleted": 56.900001525878906
+			},
+			{
+				"name": "A Little Byte Goes a Long Way",
+				"apiName": "InstantResearch",
+				"description": "Scan a Research Sample of any type.",
+				"completed": true,
+				"globalCompleted": 67.19999694824219
+			},
+			{
+				"name": "Dirt Don't Hurt",
+				"apiName": "SoilExtract",
+				"description": "Extract a resource using the Soil Centrifuge.",
+				"completed": true,
+				"globalCompleted": 42.5
+			},
+			{
+				"name": "Do Science To It",
+				"apiName": "CatalyzeComponent",
+				"description": "Synthesize a composite material with the Chemistry Lab.",
+				"completed": true,
+				"globalCompleted": 34.5
+			},
+			{
+				"name": "A Little Gassy",
+				"apiName": "CollectGas",
+				"description": "Collect a gas with the Atmospheric Condenser.",
+				"completed": true,
+				"globalCompleted": 29
+			},
+			{
+				"name": "Sweet New Ride",
+				"apiName": "BuildRover",
+				"description": "Build a rover of any type.",
+				"completed": true,
+				"globalCompleted": 45.29999923706055
+			},
+			{
+				"name": "Scrap for the Scrapper",
+				"apiName": "UseShredder",
+				"description": "Scrap an object in a Shredder.",
+				"completed": true,
+				"globalCompleted": 30.700000762939453
+			},
+			{
+				"name": "Junk Trader",
+				"apiName": "TradePlatform",
+				"description": "Use the Trade Platform to exchange Scrap for another resource.",
+				"completed": true,
+				"globalCompleted": 24.5
+			},
+			{
+				"name": "Barrier Buster",
+				"apiName": "HardTerrain",
+				"description": "Use a drill to deform a harder type of terrain.",
+				"completed": true,
+				"globalCompleted": 15.699999809265137
+			},
+			{
+				"name": "Delve Greedily and Deep",
+				"apiName": "GoMantle",
+				"description": "Travel to the Mantle depth of any planet.",
+				"completed": true,
+				"globalCompleted": 30
+			},
+			{
+				"name": "Making a New Friend",
+				"apiName": "PlantSeed",
+				"description": "Plant a seed.",
+				"completed": true,
+				"globalCompleted": 34
+			},
+			{
+				"name": "Well Hello There, Fancypants",
+				"apiName": "ChangeSuit",
+				"description": "Change into a different suit.",
+				"completed": true,
+				"globalCompleted": 39
+			},
+			{
+				"name": "Thank You For Your Continued Assistance",
+				"apiName": "PuzzleSolve",
+				"description": "Solve an EXO Dynamics Research Aid.",
+				"completed": true,
+				"globalCompleted": 46.5
+			},
+			{
+				"name": "Lab Rat",
+				"apiName": "EveryComponent",
+				"description": "Use the Chemistry Lab to synthesize each composite material.",
+				"completed": true,
+				"globalCompleted": 9.699999809265137
+			},
+			{
+				"name": "Gas Giant",
+				"apiName": "EveryGas",
+				"description": "Use the Atmospheric Condenser to collect every type of gas.",
+				"completed": true,
+				"globalCompleted": 12.800000190734863
+			},
+			{
+				"name": "Chop Shop",
+				"apiName": "ScrapX",
+				"description": "Scrap 50 objects in a Shredder.",
+				"completed": true,
+				"globalCompleted": 14
+			},
+			{
+				"name": "In An Astroneer's Garden",
+				"apiName": "EverySeed",
+				"description": "Plant a Spinelily, Lashleaf, Bouncevine, Wheezeweed, Thistlewhip, Popcoral and Daggeroot seed.",
+				"completed": true,
+				"globalCompleted": 2.799999952316284
+			},
+			{
+				"name": "Resources in the Rough",
+				"apiName": "EveryRaw",
+				"description": "Use the Terrain Tool to harvest every type of raw material.",
+				"completed": true,
+				"globalCompleted": 16.399999618530273
+			},
+			{
+				"name": "They Who Smelt It",
+				"apiName": "EverySmelt",
+				"description": "Use the Smelter to craft every type of refined resource.",
+				"completed": true,
+				"globalCompleted": 24.700000762939453
+			},
+			{
+				"name": "Research Scientist",
+				"apiName": "BytesGain",
+				"description": "Gain 100,000 Bytes across all games.",
+				"completed": true,
+				"globalCompleted": 23.5
+			},
+			{
+				"name": "Information Dump",
+				"apiName": "BytesConcurrent",
+				"description": "Reach more than 150 Bytes-Per-Minute of concurrent research.",
+				"completed": true,
+				"globalCompleted": 45.20000076293945
+			},
+			{
+				"name": "Secrets of the Universe",
+				"apiName": "ChamberAll",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 2.9000000953674316
+			},
+			{
+				"name": "Shapes and Other Shapes",
+				"apiName": "FindChamber",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 47.599998474121094
+			},
+			{
+				"name": "First Step Into a Larger World",
+				"apiName": "SolveChamber",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 31.899999618530273
+			},
+			{
+				"name": "Encounter With the Infinite",
+				"apiName": "FindEngine",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 21.700000762939453
+			},
+			{
+				"name": "Sylva Awakened",
+				"apiName": "SolveTerranEngine",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 16.899999618530273
+			},
+			{
+				"name": "Desolo Awakened",
+				"apiName": "SolveBarrenEngine",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 10.5
+			},
+			{
+				"name": "Calidor Awakened",
+				"apiName": "SolveAridEngine",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 7.800000190734863
+			},
+			{
+				"name": "Vesania Awakened",
+				"apiName": "SolveExoticEngine",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 7.900000095367432
+			},
+			{
+				"name": "Novus Awakened",
+				"apiName": "SolveExomoonEngine",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 7.800000190734863
+			},
+			{
+				"name": "Glacio Awakened",
+				"apiName": "SolveTundraEngine",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 7.599999904632568
+			},
+			{
+				"name": "Atrox Awakened",
+				"apiName": "SolveRadiatedEngine",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 6.900000095367432
+			},
+			{
+				"name": "To Infinity...",
+				"apiName": "SolveAllEngines",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 6.199999809265137
+			},
+			{
+				"name": "Blast Off",
+				"apiName": "LeaveTerran",
+				"description": "Use a shuttle to leave Sylva.",
+				"completed": true,
+				"globalCompleted": 38.29999923706055
+			},
+			{
+				"name": "One Small Step",
+				"apiName": "LandMoon",
+				"description": "Visit Desolo.",
+				"completed": true,
+				"globalCompleted": 31.700000762939453
+			},
+			{
+				"name": "It's a Dry Heat",
+				"apiName": "LandArid",
+				"description": "Visit Calidor.",
+				"completed": true,
+				"globalCompleted": 19.600000381469727
+			},
+			{
+				"name": "Into the Woods",
+				"apiName": "LandExotic",
+				"description": "Visit Vesania.",
+				"completed": true,
+				"globalCompleted": 24.100000381469727
+			},
+			{
+				"name": "To the Forest Moon",
+				"apiName": "LandExoMoon",
+				"description": "Visit Novus.",
+				"completed": true,
+				"globalCompleted": 25.200000762939453
+			},
+			{
+				"name": "I Feel Sick",
+				"apiName": "LandRadiated",
+				"description": "Visit Atrox.",
+				"completed": true,
+				"globalCompleted": 19.5
+			},
+			{
+				"name": "Cool As Ice",
+				"apiName": "LandTundra",
+				"description": "Visit Glacio.",
+				"completed": true,
+				"globalCompleted": 23.600000381469727
+			},
+			{
+				"name": "Now You See Me...",
+				"apiName": "FastTravel",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 23.5
+			},
+			{
+				"name": "...And Beyond",
+				"apiName": "BeatGame",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 6.300000190734863
+			},
+			{
+				"name": "Hang 10-Squared",
+				"apiName": "SlideTime",
+				"description": "Slide uninterrupted for at least 10 seconds.",
+				"completed": true,
+				"globalCompleted": 42.599998474121094
+			},
+			{
+				"name": "Where We're Going, We Don't Need Roads",
+				"apiName": "RoverAirtime",
+				"description": "Drive an airborne rover for at least 10 seconds.",
+				"completed": true,
+				"globalCompleted": 8.899999618530273
+			},
+			{
+				"name": "Galactic Boogaloo",
+				"apiName": "PlanetDance",
+				"description": "Dance on every planet.",
+				"completed": true,
+				"globalCompleted": 3.299999952316284
+			},
+			{
+				"name": "Baby You're a Firework",
+				"apiName": "BackpackFirework",
+				"description": "Launch 10 fireworks in 10 seconds.",
+				"completed": true,
+				"globalCompleted": 2.5999999046325684
+			},
+			{
+				"name": "EXO Dynamics Outreach Participant",
+				"apiName": "MPSession",
+				"description": "Join or host a multiplayer game session.",
+				"completed": true,
+				"globalCompleted": 44.099998474121094
+			},
+			{
+				"name": "Let Me Borrow This Just A Second",
+				"apiName": "GuestResearch",
+				"description": "Use a Research Chamber to research something in another Astroneer's game.",
+				"completed": true,
+				"globalCompleted": 22.200000762939453
+			},
+			{
+				"name": "Journey to the Center of the Thing",
+				"apiName": "MPCore",
+				"description": "Travel to the center of any planet in a multiplayer game.",
+				"completed": true,
+				"globalCompleted": 21.899999618530273
+			},
+			{
+				"name": "EXO Dynamics Outreach Advocate",
+				"apiName": "MPTime",
+				"description": "Spend more than 4 total hours in multiplayer sessions.",
+				"completed": true,
+				"globalCompleted": 37.20000076293945
+			},
+			{
+				"name": "Interplanetary Road Trip",
+				"apiName": "CoOpShuttle",
+				"description": "Travel to another planet with another player in the same shuttle.",
+				"completed": true,
+				"globalCompleted": 15.699999809265137
+			},
+			{
+				"name": "EXO Dynamics Solar System Mastery",
+				"apiName": "AllAchievements",
+				"description": "Obtain every Achievement in Astroneer.",
+				"completed": true,
+				"globalCompleted": 1.600000023841858
+			},
+			{
+				"name": "The First Discovery",
+				"apiName": "WandererFirstProbe",
+				"description": "Use the Probe Scanner to find one of the mysterious Vintage Probes.",
+				"completed": true,
+				"globalCompleted": 6.699999809265137
+			},
+			{
+				"name": "The Wanderer's Way",
+				"apiName": "WandererAllProbes",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 2.700000047683716
+			}
+		],
+		"achievementCounts": { "total": 56, "completed": 56 }
+	},
+	{
+		"platform": "Xbox",
+		"gameId": "264710",
+		"name": "Subnautica",
+		"playtimeRecent": 0,
+		"playtimeTotal": 3193,
+		"logoUrl": "https://steamcdn-a.akamaihd.net/steam/apps/264710/header.jpg",
+		"achievements": [
+			{
+				"name": "Getting Your Feet Wet",
+				"apiName": "DiveForTheVeryFirstTime",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 82.69999694824219
+			},
+			{
+				"name": "Extinction Event Avoided",
+				"apiName": "RepairAuroraReactor",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 36.20000076293945
+			},
+			{
+				"name": "Ancient Technologies",
+				"apiName": "FindPrecursorGun",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 44.599998474121094
+			},
+			{
+				"name": "Thermal Activity",
+				"apiName": "FindPrecursorLavaCastleFacility",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 18
+			},
+			{
+				"name": "Follow the Lost River",
+				"apiName": "FindPrecursorLostRiverFacility",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 23.5
+			},
+			{
+				"name": "Fourteen Thousand Leagues Under the Sea",
+				"apiName": "FindPrecursorPrisonFacility",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 18.399999618530273
+			},
+			{
+				"name": "Optimal Health",
+				"apiName": "CureInfection",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 17.200000762939453
+			},
+			{
+				"name": "Leave Only Time Capsules",
+				"apiName": "DeployTimeCapsule",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 12.100000381469727
+			},
+			{
+				"name": "Seaside Living with an Ocean View",
+				"apiName": "FindDegasiFloatingIslandsBase",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 43.5
+			},
+			{
+				"name": "Follow the Degasi",
+				"apiName": "FindDegasiJellyshroomCavesBase",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 32.599998474121094
+			},
+			{
+				"name": "Seamonsters",
+				"apiName": "FindDegasiDeepGrandReefBase",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 23.600000381469727
+			},
+			{
+				"name": "Settling in for the Long Haul",
+				"apiName": "BuildBase",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 53.5
+			},
+			{
+				"name": "Personal Propulsion",
+				"apiName": "BuildSeamoth",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 51.599998474121094
+			},
+			{
+				"name": "40-foot Sub For One",
+				"apiName": "BuildCyclops",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 36.099998474121094
+			},
+			{
+				"name": "Ordered the Prawn",
+				"apiName": "BuildExosuit",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 32.70000076293945
+			},
+			{
+				"name": "Go Among the Stars",
+				"apiName": "LaunchRocket",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 12.100000381469727
+			},
+			{
+				"name": "\"Man's Best Friend\"",
+				"apiName": "HatchCutefish",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 11.399999618530273
+			}
+		],
+		"achievementCounts": { "total": 17, "completed": 17 }
+	}
+]

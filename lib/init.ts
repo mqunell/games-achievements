@@ -22,7 +22,6 @@ interface ApiGame {
 	playtime_2weeks?: number; // Minutes; not included by API if 0
 	playtime_forever: number; // Minutes
 	img_icon_url: string; // Slug
-	img_logo_url: string; // Slug
 	has_community_visible_stats: boolean;
 	playtime_windows_forever: number;
 	playtime_mac_forever: number;
@@ -58,12 +57,13 @@ export async function initGamesAchievements() {
 			return ![359050, 365720, 469820, 489830, 1053680].includes(apiGame.appid);
 		})
 		.map(async (apiGame: ApiGame) => {
-			const { appid, name, playtime_2weeks, playtime_forever, img_logo_url } = apiGame;
+			const { appid, name, playtime_2weeks, playtime_forever } = apiGame;
 
 			const gameId = appid.toString();
 			const achievements = await getAchievements(gameId);
 
 			return {
+				platform: 'Steam',
 				gameId,
 				name: name,
 				playtimeRecent: playtime_2weeks || 0,
@@ -78,7 +78,11 @@ export async function initGamesAchievements() {
 		});
 
 	// Await the Game[] promises (due to the inner Achievement[])
-	const gamesCache = await Promise.all(games);
+	const steamData = await Promise.all(games);
+
+	// Merge the pre-written Xbox games/achievements data
+	const xboxData = JSON.parse(fs.readFileSync('data/xbox.json').toString());
+	const gamesCache = [...steamData, ...xboxData];
 
 	// Write the file with all games' data
 	fs.writeFileSync(gamesCacheFile, JSON.stringify(gamesCache));

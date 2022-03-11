@@ -1,26 +1,35 @@
 import fs from 'fs';
 import { initGamesAchievements, gamesCacheFile } from './init';
-import { Achievement } from './achievements';
 
 export type GameId = string;
 
 export interface Game {
+	platform: 'Steam' | 'Xbox';
 	gameId: GameId;
 	name: string;
 	playtimeRecent: number;
 	playtimeTotal: number;
 	iconUrl: string; // Full URL
 	logoUrl: string; // Full URL
-	achievements?: Achievement[]; // All achievements - removed when passing to frontend
+	achievements?: Achievement[]; // All achievements - omitted when passing to index
 	achievementCounts: {
 		total: number;
 		completed: number;
 	};
 }
 
+export interface Achievement {
+	name: string;
+	apiName: string;
+	description: string;
+	completed: boolean;
+	completedTime: number;
+	globalCompleted: number;
+}
+
 /**
  * Reads all games from the cache file, then removes Achievements[] to keep data size
- * minimal and filters to games with playtime > 180 minutes.
+ * minimal and filters to games with any playtime.
  */
 export async function getGames(): Promise<Game[]> {
 	// Initialize all games and achievements cache
@@ -30,9 +39,9 @@ export async function getGames(): Promise<Game[]> {
 	const gamesCache: Game[] = JSON.parse(fs.readFileSync(gamesCacheFile).toString());
 
 	const games = gamesCache
-		.map((game: Game) => {
-			const { achievements, ...data } = game;
-			return data;
+		.map((gameCache: Game) => {
+			const { achievements, ...game } = gameCache;
+			return game;
 		})
 		.filter((game: Game) => game.playtimeTotal > 0)
 		.sort((a: Game, b: Game) => (a.playtimeTotal > b.playtimeTotal ? -1 : 1));
@@ -41,15 +50,11 @@ export async function getGames(): Promise<Game[]> {
 }
 
 /**
- * Get a Game from the JSON cache file for getStaticProps() to pass to the component
- * @param gameId A game ID
- * @returns An individual game
+ * Get a full Game (including its Achievement[]) from the JSON cache file for getStaticProps()
  */
-export async function getGame(gameId: GameId): Promise<Game> {
+export function getGame(platform: string, name: string): Game {
 	const gamesCache: Game[] = JSON.parse(fs.readFileSync(gamesCacheFile).toString());
-
-	const gameCache = gamesCache.find((gc) => gc.gameId === gameId);
-	const { achievements, ...game } = gameCache;
+	const game = gamesCache.find((gc) => gc.platform === platform && gc.name === name);
 
 	return game;
 }
