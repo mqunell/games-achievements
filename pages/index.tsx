@@ -120,7 +120,7 @@ export default function Home({ games }) {
 					{displayedGames &&
 						displayedGames.map((game: Game) => (
 							<Link
-								href={`/games/${game.platform}/${game.name}`}
+								href={`/games/${game.platform}/${game.gameId}`}
 								passHref
 								key={`${game.gameId}-${game.platform}`}
 							>

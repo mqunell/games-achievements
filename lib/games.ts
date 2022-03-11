@@ -52,9 +52,9 @@ export async function getGames(): Promise<Game[]> {
 /**
  * Get a full Game (including its Achievement[]) from the JSON cache file for getStaticProps()
  */
-export function getGame(platform: string, name: string): Game {
+export function getGame(platform: string, gameId: string): Game {
 	const gamesCache: Game[] = JSON.parse(fs.readFileSync(gamesCacheFile).toString());
-	const game = gamesCache.find((gc) => gc.platform === platform && gc.name === name);
+	const game = gamesCache.find((gc) => gc.platform === platform && gc.gameId === gameId);
 
 	return game;
 }

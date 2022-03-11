@@ -1,6 +1,6 @@
 import { BadgeCheckIcon } from '@heroicons/react/solid';
 import classNames from 'classnames';
-import { Achievement } from '../lib/achievements';
+import { Achievement } from '../lib/games';
 
 interface AchievementCardProps {
 	achievement: Achievement;

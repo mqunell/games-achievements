@@ -16,8 +16,8 @@ interface GameAchievementProps {
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	const games = await getGames();
-	const paths = games.map(({ platform, name }) => ({
-		params: { platform, name },
+	const paths = games.map(({ platform, gameId }) => ({
+		params: { platform, gameId },
 	}));
 
 	return { paths, fallback: false };
@@ -25,9 +25,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const platform = params.platform as string;
-	const name = params.name as string;
+	const gameId = params.gameId as string;
 
-	const { achievements, ...game } = getGame(platform, name);
+	const { achievements, ...game } = getGame(platform, gameId);
 
 	return { props: { game, achievements }, revalidate: 600 };
 };
