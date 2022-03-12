@@ -1,5 +1,5 @@
-import { BadgeCheckIcon } from '@heroicons/react/solid';
 import classNames from 'classnames';
+import CompletedBadge from './CompletedBadge';
 import { Achievement } from '../lib/games';
 
 interface AchievementCardProps {
@@ -17,14 +17,12 @@ export default function AchievementCard({
 	const { name, description, completed, completedTime, globalCompleted } = achievement;
 
 	return (
-		/* Container - Card and Checkmark sit in the same grid cell */
+		/* Container - Card and CompletedBadge are separated for overflow-hidden on the completion bar */
 		<div className="grid h-full">
-			{/* Checkmark overlay */}
+			{/* Checkmark */}
 			{completed && (
 				<div className="relative col-start-1 row-start-1">
-					<div className="absolute -top-3 -right-4 z-10 h-max w-max rounded-full bg-green-500 p-1.5">
-						<BadgeCheckIcon className="h-8 w-8 text-white" />
-					</div>
+					<CompletedBadge />
 				</div>
 			)}
 
