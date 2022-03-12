@@ -151,7 +151,7 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 
 			{/* Floating back button */}
 			<Link href="/">
-				<a className="fixed left-8 bottom-8 rounded border border-black bg-white px-3 py-2 shadow">
+				<a className="fixed left-6 bottom-6 rounded border border-black bg-white px-4 py-3 shadow md:left-8 md:bottom-8">
 					<ArrowLeftIcon className="h-4 w-4" />
 				</a>
 			</Link>
