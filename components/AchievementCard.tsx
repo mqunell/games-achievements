@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { motion } from 'framer-motion';
 import CompletedBadge from './CompletedBadge';
 import { Achievement } from '../lib/games';
 
@@ -52,11 +53,17 @@ export default function AchievementCard({
 				{/* Completion bar */}
 				{displayOptions.showGlobal && (
 					<div className="w-full bg-blue-200">
-						<div className="bg-blue-600 p-1.5" style={{ width: globalCompleted + '%' }}>
+						<motion.div
+							initial={{ scaleX: 0 }}
+							animate={{ scaleX: 1 }}
+							transition={{ duration: 0.5, delay: 0.5 }}
+							className="origin-left bg-blue-600 p-1.5"
+							style={{ width: globalCompleted + '%' }}
+						>
 							<p className="w-max rounded border border-black bg-white px-1.5 py-0.5 text-xs">
 								{globalCompleted.toFixed(1)}%
 							</p>
-						</div>
+						</motion.div>
 					</div>
 				)}
 			</div>
