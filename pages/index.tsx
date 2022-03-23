@@ -39,7 +39,7 @@ export default function Home({ games }) {
 	// Sort state
 	const [sortBy, setSortBy] = useState(sortOptions[2]);
 
-	// Filtering and sorting
+	// Filtering and sorting (note: merged useEffect works here because it's a display option that is changed, not a filter toggle)
 	useEffect(() => {
 		const { field, direction } = sortBy;
 

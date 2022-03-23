@@ -61,21 +61,24 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 	useEffect(() => {
 		const { field, direction } = sortBy;
 
-		// Set toggles based on sort field
-		if (field === 'completedTime') {
-			setShowTime(true);
-			setShowUncompleted(false);
-		} else if (field === 'globalCompleted') {
-			setShowGlobal(true);
-		}
-
-		// Filter and sort achievements
 		const displayed = achievements
 			.filter((ach) => (ach.completed ? showCompleted : showUncompleted))
 			.sort((a, b) => (a[field] < b[field] ? direction * -1 : direction));
 
 		setDisplayedAchievements(displayed);
 	}, [sortBy, showCompleted, showUncompleted, achievements]);
+
+	// Set the toggles based on sort field (separate useEffect hook so they can be changed manually afterward)
+	useEffect(() => {
+		const { field } = sortBy;
+
+		if (field === 'completedTime') {
+			setShowTime(true);
+			setShowUncompleted(false);
+		} else if (field === 'globalCompleted') {
+			setShowGlobal(true);
+		}
+	}, [sortBy, achievements]);
 
 	return (
 		<div className="flex flex-col items-center gap-6 p-8 md:flex-row md:items-start">
