@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowLeftIcon } from '@heroicons/react/solid';
 import { Game, Achievement, getGames, getGame } from '../../../lib/games';
+import Layout from '../../../components/Layout';
 import AchievementCard from '../../../components/AchievementCard';
 import DisplayOptions from '../../../components/DisplayOptions';
 import GameCard from '../../../components/GameCard';
@@ -81,14 +82,14 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 	}, [sortBy, achievements]);
 
 	return (
-		<div className="flex flex-col items-center gap-6 p-8 md:flex-row md:items-start">
+		<Layout.Container>
 			<Head>
 				<title>{game.name} Achievements</title>
 				<meta name="description" content={`${game.name} achievements`} />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<div className="flex w-80 flex-col gap-6">
+			<Layout.TitleOptions>
 				{/* Heading image and data */}
 				<GameCard game={game} size="large" />
 
@@ -125,10 +126,10 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 					<p className="font-semibold">Sorting</p>
 					<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={sortOptions} />
 				</DisplayOptions>
-			</div>
+			</Layout.TitleOptions>
 
 			{/* Achievements */}
-			<div className="flex w-80 flex-col gap-8 md:grid md:flex-grow md:grid-cols-cards md:justify-center">
+			<Layout.Content>
 				<AnimatePresence>
 					{displayedAchievements ? (
 						displayedAchievements.map((ach: Achievement) => (
@@ -150,7 +151,7 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 						<p>None</p>
 					)}
 				</AnimatePresence>
-			</div>
+			</Layout.Content>
 
 			{/* Floating back button */}
 			<Link href="/">
@@ -158,6 +159,6 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 					<ArrowLeftIcon className="h-4 w-4" />
 				</a>
 			</Link>
-		</div>
+		</Layout.Container>
 	);
 }

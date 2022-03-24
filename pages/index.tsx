@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { GetStaticProps } from 'next';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Game, getGames } from '../lib/games';
+import Layout from '../components/Layout';
 import DisplayOptions from '../components/DisplayOptions';
 import GameCard from '../components/GameCard';
 import InputRange from '../components/InputRange';
@@ -64,14 +65,14 @@ export default function Home({ games }) {
 	}, [sortBy, filterPerc, filterTime, games]);
 
 	return (
-		<div className="flex flex-col items-center gap-6 p-8 md:flex-row md:items-start">
+		<Layout.Container>
 			<Head>
 				<title>Steam Games and Achievements</title>
 				<meta name="description" content="Steam games and achievements" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<div className="flex w-80 flex-col gap-6">
+			<Layout.TitleOptions>
 				{/* Heading */}
 				<div className="w-full rounded bg-white p-4">
 					<h1 className="text-center text-2xl font-bold">
@@ -112,10 +113,10 @@ export default function Home({ games }) {
 					<p className="font-semibold">Sorting</p>
 					<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={sortOptions} />
 				</DisplayOptions>
-			</div>
+			</Layout.TitleOptions>
 
 			{/* GameCards */}
-			<div className="flex w-80 flex-col gap-6 md:grid md:flex-grow md:grid-cols-cards md:justify-center">
+			<Layout.Content>
 				<AnimatePresence>
 					{displayedGames &&
 						displayedGames.map((game: Game) => (
@@ -141,7 +142,7 @@ export default function Home({ games }) {
 							</Link>
 						))}
 				</AnimatePresence>
-			</div>
-		</div>
+			</Layout.Content>
+		</Layout.Container>
 	);
 }
