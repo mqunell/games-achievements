@@ -1,11 +1,24 @@
+import { motion } from 'framer-motion';
+
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 
-// Page
-const Container = ({ children }) => (
-	<div className="flex flex-col items-center gap-6 p-8 md:flex-row md:items-start">
-		{children}
-	</div>
-);
+// Page - motion and fromDirection are used for page transitions
+const Container = ({ fromDirection, children }) => {
+	const x = fromDirection === 'left' ? -200 : 200;
+
+	return (
+		<motion.div
+			initial={{ opacity: 0, x }}
+			animate={{ opacity: 1, x: 0 }}
+			exit={{ opacity: 0, x }}
+			transition={{ type: 'linear', duration: 0.5 }}
+		>
+			<div className="flex flex-col items-center gap-6 p-8 md:flex-row md:items-start">
+				{children}
+			</div>
+		</motion.div>
+	);
+};
 
 // Heading, DisplayOptions
 const TitleOptions = ({ children }) => (

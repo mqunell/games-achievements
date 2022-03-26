@@ -65,7 +65,7 @@ export default function Home({ games }) {
 	}, [sortBy, filterPerc, filterTime, games]);
 
 	return (
-		<Layout.Container>
+		<Layout.Container fromDirection="left">
 			<Head>
 				<title>Steam Games and Achievements</title>
 				<meta name="description" content="Steam games and achievements" />
@@ -123,6 +123,7 @@ export default function Home({ games }) {
 							<Link
 								href={`/games/${game.platform}/${game.gameId}`}
 								passHref
+								scroll={false}
 								key={`${game.gameId}-${game.platform}`}
 							>
 								<motion.a

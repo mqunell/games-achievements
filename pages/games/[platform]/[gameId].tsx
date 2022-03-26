@@ -82,7 +82,7 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 	}, [sortBy, achievements]);
 
 	return (
-		<Layout.Container>
+		<Layout.Container fromDirection="right">
 			<Head>
 				<title>{game.name} Achievements</title>
 				<meta name="description" content={`${game.name} achievements`} />
@@ -153,10 +153,18 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 				</AnimatePresence>
 			</Layout.Content>
 
-			{/* Floating back button */}
-			<Link href="/">
-				<a className="fixed left-6 bottom-6 rounded border border-black bg-white px-4 py-3 shadow md:left-8 md:bottom-8">
-					<ArrowLeftIcon className="h-4 w-4" />
+			{/* Floating back button - separate motion component from Layout.Container and the parent <a> due to fixed positioning */}
+			<Link href="/" scroll={false}>
+				<a className="fixed left-6 bottom-6 md:left-8 md:bottom-8">
+					<motion.div
+						initial={{ opacity: 0, x: 40 }}
+						animate={{ opacity: 1, x: 0 }}
+						exit={{ opacity: 0, x: 40 }}
+						transition={{ type: 'linear', duration: 0.5, delay: 0.5 }}
+						className="relative rounded border border-black bg-white px-4 py-3 shadow"
+					>
+						<ArrowLeftIcon className="h-4 w-4" />
+					</motion.div>
 				</a>
 			</Link>
 		</Layout.Container>
