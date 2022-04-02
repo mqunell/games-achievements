@@ -34,6 +34,8 @@ export default function Home({ games }) {
 	const [showPlaytime, setShowPlaytime] = useState(true);
 
 	// Filter state
+	const [showSteam, setShowSteam] = useState(true);
+	const [showXbox, setShowXbox] = useState(true);
 	const [filterPerc, setFilterPerc] = useState(0);
 	const [filterTime, setFilterTime] = useState(0);
 
@@ -54,15 +56,19 @@ export default function Home({ games }) {
 			.filter((game: Game) => {
 				const { completed, total } = game.achievementCounts;
 
+				let validPlatform = true;
+				if (game.platform === 'Steam') validPlatform = showSteam;
+				if (game.platform === 'Xbox') validPlatform = showXbox;
+
 				const validPerc = filterPerc > 0 ? (completed / total) * 100 >= filterPerc : true; // Show games without achievements
 				const validTime = game.playtimeTotal >= filterTime * 60;
 
-				return validPerc && validTime;
+				return validPlatform && validPerc && validTime;
 			})
 			.sort((a: Game, b: Game) => (a[field] < b[field] ? direction * -1 : direction));
 
 		setDisplayedGames(displayed);
-	}, [sortBy, filterPerc, filterTime, games]);
+	}, [games, showSteam, showXbox, filterPerc, filterTime, sortBy]);
 
 	return (
 		<Layout.Container fromDirection="left">
@@ -97,6 +103,16 @@ export default function Home({ games }) {
 					<hr className="mt-3 mb-1" />
 
 					<p className="font-semibold">Filters</p>
+					<Toggle
+						text="Steam games"
+						checked={showSteam}
+						onClick={() => setShowSteam(!showSteam)}
+					/>
+					<Toggle
+						text="Xbox games"
+						checked={showXbox}
+						onClick={() => setShowXbox(!showXbox)}
+					/>
 					<InputRange
 						title="Minimum completion %"
 						value={filterPerc}
