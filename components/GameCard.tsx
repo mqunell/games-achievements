@@ -65,7 +65,7 @@ export default function GameCard({
 		<div
 			className={classNames(
 				'relative flex w-80 flex-col items-center gap-2 rounded bg-white p-4 text-center',
-				{ 'h-full transform duration-150 hover:scale-105': size === 'small' }
+				{ 'h-full transform duration-150 md:hover:scale-105': size === 'small' }
 			)}
 		>
 			{/* Checkmark */}
