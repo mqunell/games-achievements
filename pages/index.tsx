@@ -23,7 +23,8 @@ const sortOptions = [
 	{ text: 'Total playtime (lowest)', field: 'playtimeTotal', direction: 1 },
 	{ text: 'Recent playtime (highest)', field: 'playtimeRecent', direction: -1 },
 	{ text: 'Recent playtime (lowest)', field: 'playtimeRecent', direction: 1 },
-	// todo: add achievement % sorting
+	{ text: 'Completion % (highest)', field: 'completion', direction: -1 },
+	{ text: 'Completion % (lowest)', field: 'completion', direction: 1 },
 ];
 
 export default function Home({ games }) {
@@ -42,6 +43,20 @@ export default function Home({ games }) {
 	// Sort state
 	const [sortBy, setSortBy] = useState(sortOptions[2]);
 
+	// Calculate a game's completion percentage, if applicable
+	const calcCompletion = (game: Game): number | null => {
+		const { total, completed } = game.achievementCounts;
+
+		if (total === 0) return null;
+		return (completed / total) * 100;
+	};
+
+	// Helper function for sorting games. When the specified criteria matches, sort by name (alphabetically) then platform (Steam, Xbox)
+	const compareMatching = (a: Game, b: Game): number => {
+		if (a.name !== b.name) return a.name < b.name ? -1 : 1;
+		return a.platform === 'Steam' ? -1 : 1;
+	};
+
 	// Filtering and sorting (note: merged useEffect works here because it's a display option that is changed, not a filter toggle)
 	useEffect(() => {
 		const { field, direction } = sortBy;
@@ -54,18 +69,33 @@ export default function Home({ games }) {
 		// Filter and sort the games
 		const displayed = games
 			.filter((game: Game) => {
-				const { completed, total } = game.achievementCounts;
-
 				let validPlatform = true;
 				if (game.platform === 'Steam') validPlatform = showSteam;
 				if (game.platform === 'Xbox') validPlatform = showXbox;
 
-				const validPerc = filterPerc > 0 ? (completed / total) * 100 >= filterPerc : true; // Show games without achievements
+				const validPerc = filterPerc > 0 ? calcCompletion(game) >= filterPerc : true; // Show games without achievements when filterPerc is 0
 				const validTime = game.playtimeTotal >= filterTime * 60;
 
 				return validPlatform && validPerc && validTime;
 			})
-			.sort((a: Game, b: Game) => (a[field] < b[field] ? direction * -1 : direction));
+			.sort((a: Game, b: Game) => {
+				// Sort by completion percentage manually
+				if (field === 'completion') {
+					const aPerc = calcCompletion(a);
+					const bPerc = calcCompletion(b);
+
+					// Show games without achievements last
+					if (aPerc !== null && bPerc === null) return -1;
+					if (aPerc === null && bPerc !== null) return 1;
+
+					if (aPerc === bPerc) return compareMatching(a, b);
+					return aPerc < bPerc ? direction * -1 : direction;
+				}
+
+				// Sort by any other field using the field name directly
+				if (a[field] === b[field]) return compareMatching(a, b);
+				return a[field] < b[field] ? direction * -1 : direction;
+			});
 
 		setDisplayedGames(displayed);
 	}, [games, showSteam, showXbox, filterPerc, filterTime, sortBy]);
