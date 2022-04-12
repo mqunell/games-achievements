@@ -12,7 +12,7 @@ export default function DisplayOptions({ children }) {
 				{({ open }) => (
 					<>
 						<Disclosure.Button className="flex w-full items-center justify-between rounded bg-blue-600 px-3 py-2 text-white">
-							<span>Display options</span>
+							<h2>Display options</h2>
 							<ChevronUpIcon
 								className={classNames('h-5 w-5 transform transition-transform ease-out', {
 									'rotate-180 duration-500': open,

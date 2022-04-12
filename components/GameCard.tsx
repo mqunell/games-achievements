@@ -96,7 +96,7 @@ export default function GameCard({
 					)}
 				</div>
 				<h1
-					className={classNames('font-semibold', {
+					className={classNames({
 						'truncate text-xl': size === 'small',
 						'text-2xl': size === 'large',
 					})}

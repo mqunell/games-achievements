@@ -31,7 +31,7 @@ export default function AchievementCard({
 			<div className="relative col-start-1 row-start-1 flex flex-col overflow-hidden rounded bg-white text-center">
 				{/* Text */}
 				<div className="flex h-full flex-col items-center gap-1 p-4">
-					<h2 className="text-lg font-semibold">{name}</h2>
+					<h2 className="text-xl">{name}</h2>
 					<p className={classNames('mb-auto', { italic: !description })}>
 						{description || 'Hidden'}
 					</p>

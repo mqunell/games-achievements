@@ -2,20 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-	box-sizing: border-box;
-}
-
-html,
 body {
-	padding: 0;
-	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
-		Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
-body {
-	max-width: 100vw;
-	min-height: 100vh;
 	background-color: rgb(36, 40, 47);
+	font-family: 'Anek Gujarati', sans-serif;
+	font-weight: 400;
+}
+
+h1,
+h2 {
+	font-family: 'Poppins', sans-serif;
+	font-weight: 500;
 }
