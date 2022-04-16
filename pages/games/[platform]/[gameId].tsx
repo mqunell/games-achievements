@@ -84,9 +84,13 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 	return (
 		<Layout.Container fromDirection="right">
 			<Head>
-				<title>{game.name} Achievements</title>
-				<meta name="description" content={`${game.name} achievements`} />
-				<link rel="icon" href="/favicon.ico" />
+				<title>
+					{game.name} Achievements ({game.platform})
+				</title>
+				<meta
+					name="description"
+					content={`${game.name} achievements on ${game.platform}`}
+				/>
 			</Head>
 
 			<Layout.TitleOptions>

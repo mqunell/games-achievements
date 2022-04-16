@@ -103,9 +103,8 @@ export default function Home({ games }) {
 	return (
 		<Layout.Container fromDirection="left">
 			<Head>
-				<title>Steam Games and Achievements</title>
-				<meta name="description" content="Steam games and achievements" />
-				<link rel="icon" href="/favicon.ico" />
+				<title>Games and Achievements</title>
+				<meta name="description" content="Steam and Xbox games and achievements" />
 			</Head>
 
 			<Layout.TitleOptions>
