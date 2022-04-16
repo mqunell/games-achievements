@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 body {
-	background-color: rgb(36, 40, 47);
 	font-family: 'Anek Gujarati', sans-serif;
 	font-weight: 400;
+	@apply bg-body overflow-x-hidden;
 }
 
 h1,
