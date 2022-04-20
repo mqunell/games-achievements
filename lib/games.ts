@@ -9,7 +9,6 @@ export interface Game {
 	name: string;
 	playtimeRecent: number;
 	playtimeTotal: number;
-	iconUrl: string; // Full URL
 	logoUrl: string; // Full URL
 	achievements?: Achievement[]; // All achievements - omitted when passing to index
 	achievementCounts: {

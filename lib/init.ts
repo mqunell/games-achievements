@@ -20,11 +20,7 @@ interface ApiGame {
 	name: string;
 	playtime_2weeks?: number; // Minutes; not included by API if 0
 	playtime_forever: number; // Minutes
-	img_icon_url: string; // Slug
-	has_community_visible_stats: boolean;
-	playtime_windows_forever: number;
-	playtime_mac_forever: number;
-	playtime_linux_forever: number;
+	// Others are irrelevant
 }
 
 interface ApiMyAchievement {
