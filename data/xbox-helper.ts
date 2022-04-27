@@ -17,12 +17,13 @@ const API_KEY = process.env.STEAM_API_KEY;
 const USERS_GAMES = [
 	// { userId: '76561198045216432', gameId: 361420 }, // Astroneer (done)
 	// { userId: '76561198236437696', gameId: 264710 }, // Subnautica (done)
-	{ userId: '76561198236437696', gameId: 367520 }, // Hollow Knight
-	{ userId: '76561198289001698', gameId: 1672970 }, // Minecraft Dungeons
-	{ userId: '76561198357747337', gameId: 557340 }, // My Friend Pedro
-	{ userId: '76561198268914540', gameId: 387290 }, // Ori 1
-	{ userId: '76561198268914540', gameId: 1057090 }, // Ori 2
-	{ userId: '76561198056333317', gameId: 690040 }, // SUPERHOT: MCD
+	// { userId: '76561198236437696', gameId: 367520 }, // Hollow Knight (done)
+	// { userId: '76561198289001698', gameId: 1672970 }, // Minecraft Dungeons (done)
+	// { userId: '76561198357747337', gameId: 557340 }, // My Friend Pedro (done)
+	// { userId: '76561198268914540', gameId: 387290 }, // Ori 1 (done)
+	// { userId: '76561198268914540', gameId: 1057090 }, // Ori 2 (done)
+	// { userId: '76561198056333317', gameId: 690040 }, // SUPERHOT: MCD (done)
+	// todo: Halo MCC, World War Z, Lawn Mowing Simulator, Guacamelee! 2, Human Fall Flat, Tunic
 ];
 
 const userGamesUrl = (userId: string) =>

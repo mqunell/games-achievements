@@ -531,5 +531,2154 @@
 			}
 		],
 		"achievementCounts": { "total": 17, "completed": 17 }
+	},
+	{
+		"platform": "Xbox",
+		"gameId": "367520",
+		"name": "Hollow Knight",
+		"playtimeRecent": 0,
+		"playtimeTotal": 853,
+		"logoUrl": "https://steamcdn-a.akamaihd.net/steam/apps/367520/header.jpg",
+		"achievements": [
+			{
+				"name": "Charmed",
+				"apiName": "CHARMED",
+				"description": "Acquire your first Charm",
+				"completed": true,
+				"globalCompleted": 75.30000305175781
+			},
+			{
+				"name": "Enchanted",
+				"apiName": "ENCHANTED",
+				"description": "Acquire half of Hallownest's Charms",
+				"completed": false,
+				"globalCompleted": 36.900001525878906
+			},
+			{
+				"name": "Blessed",
+				"apiName": "BLESSED",
+				"description": "Acquire all Charms and receive Salubra's blessing",
+				"completed": false,
+				"globalCompleted": 17.799999237060547
+			},
+			{
+				"name": "Protected",
+				"apiName": "PROTECTED",
+				"description": "Acquire 4 Mask Shards",
+				"completed": true,
+				"globalCompleted": 44.70000076293945
+			},
+			{
+				"name": "Masked",
+				"apiName": "MASKED",
+				"description": "Acquire all Mask Shards",
+				"completed": false,
+				"globalCompleted": 16.799999237060547
+			},
+			{
+				"name": "Soulful",
+				"apiName": "SOULFUL",
+				"description": "Acquire 3 Vessel Fragments",
+				"completed": true,
+				"globalCompleted": 40.400001525878906
+			},
+			{
+				"name": "Worldsoul",
+				"apiName": "WORLDSOUL",
+				"description": "Acquire all Vessel Fragments",
+				"completed": false,
+				"globalCompleted": 22.100000381469727
+			},
+			{
+				"name": "Falsehood",
+				"apiName": "FK_DEFEAT",
+				"description": "Defeat the False Knight",
+				"completed": true,
+				"globalCompleted": 69.19999694824219
+			},
+			{
+				"name": "Strength",
+				"apiName": "DREAM_FK",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 22.899999618530273
+			},
+			{
+				"name": "Test of Resolve",
+				"apiName": "HORNET_1",
+				"description": "Defeat Hornet in Greenpath",
+				"completed": true,
+				"globalCompleted": 60.29999923706055
+			},
+			{
+				"name": "Proof of Resolve",
+				"apiName": "HORNET_2",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 34.79999923706055
+			},
+			{
+				"name": "Illumination",
+				"apiName": "SOUL_MASTER_DEFEAT",
+				"description": "Defeat the Soul Master",
+				"completed": true,
+				"globalCompleted": 43.400001525878906
+			},
+			{
+				"name": "Release",
+				"apiName": "BROKEN_VESSEL",
+				"description": "Defeat the Broken Vessel",
+				"completed": true,
+				"globalCompleted": 38.20000076293945
+			},
+			{
+				"name": "Peace",
+				"apiName": "DREAM_BROKEN_VESSEL",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 26.899999618530273
+			},
+			{
+				"name": "Honour",
+				"apiName": "DUNG_DEFENDER",
+				"description": "Defeat the Dung Defender",
+				"completed": true,
+				"globalCompleted": 39.099998474121094
+			},
+			{
+				"name": "Respect",
+				"apiName": "MANTIS_LORDS",
+				"description": "Defeat the Mantis Lords",
+				"completed": true,
+				"globalCompleted": 42.400001525878906
+			},
+			{
+				"name": "Obsession",
+				"apiName": "COLLECTOR",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 28
+			},
+			{
+				"name": "Rivalry",
+				"apiName": "ZOTE",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 26.5
+			},
+			{
+				"name": "Attunement",
+				"apiName": "ATTUNEMENT",
+				"description": "Collect 600 Essence",
+				"completed": false,
+				"globalCompleted": 34.79999923706055
+			},
+			{
+				"name": "Awakening",
+				"apiName": "AWAKENING",
+				"description": "Collect 1800 Essence and awaken the Dream Nail",
+				"completed": false,
+				"globalCompleted": 26.5
+			},
+			{
+				"name": "Ascension",
+				"apiName": "ASCENSION",
+				"description": "Collect 2400 Essence and hear the Seer's final words",
+				"completed": false,
+				"globalCompleted": 17.299999237060547
+			},
+			{
+				"name": "Grubfriend",
+				"apiName": "GRUBFRIEND",
+				"description": "Rescue half of the imprisoned grubs",
+				"completed": false,
+				"globalCompleted": 35.29999923706055
+			},
+			{
+				"name": "Metamorphosis",
+				"apiName": "METAMORPHOSIS",
+				"description": "Rescue all of the imprisoned grubs",
+				"completed": false,
+				"globalCompleted": 23.5
+			},
+			{
+				"name": "Neglect",
+				"apiName": "NEGLECT",
+				"description": "Leave Zote to die",
+				"completed": false,
+				"globalCompleted": 5.699999809265137
+			},
+			{
+				"name": "Purity",
+				"apiName": "NAILSMITH_KILL",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 16.700000762939453
+			},
+			{
+				"name": "Happy Couple",
+				"apiName": "NAILSMITH_SPARE",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 8.300000190734863
+			},
+			{
+				"name": "Witness",
+				"apiName": "QUIRREL_EPILOGUE",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 21.799999237060547
+			},
+			{
+				"name": "Solace",
+				"apiName": "MOURNER",
+				"description": "Bring peace to the Grey Mourner",
+				"completed": false,
+				"globalCompleted": 17.799999237060547
+			},
+			{
+				"name": "Execution",
+				"apiName": "TRAITOR_LORD",
+				"description": "Defeat the Traitor Lord",
+				"completed": false,
+				"globalCompleted": 29.700000762939453
+			},
+			{
+				"name": "Connection",
+				"apiName": "STAG_STATION_HALF",
+				"description": "Open half of Hallownest's Stag Stations",
+				"completed": true,
+				"globalCompleted": 46.099998474121094
+			},
+			{
+				"name": "Hope",
+				"apiName": "STAG_STATION_ALL",
+				"description": "Open all of Hallownest's Stag Stations and discover the Stag Nest",
+				"completed": false,
+				"globalCompleted": 30.100000381469727
+			},
+			{
+				"name": "Teacher",
+				"apiName": "TEACHER",
+				"description": "Destroy Monomon the Teacher",
+				"completed": false,
+				"globalCompleted": 34
+			},
+			{
+				"name": "Watcher",
+				"apiName": "WATCHER",
+				"description": "Destroy Lurien the Watcher",
+				"completed": false,
+				"globalCompleted": 33.5
+			},
+			{
+				"name": "Beast",
+				"apiName": "BEAST",
+				"description": "Destroy Herrah the Beast",
+				"completed": true,
+				"globalCompleted": 35.20000076293945
+			},
+			{
+				"name": "Cartographer",
+				"apiName": "MAP",
+				"description": "Acquire a map of each area",
+				"completed": false,
+				"globalCompleted": 33
+			},
+			{
+				"name": "Warrior",
+				"apiName": "COLOSSEUM_1",
+				"description": "Complete the Trial of the Warrior",
+				"completed": false,
+				"globalCompleted": 34.20000076293945
+			},
+			{
+				"name": "Conqueror",
+				"apiName": "COLOSSEUM_2",
+				"description": "Complete the Trial of the Conqueror",
+				"completed": false,
+				"globalCompleted": 30.899999618530273
+			},
+			{
+				"name": "Fool",
+				"apiName": "COLOSSEUM_3",
+				"description": "Complete the Trial of the Fool",
+				"completed": false,
+				"globalCompleted": 15.899999618530273
+			},
+			{
+				"name": "The Hollow Knight",
+				"apiName": "ENDING_A",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 20
+			},
+			{
+				"name": "Sealed Siblings",
+				"apiName": "ENDING_B",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 15.5
+			},
+			{
+				"name": "Dream No More",
+				"apiName": "ENDING_C",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 16.100000381469727
+			},
+			{
+				"name": "Void",
+				"apiName": "VOID",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 22.5
+			},
+			{
+				"name": "Speedrun 1",
+				"apiName": "SPEEDRUN_1",
+				"description": "Complete the game in under 10 hours",
+				"completed": false,
+				"globalCompleted": 4.099999904632568
+			},
+			{
+				"name": "Speedrun 2",
+				"apiName": "SPEEDRUN_2",
+				"description": "Complete the game in under 5 hours",
+				"completed": false,
+				"globalCompleted": 3.299999952316284
+			},
+			{
+				"name": "Completion",
+				"apiName": "COMPLETION",
+				"description": "Achieve 100% game completion and finish the game",
+				"completed": false,
+				"globalCompleted": 15.5
+			},
+			{
+				"name": "Speed Completion",
+				"apiName": "SPEED_COMPLETION",
+				"description": "Achieve 100% game completion and finish the game in under 20 hours",
+				"completed": false,
+				"globalCompleted": 3.5
+			},
+			{
+				"name": "Steel Soul",
+				"apiName": "STEELSOUL",
+				"description": "Finish the game in Steel Soul mode",
+				"completed": false,
+				"globalCompleted": 3
+			},
+			{
+				"name": "Steel Heart",
+				"apiName": "STEELSOUL_COMPLETION",
+				"description": "Achieve 100% game completion and finish the game in Steel Soul mode",
+				"completed": false,
+				"globalCompleted": 2.4000000953674316
+			},
+			{
+				"name": "Keen Hunter",
+				"apiName": "HUNTER_1",
+				"description": "Record all of Hallownest's creatures in the Hunter's Journal",
+				"completed": false,
+				"globalCompleted": 6
+			},
+			{
+				"name": "True Hunter",
+				"apiName": "HUNTER_2",
+				"description": "Receive the Hunter's Mark",
+				"completed": false,
+				"globalCompleted": 5.5
+			},
+			{
+				"name": "Passing of the Age",
+				"apiName": "MR_MUSHROOM",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 5.400000095367432
+			},
+			{
+				"name": "Mortality",
+				"apiName": "DREAM_SOUL_MASTER_DEFEAT",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 20.399999618530273
+			},
+			{
+				"name": "Memory",
+				"apiName": "WHITE_DEFENDER",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 15.100000381469727
+			},
+			{
+				"name": "Dark Romance",
+				"apiName": "GREY_PRINCE",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 18.799999237060547
+			},
+			{
+				"name": "Grand Performance",
+				"apiName": "GRIMM",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 22.5
+			},
+			{
+				"name": "Ritual",
+				"apiName": "NIGHTMARE_GRIMM",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 12.5
+			},
+			{
+				"name": "Banishment",
+				"apiName": "BANISHMENT",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 6.300000190734863
+			},
+			{
+				"name": "Brotherhood",
+				"apiName": "PANTHEON1",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 13.100000381469727
+			},
+			{
+				"name": "Inspiration",
+				"apiName": "PANTHEON2",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 12.199999809265137
+			},
+			{
+				"name": "Focus",
+				"apiName": "PANTHEON3",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 8.399999618530273
+			},
+			{
+				"name": "Soul & Shade",
+				"apiName": "PANTHEON4",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 6.400000095367432
+			},
+			{
+				"name": "Embrace the Void",
+				"apiName": "ENDINGD",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 3.299999952316284
+			},
+			{
+				"name": "Pure Completion",
+				"apiName": "COMPLETIONGG",
+				"description": "Achieve 112% game completion and finish the game.",
+				"completed": false,
+				"globalCompleted": 4.400000095367432
+			}
+		],
+		"achievementCounts": {
+			"total": 63,
+			"completed": 11
+		}
+	},
+	{
+		"platform": "Xbox",
+		"gameId": "1672970",
+		"name": "Minecraft Dungeons",
+		"playtimeRecent": 0,
+		"playtimeTotal": 1453,
+		"logoUrl": "https://steamcdn-a.akamaihd.net/steam/apps/1672970/header.jpg",
+		"achievements": [
+			{
+				"name": "Life Of The Party",
+				"apiName": "REVIVE_20",
+				"description": "Revive a downed friend 20 times.",
+				"completed": true,
+				"globalCompleted": 26.5
+			},
+			{
+				"name": "Wooden Sword",
+				"apiName": "KILL_50_MOBS",
+				"description": "Defeat 50 mobs.",
+				"completed": true,
+				"globalCompleted": 89.9000015258789
+			},
+			{
+				"name": "Diamond Sword",
+				"apiName": "KILL_2500_MOBS",
+				"description": "Defeat 2,500 mobs.",
+				"completed": true,
+				"globalCompleted": 66.19999694824219
+			},
+			{
+				"name": "Passive Aggressive",
+				"apiName": "KILL_50_PASSIVE",
+				"description": "Defeat 50 passive mobs.",
+				"completed": true,
+				"globalCompleted": 63
+			},
+			{
+				"name": "Break the Spell",
+				"apiName": "KILL_50_ENCHANTED",
+				"description": "Defeat 50 enchanted mobs.",
+				"completed": true,
+				"globalCompleted": 53.099998474121094
+			},
+			{
+				"name": "Scrappy Scout",
+				"apiName": "LVL_10",
+				"description": "Reach Level 10.",
+				"completed": true,
+				"globalCompleted": 74.9000015258789
+			},
+			{
+				"name": "Apprentice Adventurer",
+				"apiName": "LVL_25",
+				"description": "Reach Level 25.",
+				"completed": true,
+				"globalCompleted": 54.5
+			},
+			{
+				"name": "Expert Explorer",
+				"apiName": "LVL_50",
+				"description": "Reach Level 50.",
+				"completed": true,
+				"globalCompleted": 31.600000381469727
+			},
+			{
+				"name": "Fancy That!",
+				"apiName": "FANCY_CHEST",
+				"description": "Find and open your first 'fancy' treasure chest.",
+				"completed": true,
+				"globalCompleted": 86.0999984741211
+			},
+			{
+				"name": "More For Me",
+				"apiName": "CHEST_100",
+				"description": "Open 100 treasure chests.",
+				"completed": false,
+				"globalCompleted": 39
+			},
+			{
+				"name": "Cha-ching!",
+				"apiName": "EMERALD_1000",
+				"description": "Collect a total of 1,000 emeralds.",
+				"completed": true,
+				"globalCompleted": 77.19999694824219
+			},
+			{
+				"name": "Oooh! Shiny!",
+				"apiName": "EMERALD_5000",
+				"description": "Collect a total of 5,000 emeralds.",
+				"completed": true,
+				"globalCompleted": 57.599998474121094
+			},
+			{
+				"name": "Om Nom Nom",
+				"apiName": "EAT_200_FOOD",
+				"description": "Eat 200 food items.",
+				"completed": true,
+				"globalCompleted": 44.900001525878906
+			},
+			{
+				"name": "Happy Camper",
+				"apiName": "COMPLETE_SQUID_COAST",
+				"description": "Complete Squid Coast and set up camp.",
+				"completed": true,
+				"globalCompleted": 85.9000015258789
+			},
+			{
+				"name": "Out of the Woods",
+				"apiName": "COMPLETE_CREEPER_WOODS",
+				"description": "Complete Creeper Woods.",
+				"completed": true,
+				"globalCompleted": 87.0999984741211
+			},
+			{
+				"name": "The Plot Thickens",
+				"apiName": "COMPLETE_LEVEL_GROUP1",
+				"description": "Complete Pumpkin Pastures and Soggy Swamp.",
+				"completed": true,
+				"globalCompleted": 65.69999694824219
+			},
+			{
+				"name": "Built On Sand, Set in Stone",
+				"apiName": "COMPLETE_LEVEL_GROUP2",
+				"description": "Complete Redstone Mines and Cacti Canyon.",
+				"completed": true,
+				"globalCompleted": 64.9000015258789
+			},
+			{
+				"name": "High and Dry",
+				"apiName": "COMPLETE_LEVEL_GROUP3",
+				"description": "Complete Desert Temple, Fiery Forge and Highblock Halls.",
+				"completed": true,
+				"globalCompleted": 49.900001525878906
+			},
+			{
+				"name": "Saved The Overworld",
+				"apiName": "DEFEAT_ARCH_ILLAGER_ANY",
+				"description": "Defeat the Arch-Illager at the Obsidian Pinnacle.",
+				"completed": true,
+				"globalCompleted": 46.20000076293945
+			},
+			{
+				"name": "High Treason",
+				"apiName": "DEFEAT_ARCH_ILLAGER_HARD",
+				"description": "Defeat the Arch-Illager on Apocalypse difficulty.",
+				"completed": false,
+				"globalCompleted": 11.899999618530273
+			},
+			{
+				"name": "Blast Radius",
+				"apiName": "TNT_KILL_10",
+				"description": "Kill any 10 mobs at once with TNT.",
+				"completed": true,
+				"globalCompleted": 38.599998474121094
+			},
+			{
+				"name": "Maxed Out And Geared Up",
+				"apiName": "FULL_ENCHANTED_GEAR_SET",
+				"description": "Equip a gear set consisting of fully enchanted items (3 enchantment slots upgraded to level 3).",
+				"completed": false,
+				"globalCompleted": 16.5
+			},
+			{
+				"name": "Worked Like A Charm",
+				"apiName": "FULLY_UPGRADE_ENCHANTMENT",
+				"description": "Enchant an item and upgrade the enchantment to Tier 3.",
+				"completed": true,
+				"globalCompleted": 70.5
+			},
+			{
+				"name": "A Friend in Need",
+				"apiName": "BEAST_MASTER",
+				"description": "Use artifacts to summon the Wolf, Llama and Iron Golem allies at least once each.",
+				"completed": false,
+				"globalCompleted": 15.399999618530273
+			},
+			{
+				"name": "Abomination Domination",
+				"apiName": "DEFEAT_JUNGLE_ABOMINATION_ADVENTURE",
+				"description": "Complete Overgrown Temple on Adventure or Apocalypse difficulty.",
+				"completed": false,
+				"globalCompleted": 8
+			},
+			{
+				"name": "Pandamonium",
+				"apiName": "COMPLETE_PANDA_PLATEAU",
+				"description": "Complete the Panda Plateau secret mission.",
+				"completed": false,
+				"globalCompleted": 6.099999904632568
+			},
+			{
+				"name": "Leader of the Pack",
+				"apiName": "OCELOT_ARMOUR",
+				"description": "Wear the Ocelot Armour and complete any mission featuring Ocelots without killing any of them.",
+				"completed": false,
+				"globalCompleted": 0.8999999761581421
+			},
+			{
+				"name": "Survival Skills",
+				"apiName": "COMPLETE_DINGY_JUNGLE_POTION",
+				"description": "Complete Dingy Jungle without using a healing potion or losing a life.",
+				"completed": false,
+				"globalCompleted": 4.099999904632568
+			},
+			{
+				"name": "Jungle Fungus",
+				"apiName": "DEFEAT_MOOSHROOM_MONSTROSITY_ITEMS",
+				"description": "Defeat the Mooshroom Monstrosity using only gear unique to the jungle.",
+				"completed": false,
+				"globalCompleted": 0.5
+			},
+			{
+				"name": "Lone Champion",
+				"apiName": "DEFEAT_WRETCHED_WRAITH_ADVENTURE",
+				"description": "Complete Lone Fortress on Adventure or Apocalypse difficulty.",
+				"completed": false,
+				"globalCompleted": 5.900000095367432
+			},
+			{
+				"name": "Lost In The Snow",
+				"apiName": "COMPLETE_LOST_SETTLEMENT",
+				"description": "Complete the Lost Settlement secret mission.",
+				"completed": false,
+				"globalCompleted": 3.700000047683716
+			},
+			{
+				"name": "Chill Out",
+				"apiName": "ICE_WAND_KILL_5",
+				"description": "Defeat 5 mobs with a single Ice Wand attack",
+				"completed": false,
+				"globalCompleted": 3.700000047683716
+			},
+			{
+				"name": "Smooth Operator",
+				"apiName": "ICE_SLIDE_500",
+				"description": "Slide a total distance of 500 blocks on ice.",
+				"completed": false,
+				"globalCompleted": 16
+			},
+			{
+				"name": "Frozen Fists",
+				"apiName": "ICE_NO_WEAPONS",
+				"description": "Complete Frosted Fjord without having a melee or ranged weapon equipped at any time.",
+				"completed": false,
+				"globalCompleted": 0.800000011920929
+			},
+			{
+				"name": "Taming the Storm",
+				"apiName": "COMPLETE_GALE_SANCTUM_ADVENTURE",
+				"description": "Complete Gale Sanctum on Adventure or Apocalypse difficulty.",
+				"completed": false,
+				"globalCompleted": 5.699999809265137
+			},
+			{
+				"name": "Rampart Rampage",
+				"apiName": "COMPLETE_COLOSSAL_RAMPART",
+				"description": "Complete the Colossal Rampart secret mission.",
+				"completed": false,
+				"globalCompleted": 3.0999999046325684
+			},
+			{
+				"name": "Whirlwind Warrior",
+				"apiName": "KILL_10_MOUNTAINEER_TEMPEST_KNIFE_TIMED",
+				"description": "Using the Tempest Knife, defeat 10 Mountaineer mobs within 10 seconds.",
+				"completed": false,
+				"globalCompleted": 1
+			},
+			{
+				"name": "A Taste Of Their Own Medicine",
+				"apiName": "UPDRAFT_WINDCALLERS_3",
+				"description": "Using the Updraft Tome, cast Updraft on three Wind Callers at once.",
+				"completed": false,
+				"globalCompleted": 0.800000011920929
+			},
+			{
+				"name": "Wooly Wisdom",
+				"apiName": "LLAMA_OFFERING",
+				"description": "Find the chamber dedicated to the humble Llama and make an offering.",
+				"completed": false,
+				"globalCompleted": 2.9000000953674316
+			},
+			{
+				"name": "Giant Slayer",
+				"apiName": "KILL_RAVAGER_SQUALL_GOLEM_TIMED",
+				"description": "Defeat a Ravager and a Squall Golem within 5 seconds of each other.",
+				"completed": false,
+				"globalCompleted": 1.600000023841858
+			},
+			{
+				"name": "Herd Mentality",
+				"apiName": "DEFEAT_TEMPEST_GOLEM_PETS",
+				"description": "Defeat the Tempest Golem while four pets are active.",
+				"completed": false,
+				"globalCompleted": 0.800000011920929
+			},
+			{
+				"name": "Post Post-Apocalypse",
+				"apiName": "COMPLETE_OBSIDIAN_PINNACLE_APOCALYPSE5",
+				"description": "Complete Obsidian Pinnacle on Apocalypse Plus 5 difficulty.",
+				"completed": false,
+				"globalCompleted": 4.099999904632568
+			},
+			{
+				"name": "Dress for Success",
+				"apiName": "COMPLETE_DAILY_TRIAL_EMERALD_ARMOUR",
+				"description": "Complete a Daily Trial with a level III challenge while wearing Emerald Gear.",
+				"completed": false,
+				"globalCompleted": 0.699999988079071
+			},
+			{
+				"name": "Repeat Customer",
+				"apiName": "DEATH_BARTER_2",
+				"description": "Save yourself by using the Death Barter enchantment twice in a single mission.",
+				"completed": false,
+				"globalCompleted": 6.199999809265137
+			},
+			{
+				"name": "Nether Been Better",
+				"apiName": "COMPLETE_NETHER_WASTES_APOCALYPSE",
+				"description": "Complete Nether Wastes on Apocalypse difficulty.",
+				"completed": false,
+				"globalCompleted": 6.599999904632568
+			},
+			{
+				"name": "Trial by Fire",
+				"apiName": "COMPLETE_NETHER_SECRET_APOCALYPSE_PLUS",
+				"description": "Complete all secret Nether levels on any Apocalypse Plus difficulty.",
+				"completed": false,
+				"globalCompleted": 1.100000023841858
+			},
+			{
+				"name": "Ancient Hunter",
+				"apiName": "DEFEAT_ANCIENT_15",
+				"description": "Defeat 15 different ancient mobs.",
+				"completed": false,
+				"globalCompleted": 1.7000000476837158
+			},
+			{
+				"name": "A Piglin's Best Friend",
+				"apiName": "COLLECT_500_GOLD",
+				"description": "Collect 500 gold over time.",
+				"completed": false,
+				"globalCompleted": 8.300000190734863
+			},
+			{
+				"name": "Locally Sourced",
+				"apiName": "MERCHANTS_6",
+				"description": "Have 6 merchants in your camp at once.",
+				"completed": false,
+				"globalCompleted": 20.299999237060547
+			},
+			{
+				"name": "Ear Protection Recommended",
+				"apiName": "GONG_6",
+				"description": "Activate the Gong of Weakening 6 times in 5 seconds.",
+				"completed": false,
+				"globalCompleted": 0.6000000238418579
+			},
+			{
+				"name": "Acclaimed Acrobat",
+				"apiName": "SPINWHEEL_70",
+				"description": "Achieve 70 hits with a single activation of the Spinblade.",
+				"completed": false,
+				"globalCompleted": 0.800000011920929
+			},
+			{
+				"name": "Back to Back",
+				"apiName": "HYPERMISSIONS_4",
+				"description": "Complete two Ancient Hunts and two Daily Trials, in two-player co-op, on the second day of the month",
+				"completed": false,
+				"globalCompleted": 0.5
+			},
+			{
+				"name": "Homecoming",
+				"apiName": "HOMECOMING",
+				"description": "During Ancient Hunts, bring a wolf, a bat, and a soul entity to visit familiar locations.",
+				"completed": false,
+				"globalCompleted": 0.30000001192092896
+			},
+			{
+				"name": "Seriously Overpowered",
+				"apiName": "EFFECTS_TRIGGER_5",
+				"description": "Equip a gilded, unique, fully enchanted weapon.",
+				"completed": false,
+				"globalCompleted": 6.300000190734863
+			},
+			{
+				"name": "Turn the Tide",
+				"apiName": "COMPLETE_ABYSSAL_MONUMENT_APOCALYPSE",
+				"description": "Complete Abyssal Monument on Apocalypse difficulty.",
+				"completed": false,
+				"globalCompleted": 3.799999952316284
+			},
+			{
+				"name": "Glow and Behold",
+				"apiName": "COMPLETE_RADIANT_RAVINE_APOCALYPSE_PLUS",
+				"description": "Complete the Radiant Ravine secret mission on any Apocalypse Plus difficulty.",
+				"completed": false,
+				"globalCompleted": 1.7999999523162842
+			},
+			{
+				"name": "Iceologer's Revenge",
+				"apiName": "GLOWSQUID_ICEWAND",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 0.5
+			},
+			{
+				"name": "Gone Fishin'",
+				"apiName": "FISHING_ROD",
+				"description": "Hit each type of underwater mob with the fishing rod.",
+				"completed": false,
+				"globalCompleted": 0.4000000059604645
+			},
+			{
+				"name": "Lost Power",
+				"apiName": "LOST_CONDUIT",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 0.699999988079071
+			},
+			{
+				"name": "Feeling Bubbly",
+				"apiName": "RELAX_BUBBLE_COLUMN",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 2
+			},
+			{
+				"name": "Save Your Breath",
+				"apiName": "NO_OXYGEN_60",
+				"description": "Survive without oxygen for 60 seconds.",
+				"completed": false,
+				"globalCompleted": 1.2000000476837158
+			},
+			{
+				"name": "Seafood Skewer",
+				"apiName": "TRIDENT",
+				"description": "Defeat 10 mobs with a single Trident explosion.",
+				"completed": false,
+				"globalCompleted": 1.100000023841858
+			},
+			{
+				"name": "Bad Omen, Good Loot",
+				"apiName": "RAID_CAPTAIN_10",
+				"description": "Complete 10 missions where the difficulty has been modified by a Raid Captain's Banner.",
+				"completed": false,
+				"globalCompleted": 4.400000095367432
+			},
+			{
+				"name": "Bubble Trouble",
+				"apiName": "BUBBLE_BOW",
+				"description": "Using the Bubble Bow, have 10 mobs bubbled at the same time.",
+				"completed": false,
+				"globalCompleted": 3.299999952316284
+			},
+			{
+				"name": "To the End!",
+				"apiName": "TRAVEL_THROUGH_END_PORTAL",
+				"description": "Travel through the End Portal to the End Wilds.",
+				"completed": false,
+				"globalCompleted": 21.200000762939453
+			},
+			{
+				"name": "Treasure Trove",
+				"apiName": "ENTER_STRONGHOLD_VAULT",
+				"description": "Enter the Stronghold Vault.",
+				"completed": false,
+				"globalCompleted": 2.9000000953674316
+			},
+			{
+				"name": "Heartbreaker",
+				"apiName": "DEFEAT_BROKEN_HEART_OF_ENDER",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 8
+			},
+			{
+				"name": "I Need Them All",
+				"apiName": "UNLOCK_ALL_ITEMS_BASE_AND_DLC",
+				"description": "Unlock all mission item drops in the base game and DLCs.",
+				"completed": false,
+				"globalCompleted": 1.7000000476837158
+			},
+			{
+				"name": "Take the High Road",
+				"apiName": "REACH_TOP_OF_BROKEN_CITADEL_NO_HIT_SHULKERS_BULLET",
+				"description": "Reach the top of the Broken Citadel without ever getting hit by a Shulker.",
+				"completed": false,
+				"globalCompleted": 0.5
+			},
+			{
+				"name": "End Run",
+				"apiName": "DEFEAT_1000_ENDERLINGS_WITH_OBSIDIAN_BLADE",
+				"description": "Defeat a total of 1000 Enderlings (Watchling, Blastling, Snareling) with an Obsidian Claymore.",
+				"completed": false,
+				"globalCompleted": 0.5
+			},
+			{
+				"name": "Avoidable",
+				"apiName": "SURVIVE_AFFLICTED_BY_VOIDED_X999",
+				"description": "Survive being afflicted by Voided x999.",
+				"completed": false,
+				"globalCompleted": 1
+			},
+			{
+				"name": "Diver's Dozen",
+				"apiName": "ELYTRA_DIVE_ATTACK_12_ENEMIES_AT_ONCE",
+				"description": "Using the Elytra, dive attack 12 enemies at once.",
+				"completed": false,
+				"globalCompleted": 0.4000000059604645
+			},
+			{
+				"name": "Burning Up",
+				"apiName": "BURNING_BREW_DEFEAT_MOB_WITH_FIRE_ENCHANTMENT",
+				"description": "After consuming a Burning Brew, defeat a Mob using a weapon with the Fire Aspect enchantment.",
+				"completed": false,
+				"globalCompleted": 6.599999904632568
+			},
+			{
+				"name": "The Eponymous Squid",
+				"apiName": "SQUID_COAST_EASTER_EGG",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 1.2000000476837158
+			},
+			{
+				"name": "Fashionable Climber",
+				"apiName": "TOWER_ALL_EQUIPMENT",
+				"description": "Acquire a melee weapon, ranged weapon, armor, and artifact while climbing the tower.",
+				"completed": false,
+				"globalCompleted": 17.399999618530273
+			},
+			{
+				"name": "Meet and Greet",
+				"apiName": "TOWER_ALL_VENDOR_PURCHASE",
+				"description": "Make a purchase from each of the tower's vendors.",
+				"completed": false,
+				"globalCompleted": 10.699999809265137
+			},
+			{
+				"name": "Tower Power",
+				"apiName": "COMPLETE_TOWER_ADVENTURE",
+				"description": "Complete a tower run on Adventure difficulty.",
+				"completed": false,
+				"globalCompleted": 4.900000095367432
+			},
+			{
+				"name": "Indomitable",
+				"apiName": "COMPLETE_TOWER_APOCALYPSE",
+				"description": "Complete a tower run on Apocalypse difficulty.",
+				"completed": false,
+				"globalCompleted": 3.200000047683716
+			},
+			{
+				"name": "Staff Only (secret)",
+				"apiName": "STORAGE_ROOM",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 1.2000000476837158
+			},
+			{
+				"name": "Well-Seasoned",
+				"apiName": "SEASON_RANK_10",
+				"description": "Reach seasonal adventure rank 10.",
+				"completed": false,
+				"globalCompleted": 7.599999904632568
+			},
+			{
+				"name": "Trendsetter",
+				"apiName": "SEASON_RANK_25",
+				"description": "Reach seasonal adventure rank 25.",
+				"completed": false,
+				"globalCompleted": 1.100000023841858
+			},
+			{
+				"name": "Golden Gauntlet",
+				"apiName": "GAUNTLET_GALES_GOLDEN_PARROT",
+				"description": "Complete Gauntlet of Gales on Apocalypse difficulty with the golden parrot as your companion",
+				"completed": false,
+				"globalCompleted": 0.20000000298023224
+			},
+			{
+				"name": "So Many Stairs!",
+				"apiName": "CLEAR_X_TOWER_FLOORS",
+				"description": "Clear 100 Tower floors.",
+				"completed": false,
+				"globalCompleted": 5.699999809265137
+			},
+			{
+				"name": "Pet the Dog",
+				"apiName": "PET_THE_DOG",
+				"description": "\"Who's a good wolf? You are! Yes, you are.\"",
+				"completed": false,
+				"globalCompleted": 16.100000381469727
+			},
+			{
+				"name": "So Last Season",
+				"apiName": "COMPLETE_LEVEL_WITH_OLD_SEASON_COSMETICS",
+				"description": "Complete a mission with a full set of cosmetics (Cape, Pet, Emote, Flairs) from a previous season.",
+				"completed": false,
+				"globalCompleted": 0.10000000149011612
+			},
+			{
+				"name": "Mine Is Cuter Than Yours!",
+				"apiName": "DEFEAT_REDSTONE_MONSTROSITY_PETS",
+				"description": "Defeat the Redstone Monstrosity with any Ministrosity Pet equipped.",
+				"completed": false,
+				"globalCompleted": 0
+			},
+			{
+				"name": "Same To You, Buddy!",
+				"apiName": "ROAR_AT_JBOMINATION",
+				"description": "Use the Abomination Roar emote at the Jungle Abomination.",
+				"completed": false,
+				"globalCompleted": 0
+			},
+			{
+				"name": "Tower Tourist",
+				"apiName": "VISIT_15_TOWER_BIOMES",
+				"description": "Encounter 15 different biomes in your Tower adventures.",
+				"completed": false,
+				"globalCompleted": 0
+			},
+			{
+				"name": "Goal Driven",
+				"apiName": "WEEKLY_CHALLENGES_10",
+				"description": "Complete 10 Weekly Challenges.",
+				"completed": false,
+				"globalCompleted": 0
+			},
+			{
+				"name": "Daily Destroyer",
+				"apiName": "COMPLETE_DAILY_TRIALS_IN_ONE_DAY_3",
+				"description": "Complete 3 Daily Trials in 1 day.",
+				"completed": false,
+				"globalCompleted": 0
+			},
+			{
+				"name": "Hot-Footed Hero",
+				"apiName": "COMPLETE_CACTI_CANYON_UNDER_5_MIN",
+				"description": "Complete Cacti Canyon in under 5 minutes.",
+				"completed": false,
+				"globalCompleted": 0
+			},
+			{
+				"name": "Creeper In The Woods",
+				"apiName": "CREEPER_WOODS_NO_KILLS",
+				"description": "Complete Creeper Woods on Apocalypse difficulty, without defeating any mobs.",
+				"completed": false,
+				"globalCompleted": 0.10000000149011612
+			},
+			{
+				"name": "How Does It All Fit?",
+				"apiName": "STORAGE_CHEST_50",
+				"description": "Store 50 items in the Storage Chest.",
+				"completed": false,
+				"globalCompleted": 1.100000023841858
+			},
+			{
+				"name": "Back From Whence You Came!",
+				"apiName": "WILDFIRES_10",
+				"description": "Defeat 10 Wildfires.",
+				"completed": false,
+				"globalCompleted": 0
+			}
+		],
+		"achievementCounts": {
+			"total": 94,
+			"completed": 20
+		}
+	},
+	{
+		"platform": "Xbox",
+		"gameId": "557340",
+		"name": "My Friend Pedro",
+		"playtimeRecent": 0,
+		"playtimeTotal": 550,
+		"logoUrl": "https://steamcdn-a.akamaihd.net/steam/apps/557340/header.jpg",
+		"achievements": [
+			{
+				"name": "Because video games",
+				"apiName": "ACH_0",
+				"description": "Break 100 crates",
+				"completed": true,
+				"globalCompleted": 45.400001525878906
+			},
+			{
+				"name": "Make an entrance",
+				"apiName": "ACH_1",
+				"description": "Jump through 10 windows",
+				"completed": true,
+				"globalCompleted": 51.099998474121094
+			},
+			{
+				"name": "Three birds, one explosion",
+				"apiName": "ACH_2",
+				"description": "Kill at least 3 enemies with one explosion",
+				"completed": true,
+				"globalCompleted": 27.200000762939453
+			},
+			{
+				"name": "Mumbo Combo",
+				"apiName": "ACH_3",
+				"description": "Get a 10x combo",
+				"completed": true,
+				"globalCompleted": 85.19999694824219
+			},
+			{
+				"name": "Comb-o-ver",
+				"apiName": "ACH_4",
+				"description": "Get a 20x combo",
+				"completed": true,
+				"globalCompleted": 66.5
+			},
+			{
+				"name": "Ah, Combon now!",
+				"apiName": "ACH_5",
+				"description": "Get a 50x combo",
+				"completed": true,
+				"globalCompleted": 8.600000381469727
+			},
+			{
+				"name": "Well done",
+				"apiName": "ACH_6",
+				"description": "Kick a frying pan in to the face of an enemy",
+				"completed": true,
+				"globalCompleted": 21.899999618530273
+			},
+			{
+				"name": "Sk8, don't h8",
+				"apiName": "ACH_7",
+				"description": "Kick a skateboard in to the face of an enemy",
+				"completed": true,
+				"globalCompleted": 42.29999923706055
+			},
+			{
+				"name": "Think fast",
+				"apiName": "ACH_8",
+				"description": "Kick a Gas Canister in to the face of an enemy",
+				"completed": true,
+				"globalCompleted": 51.400001525878906
+			},
+			{
+				"name": "Knife to meat you",
+				"apiName": "ACH_9",
+				"description": "Stick a knife in to an enemy",
+				"completed": true,
+				"globalCompleted": 59.29999923706055
+			},
+			{
+				"name": "Flying pan",
+				"apiName": "ACH_10",
+				"description": "Kill enemy by ricocheting bullet off frying pan",
+				"completed": true,
+				"globalCompleted": 58.599998474121094
+			},
+			{
+				"name": "Jester",
+				"apiName": "ACH_11",
+				"description": "Juggle basketball 10 times without it touching anything",
+				"completed": true,
+				"globalCompleted": 6.099999904632568
+			},
+			{
+				"name": "Barrely saw it coming",
+				"apiName": "ACH_12",
+				"description": "Kill an enemy using a barrel",
+				"completed": true,
+				"globalCompleted": 82
+			},
+			{
+				"name": "Table service",
+				"apiName": "ACH_13",
+				"description": "Flip 10 tables",
+				"completed": true,
+				"globalCompleted": 22.600000381469727
+			},
+			{
+				"name": "Shamona",
+				"apiName": "ACH_14",
+				"description": "Dodge 1000 bullets",
+				"completed": true,
+				"globalCompleted": 26.399999618530273
+			},
+			{
+				"name": "Yes you can",
+				"apiName": "ACH_15",
+				"description": "Kick enemies 100 times",
+				"completed": true,
+				"globalCompleted": 18.399999618530273
+			},
+			{
+				"name": "They probably deserved it",
+				"apiName": "ACH_16",
+				"description": "Kill 500 enemies",
+				"completed": true,
+				"globalCompleted": 58.20000076293945
+			},
+			{
+				"name": "Murderous tendencies",
+				"apiName": "ACH_17",
+				"description": "Kill 1000 enemies",
+				"completed": true,
+				"globalCompleted": 45.5
+			},
+			{
+				"name": "Questionable moral",
+				"apiName": "ACH_18",
+				"description": "Kill 2000 enemies",
+				"completed": true,
+				"globalCompleted": 16.799999237060547
+			},
+			{
+				"name": "Gold star for you",
+				"apiName": "ACH_19",
+				"description": "Get an S-rating",
+				"completed": true,
+				"globalCompleted": 49.900001525878906
+			},
+			{
+				"name": "Wow",
+				"apiName": "ACH_20",
+				"description": "Get S-rating on 10 levels",
+				"completed": false,
+				"globalCompleted": 2.799999952316284
+			},
+			{
+				"name": "Brush your shoulders off",
+				"apiName": "ACH_21",
+				"description": "Get S-rating on 25 levels",
+				"completed": false,
+				"globalCompleted": 1.600000023841858
+			},
+			{
+				"name": "S for Sensei",
+				"apiName": "ACH_22",
+				"description": "Get S-rating on all levels",
+				"completed": false,
+				"globalCompleted": 1.2999999523162842
+			},
+			{
+				"name": "Numb fingers",
+				"apiName": "ACH_23",
+				"description": "Complete a level without firing a weapon",
+				"completed": true,
+				"globalCompleted": 25.100000381469727
+			},
+			{
+				"name": "One for the road",
+				"apiName": "ACH_24",
+				"description": "Finish chapter \"Old Town\"",
+				"completed": true,
+				"globalCompleted": 66.5
+			},
+			{
+				"name": "Leap of faith",
+				"apiName": "ACH_25",
+				"description": "Finish chapter \"District Null\"",
+				"completed": true,
+				"globalCompleted": 49.900001525878906
+			},
+			{
+				"name": "What just happened?",
+				"apiName": "ACH_26",
+				"description": "Finish chapter \"Pedro's World\"",
+				"completed": true,
+				"globalCompleted": 46.599998474121094
+			},
+			{
+				"name": "Train of thought",
+				"apiName": "ACH_27",
+				"description": "Finish chapter \"The Sewer\"",
+				"completed": true,
+				"globalCompleted": 37.900001525878906
+			},
+			{
+				"name": "Connection lost",
+				"apiName": "ACH_28",
+				"description": "Finish chapter \"The Internet\"",
+				"completed": true,
+				"globalCompleted": 32.70000076293945
+			},
+			{
+				"name": "Face the truth",
+				"apiName": "ACH_29",
+				"description": "Finish the game",
+				"completed": true,
+				"globalCompleted": 32.29999923706055
+			}
+		],
+		"achievementCounts": {
+			"total": 30,
+			"completed": 27
+		}
+	},
+	{
+		"platform": "Xbox",
+		"gameId": "387290",
+		"name": "Ori and the Blind Forest: Definitive Edition",
+		"playtimeRecent": 0,
+		"playtimeTotal": 645,
+		"logoUrl": "https://steamcdn-a.akamaihd.net/steam/apps/387290/header.jpg",
+		"achievements": [
+			{
+				"name": "The Journey Begins",
+				"apiName": "completePrologue",
+				"description": "Complete the Prologue",
+				"completed": true,
+				"globalCompleted": 81.4000015258789
+			},
+			{
+				"name": "The Ancient Being ",
+				"apiName": "reachSpiritTree",
+				"description": "Meet the Ancient Being",
+				"completed": true,
+				"globalCompleted": 74.80000305175781
+			},
+			{
+				"name": "Get Back Here!",
+				"apiName": "meetGumo",
+				"description": "Discover the character in the shadows",
+				"completed": true,
+				"globalCompleted": 60.5
+			},
+			{
+				"name": "Let's be Friends",
+				"apiName": "retrieveWaterVein",
+				"description": "Make an unexpected friend",
+				"completed": true,
+				"globalCompleted": 55.29999923706055
+			},
+			{
+				"name": "Rotten Inside",
+				"apiName": "enterGinsoTree",
+				"description": "Enter the Ginso Tree",
+				"completed": true,
+				"globalCompleted": 54.400001525878906
+			},
+			{
+				"name": "Run for Your Life",
+				"apiName": "ressurectedGinsoHeart",
+				"description": "Cleanse the Ginso Tree's Heart",
+				"completed": true,
+				"globalCompleted": 51.099998474121094
+			},
+			{
+				"name": "Close Call",
+				"apiName": "escapeGinsoTree",
+				"description": "Escape a dangerous situation  ",
+				"completed": true,
+				"globalCompleted": 50.400001525878906
+			},
+			{
+				"name": "Obtaining Clarity",
+				"apiName": "clearMistyWoods",
+				"description": "Clear the haze from the Misty Woods",
+				"completed": true,
+				"globalCompleted": 43.20000076293945
+			},
+			{
+				"name": "Solid Ground",
+				"apiName": "restoreWind",
+				"description": "Restore the winds of Nibel",
+				"completed": true,
+				"globalCompleted": 39.900001525878906
+			},
+			{
+				"name": "Fight to Live Another Day",
+				"apiName": "escapedKuro",
+				"description": "Have a close encounter",
+				"completed": true,
+				"globalCompleted": 39.20000076293945
+			},
+			{
+				"name": "Top of the world",
+				"apiName": "recoverSunstone",
+				"description": "Climb to the top of Nibel",
+				"completed": true,
+				"globalCompleted": 37.29999923706055
+			},
+			{
+				"name": "Into the Fire",
+				"apiName": "enterMountHoru",
+				"description": "Enter Mt. Horu",
+				"completed": true,
+				"globalCompleted": 36.79999923706055
+			},
+			{
+				"name": "Rekindle",
+				"apiName": "restoreFire",
+				"description": "Fan the flames",
+				"completed": true,
+				"globalCompleted": 35.5
+			},
+			{
+				"name": "Love",
+				"apiName": "naruReunion",
+				"description": "A beloved bond",
+				"completed": true,
+				"globalCompleted": 34.900001525878906
+			},
+			{
+				"name": "The Journey Ends",
+				"apiName": "completeGame",
+				"description": "Complete the game",
+				"completed": true,
+				"globalCompleted": 34.900001525878906
+			},
+			{
+				"name": "Life Saver",
+				"apiName": "createLotsOfSoulLinks",
+				"description": "Create 50 Soul Links",
+				"completed": true,
+				"globalCompleted": 43.20000076293945
+			},
+			{
+				"name": "Deadly Detonation",
+				"apiName": "killManyWithChargeFlame",
+				"description": "Kill 4 enemies simultaneously using Charge Flame.",
+				"completed": true,
+				"globalCompleted": 42.79999923706055
+			},
+			{
+				"name": "Deadly Deflection",
+				"apiName": "killManyWithBashRedirect",
+				"description": "Kill 25 enemies using Bash to reflect projectiles",
+				"completed": true,
+				"globalCompleted": 28.5
+			},
+			{
+				"name": "A New Path",
+				"apiName": "openShortcutsWithChargeFlame",
+				"description": "Break open 5 shortcuts using the Charge Flame",
+				"completed": true,
+				"globalCompleted": 61.099998474121094
+			},
+			{
+				"name": "Choices Choices",
+				"apiName": "activateFirstSkill",
+				"description": "Use your first ability point",
+				"completed": true,
+				"globalCompleted": 87.80000305175781
+			},
+			{
+				"name": "Deadly Dash",
+				"apiName": "chargeJumpIntoManyEnemies",
+				"description": "Kill 5 enemies with Charge Jump",
+				"completed": true,
+				"globalCompleted": 8.199999809265137
+			},
+			{
+				"name": "So Many Secrets",
+				"apiName": "findSecret",
+				"description": "Find your first secret",
+				"completed": true,
+				"globalCompleted": 89.30000305175781
+			},
+			{
+				"name": "Seasoned Explorer",
+				"apiName": "findHalfOfSecrets",
+				"description": "Find 50% of all secrets",
+				"completed": true,
+				"globalCompleted": 29.399999618530273
+			},
+			{
+				"name": "No Stone Unturned",
+				"apiName": "findAllSecrets",
+				"description": "Find all secrets",
+				"completed": true,
+				"globalCompleted": 8.300000190734863
+			},
+			{
+				"name": "Marking the way",
+				"apiName": "findMapStone",
+				"description": "Restore your first Map Stone",
+				"completed": true,
+				"globalCompleted": 78.19999694824219
+			},
+			{
+				"name": "Halfway There",
+				"apiName": "findHalfOfMapStones",
+				"description": "Restore 50% of all Map Stones",
+				"completed": true,
+				"globalCompleted": 48.400001525878906
+			},
+			{
+				"name": "World at Your Feet",
+				"apiName": "findAllMapStones",
+				"description": "Restore all Map Stones",
+				"completed": true,
+				"globalCompleted": 15.399999618530273
+			},
+			{
+				"name": "Good Eye",
+				"apiName": "findLostCorridor",
+				"description": "Find the lost corridor in the Misty Woods",
+				"completed": true,
+				"globalCompleted": 23.299999237060547
+			},
+			{
+				"name": "Safe and Sound",
+				"apiName": "useEverySavePedestal",
+				"description": "Save at every Spirit Portal ",
+				"completed": true,
+				"globalCompleted": 21
+			},
+			{
+				"name": "Master of the Forest ",
+				"apiName": "discoverAllMap",
+				"description": "Visit 100% of the map",
+				"completed": true,
+				"globalCompleted": 11.5
+			},
+			{
+				"name": "Power Player",
+				"apiName": "collectLotsOfEnergy",
+				"description": "Collect 200 Energy Shards",
+				"completed": true,
+				"globalCompleted": 33.599998474121094
+			},
+			{
+				"name": "Soul Master",
+				"apiName": "collectBranchOneSkills",
+				"description": "Earn all Efficiency Skills in the Ability Tree",
+				"completed": true,
+				"globalCompleted": 24.299999237060547
+			},
+			{
+				"name": "Utility Master",
+				"apiName": "collectBranchTwoSkills",
+				"description": "Earn all Utility Skills in the Ability Tree",
+				"completed": true,
+				"globalCompleted": 22.5
+			},
+			{
+				"name": "Combat Master",
+				"apiName": "collectBranchThreeSkills",
+				"description": "Earn all Combat Skills in the Ability Tree",
+				"completed": true,
+				"globalCompleted": 21.100000381469727
+			},
+			{
+				"name": "Phenom",
+				"apiName": "collectAllSkills",
+				"description": "Earn all skills in the Ability Tree",
+				"completed": true,
+				"globalCompleted": 17.200000762939453
+			},
+			{
+				"name": "Powerhouse ",
+				"apiName": "collectAllEnergyCells",
+				"description": "Collect all Energy Cells",
+				"completed": true,
+				"globalCompleted": 16.5
+			},
+			{
+				"name": "Master Guardian",
+				"apiName": "collectAllHealthCells",
+				"description": "Collect all Health Cells",
+				"completed": true,
+				"globalCompleted": 17.899999618530273
+			},
+			{
+				"name": "Juggle Master",
+				"apiName": "juggleRock",
+				"description": "Juggle a rock 5 times without it hitting the ground",
+				"completed": true,
+				"globalCompleted": 14.100000381469727
+			},
+			{
+				"name": "Bash Master",
+				"apiName": "bashEnemyALotInARow",
+				"description": "Bash off enemies 10 times in a row without touching the ground",
+				"completed": true,
+				"globalCompleted": 6
+			},
+			{
+				"name": "Deadly Dodge",
+				"apiName": "trickEnemiesToKillEachOther",
+				"description": "Trick 5 enemies into killing another enemy",
+				"completed": true,
+				"globalCompleted": 42.400001525878906
+			},
+			{
+				"name": "Flying Fury",
+				"apiName": "killEnemiesWithoutTouchingGround",
+				"description": "Kill 3 enemies without touching the ground",
+				"completed": true,
+				"globalCompleted": 32.599998474121094
+			},
+			{
+				"name": "Self Destruction",
+				"apiName": "trickEnemyIntoKillingItself",
+				"description": "Cause an enemy to destroy itself",
+				"completed": true,
+				"globalCompleted": 57.79999923706055
+			},
+			{
+				"name": "Crushing Blow",
+				"apiName": "crushRamWithStomper",
+				"description": "Crush a Ram with a Stomper",
+				"completed": true,
+				"globalCompleted": 40.20000076293945
+			},
+			{
+				"name": "Stomp Master",
+				"apiName": "killFiftyEnemiesWithStomp",
+				"description": "Kill 50 enemies with Stomp",
+				"completed": true,
+				"globalCompleted": 13.800000190734863
+			},
+			{
+				"name": "Blast Master",
+				"apiName": "killAHundredEnemiesWithChargeFlame",
+				"description": "Kill 100 enemies with Charge Flame",
+				"completed": true,
+				"globalCompleted": 8.399999618530273
+			},
+			{
+				"name": "Flame Master",
+				"apiName": "killFiveHundredEnemiesWithSpiritFlame",
+				"description": "Kill 500 enemies with Spirit Flame",
+				"completed": true,
+				"globalCompleted": 31.299999237060547
+			},
+			{
+				"name": "Supersonic ",
+				"apiName": "finishWholeGameFast",
+				"description": "Finish the game in under 3 hours",
+				"completed": false,
+				"globalCompleted": 1.5
+			},
+			{
+				"name": "Airborne",
+				"apiName": "doubleJumpConsecutively",
+				"description": "Double Jump 5 times consecutively without touching the ground",
+				"completed": false,
+				"globalCompleted": 31.200000762939453
+			},
+			{
+				"name": "Immortal",
+				"apiName": "completeGameWithoutDying",
+				"description": "Complete whole game without dying",
+				"completed": false,
+				"globalCompleted": 1
+			},
+			{
+				"name": "Elite",
+				"apiName": "completeGameWithoutUsingAbilityPoint",
+				"description": "Complete the whole game without using an Ability Point",
+				"completed": false,
+				"globalCompleted": 1.399999976158142
+			},
+			{
+				"name": "Raider Run",
+				"apiName": "escapeTheBoulder",
+				"description": "Escape the Boulder in Black Root Burrows",
+				"completed": true,
+				"globalCompleted": 34
+			},
+			{
+				"name": "The Cycle",
+				"apiName": "completeLostGrove",
+				"description": "Uncover the mysteries of Naru",
+				"completed": true,
+				"globalCompleted": 25.700000762939453
+			},
+			{
+				"name": "Lightning Fast",
+				"apiName": "chargeDashFiveTimes",
+				"description": "Kill 5 enemies using Charge Dash",
+				"completed": true,
+				"globalCompleted": 9.899999618530273
+			},
+			{
+				"name": "Explosive Lobb",
+				"apiName": "activateGrenadeSwitches",
+				"description": "Activate 3 torches using Light Burst",
+				"completed": true,
+				"globalCompleted": 27.899999618530273
+			},
+			{
+				"name": "Light Burst Master",
+				"apiName": "kill50EnemiesWithGrenade",
+				"description": "Kill 50 enemies with Light Burst",
+				"completed": true,
+				"globalCompleted": 3.299999952316284
+			},
+			{
+				"name": "Formidable",
+				"apiName": "beatHardMode",
+				"description": " Complete the game on Hard Difficulty",
+				"completed": false,
+				"globalCompleted": 6.199999809265137
+			},
+			{
+				"name": "Unhinged",
+				"apiName": "beatOneLifeMode",
+				"description": "Complete the game on One Life Difficulty",
+				"completed": false,
+				"globalCompleted": 0.8999999761581421
+			}
+		],
+		"achievementCounts": {
+			"total": 57,
+			"completed": 51
+		}
+	},
+	{
+		"platform": "Xbox",
+		"gameId": "1057090",
+		"name": "Ori and the Will of the Wisps",
+		"playtimeRecent": 0,
+		"playtimeTotal": 1040,
+		"logoUrl": "https://steamcdn-a.akamaihd.net/steam/apps/1057090/header.jpg",
+		"achievements": [
+			{
+				"name": "Close Call",
+				"apiName": "1",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 84.5999984741211
+			},
+			{
+				"name": "Take the Bug by the Horn",
+				"apiName": "3",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 66.0999984741211
+			},
+			{
+				"name": "Laser Brain",
+				"apiName": "4",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 43.29999923706055
+			},
+			{
+				"name": "Home Sweet Home",
+				"apiName": "7",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 63.099998474121094
+			},
+			{
+				"name": "Let the Waters Flow",
+				"apiName": "8",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 58.900001525878906
+			},
+			{
+				"name": "Icy Escape",
+				"apiName": "9",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 46.70000076293945
+			},
+			{
+				"name": "Dark Triumph",
+				"apiName": "10",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 47.79999923706055
+			},
+			{
+				"name": "Guardian's Rest",
+				"apiName": "11",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 47.70000076293945
+			},
+			{
+				"name": "Quick Sand",
+				"apiName": "12",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 44.599998474121094
+			},
+			{
+				"name": "Stone Cold",
+				"apiName": "13",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 42.5
+			},
+			{
+				"name": "Destiny",
+				"apiName": "14",
+				"description": "Complete the Game",
+				"completed": true,
+				"globalCompleted": 42.70000076293945
+			},
+			{
+				"name": "Hardcore Fan",
+				"apiName": "15",
+				"description": "Complete Hard Mode",
+				"completed": false,
+				"globalCompleted": 5.400000095367432
+			},
+			{
+				"name": "Tools of the Trade",
+				"apiName": "16",
+				"description": "Unlock all Abilities",
+				"completed": true,
+				"globalCompleted": 30.899999618530273
+			},
+			{
+				"name": "Mad Skills",
+				"apiName": "17",
+				"description": "Upgrade all Abilities",
+				"completed": true,
+				"globalCompleted": 24.299999237060547
+			},
+			{
+				"name": "Fully Slotted",
+				"apiName": "18",
+				"description": "Upgrade all Shard Slots",
+				"completed": true,
+				"globalCompleted": 36.900001525878906
+			},
+			{
+				"name": "Shard Hunter",
+				"apiName": "19",
+				"description": "Unlock all Shards",
+				"completed": false,
+				"globalCompleted": 20.299999237060547
+			},
+			{
+				"name": "Shard Specialist",
+				"apiName": "20",
+				"description": "Upgrade all Shards",
+				"completed": false,
+				"globalCompleted": 13
+			},
+			{
+				"name": "Powerful",
+				"apiName": "22",
+				"description": "Max out Energy",
+				"completed": true,
+				"globalCompleted": 20.899999618530273
+			},
+			{
+				"name": "Cartographer's Protégé",
+				"apiName": "23",
+				"description": "Buy all Maps from Lupo",
+				"completed": true,
+				"globalCompleted": 24
+			},
+			{
+				"name": "Shrine Bright",
+				"apiName": "24",
+				"description": "Complete all Spirit Shrines",
+				"completed": true,
+				"globalCompleted": 37.099998474121094
+			},
+			{
+				"name": "Lost and Found",
+				"apiName": "25",
+				"description": "Find all Collectibles",
+				"completed": false,
+				"globalCompleted": 12.300000190734863
+			},
+			{
+				"name": "Mark of the Trader",
+				"apiName": "26",
+				"description": "Complete the Trade Sequence Quest",
+				"completed": false,
+				"globalCompleted": 25.600000381469727
+			},
+			{
+				"name": "Completionist",
+				"apiName": "27",
+				"description": "Complete every Side Quest",
+				"completed": false,
+				"globalCompleted": 21.600000381469727
+			},
+			{
+				"name": "Fixer Upper",
+				"apiName": "28",
+				"description": "Complete all Wellspring Glades Projects",
+				"completed": false,
+				"globalCompleted": 22.700000762939453
+			},
+			{
+				"name": "Speed Demon",
+				"apiName": "29",
+				"description": "Complete all Spirit Trials",
+				"completed": true,
+				"globalCompleted": 12.600000381469727
+			},
+			{
+				"name": "Healthy",
+				"apiName": "21",
+				"description": "Max out Life",
+				"completed": true,
+				"globalCompleted": 22.200000762939453
+			},
+			{
+				"name": "Untouchable",
+				"apiName": "30",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 2.0999999046325684
+			},
+			{
+				"name": "Timely Demise",
+				"apiName": "31",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 47.400001525878906
+			},
+			{
+				"name": "Juggling Act",
+				"apiName": "32",
+				"description": "Juggle 3 or More Projectiles in the Air for Over 5 Seconds",
+				"completed": true,
+				"globalCompleted": 57.400001525878906
+			},
+			{
+				"name": "Bring it On",
+				"apiName": "33",
+				"description": "Defeat 5 Enemies Without Touching the Ground",
+				"completed": true,
+				"globalCompleted": 44.20000076293945
+			},
+			{
+				"name": "High and Dry",
+				"apiName": "34",
+				"description": "Avoid Touching any Corrupted Water",
+				"completed": false,
+				"globalCompleted": 2.5999999046325684
+			},
+			{
+				"name": "Damage Spike",
+				"apiName": "35",
+				"description": "Defeat 3 Enemies with a Single Spike",
+				"completed": true,
+				"globalCompleted": 13.699999809265137
+			},
+			{
+				"name": "Did I Do That?",
+				"apiName": "37",
+				"description": "Defeat 10 Enemies using Environmental Hazards",
+				"completed": true,
+				"globalCompleted": 68.4000015258789
+			},
+			{
+				"name": "Shardless",
+				"apiName": "38",
+				"description": "Beat the Game Without Equipping a Shard",
+				"completed": false,
+				"globalCompleted": 1.399999976158142
+			},
+			{
+				"name": "Lightless",
+				"apiName": "39",
+				"description": "Beat the Game Without Spending any Spirit Light",
+				"completed": false,
+				"globalCompleted": 1.2999999523162842
+			},
+			{
+				"name": "Look at the Time",
+				"apiName": "40",
+				"description": "Complete the Game in Under 4 Hours",
+				"completed": false,
+				"globalCompleted": 1.399999976158142
+			},
+			{
+				"name": "Immortal",
+				"apiName": "41",
+				"description": "Complete the Game without Dying",
+				"completed": false,
+				"globalCompleted": 1.2000000476837158
+			}
+		],
+		"achievementCounts": {
+			"total": 37,
+			"completed": 24
+		}
+	},
+	{
+		"platform": "Xbox",
+		"gameId": "690040",
+		"name": "SUPERHOT: MIND CONTROL DELETE",
+		"playtimeRecent": 0,
+		"playtimeTotal": 767,
+		"logoUrl": "https://steamcdn-a.akamaihd.net/steam/apps/690040/header.jpg",
+		"achievements": [
+			{
+				"name": "MORE",
+				"apiName": "achievement_1_completed",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 91.9000015258789
+			},
+			{
+				"name": "MORE and MORE",
+				"apiName": "achievement_2_completed",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 82.80000305175781
+			},
+			{
+				"name": "even MORE",
+				"apiName": "achievement_3_completed",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 77
+			},
+			{
+				"name": "so much MORE",
+				"apiName": "achievement_4_completed",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 51.70000076293945
+			},
+			{
+				"name": "there's still MORE",
+				"apiName": "achievement_5_completed",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 27.700000762939453
+			},
+			{
+				"name": "MORE than ever",
+				"apiName": "achievement_6_completed",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 16
+			},
+			{
+				"name": "MORE power",
+				"apiName": "achievement_7_completed",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 66.4000015258789
+			},
+			{
+				"name": "MORE mysteries",
+				"apiName": "achievement_8_completed",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 8.100000381469727
+			},
+			{
+				"name": "MORE story",
+				"apiName": "achievement_9_completed",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 64.19999694824219
+			},
+			{
+				"name": "MORE slashing",
+				"apiName": "achievement_10_completed",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 28
+			},
+			{
+				"name": "MORE shooting",
+				"apiName": "achievement_11_completed",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 25.200000762939453
+			},
+			{
+				"name": "MORE punching",
+				"apiName": "achievement_12_completed",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 59.20000076293945
+			},
+			{
+				"name": "less is MORE",
+				"apiName": "achievement_13_completed",
+				"description": "",
+				"completed": true,
+				"globalCompleted": 8.600000381469727
+			},
+			{
+				"name": "back for MORE",
+				"apiName": "achievement_14_completed",
+				"description": "",
+				"completed": false,
+				"globalCompleted": 6.699999809265137
+			}
+		],
+		"achievementCounts": {
+			"total": 14,
+			"completed": 12
+		}
 	}
 ]
