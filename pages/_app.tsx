@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps, router }) {
 	return (
 		<AnimatePresence exitBeforeEnter onExitComplete={() => window.scrollTo(0, 0)}>
 			<Component {...pageProps} key={`component-${router.route}`} />
-			<Footer route={router.route} key={`footer-${router.route}`} />
+			<Footer key={`footer-${router.route}`} />
 		</AnimatePresence>
 	);
 }
