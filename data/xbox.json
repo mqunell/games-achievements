@@ -551,7 +551,7 @@
 				"name": "Enchanted",
 				"apiName": "ENCHANTED",
 				"description": "Acquire half of Hallownest's Charms",
-				"completed": false,
+				"completed": true,
 				"globalCompleted": 36.900001525878906
 			},
 			{
@@ -691,7 +691,7 @@
 				"name": "Grubfriend",
 				"apiName": "GRUBFRIEND",
 				"description": "Rescue half of the imprisoned grubs",
-				"completed": false,
+				"completed": true,
 				"globalCompleted": 35.29999923706055
 			},
 			{
@@ -984,7 +984,7 @@
 		],
 		"achievementCounts": {
 			"total": 63,
-			"completed": 11
+			"completed": 13
 		}
 	},
 	{
@@ -2679,6 +2679,167 @@
 		"achievementCounts": {
 			"total": 14,
 			"completed": 12
+		}
+	},
+	{
+		"platform": "Xbox",
+		"gameId": "969760",
+		"name": "Omno",
+		"playtimeRecent": 0,
+		"playtimeTotal": 30,
+		"logoUrl": "https://steamcdn-a.akamaihd.net/steam/apps/969760/header.jpg",
+		"achievements": [
+			{
+				"name": "Pit Master",
+				"apiName": "ACH_AREA_COMPLETE_1",
+				"description": "Auqui Pit completed",
+				"completed": true,
+				"globalCompleted": 68.4000015258789
+			},
+			{
+				"name": "Plateau Master",
+				"apiName": "ACH_AREA_COMPLETE_2",
+				"description": "Agneya Plateau completed",
+				"completed": true,
+				"globalCompleted": 44.29999923706055
+			},
+			{
+				"name": "Plains Master",
+				"apiName": "ACH_AREA_COMPLETE_3",
+				"description": "Malaha Plain completed",
+				"completed": false,
+				"globalCompleted": 44.400001525878906
+			},
+			{
+				"name": "Valley Master",
+				"apiName": "ACH_AREA_COMPLETE_4",
+				"description": "Sag'Ya Valley completed",
+				"completed": false,
+				"globalCompleted": 35.900001525878906
+			},
+			{
+				"name": "Lake Master",
+				"apiName": "ACH_AREA_COMPLETE_5",
+				"description": "Lake Ober completed",
+				"completed": false,
+				"globalCompleted": 29
+			},
+			{
+				"name": "Canyon Master",
+				"apiName": "ACH_AREA_COMPLETE_6",
+				"description": "Cavulta Canyon completed",
+				"completed": false,
+				"globalCompleted": 25.100000381469727
+			},
+			{
+				"name": "Desert Master",
+				"apiName": "ACH_AREA_COMPLETE_7",
+				"description": "Unkh-Tuur Desert completed",
+				"completed": false,
+				"globalCompleted": 24.700000762939453
+			},
+			{
+				"name": "Mesa Master",
+				"apiName": "ACH_AREA_COMPLETE_8",
+				"description": "Yeccaph Mesa completed",
+				"completed": false,
+				"globalCompleted": 24.799999237060547
+			},
+			{
+				"name": "Heights Master",
+				"apiName": "ACH_AREA_COMPLETE_9",
+				"description": "Pulyang Heights completed",
+				"completed": false,
+				"globalCompleted": 22.799999237060547
+			},
+			{
+				"name": "Cliff Master",
+				"apiName": "ACH_AREA_COMPLETE_10",
+				"description": "Fluamao Cliffs completed",
+				"completed": false,
+				"globalCompleted": 22.100000381469727
+			},
+			{
+				"name": "The Ascendant",
+				"apiName": "ACH_AREAS_ALL",
+				"description": "Finished Omno with all areas completed",
+				"completed": false,
+				"globalCompleted": 16.899999618530273
+			},
+			{
+				"name": "The Initiate",
+				"apiName": "ACH_RIDE_1",
+				"description": "Rode the First Legendary Animal",
+				"completed": true,
+				"globalCompleted": 94.4000015258789
+			},
+			{
+				"name": "The Apprentice",
+				"apiName": "ACH_RIDE_2",
+				"description": "Rode the Second Legendary Animal",
+				"completed": true,
+				"globalCompleted": 71.30000305175781
+			},
+			{
+				"name": "The Disciple",
+				"apiName": "ACH_RIDE_3",
+				"description": "Rode the Third Legendary Animal",
+				"completed": false,
+				"globalCompleted": 53.20000076293945
+			},
+			{
+				"name": "The Adept",
+				"apiName": "ACH_RIDE_4",
+				"description": "Rode the Fourth Legendary Animal",
+				"completed": false,
+				"globalCompleted": 39.70000076293945
+			},
+			{
+				"name": "The Exalted",
+				"apiName": "ACH_RIDE_5",
+				"description": "Rode the Fifth Legendary Animal",
+				"completed": false,
+				"globalCompleted": 30.899999618530273
+			},
+			{
+				"name": "Amphibic",
+				"apiName": "ACH_ANM_1",
+				"description": "Walked through water for 20 seconds",
+				"completed": false,
+				"globalCompleted": 44.29999923706055
+			},
+			{
+				"name": "Aggression management",
+				"apiName": "ACH_ANM_2",
+				"description": "Stomped a Lapicrab 5 times",
+				"completed": false,
+				"globalCompleted": 23.600000381469727
+			},
+			{
+				"name": "Likeminded",
+				"apiName": "ACH_ANM_3",
+				"description": "Surfed with Scipuins for 30 seconds",
+				"completed": false,
+				"globalCompleted": 32.29999923706055
+			},
+			{
+				"name": "Herder",
+				"apiName": "ACH_ANM_4",
+				"description": "Gathered 3 Caloobs around you at once",
+				"completed": false,
+				"globalCompleted": 19
+			},
+			{
+				"name": "Ground is lava",
+				"apiName": "ACH_ANM_5",
+				"description": "Kept an Astendeon airborne for 10 seconds",
+				"completed": false,
+				"globalCompleted": 8.300000190734863
+			}
+		],
+		"achievementCounts": {
+			"total": 21,
+			"completed": 4
 		}
 	}
 ]

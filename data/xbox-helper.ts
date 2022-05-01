@@ -23,6 +23,7 @@ const USERS_GAMES = [
 	// { userId: '76561198268914540', gameId: 387290 }, // Ori 1 (done)
 	// { userId: '76561198268914540', gameId: 1057090 }, // Ori 2 (done)
 	// { userId: '76561198056333317', gameId: 690040 }, // SUPERHOT: MCD (done)
+	// { userId: '76561198048067291', gameId: 969760 }, // Omno (done),
 	// todo: Halo MCC, World War Z, Lawn Mowing Simulator, Guacamelee! 2, Human Fall Flat, Tunic
 ];
 
