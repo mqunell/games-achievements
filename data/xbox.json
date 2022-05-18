@@ -537,7 +537,7 @@
 		"gameId": "367520",
 		"name": "Hollow Knight",
 		"playtimeRecent": 0,
-		"playtimeTotal": 853,
+		"playtimeTotal": 1241,
 		"logoUrl": "https://steamcdn-a.akamaihd.net/steam/apps/367520/header.jpg",
 		"achievements": [
 			{
@@ -614,7 +614,7 @@
 				"name": "Proof of Resolve",
 				"apiName": "HORNET_2",
 				"description": "",
-				"completed": false,
+				"completed": true,
 				"globalCompleted": 34.79999923706055
 			},
 			{
@@ -670,7 +670,7 @@
 				"name": "Attunement",
 				"apiName": "ATTUNEMENT",
 				"description": "Collect 600 Essence",
-				"completed": false,
+				"completed": true,
 				"globalCompleted": 34.79999923706055
 			},
 			{
@@ -761,14 +761,14 @@
 				"name": "Teacher",
 				"apiName": "TEACHER",
 				"description": "Destroy Monomon the Teacher",
-				"completed": false,
+				"completed": true,
 				"globalCompleted": 34
 			},
 			{
 				"name": "Watcher",
 				"apiName": "WATCHER",
 				"description": "Destroy Lurien the Watcher",
-				"completed": false,
+				"completed": true,
 				"globalCompleted": 33.5
 			},
 			{
@@ -782,14 +782,14 @@
 				"name": "Cartographer",
 				"apiName": "MAP",
 				"description": "Acquire a map of each area",
-				"completed": false,
+				"completed": true,
 				"globalCompleted": 33
 			},
 			{
 				"name": "Warrior",
 				"apiName": "COLOSSEUM_1",
 				"description": "Complete the Trial of the Warrior",
-				"completed": false,
+				"completed": true,
 				"globalCompleted": 34.20000076293945
 			},
 			{
@@ -984,7 +984,7 @@
 		],
 		"achievementCounts": {
 			"total": 63,
-			"completed": 13
+			"completed": 19
 		}
 	},
 	{
@@ -2686,7 +2686,7 @@
 		"gameId": "969760",
 		"name": "Omno",
 		"playtimeRecent": 0,
-		"playtimeTotal": 30,
+		"playtimeTotal": 143,
 		"logoUrl": "https://steamcdn-a.akamaihd.net/steam/apps/969760/header.jpg",
 		"achievements": [
 			{
@@ -2707,28 +2707,28 @@
 				"name": "Plains Master",
 				"apiName": "ACH_AREA_COMPLETE_3",
 				"description": "Malaha Plain completed",
-				"completed": false,
+				"completed": true,
 				"globalCompleted": 44.400001525878906
 			},
 			{
 				"name": "Valley Master",
 				"apiName": "ACH_AREA_COMPLETE_4",
 				"description": "Sag'Ya Valley completed",
-				"completed": false,
+				"completed": true,
 				"globalCompleted": 35.900001525878906
 			},
 			{
 				"name": "Lake Master",
 				"apiName": "ACH_AREA_COMPLETE_5",
 				"description": "Lake Ober completed",
-				"completed": false,
+				"completed": true,
 				"globalCompleted": 29
 			},
 			{
 				"name": "Canyon Master",
 				"apiName": "ACH_AREA_COMPLETE_6",
 				"description": "Cavulta Canyon completed",
-				"completed": false,
+				"completed": true,
 				"globalCompleted": 25.100000381469727
 			},
 			{
@@ -2784,14 +2784,14 @@
 				"name": "The Disciple",
 				"apiName": "ACH_RIDE_3",
 				"description": "Rode the Third Legendary Animal",
-				"completed": false,
+				"completed": true,
 				"globalCompleted": 53.20000076293945
 			},
 			{
 				"name": "The Adept",
 				"apiName": "ACH_RIDE_4",
 				"description": "Rode the Fourth Legendary Animal",
-				"completed": false,
+				"completed": true,
 				"globalCompleted": 39.70000076293945
 			},
 			{
@@ -2819,14 +2819,14 @@
 				"name": "Likeminded",
 				"apiName": "ACH_ANM_3",
 				"description": "Surfed with Scipuins for 30 seconds",
-				"completed": false,
+				"completed": true,
 				"globalCompleted": 32.29999923706055
 			},
 			{
 				"name": "Herder",
 				"apiName": "ACH_ANM_4",
 				"description": "Gathered 3 Caloobs around you at once",
-				"completed": false,
+				"completed": true,
 				"globalCompleted": 19
 			},
 			{
@@ -2839,7 +2839,7 @@
 		],
 		"achievementCounts": {
 			"total": 21,
-			"completed": 4
+			"completed": 12
 		}
 	}
 ]
