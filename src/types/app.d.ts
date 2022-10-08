@@ -22,3 +22,28 @@ interface Achievement {
 	completedTime: number;
 	globalCompleted: number;
 }
+
+// ---
+
+type AchApiName = string;
+
+interface GameMeta {
+	gameId: GameId;
+	name: string;
+	achievements?: AchievementMeta[];
+}
+
+interface AchievementMeta {
+	name: string;
+	apiName: AchApiName;
+	description: string;
+	globalCompleted: number;
+}
+
+interface GameStats {
+	gameId: GameId;
+	platform: 'Steam' | 'Xbox';
+	playtimeRecent: number; // Minutes
+	playtimeTotal: number; // Minutes
+	completedAchievements: [AchApiName];
+}
