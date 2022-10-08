@@ -76,7 +76,7 @@ export async function initGamesAchievements() {
 	const steamData = await Promise.all(games);
 
 	// Merge the pre-written Xbox games/achievements data
-	const xboxData = JSON.parse(fs.readFileSync('data/xbox.json').toString());
+	const xboxData = JSON.parse(fs.readFileSync('src/data/xbox.json').toString());
 	const gamesCache = [...steamData, ...xboxData];
 
 	// Write the file with all games' data

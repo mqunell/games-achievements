@@ -3,13 +3,13 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { GetStaticProps } from 'next';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Game, getGames } from '../lib/games';
-import Layout from '../components/Layout';
-import DisplayOptions from '../components/DisplayOptions';
-import GameCard from '../components/GameCard';
-import InputRange from '../components/InputRange';
-import Select from '../components/Select';
-import Toggle from '../components/Toggle';
+import { Game, getGames } from '@/lib/games';
+import Layout from '@/components/Layout';
+import DisplayOptions from '@/components/DisplayOptions';
+import GameCard from '@/components/GameCard';
+import InputRange from '@/components/InputRange';
+import Select from '@/components/Select';
+import Toggle from '@/components/Toggle';
 
 export const getStaticProps: GetStaticProps = async () => {
 	const games = await getGames();

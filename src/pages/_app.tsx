@@ -1,6 +1,6 @@
 import { AnimatePresence } from 'framer-motion';
-import Footer from '../components/Footer';
-import '../styles/globals.css';
+import Footer from '@/components/Footer';
+import '@/styles/globals.css';
 
 /**
  * Page transitions are handled by this AnimatePresence. Rather than the pages' Link components

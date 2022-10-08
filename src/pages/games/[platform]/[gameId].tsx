@@ -4,13 +4,13 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowLeftIcon } from '@heroicons/react/solid';
-import { Game, Achievement, getGames, getGame } from '../../../lib/games';
-import Layout from '../../../components/Layout';
-import AchievementCard from '../../../components/AchievementCard';
-import DisplayOptions from '../../../components/DisplayOptions';
-import GameCard from '../../../components/GameCard';
-import Select from '../../../components/Select';
-import Toggle from '../../../components/Toggle';
+import { Game, Achievement, getGames, getGame } from '@/lib/games';
+import Layout from '@/components/Layout';
+import AchievementCard from '@/components/AchievementCard';
+import DisplayOptions from '@/components/DisplayOptions';
+import GameCard from '@/components/GameCard';
+import Select from '@/components/Select';
+import Toggle from '@/components/Toggle';
 
 interface GameAchievementProps {
 	game: Game;

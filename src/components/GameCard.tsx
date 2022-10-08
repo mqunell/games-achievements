@@ -3,7 +3,7 @@ import Image from 'next/image';
 import classNames from 'classnames';
 import { CheckCircleIcon, ClockIcon } from '@heroicons/react/solid';
 import CompletedBadge from './CompletedBadge';
-import { Game } from '../lib/games';
+import { Game } from '@/lib/games';
 
 interface GameCardProps {
 	game: Game;

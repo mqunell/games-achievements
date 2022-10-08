@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import CompletedBadge from './CompletedBadge';
-import { Achievement } from '../lib/games';
+import { Achievement } from '@/lib/games';
 
 interface AchievementCardProps {
 	achievement: Achievement;
