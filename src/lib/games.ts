@@ -1,31 +1,6 @@
 import fs from 'fs';
 import { initGamesAchievements, gamesCacheFile } from './init';
 
-export type GameId = string;
-
-export interface Game {
-	platform: 'Steam' | 'Xbox';
-	gameId: GameId;
-	name: string;
-	playtimeRecent: number;
-	playtimeTotal: number;
-	logoUrl: string; // Full URL
-	achievements?: Achievement[]; // All achievements - omitted when passing to index
-	achievementCounts: {
-		total: number;
-		completed: number;
-	};
-}
-
-export interface Achievement {
-	name: string;
-	apiName: string;
-	description: string;
-	completed: boolean;
-	completedTime: number;
-	globalCompleted: number;
-}
-
 /**
  * Reads all games from the cache file, then removes Achievements[] to keep data size
  * minimal and filters to games with any playtime.

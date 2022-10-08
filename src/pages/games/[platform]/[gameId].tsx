@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowLeftIcon } from '@heroicons/react/solid';
-import { Game, Achievement, getGames, getGame } from '@/lib/games';
+import { getGames, getGame } from '@/lib/games';
 import Layout from '@/components/Layout';
 import AchievementCard from '@/components/AchievementCard';
 import DisplayOptions from '@/components/DisplayOptions';

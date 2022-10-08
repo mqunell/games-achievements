@@ -1,6 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
 import fs from 'fs';
-import { Game, Achievement, GameId } from './games';
 
 const API_KEY = process.env.STEAM_API_KEY;
 const USER_ID = process.env.STEAM_USER_ID;

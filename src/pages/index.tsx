@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { GetStaticProps } from 'next';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Game, getGames } from '@/lib/games';
+import { getGames } from '@/lib/games';
 import Layout from '@/components/Layout';
 import DisplayOptions from '@/components/DisplayOptions';
 import GameCard from '@/components/GameCard';
