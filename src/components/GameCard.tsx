@@ -3,6 +3,7 @@ import Image from 'next/image';
 import classNames from 'classnames';
 import { CheckCircleIcon, ClockIcon } from '@heroicons/react/solid';
 import CompletedBadge from './CompletedBadge';
+import { Game } from '@/pages/index';
 
 interface GameCardProps {
 	game: Game;
@@ -18,6 +19,9 @@ interface IconTextProps {
 	text: string;
 	italic?: boolean;
 }
+
+const logoUrl = (gameId: GameId) =>
+	`https://steamcdn-a.akamaihd.net/steam/apps/${gameId}/header.jpg`;
 
 const formatTime = (minutes: number) => {
 	const hours = Math.trunc(minutes / 60).toString();
@@ -44,7 +48,8 @@ export default function GameCard({
 	size,
 	displayOptions = { showProgress: true, showPlaytime: true },
 }: GameCardProps) {
-	const { name, playtimeRecent, playtimeTotal, logoUrl, achievementCounts } = game;
+	const { gameId, name, platforms, playtimeRecent, playtimeTotal, achievementCounts } =
+		game;
 	const { completed, total } = achievementCounts;
 
 	// displayOptions state
@@ -77,7 +82,7 @@ export default function GameCard({
 					'h-[135px] w-[288px]': size === 'large',
 				})}
 			>
-				<Image src={logoUrl} alt={`${name} logo`} layout="fill" />
+				<Image src={logoUrl(gameId)} alt={`${name} logo`} layout="fill" />
 			</div>
 
 			{/* Title */}
@@ -88,9 +93,11 @@ export default function GameCard({
 						'h-6 w-6': size === 'large',
 					})}
 				>
-					{game.platform === 'Steam' ? (
+					{/* todo: Adjust how these are laid out */}
+					{platforms.includes('Steam') && (
 						<Image src="/Steam.svg" alt="Steam logo" layout="fill" />
-					) : (
+					)}
+					{platforms.includes('Xbox') && (
 						<Image src="/Xbox.svg" alt="Xbox logo" layout="fill" />
 					)}
 				</div>

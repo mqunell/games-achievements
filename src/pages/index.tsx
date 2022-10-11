@@ -3,17 +3,57 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { GetStaticProps } from 'next';
 import { AnimatePresence, motion } from 'framer-motion';
-import { getGames } from '@/lib/games';
 import Layout from '@/components/Layout';
 import DisplayOptions from '@/components/DisplayOptions';
 import GameCard from '@/components/GameCard';
 import InputRange from '@/components/InputRange';
 import Select from '@/components/Select';
 import Toggle from '@/components/Toggle';
+import dbConnect from '@/data/dbConnect';
+import Game from '@/models/GameMeta';
+import { getGameMetas, getGameStats } from '@/lib/dbHelper';
+
+export interface Game {
+	gameId: GameId;
+	name: string;
+	platforms: ('Steam' | 'Xbox')[];
+	playtimeRecent: number;
+	playtimeTotal: number;
+	achievementCounts: {
+		total: number;
+		completed: number;
+	};
+}
 
 export const getStaticProps: GetStaticProps = async () => {
-	const games = await getGames();
-	return { props: { games }, revalidate: 600 };
+	await dbConnect();
+
+	const games: GameMeta[] = await getGameMetas();
+	const stats: GameStats[] = await getGameStats();
+
+	const gameCards = games.map((game: GameMeta) => {
+		const gameStats: GameStats[] = stats.filter((stat) => stat.gameId === game.gameId);
+
+		console.log(game);
+		console.log(stats);
+		const completedCounts = gameStats.map(
+			(stat) => stat.achievements.filter((ach) => ach.completed).length
+		);
+
+		return {
+			gameId: game.gameId,
+			name: game.name,
+			platforms: gameStats.map((stat) => stat.platform),
+			playtimeRecent: gameStats.reduce((acc, stat) => acc + stat.playtimeRecent, 0),
+			playtimeTotal: gameStats.reduce((acc, stat) => acc + stat.playtimeTotal, 0),
+			achievementCounts: {
+				total: game.achievements.length,
+				completed: Math.max(...completedCounts),
+			},
+		};
+	});
+
+	return { props: { games: gameCards }, revalidate: 600 };
 };
 
 const sortOptions = [
@@ -27,7 +67,7 @@ const sortOptions = [
 	{ text: 'Completion % (lowest)', field: 'completion', direction: 1 },
 ];
 
-export default function Home({ games }) {
+export default function Home({ games }: { games: Game[] }) {
 	const [displayedGames, setDisplayedGames] = useState([]);
 
 	// Display state
@@ -54,7 +94,7 @@ export default function Home({ games }) {
 	// Helper function for sorting games. When the specified criteria matches, sort by name (alphabetically) then platform (Steam, Xbox)
 	const compareMatching = (a: Game, b: Game): number => {
 		if (a.name !== b.name) return a.name < b.name ? -1 : 1;
-		return a.platform === 'Steam' ? -1 : 1;
+		return a.platforms.includes('Steam') ? -1 : 1;
 	};
 
 	// Filtering and sorting (note: merged useEffect works here because it's a display option that is changed, not a filter toggle)
@@ -70,8 +110,8 @@ export default function Home({ games }) {
 		const displayed = games
 			.filter((game: Game) => {
 				let validPlatform = true;
-				if (game.platform === 'Steam') validPlatform = showSteam;
-				if (game.platform === 'Xbox') validPlatform = showXbox;
+				if (game.platforms.includes('Steam')) validPlatform = showSteam;
+				if (game.platforms.includes('Xbox')) validPlatform = showXbox;
 
 				const validPerc = filterPerc > 0 ? calcCompletion(game) >= filterPerc : true; // Show games without achievements when filterPerc is 0
 				const validTime = game.playtimeTotal >= filterTime * 60;
@@ -110,6 +150,9 @@ export default function Home({ games }) {
 			<Layout.TitleOptions>
 				{/* Heading */}
 				<div className="w-full rounded bg-white p-4">
+					<p className="mb-2 text-center text-sm italic text-red-600">
+						Clicking on games is temporarily disabled
+					</p>
 					<h1 className="text-center text-2xl font-bold">
 						{displayedGames.length}/{games.length} Games
 					</h1>
@@ -165,27 +208,28 @@ export default function Home({ games }) {
 				<AnimatePresence>
 					{displayedGames &&
 						displayedGames.map((game: Game) => (
-							<Link
-								href={`/games/${game.platform}/${game.gameId}`}
+							/* <Link
+								href={`/games/${game.gameId}`}
 								passHref
 								scroll={false}
-								key={`${game.gameId}-${game.platform}`}
+								key={game.gameId}
+							> */
+							<motion.a
+								key={game.gameId} // todo: Remove key when parent Link is added back
+								className="cursor-pointer"
+								layout="position"
+								initial={{ opacity: 0 }}
+								animate={{ opacity: 1 }}
+								exit={{ opacity: 0 }}
+								transition={{ duration: 0.5 }}
 							>
-								<motion.a
-									className="cursor-pointer"
-									layout="position"
-									initial={{ opacity: 0 }}
-									animate={{ opacity: 1 }}
-									exit={{ opacity: 0 }}
-									transition={{ duration: 0.5 }}
-								>
-									<GameCard
-										game={game}
-										size="small"
-										displayOptions={{ showProgress, showPlaytime }}
-									/>
-								</motion.a>
-							</Link>
+								<GameCard
+									game={game}
+									size="small"
+									displayOptions={{ showProgress, showPlaytime }}
+								/>
+							</motion.a>
+							// </Link>
 						))}
 				</AnimatePresence>
 			</Layout.Content>
