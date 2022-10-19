@@ -2,19 +2,16 @@ import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import CompletedBadge from './CompletedBadge';
 
-interface AchievementCardProps {
-	achievement: Achievement;
+interface Props {
+	achCard: AchievementCard;
 	displayOptions: {
 		showTime: boolean;
 		showGlobal: boolean;
 	};
 }
 
-export default function AchievementCard({
-	achievement,
-	displayOptions,
-}: AchievementCardProps) {
-	const { name, description, completed, completedTime, globalCompleted } = achievement;
+export default function AchievementCard({ achCard, displayOptions }: Props) {
+	const { name, description, globalCompleted, completed, completedTime } = achCard;
 
 	return (
 		/* Container - Card and CompletedBadge are separated for overflow-hidden on the completion bar */

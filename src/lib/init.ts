@@ -14,28 +14,6 @@ const myAchsUrl = (gameId: GameId) =>
 const globalAchsUrl = (gameId: GameId) =>
 	`http://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v0002/?gameid=${gameId}&l=english`;
 
-interface ApiGame {
-	appid: number;
-	name: string;
-	playtime_2weeks?: number; // Minutes; not included by API if 0
-	playtime_forever: number; // Minutes
-	rtime_last_played: number; // Currently not used, but might be interesting
-	// Others are irrelevant
-}
-
-interface ApiMyAchievement {
-	apiname: string;
-	achieved: number;
-	unlocktime: number;
-	name: string;
-	description: string;
-}
-
-interface ApiGlobalAchievement {
-	name: string;
-	percent: number;
-}
-
 export async function initGames() {
 	await dbConnect();
 
@@ -46,7 +24,6 @@ export async function initGames() {
 	apiGames
 		.filter(({ appid }: ApiGame) => {
 			return ![359050, 365720, 469820, 489830, 1053680].includes(appid);
-			// return appid === 782330;
 		})
 		.forEach(async ({ appid, name, playtime_2weeks, playtime_forever }: ApiGame) => {
 			const gameId = String(appid);

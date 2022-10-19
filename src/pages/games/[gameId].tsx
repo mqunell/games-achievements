@@ -4,51 +4,62 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowLeftIcon } from '@heroicons/react/solid';
-import { getGames, getGame } from '@/lib/games';
 import Layout from '@/components/Layout';
 import AchievementCard from '@/components/AchievementCard';
 import DisplayOptions from '@/components/DisplayOptions';
 import GameCard from '@/components/GameCard';
 import Select from '@/components/Select';
 import Toggle from '@/components/Toggle';
+import { getGameMeta, getGameMetas, getGameStats } from '@/lib/dbHelper';
+import { generateGameCard } from '@/lib/generateGameCard';
+import { compare, defaultSortOption, sortOptions } from '@/lib/sortGamePage';
 
-interface GameAchievementProps {
-	game: Game;
-	achievements: Achievement[];
+interface Props {
+	gameCard: GameCard;
+	achCards: AchievementCard[];
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	const games = await getGames();
-	const paths = games.map(({ platform, gameId }) => ({
-		params: { platform, gameId },
+	const games: GameMeta[] = await getGameMetas();
+
+	const paths = games.map(({ gameId }) => ({
+		params: { gameId },
 	}));
 
 	return { paths, fallback: false };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const platform = params.platform as string;
-	const gameId = params.gameId as string;
+	const gameId = params.gameId as GameId;
 
-	const { achievements, ...game } = getGame(platform, gameId);
+	const game: GameMeta = await getGameMeta(gameId);
+	const stats: GameStats[] = await getGameStats(gameId);
 
-	return { props: { game, achievements }, revalidate: 600 };
+	const achCards: AchievementCard[] = game.achievements.map(
+		(achMeta: AchievementMeta) => {
+			const achStats = stats.find((stat) => stat.gameId === gameId).achievements;
+			const achStat = achStats.find((ach) => ach.name === achMeta.name);
+
+			const { name, description, globalCompleted } = achMeta;
+			const { completed, completedTime } = achStat;
+
+			return { name, description, globalCompleted, completed, completedTime };
+		}
+	);
+
+	return {
+		props: { gameCard: generateGameCard(game, stats), achCards },
+		revalidate: 600,
+	};
 };
 
-const sortOptions = [
-	{ text: 'Alphabetical (a-z)', field: 'name', direction: 1 },
-	{ text: 'Alphabetical (z-a)', field: 'name', direction: -1 },
-	{ text: 'Completion time (newest)', field: 'completedTime', direction: -1 },
-	{ text: 'Completion time (oldest)', field: 'completedTime', direction: 1 },
-	{ text: 'Global completion % (highest)', field: 'globalCompleted', direction: -1 },
-	{ text: 'Global completion % (lowest)', field: 'globalCompleted', direction: 1 },
-];
-
-export default function GameAchievements({ game, achievements }: GameAchievementProps) {
-	const [displayedAchievements, setDisplayedAchievements] = useState([]);
+export default function GameAchievements({ gameCard, achCards }: Props) {
+	const [displayedAchievements, setDisplayedAchievements] = useState<AchievementCard[]>(
+		[]
+	);
 
 	// Display state
-	const [showTime, setShowTime] = useState(game.platform !== 'Xbox'); // Xbox achievements don't have completion dates
+	const [showTime, setShowTime] = useState(true); // Xbox achievements don't have completion dates - todo: only show times if the default list is Steam
 	const [showGlobal, setShowGlobal] = useState(true);
 
 	// Filter state
@@ -56,18 +67,16 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 	const [showUncompleted, setShowUncompleted] = useState(true);
 
 	// Sort state
-	const [sortBy, setSortBy] = useState(sortOptions[4]);
+	const [sortBy, setSortBy] = useState(defaultSortOption);
 
 	// Filtering and sorting
 	useEffect(() => {
-		const { field, direction } = sortBy;
-
-		const displayed = achievements
+		const displayed = achCards
 			.filter((ach) => (ach.completed ? showCompleted : showUncompleted))
-			.sort((a, b) => (a[field] < b[field] ? direction * -1 : direction));
+			.sort((a, b) => compare(a, b, sortBy));
 
 		setDisplayedAchievements(displayed);
-	}, [sortBy, showCompleted, showUncompleted, achievements]);
+	}, [sortBy, showCompleted, showUncompleted, achCards]);
 
 	// Set the toggles based on sort field (separate useEffect hook so they can be changed manually afterward)
 	useEffect(() => {
@@ -79,23 +88,18 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 		} else if (field === 'globalCompleted') {
 			setShowGlobal(true);
 		}
-	}, [sortBy, achievements]);
+	}, [sortBy]);
 
 	return (
 		<Layout.Container fromDirection="right">
 			<Head>
-				<title>
-					{game.name} Achievements ({game.platform})
-				</title>
-				<meta
-					name="description"
-					content={`${game.name} achievements on ${game.platform}`}
-				/>
+				<title>{gameCard.name} Achievements</title>
+				<meta name="description" content={`${gameCard.name} achievements`} />
 			</Head>
 
 			<Layout.TitleOptions>
 				{/* Heading image and data */}
-				<GameCard game={game} size="large" />
+				<GameCard game={gameCard} size="large" />
 
 				{/* Display options */}
 				<DisplayOptions>
@@ -136,17 +140,17 @@ export default function GameAchievements({ game, achievements }: GameAchievement
 			<Layout.Content>
 				<AnimatePresence>
 					{displayedAchievements ? (
-						displayedAchievements.map((ach: Achievement) => (
+						displayedAchievements.map((achCard: AchievementCard) => (
 							<motion.div
 								layout="position"
 								initial={{ opacity: 0 }}
 								animate={{ opacity: 1 }}
 								exit={{ opacity: 0 }}
 								transition={{ duration: 0.5 }}
-								key={ach.apiName}
+								key={achCard.name}
 							>
 								<AchievementCard
-									achievement={ach}
+									achCard={achCard}
 									displayOptions={{ showTime, showGlobal }}
 								/>
 							</motion.div>

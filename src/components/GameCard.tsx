@@ -3,10 +3,9 @@ import Image from 'next/image';
 import classNames from 'classnames';
 import { CheckCircleIcon, ClockIcon } from '@heroicons/react/solid';
 import CompletedBadge from './CompletedBadge';
-import { Game } from '@/pages/index';
 
-interface GameCardProps {
-	game: Game;
+interface Props {
+	game: GameCard;
 	size: 'small' | 'large';
 	displayOptions?: {
 		showProgress: boolean;
@@ -47,10 +46,8 @@ export default function GameCard({
 	game,
 	size,
 	displayOptions = { showProgress: true, showPlaytime: true },
-}: GameCardProps) {
-	const { gameId, name, platforms, playtimeRecent, playtimeTotal, achievementCounts } =
-		game;
-	const { completed, total } = achievementCounts;
+}: Props) {
+	const { gameId, name, platforms, playtimes, achievementCounts: achCounts } = game;
 
 	// displayOptions state
 	const [showProgress, setShowProgress] = useState(displayOptions.showProgress);
@@ -62,7 +59,7 @@ export default function GameCard({
 	}, [displayOptions]);
 
 	// Show one decimal place unless x.0%
-	let percentage = ((completed / total) * 100).toFixed(1);
+	let percentage = ((achCounts.completed / achCounts.total) * 100).toFixed(1);
 	if (percentage.endsWith('.0')) percentage = percentage.slice(0, -2);
 
 	return (
@@ -73,7 +70,9 @@ export default function GameCard({
 			)}
 		>
 			{/* Checkmark */}
-			{total > 0 && completed === total && <CompletedBadge />}
+			{achCounts.total > 0 && achCounts.completed === achCounts.total && (
+				<CompletedBadge />
+			)}
 
 			{/* Logo image */}
 			<div
@@ -117,18 +116,22 @@ export default function GameCard({
 			{showProgress && (
 				<IconText
 					icon={CheckCircleIcon}
-					text={total > 0 ? `${completed}/${total} - ${percentage}%` : 'No Achievements'}
-					italic={total === 0}
+					text={
+						achCounts.total > 0
+							? `${achCounts.completed}/${achCounts.total} - ${percentage}%`
+							: 'No Achievements'
+					}
+					italic={achCounts.total === 0}
 				/>
 			)}
 
 			{/* Playtime */}
 			{showPlaytime && (
 				<div className="flex flex-col items-center">
-					<IconText icon={ClockIcon} text={`Total: ${formatTime(playtimeTotal)}`} />
+					<IconText icon={ClockIcon} text={`Total: ${formatTime(playtimes.total)}`} />
 
-					{playtimeRecent > 0 && (
-						<IconText icon={ClockIcon} text={`Recent: ${formatTime(playtimeRecent)}`} />
+					{playtimes.recent > 0 && (
+						<IconText icon={ClockIcon} text={`Recent: ${formatTime(playtimes.recent)}`} />
 					)}
 				</div>
 			)}
