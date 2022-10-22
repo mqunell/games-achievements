@@ -34,8 +34,7 @@ export default function Home({ games }: { games: GameCard[] }) {
 	const [showPlaytime, setShowPlaytime] = useState(true);
 
 	// Filter state
-	const [showSteam, setShowSteam] = useState(true);
-	const [showXbox, setShowXbox] = useState(true);
+	const [filterPlatforms, setFilterPlatforms] = useState({ Steam: true, Xbox: true });
 	const [filterPerc, setFilterPerc] = useState(0);
 	const [filterTime, setFilterTime] = useState(0);
 
@@ -54,10 +53,10 @@ export default function Home({ games }: { games: GameCard[] }) {
 		// Filter and sort the games
 		const displayed = games
 			.filter((game: GameCard) => {
-				let validPlatform = true;
-				if (game.platforms.includes('Steam')) validPlatform = showSteam;
-				if (game.platforms.includes('Xbox')) validPlatform = showXbox;
-
+				const validPlatform = game.platforms.reduce(
+					(acc, plat) => acc || filterPlatforms[plat],
+					false
+				);
 				const validPerc = filterPerc > 0 ? calcCompletion(game) >= filterPerc : true; // Show games without achievements when filterPerc is 0
 				const validTime = game.playtimes.total >= filterTime * 60;
 
@@ -66,7 +65,7 @@ export default function Home({ games }: { games: GameCard[] }) {
 			.sort((a: GameCard, b: GameCard) => compare(a, b, sortBy));
 
 		setDisplayedGames(displayed);
-	}, [games, showSteam, showXbox, filterPerc, filterTime, sortBy]);
+	}, [games, filterPlatforms, filterPerc, filterTime, sortBy]);
 
 	return (
 		<Layout.Container fromDirection="left">
@@ -102,13 +101,15 @@ export default function Home({ games }: { games: GameCard[] }) {
 					<p className="font-semibold">Filters</p>
 					<Toggle
 						text="Steam games"
-						checked={showSteam}
-						onClick={() => setShowSteam(!showSteam)}
+						checked={filterPlatforms.Steam}
+						onClick={() =>
+							setFilterPlatforms((prev) => ({ ...prev, Steam: !prev.Steam }))
+						}
 					/>
 					<Toggle
 						text="Xbox games"
-						checked={showXbox}
-						onClick={() => setShowXbox(!showXbox)}
+						checked={filterPlatforms.Xbox}
+						onClick={() => setFilterPlatforms((prev) => ({ ...prev, Xbox: !prev.Xbox }))}
 					/>
 					<InputRange
 						title="Minimum completion %"
