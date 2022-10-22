@@ -85,23 +85,20 @@ export default function GameCard({
 			</div>
 
 			{/* Title */}
-			<div className="mt-1 flex max-w-full items-center gap-2 ">
-				<div
-					className={classNames('relative shrink-0', {
-						'h-5 w-5': size === 'small',
-						'h-6 w-6': size === 'large',
-					})}
-				>
-					{/* todo: Adjust how these are laid out */}
-					{platforms.includes('Steam') && (
-						<Image src="/Steam.svg" alt="Steam logo" layout="fill" />
-					)}
-					{platforms.includes('Xbox') && (
-						<Image src="/Xbox.svg" alt="Xbox logo" layout="fill" />
-					)}
-				</div>
+			<div className="mt-1 flex max-w-full items-center gap-1">
+				{platforms.sort().map((platform) => (
+					<div
+						key={platform}
+						className={classNames('relative shrink-0', {
+							'h-5 w-5': size === 'small',
+							'h-6 w-6': size === 'large',
+						})}
+					>
+						<Image src={`/${platform}.svg`} alt={`${platform} logo`} layout="fill" />
+					</div>
+				))}
 				<h1
-					className={classNames({
+					className={classNames('ml-1', {
 						'truncate text-xl': size === 'small',
 						'text-2xl': size === 'large',
 					})}
