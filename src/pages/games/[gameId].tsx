@@ -10,7 +10,7 @@ import DisplayOptions from '@/components/DisplayOptions';
 import GameCard from '@/components/GameCard';
 import Select from '@/components/Select';
 import Toggle from '@/components/Toggle';
-import { getGameMeta, getGameMetas, getGameStats } from '@/lib/dbHelper';
+import { getGameMeta, getGameMetas, getGameStats } from '@/data/dbHelper';
 import { generateGameCard } from '@/lib/generateGameCard';
 import { compare, defaultSortOption, sortOptions } from '@/lib/sortGamePage';
 

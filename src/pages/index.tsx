@@ -9,7 +9,7 @@ import GameCard from '@/components/GameCard';
 import InputRange from '@/components/InputRange';
 import Select from '@/components/Select';
 import Toggle from '@/components/Toggle';
-import { getGameMetas, getGameStats } from '@/lib/dbHelper';
+import { getGameMetas, getGameStats } from '@/data/dbHelper';
 import { generateGameCard } from '@/lib/generateGameCard';
 import { calcCompletion } from '@/lib/percentage';
 import { compare, defaultSortOption, sortOptions } from '@/lib/sortHomePage';

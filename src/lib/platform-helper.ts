@@ -40,8 +40,8 @@ const globalAchsUrl = (userId: string, gameId: number) =>
 	`http://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v0002/?gameid=${gameId}&l=english`;
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-	const xboxGames = await prepareXboxGames();
-	res.status(200).json(xboxGames);
+	// const xboxGames = await prepareXboxGames();
+	// res.status(200).json(xboxGames);
 }
 
 /* async function prepareXboxGames() {
