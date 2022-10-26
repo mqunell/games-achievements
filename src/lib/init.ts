@@ -21,11 +21,16 @@ export async function initGames() {
 	const gamesRes: AxiosResponse = await axios.get(gamesUrl);
 	const apiGames: ApiGame[] = gamesRes.data.response.games;
 
+	const allGameMetas: GameMeta[] = [];
+	const allGameStats: GameStats[] = [];
+
 	apiGames
 		.filter(({ appid }: ApiGame) => {
 			return ![359050, 365720, 469820, 489830, 1053680].includes(appid);
 		})
 		.forEach(async ({ appid, name, playtime_2weeks, playtime_forever }: ApiGame) => {
+			if (playtime_forever < 30) return;
+
 			const gameId = String(appid);
 			const { metaAchs, statsAchs } = await initAchievements(gameId);
 
@@ -43,20 +48,20 @@ export async function initGames() {
 				achievements: statsAchs,
 			};
 
-			if (gameStats.playtimeTotal < 30) return;
-
-			// @ts-ignore
-			GameMeta.findOneAndUpdate({ gameId }, gameMeta, { upsert: true })
-				.then(() => console.log(gameMeta.gameId, 'GameMeta saved'))
-				.catch((error) => console.error(gameMeta.gameId, 'GameMeta error', error));
-
-			// @ts-ignore
-			GameStats.findOneAndUpdate({ gameId, platform: gameStats.platform }, gameStats, {
-				upsert: true,
-			})
-				.then(() => console.log(gameStats.gameId, 'GameStats saved'))
-				.catch((error) => console.error(gameStats.gameId, 'GameStats error', error));
+			allGameMetas.push(
+				// @ts-ignore
+				GameMeta.findOneAndUpdate({ gameId }, gameMeta, { upsert: true })
+			);
+			allGameStats.push(
+				// @ts-ignore
+				GameStats.findOneAndUpdate({ gameId, platform: 'Steam' }, gameStats, {
+					upsert: true,
+				})
+			);
 		});
+
+	await Promise.all(allGameMetas).then(() => console.log('games done'));
+	await Promise.all(allGameStats).then(() => console.log('stats done'));
 }
 
 async function initAchievements(

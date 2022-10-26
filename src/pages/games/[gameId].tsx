@@ -35,6 +35,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const game: GameMeta = await getGameMeta(gameId);
 	const stats: GameStats[] = await getGameStats(gameId);
 
+	const gameCard = generateGameCard(game, stats);
+
 	const achCards: AchievementCard[] = game.achievements.map(
 		(achMeta: AchievementMeta) => {
 			const achStats = stats.find((stat) => stat.gameId === gameId).achievements;
@@ -47,10 +49,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 		}
 	);
 
-	return {
-		props: { gameCard: generateGameCard(game, stats), achCards },
-		revalidate: 600,
-	};
+	return { props: { gameCard, achCards }, revalidate: 3600 };
 };
 
 export default function GameAchievements({ gameCard, achCards }: Props) {
