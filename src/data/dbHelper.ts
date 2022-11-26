@@ -17,6 +17,7 @@ export const getGameMeta = async (gameId: GameId) => {
 	// @ts-ignore
 	const res = await GameMeta.find({ gameId }, '-_id -__v');
 	const data = res.map((doc) => doc.toObject());
+
 	return data[0];
 };
 
@@ -28,5 +29,6 @@ export const getGameStats = async (gameId?: GameId) => {
 	// @ts-ignore
 	const res = await GameStats.find(query, '-_id -__v');
 	const data = res.map((doc) => doc.toObject());
+
 	return data;
 };
