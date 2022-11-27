@@ -14,8 +14,13 @@ const myAchsUrl = (gameId: GameId) =>
 const globalAchsUrl = (gameId: GameId) =>
 	`http://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v0002/?gameid=${gameId}&l=english`;
 
-const isValidGame = ({ appid, playtime_forever }: ApiGame) =>
-	![359050, 365720, 469820, 489830, 1053680].includes(appid) && playtime_forever > 30;
+const isValidGame = ({ appid, playtime_forever, playtime_2weeks }: ApiGame) => {
+	return (
+		![359050, 365720, 469820, 489830, 1053680].includes(appid) &&
+		playtime_forever > 30 &&
+		playtime_2weeks > 0 // Temp fix for Vercel ISR timeouts
+	);
+};
 
 export async function initGames() {
 	await dbConnect();
