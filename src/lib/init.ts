@@ -18,7 +18,7 @@ const isValidGame = ({ appid, playtime_forever, playtime_2weeks }: ApiGame) => {
 	return (
 		![359050, 365720, 469820, 489830, 1053680].includes(appid) &&
 		playtime_forever > 30 &&
-		playtime_2weeks > 0 // Temp fix for Vercel ISR timeouts
+		playtime_2weeks > 0 // Temp fix for Vercel ISR timeouts - remove to clear stale playtimeRecents
 	);
 };
 
@@ -47,7 +47,7 @@ export async function initGames() {
 		const gameStats: GameStats = {
 			gameId,
 			platform: 'Steam',
-			playtimeRecent: playtime_2weeks,
+			playtimeRecent: playtime_2weeks || 0,
 			playtimeTotal: playtime_forever,
 			achievements: statsAchs,
 		};
