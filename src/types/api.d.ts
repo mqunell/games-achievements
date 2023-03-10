@@ -7,7 +7,7 @@ interface ApiGame {
 	// Others are irrelevant
 }
 
-interface ApiMyAchievement {
+interface ApiUserAchievement {
 	apiname: string;
 	achieved: number;
 	unlocktime: number;

@@ -9,22 +9,16 @@ import GameCard from '@/components/GameCard';
 import InputRange from '@/components/InputRange';
 import Select from '@/components/Select';
 import Toggle from '@/components/Toggle';
-import { getGameMetas, getGameStats } from '@/data/dbHelper';
-import { initGames } from '@/lib/init';
+import { getGames } from '@/data/dbHelper';
 import { generateGameCard } from '@/lib/generateGameCard';
 import { calcCompletion } from '@/lib/percentage';
 import { compare, defaultSortOption, sortOptions } from '@/lib/sortHomePage';
 
 export const getStaticProps: GetStaticProps = async () => {
-	await initGames();
-
-	const games: GameMeta[] = await getGameMetas();
-	const stats: GameStats[] = await getGameStats();
-
-	const gameCards = games.map((game: GameMeta) => {
-		const gameStats: GameStats[] = stats.filter((stat) => stat.gameId === game.gameId);
-		return generateGameCard(game, gameStats);
-	});
+	const games: Game[] = await getGames();
+	const gameCards: GameCard[] = games
+		.filter((game) => !(game.name === 'ASTRONEER' && game.platform === 'Steam')) // TODO: Combine Astroneer and remove this filter
+		.map((game) => generateGameCard(game));
 
 	return { props: { games: gameCards }, revalidate: 3600 };
 };

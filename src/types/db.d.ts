@@ -1,29 +1,19 @@
 type GameId = string;
-type AchName = string;
 
-interface GameMeta {
-	gameId: GameId;
+interface Game {
+	id: GameId;
 	name: string;
-	achievements: AchievementMeta[];
-}
-
-interface AchievementMeta {
-	name: AchName;
-	apiName: string;
-	description: string;
-	globalCompleted: number;
-}
-
-interface GameStats {
-	gameId: GameId;
 	platform: 'Steam' | 'Xbox';
 	playtimeRecent: number; // Minutes
 	playtimeTotal: number; // Minutes
-	achievements: AchievementStats[];
+	achievements: CAchievement[];
 }
 
-interface AchievementStats {
-	name: AchName;
+interface Achievement {
+	id: string;
+	name: string;
+	description: string;
 	completed: boolean;
 	completedTime: number;
+	globalCompleted: number;
 }

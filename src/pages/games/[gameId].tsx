@@ -10,7 +10,7 @@ import DisplayOptions from '@/components/DisplayOptions';
 import GameCard from '@/components/GameCard';
 import Select from '@/components/Select';
 import Toggle from '@/components/Toggle';
-import { getGameMeta, getGameMetas, getGameStats } from '@/data/dbHelper';
+import { getGame, getGames } from '@/data/dbHelper';
 import { generateGameCard } from '@/lib/generateGameCard';
 import { compare, defaultSortOption, sortOptions } from '@/lib/sortGamePage';
 
@@ -20,10 +20,10 @@ interface Props {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	const games: GameMeta[] = await getGameMetas();
+	const games: Game[] = await getGames();
 
-	const paths = games.map(({ gameId }) => ({
-		params: { gameId },
+	const paths = games.map(({ id }) => ({
+		params: { gameId: id },
 	}));
 
 	return { paths, fallback: false };
@@ -31,23 +31,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const gameId = params.gameId as GameId;
+	const game: Game = await getGame(gameId);
 
-	const game: GameMeta = await getGameMeta(gameId);
-	const stats: GameStats[] = await getGameStats(gameId);
-
-	const gameCard = generateGameCard(game, stats);
-
-	const achCards: AchievementCard[] = game.achievements.map(
-		(achMeta: AchievementMeta) => {
-			const achStats = stats.find((stat) => stat.gameId === gameId).achievements;
-			const achStat = achStats.find((ach) => ach.name === achMeta.name);
-
-			const { name, description, globalCompleted } = achMeta;
-			const { completed, completedTime } = achStat;
-
-			return { name, description, globalCompleted, completed, completedTime };
-		}
-	);
+	const gameCard: GameCard = generateGameCard(game);
+	const achCards: AchievementCard[] = game.achievements;
 
 	return { props: { gameCard, achCards }, revalidate: 3600 };
 };
