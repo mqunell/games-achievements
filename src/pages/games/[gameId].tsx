@@ -11,7 +11,7 @@ import GameCard from '@/components/GameCard';
 import Select from '@/components/Select';
 import Toggle from '@/components/Toggle';
 import { getGame, getGames } from '@/data/dbHelper';
-import { generateGameCard } from '@/lib/generateGameCard';
+import { generateCombinedGameCard, generateGameCard } from '@/lib/generateGameCard';
 import { compare, defaultSortOption, sortOptions } from '@/lib/sortGamePage';
 
 interface Props {
@@ -22,19 +22,31 @@ interface Props {
 export const getStaticPaths: GetStaticPaths = async () => {
 	const games: Game[] = await getGames();
 
-	const paths = games.map(({ id }) => ({
-		params: { gameId: id },
-	}));
+	const paths = games
+		.filter((game) => game.id !== '361420')
+		.map(({ id }) => ({ params: { gameId: id } }));
+
+	paths.push({ params: { gameId: '361420' } });
 
 	return { paths, fallback: false };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const gameId = params.gameId as GameId;
-	const game: Game = await getGame(gameId);
+	let gameCard: GameCard;
+	let achCards: AchievementCard[];
 
-	const gameCard: GameCard = generateGameCard(game);
-	const achCards: AchievementCard[] = game.achievements;
+	if (gameId !== '361420') {
+		const game: Game = await getGame(gameId);
+
+		gameCard = generateGameCard(game);
+		achCards = game.achievements;
+	} else {
+		const games: Game[] = await getGames(gameId);
+
+		gameCard = generateCombinedGameCard(games);
+		achCards = games.find((game) => game.platform === 'Steam').achievements;
+	}
 
 	return { props: { gameCard, achCards }, revalidate: 3600 };
 };

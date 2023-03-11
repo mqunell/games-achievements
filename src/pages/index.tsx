@@ -10,15 +10,20 @@ import InputRange from '@/components/InputRange';
 import Select from '@/components/Select';
 import Toggle from '@/components/Toggle';
 import { getGames } from '@/data/dbHelper';
-import { generateGameCard } from '@/lib/generateGameCard';
+import { generateCombinedGameCard, generateGameCard } from '@/lib/generateGameCard';
 import { calcCompletion } from '@/lib/percentage';
 import { compare, defaultSortOption, sortOptions } from '@/lib/sortHomePage';
 
 export const getStaticProps: GetStaticProps = async () => {
 	const games: Game[] = await getGames();
+
 	const gameCards: GameCard[] = games
-		.filter((game) => !(game.name === 'ASTRONEER' && game.platform === 'Steam')) // TODO: Combine Astroneer and remove this filter
+		.filter((game) => game.id !== '361420')
 		.map((game) => generateGameCard(game));
+
+	gameCards.push(
+		generateCombinedGameCard(games.filter((game) => game.id === '361420'))
+	);
 
 	return { props: { games: gameCards }, revalidate: 3600 };
 };

@@ -11,3 +11,23 @@ export const generateGameCard = (game: Game): GameCard => ({
 		completed: game.achievements?.filter((ach) => ach.completed).length || 0,
 	},
 });
+
+// Hard-coded for Steam and Xbox, and prioritizes Steam data
+export const generateCombinedGameCard = (games: Game[]): GameCard => {
+	const steamGame = games.find(game => game.platform === 'Steam')
+	const xboxGame = games.find(game => game.platform === 'Xbox')
+
+	return {
+		gameId: steamGame.id,
+		name: steamGame.name,
+		platforms: ['Steam', 'Xbox'],
+		playtimes: {
+			recent: steamGame.playtimeRecent,
+			total: steamGame.playtimeTotal + xboxGame.playtimeTotal,
+		},
+		achievementCounts: {
+			total: steamGame.achievements?.length || 0,
+			completed: steamGame.achievements?.filter((ach) => ach.completed).length || 0,
+		},
+	}
+}
