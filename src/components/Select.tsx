@@ -1,7 +1,6 @@
 import { Fragment } from 'react';
 import { Listbox } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
-import clsx from 'clsx';
 
 type Props = {
 	sortBy: SortOption;
@@ -28,17 +27,10 @@ const Select = ({ sortBy, setSortBy, sortOptions }: Props) => (
 			{sortOptions.map((option) => (
 				// Make this a Fragment so the <li> can be conditionally styled with the render props
 				<Listbox.Option key={option} value={option} as={Fragment}>
-					{({ active, selected }) => (
-						<li
-							className={clsx(
-								'flex cursor-pointer items-center justify-between py-1 px-2',
-								!active ? 'bg-green-500' : 'bg-green-600'
-							)}
-						>
-							<span>{option}</span>
-							{selected && <CheckIcon className="h-4 w-4" />}
-						</li>
-					)}
+					<li className="flex cursor-pointer items-center justify-between py-1 px-2 ui-active:bg-green-600 ui-not-active:bg-green-500">
+						<span>{option}</span>
+						<CheckIcon className="hidden h-4 w-4 ui-selected:block" />
+					</li>
 				</Listbox.Option>
 			))}
 		</Listbox.Options>
