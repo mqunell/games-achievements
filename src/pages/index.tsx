@@ -12,7 +12,7 @@ import Toggle from '@/components/Toggle';
 import { getGames } from '@/data/dbHelper';
 import { generateCombinedGameCard, generateGameCard } from '@/lib/generateGameCard';
 import { calcCompletion } from '@/lib/percentage';
-import { compare, defaultSortOption, sortOptions } from '@/lib/sortHomePage';
+import { compare, defaultSortOption, sortOptions } from '@/lib/sortGames';
 
 const mergeIds = ['361420'];
 

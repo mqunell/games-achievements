@@ -12,7 +12,7 @@ import Select from '@/components/Select';
 import Toggle from '@/components/Toggle';
 import { getGame, getGames } from '@/data/dbHelper';
 import { generateCombinedGameCard, generateGameCard } from '@/lib/generateGameCard';
-import { compare, defaultSortOption, sortOptions } from '@/lib/sortGamePage';
+import { compare, defaultSortOption, sortOptions } from '@/lib/sortAchievements';
 
 interface Props {
 	gameCard: GameCard;
