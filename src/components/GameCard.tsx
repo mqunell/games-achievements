@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { CheckCircleIcon, ClockIcon } from '@heroicons/react/solid';
 import CompletedBadge from './CompletedBadge';
 
@@ -37,7 +37,7 @@ function IconText({ icon, text, italic = false }: IconTextProps) {
 			<div className="rounded-full bg-green-500 p-0.5">
 				<Icon className="h-5 w-5 text-white" />
 			</div>
-			<p className={classNames('text-lg', { italic: italic })}>{text}</p>
+			<p className={clsx('text-lg', { italic: italic })}>{text}</p>
 		</div>
 	);
 }
@@ -64,7 +64,7 @@ export default function GameCard({
 
 	return (
 		<div
-			className={classNames(
+			className={clsx(
 				'relative flex w-80 flex-col items-center gap-2 rounded bg-white p-4 text-center',
 				{ 'h-full transform duration-150 md:hover:scale-105': size === 'small' }
 			)}
@@ -76,7 +76,7 @@ export default function GameCard({
 
 			{/* Logo image */}
 			<div
-				className={classNames('relative shadow-md', {
+				className={clsx('relative shadow-md', {
 					'h-[86px] w-[184px]': size === 'small',
 					'h-[135px] w-[288px]': size === 'large',
 				})}
@@ -89,7 +89,7 @@ export default function GameCard({
 				{platforms.sort().map((platform) => (
 					<div
 						key={platform}
-						className={classNames('relative shrink-0', {
+						className={clsx('relative shrink-0', {
 							'h-5 w-5': size === 'small',
 							'h-6 w-6': size === 'large',
 						})}
@@ -98,7 +98,7 @@ export default function GameCard({
 					</div>
 				))}
 				<h1
-					className={classNames('ml-1', {
+					className={clsx('ml-1', {
 						'truncate text-xl': size === 'small',
 						'text-2xl': size === 'large',
 					})}

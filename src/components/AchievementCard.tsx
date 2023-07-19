@@ -1,5 +1,5 @@
-import classNames from 'classnames';
 import { motion } from 'framer-motion';
+import clsx from 'clsx';
 import CompletedBadge from './CompletedBadge';
 
 interface Props {
@@ -28,7 +28,7 @@ export default function AchievementCard({ achCard, displayOptions }: Props) {
 				{/* Text */}
 				<div className="flex h-full flex-col items-center gap-1 p-4">
 					<h2 className="text-xl">{name}</h2>
-					<p className={classNames('mb-auto', { italic: !description })}>
+					<p className={clsx('mb-auto', { italic: !description })}>
 						{description || 'Hidden'}
 					</p>
 
