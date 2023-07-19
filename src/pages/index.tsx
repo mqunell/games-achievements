@@ -9,6 +9,7 @@ import GameCard from '@/components/GameCard';
 import InputRange from '@/components/InputRange';
 import Select from '@/components/Select';
 import Toggle from '@/components/Toggle';
+import TextFilter from '@/components/TextFilter';
 import { getGames } from '@/data/dbHelper';
 import { generateCombinedGameCard, generateGameCard } from '@/lib/generateGameCard';
 import { calcCompletion } from '@/lib/percentage';
@@ -39,6 +40,7 @@ const Home = ({ games }: { games: GameCard[] }) => {
 
 	// Filter state
 	const [filterPlatforms, setFilterPlatforms] = useState({ Steam: true, Xbox: true });
+	const [filterText, setFilterText] = useState('');
 	const [filterPerc, setFilterPerc] = useState(0);
 	const [filterTime, setFilterTime] = useState(0);
 
@@ -59,15 +61,16 @@ const Home = ({ games }: { games: GameCard[] }) => {
 					(acc, plat) => acc || filterPlatforms[plat],
 					false
 				);
+				const validText = game.name.toLowerCase().includes(filterText.toLowerCase());
 				const validPerc = filterPerc > 0 ? calcCompletion(game) >= filterPerc : true; // Show games without achievements when filterPerc is 0
 				const validTime = game.playtimes.total >= filterTime * 60;
 
-				return validPlatform && validPerc && validTime;
+				return validPlatform && validText && validPerc && validTime;
 			})
 			.sort((a: GameCard, b: GameCard) => compare(a, b, sortBy));
 
 		setDisplayedGames(displayed);
-	}, [games, filterPlatforms, filterPerc, filterTime, sortBy]);
+	}, [games, filterPlatforms, filterText, filterPerc, filterTime, sortBy]);
 
 	return (
 		<Layout.Container fromDirection="left">
@@ -113,6 +116,7 @@ const Home = ({ games }: { games: GameCard[] }) => {
 						checked={filterPlatforms.Xbox}
 						onClick={() => setFilterPlatforms((prev) => ({ ...prev, Xbox: !prev.Xbox }))}
 					/>
+					<TextFilter filterText={filterText} setFilterText={setFilterText} />
 					<InputRange
 						title="Minimum completion %"
 						value={filterPerc}

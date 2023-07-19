@@ -1,7 +1,5 @@
 import { motion } from 'framer-motion';
 
-/* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
-
 // Page - motion and fromDirection are used for page transitions
 const Container = ({ fromDirection, children }) => {
 	const x = fromDirection === 'left' ? -200 : 200;
@@ -32,4 +30,5 @@ const Content = ({ children }) => (
 	</div>
 );
 
+/* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default { Container, TitleOptions, Content };

@@ -10,6 +10,7 @@ import DisplayOptions from '@/components/DisplayOptions';
 import GameCard from '@/components/GameCard';
 import Select from '@/components/Select';
 import Toggle from '@/components/Toggle';
+import TextFilter from '@/components/TextFilter';
 import { getGame, getGames } from '@/data/dbHelper';
 import { generateCombinedGameCard, generateGameCard } from '@/lib/generateGameCard';
 import { compare, defaultSortOption, sortOptions } from '@/lib/sortAchievements';
@@ -63,6 +64,7 @@ const GameAchievements = ({ gameCard, achCards }: Props) => {
 	// Filter state
 	const [showCompleted, setShowCompleted] = useState(true);
 	const [showUncompleted, setShowUncompleted] = useState(true);
+	const [filterText, setFilterText] = useState('');
 
 	// Sort state
 	const [sortBy, setSortBy] = useState<AchSortOption>(defaultSortOption);
@@ -70,11 +72,16 @@ const GameAchievements = ({ gameCard, achCards }: Props) => {
 	// Filtering and sorting
 	useEffect(() => {
 		const displayed = achCards
-			.filter((ach) => (ach.completed ? showCompleted : showUncompleted))
+			.filter((ach) => {
+				const validCompleted = ach.completed ? showCompleted : showUncompleted;
+				const validText = ach.name.toLowerCase().includes(filterText.toLowerCase());
+
+				return validCompleted && validText;
+			})
 			.sort((a, b) => compare(a, b, sortBy));
 
 		setDisplayedAchievements(displayed);
-	}, [sortBy, showCompleted, showUncompleted, achCards]);
+	}, [sortBy, showCompleted, showUncompleted, filterText, achCards]);
 
 	// Set the toggles based on sort field (separate useEffect hook so they can be changed manually afterward)
 	useEffect(() => {
@@ -124,6 +131,7 @@ const GameAchievements = ({ gameCard, achCards }: Props) => {
 						checked={showUncompleted}
 						onClick={() => setShowUncompleted(!showUncompleted)}
 					/>
+					<TextFilter filterText={filterText} setFilterText={setFilterText} />
 
 					<hr className="mt-3 mb-1" />
 
