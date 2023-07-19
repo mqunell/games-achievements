@@ -4,20 +4,20 @@ import clsx from 'clsx';
 import { CheckCircleIcon, ClockIcon } from '@heroicons/react/solid';
 import CompletedBadge from './CompletedBadge';
 
-interface Props {
+type Props = {
 	game: GameCard;
 	size: 'small' | 'large';
 	displayOptions?: {
 		showProgress: boolean;
 		showPlaytime: boolean;
 	};
-}
+};
 
-interface IconTextProps {
+type IconTextProps = {
 	icon: React.ElementType;
 	text: string;
 	italic?: boolean;
-}
+};
 
 const logoUrl = (gameId: GameId) =>
 	`https://steamcdn-a.akamaihd.net/steam/apps/${gameId}/header.jpg`;
@@ -29,7 +29,7 @@ const formatTime = (minutes: number) => {
 	return `${hours}:${mins}`;
 };
 
-function IconText({ icon, text, italic = false }: IconTextProps) {
+const IconText = ({ icon, text, italic = false }: IconTextProps) => {
 	const Icon = icon;
 
 	return (
@@ -40,13 +40,13 @@ function IconText({ icon, text, italic = false }: IconTextProps) {
 			<p className={clsx('text-lg', { italic: italic })}>{text}</p>
 		</div>
 	);
-}
+};
 
-export default function GameCard({
+const GameCard = ({
 	game,
 	size,
 	displayOptions = { showProgress: true, showPlaytime: true },
-}: Props) {
+}: Props) => {
 	const { gameId, name, platforms, playtimes, achievementCounts: achCounts } = game;
 
 	// displayOptions state
@@ -134,4 +134,6 @@ export default function GameCard({
 			)}
 		</div>
 	);
-}
+};
+
+export default GameCard;

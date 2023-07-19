@@ -3,16 +3,16 @@ import { Listbox } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 import clsx from 'clsx';
 
-interface SelectProps {
+type Props = {
 	sortBy: SortOption;
 	setSortBy: (value: SortOption | any) => void;
 	sortOptions: SortOption[];
-}
+};
 
 /**
  * Styled implementation of Headless UI's Listbox
  */
-const Select = ({ sortBy, setSortBy, sortOptions }: SelectProps) => (
+const Select = ({ sortBy, setSortBy, sortOptions }: Props) => (
 	<Listbox
 		as="div"
 		className="flex w-full flex-col gap-1"

@@ -1,19 +1,19 @@
 type GameId = string;
 
-interface Game {
+type Game = {
 	id: GameId;
 	name: string;
 	platform: 'Steam' | 'Xbox';
 	playtimeRecent: number; // Minutes
 	playtimeTotal: number; // Minutes
 	achievements: CAchievement[];
-}
+};
 
-interface Achievement {
+type Achievement = {
 	id: string;
 	name: string;
 	description: string;
 	completed: boolean;
 	completedTime: number;
 	globalCompleted: number;
-}
+};

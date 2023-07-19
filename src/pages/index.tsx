@@ -30,7 +30,7 @@ export const getStaticProps: GetStaticProps = async () => {
 	return { props: { games: gameCards }, revalidate: 3600 };
 };
 
-export default function Home({ games }: { games: GameCard[] }) {
+const Home = ({ games }: { games: GameCard[] }) => {
 	const [displayedGames, setDisplayedGames] = useState([]);
 
 	// Display state
@@ -162,4 +162,6 @@ export default function Home({ games }: { games: GameCard[] }) {
 			</Layout.Content>
 		</Layout.Container>
 	);
-}
+};
+
+export default Home;

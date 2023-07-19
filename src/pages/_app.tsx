@@ -8,13 +8,11 @@ import '@/styles/globals.css';
  * stays in place while animating out and the entering page starts from the top. Unique keys are
  * required for unmount/mount animations.
  */
-function MyApp({ Component, pageProps, router }) {
-	return (
-		<AnimatePresence exitBeforeEnter onExitComplete={() => window.scrollTo(0, 0)}>
-			<Component {...pageProps} key={`component-${router.route}`} />
-			<Footer key={`footer-${router.route}`} />
-		</AnimatePresence>
-	);
-}
+const MyApp = ({ Component, pageProps, router }) => (
+	<AnimatePresence exitBeforeEnter onExitComplete={() => window.scrollTo(0, 0)}>
+		<Component {...pageProps} key={`component-${router.route}`} />
+		<Footer key={`footer-${router.route}`} />
+	</AnimatePresence>
+);
 
 export default MyApp;

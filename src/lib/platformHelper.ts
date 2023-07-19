@@ -24,26 +24,7 @@ const userAchsUrl = (userId: string, gameId: string) =>
 const globalAchsUrl = (userId: string, gameId: string) =>
 	`http://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v0002/?gameid=${gameId}&l=english`;
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-	const { task, userId, gameId, game } = req.body;
-	console.log(req.body);
-
-	let response;
-
-	if (task === 'fetchSteamGame') {
-		response = await fetchSteamGame({ userId, gameId });
-	} else if (task === 'fetchDatabaseGame') {
-		response = await fetchDatabaseGame({ gameId });
-	} else if (task === 'upsertDatabaseGame') {
-		response = await upsertDatabaseGame(game);
-	} else {
-		res.status(400).json('Invalid task');
-	}
-
-	res.status(200).json(response);
-}
-
-async function fetchSteamGame({ userId, gameId }): Promise<Game> {
+const fetchSteamGame = async ({ userId, gameId }): Promise<Game> => {
 	let userAchievementsRes;
 	let globalAchievementsRes;
 
@@ -77,14 +58,14 @@ async function fetchSteamGame({ userId, gameId }): Promise<Game> {
 			).percent,
 		})),
 	};
-}
+};
 
-async function fetchDatabaseGame({ gameId }): Promise<Game> {
+const fetchDatabaseGame = async ({ gameId }): Promise<Game> => {
 	const game: Game = await getGame(gameId);
 	return game;
-}
+};
 
-async function upsertDatabaseGame(game: Game) {
+const upsertDatabaseGame = async (game: Game) => {
 	await dbConnect();
 
 	// @ts-ignore
@@ -95,4 +76,25 @@ async function upsertDatabaseGame(game: Game) {
 		.catch((err) => err);
 
 	return result;
-}
+};
+
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+	const { task, userId, gameId, game } = req.body;
+	console.log(req.body);
+
+	let response;
+
+	if (task === 'fetchSteamGame') {
+		response = await fetchSteamGame({ userId, gameId });
+	} else if (task === 'fetchDatabaseGame') {
+		response = await fetchDatabaseGame({ gameId });
+	} else if (task === 'upsertDatabaseGame') {
+		response = await upsertDatabaseGame(game);
+	} else {
+		res.status(400).json('Invalid task');
+	}
+
+	res.status(200).json(response);
+};
+
+export default handler;

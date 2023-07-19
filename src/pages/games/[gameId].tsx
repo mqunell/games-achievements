@@ -14,10 +14,10 @@ import { getGame, getGames } from '@/data/dbHelper';
 import { generateCombinedGameCard, generateGameCard } from '@/lib/generateGameCard';
 import { compare, defaultSortOption, sortOptions } from '@/lib/sortAchievements';
 
-interface Props {
+type Props = {
 	gameCard: GameCard;
 	achCards: AchCard[];
-}
+};
 
 const mergeIds = ['361420'];
 
@@ -53,7 +53,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	return { props: { gameCard, achCards }, revalidate: 3600 };
 };
 
-export default function GameAchievements({ gameCard, achCards }: Props) {
+const GameAchievements = ({ gameCard, achCards }: Props) => {
 	const [displayedAchievements, setDisplayedAchievements] = useState<AchCard[]>([]);
 
 	// Display state
@@ -173,4 +173,6 @@ export default function GameAchievements({ gameCard, achCards }: Props) {
 			</Link>
 		</Layout.Container>
 	);
-}
+};
+
+export default GameAchievements;

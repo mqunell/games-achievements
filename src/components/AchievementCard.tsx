@@ -2,15 +2,15 @@ import { motion } from 'framer-motion';
 import clsx from 'clsx';
 import CompletedBadge from './CompletedBadge';
 
-interface Props {
+type Props = {
 	achCard: AchCard;
 	displayOptions: {
 		showTime: boolean;
 		showGlobal: boolean;
 	};
-}
+};
 
-export default function AchievementCard({ achCard, displayOptions }: Props) {
+const AchievementCard = ({ achCard, displayOptions }: Props) => {
 	const { name, description, globalCompleted, completed, completedTime } = achCard;
 
 	return (
@@ -65,4 +65,6 @@ export default function AchievementCard({ achCard, displayOptions }: Props) {
 			</div>
 		</div>
 	);
-}
+};
+
+export default AchievementCard;
