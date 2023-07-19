@@ -14,15 +14,17 @@ import { generateCombinedGameCard, generateGameCard } from '@/lib/generateGameCa
 import { calcCompletion } from '@/lib/percentage';
 import { compare, defaultSortOption, sortOptions } from '@/lib/sortHomePage';
 
+const mergeIds = ['361420'];
+
 export const getStaticProps: GetStaticProps = async () => {
 	const games: Game[] = await getGames();
 
 	const gameCards: GameCard[] = games
-		.filter((game) => game.id !== '361420')
+		.filter((game) => !mergeIds.includes(game.id))
 		.map((game) => generateGameCard(game));
 
-	gameCards.push(
-		generateCombinedGameCard(games.filter((game) => game.id === '361420'))
+	mergeIds.forEach((mergeId) =>
+		gameCards.push(generateCombinedGameCard(games.filter((game) => game.id === mergeId)))
 	);
 
 	return { props: { games: gameCards }, revalidate: 3600 };
@@ -41,14 +43,12 @@ export default function Home({ games }: { games: GameCard[] }) {
 	const [filterTime, setFilterTime] = useState(0);
 
 	// Sort state
-	const [sortBy, setSortBy] = useState(defaultSortOption);
+	const [sortBy, setSortBy] = useState<GameSortOption>(defaultSortOption);
 
 	// Filtering and sorting (note: merged useEffect works here because it's a display option that is changed, not a filter toggle)
 	useEffect(() => {
-		const { field } = sortBy;
-
 		// Set toggles based on sort field
-		if (field.startsWith('playtime')) {
+		if (sortBy === 'Playtime') {
 			setShowPlaytime(true);
 		}
 

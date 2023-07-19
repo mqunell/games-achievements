@@ -1,15 +1,29 @@
-export const sortOptions = [
-	{ text: 'Alphabetical (a-z)', field: 'name', direction: 1 },
-	{ text: 'Alphabetical (z-a)', field: 'name', direction: -1 },
-	{ text: 'Completion time (newest)', field: 'completedTime', direction: -1 },
-	{ text: 'Completion time (oldest)', field: 'completedTime', direction: 1 },
-	{ text: 'Global completion % (highest)', field: 'globalCompleted', direction: -1 },
-	{ text: 'Global completion % (lowest)', field: 'globalCompleted', direction: 1 },
+export const sortOptions: AchSortOption[] = [
+	'Name',
+	'Completion time',
+	'Global completion',
 ];
 
-export const defaultSortOption = sortOptions[4];
+export const defaultSortOption = sortOptions[1];
 
-export const compare = (a: AchievementCard, b: AchievementCard, sortBy): number => {
-	const { field, direction } = sortBy;
-	return a[field] < b[field] ? direction * -1 : direction;
+export const compare = (a: AchCard, b: AchCard, sortBy: AchSortOption): number => {
+	if (sortBy === 'Name') {
+		return a.name < b.name ? -1 : 1;
+	}
+
+	if (sortBy === 'Completion time') {
+		if (!a.completedTime && !b.completedTime) {
+			return a.globalCompleted < b.globalCompleted ? -1 : 1;
+		}
+
+		return a.completedTime < b.completedTime ? -1 : 1;
+	}
+
+	if (sortBy === 'Global completion') {
+		if (a.globalCompleted === b.globalCompleted) {
+			return a.completed > b.completed ? -1 : 1;
+		}
+
+		return a.globalCompleted > b.globalCompleted ? -1 : 1;
+	}
 };

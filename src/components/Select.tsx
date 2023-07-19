@@ -3,15 +3,9 @@ import { Listbox } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 import classNames from 'classnames';
 
-interface SortOption {
-	text: string;
-	field: string;
-	direction: number;
-}
-
 interface SelectProps {
 	sortBy: SortOption;
-	setSortBy: (value: SortOption) => void;
+	setSortBy: (value: SortOption | any) => void;
 	sortOptions: SortOption[];
 }
 
@@ -27,17 +21,14 @@ export default function Select({ sortBy, setSortBy, sortOptions }: SelectProps) 
 			onChange={setSortBy}
 		>
 			<Listbox.Button className="flex items-center justify-between rounded bg-green-500 py-1 px-2 text-white">
-				<span>{sortBy.text}</span>
+				<span>{sortBy}</span>
 				<SelectorIcon className="h-5 w-5" aria-hidden="true" />
 			</Listbox.Button>
 
 			<Listbox.Options className="flex flex-col divide-y overflow-hidden rounded border border-green-500 text-white">
 				{sortOptions.map((option) => (
-					<Listbox.Option
-						key={`${option.field}${option.direction}`}
-						value={option}
-						as={Fragment} // Make this a Fragment so the <li> can be conditionally styled with the render props
-					>
+					// Make this a Fragment so the <li> can be conditionally styled with the render props
+					<Listbox.Option key={option} value={option} as={Fragment}>
 						{({ active, selected }) => (
 							<li
 								className={classNames(
@@ -45,7 +36,7 @@ export default function Select({ sortBy, setSortBy, sortOptions }: SelectProps) 
 									!active ? 'bg-green-500' : 'bg-green-600'
 								)}
 							>
-								<span>{option.text}</span>
+								<span>{option}</span>
 								{selected && <CheckIcon className="h-4 w-4" />}
 							</li>
 						)}

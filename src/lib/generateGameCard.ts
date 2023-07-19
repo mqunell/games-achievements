@@ -14,8 +14,8 @@ export const generateGameCard = (game: Game): GameCard => ({
 
 // Hard-coded for Steam and Xbox, and prioritizes Steam data
 export const generateCombinedGameCard = (games: Game[]): GameCard => {
-	const steamGame = games.find(game => game.platform === 'Steam')
-	const xboxGame = games.find(game => game.platform === 'Xbox')
+	const steamGame = games.find((game) => game.platform === 'Steam');
+	const xboxGame = games.find((game) => game.platform === 'Xbox');
 
 	return {
 		gameId: steamGame.id,
@@ -29,5 +29,5 @@ export const generateCombinedGameCard = (games: Game[]): GameCard => {
 			total: steamGame.achievements?.length || 0,
 			completed: steamGame.achievements?.filter((ach) => ach.completed).length || 0,
 		},
-	}
-}
+	};
+};

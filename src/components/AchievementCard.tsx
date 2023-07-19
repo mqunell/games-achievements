@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import CompletedBadge from './CompletedBadge';
 
 interface Props {
-	achCard: AchievementCard;
+	achCard: AchCard;
 	displayOptions: {
 		showTime: boolean;
 		showGlobal: boolean;
