@@ -96,7 +96,7 @@ const GameAchievements = ({ gameCard, achCards }: Props) => {
 	return (
 		<Layout.Container fromDirection="right">
 			<Head>
-				<title>{gameCard.name} Achievements</title>
+				<title>{`${gameCard.name} Achievements`}</title>
 				<meta name="description" content={`${gameCard.name} achievements`} />
 			</Head>
 
