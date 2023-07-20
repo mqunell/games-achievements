@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import axios from 'axios';
 import dbConnect from '@/data/dbConnect';
 import Game from '@/models/Game';
 import { getGame } from '@/data/dbHelper';
@@ -21,43 +20,42 @@ const API_KEY = process.env.STEAM_API_KEY;
 const userAchsUrl = (userId: string, gameId: string) =>
 	`http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key=${API_KEY}&steamid=${userId}&appid=${gameId}&l=english`;
 
-const globalAchsUrl = (userId: string, gameId: string) =>
+const globalAchsUrl = (gameId: string) =>
 	`http://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v0002/?gameid=${gameId}&l=english`;
 
 const fetchSteamGame = async ({ userId, gameId }): Promise<Game> => {
-	let userAchievementsRes;
-	let globalAchievementsRes;
-
 	try {
-		userAchievementsRes = await axios.get(userAchsUrl(userId, gameId));
-		globalAchievementsRes = await axios.get(globalAchsUrl(userId, gameId));
+		const userAchsRes = await fetch(userAchsUrl(userId, gameId));
+		const globalAchsRes = await fetch(globalAchsUrl(gameId));
+
+		const userAchsData = await userAchsRes.json();
+		const globalAchsData = await globalAchsRes.json();
+
+		const apiUserAchs: ApiUserAchievement[] = userAchsData.playerstats.achievements;
+		const apiGlobalAchs: ApiGlobalAchievement[] =
+			globalAchsData.achievementpercentages.achievements;
+
+		return {
+			id: gameId,
+			name: userAchsData.playerstats.gameName,
+			platform: 'Xbox',
+			playtimeRecent: 0,
+			playtimeTotal: 0,
+			achievements: apiUserAchs.map((apiAch) => ({
+				id: apiAch.apiname,
+				name: apiAch.name,
+				description: apiAch.description,
+				completed: false,
+				completedTime: 0,
+				globalCompleted: apiGlobalAchs.find(
+					(globalAch) => globalAch.name === apiAch.apiname,
+				).percent,
+			})),
+		};
 	} catch (e) {
-		console.log('api error');
+		console.log('api error', e);
+		return null;
 	}
-
-	const apiUserAchievements: ApiUserAchievement[] =
-		userAchievementsRes.data.playerstats.achievements;
-
-	const apiGlobalAchievements: ApiGlobalAchievement[] =
-		globalAchievementsRes.data.achievementpercentages.achievements;
-
-	return {
-		id: gameId,
-		name: userAchievementsRes.data.playerstats.gameName,
-		platform: 'Xbox',
-		playtimeRecent: 0,
-		playtimeTotal: 0,
-		achievements: apiUserAchievements.map((apiAch) => ({
-			id: apiAch.apiname,
-			name: apiAch.name,
-			description: apiAch.description,
-			completed: false,
-			completedTime: 0,
-			globalCompleted: apiGlobalAchievements.find(
-				(globalAch) => globalAch.name === apiAch.apiname
-			).percent,
-		})),
-	};
 };
 
 const fetchDatabaseGame = async ({ gameId }): Promise<Game> => {
