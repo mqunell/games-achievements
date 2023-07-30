@@ -13,8 +13,11 @@ export const compare = (a: AchCard, b: AchCard, sortBy: AchSortOption): number =
 
 	if (sortBy === 'Completion time') {
 		if (!a.completedTime && !b.completedTime) {
-			return a.globalCompleted < b.globalCompleted ? -1 : 1;
+			return a.globalCompleted >= b.globalCompleted ? -1 : 1;
 		}
+
+		if (!a.completedTime) return 1;
+		if (!b.completedTime) return -1;
 
 		return a.completedTime < b.completedTime ? -1 : 1;
 	}

@@ -85,12 +85,8 @@ const GameAchievements = ({ gameCard, achCards }: Props) => {
 
 	// Set the toggles based on sort field (separate useEffect hook so they can be changed manually afterward)
 	useEffect(() => {
-		if (sortBy === 'Completion time') {
-			setShowTime(true);
-			setShowUncompleted(false);
-		} else if (sortBy === 'Global completion') {
-			setShowGlobal(true);
-		}
+		if (sortBy === 'Completion time') setShowTime(true);
+		if (sortBy === 'Global completion') setShowGlobal(true);
 	}, [sortBy]);
 
 	return (
