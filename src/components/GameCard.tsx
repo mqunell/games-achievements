@@ -58,6 +58,8 @@ const GameCard = ({
 		setShowPlaytime(displayOptions.showPlaytime);
 	}, [displayOptions]);
 
+	const hasImage = platforms.includes('Steam') || platforms.includes('Xbox');
+
 	// Show one decimal place unless x.0%
 	let percentage = ((achCounts.completed / achCounts.total) * 100).toFixed(1);
 	if (percentage.endsWith('.0')) percentage = percentage.slice(0, -2);
@@ -66,7 +68,7 @@ const GameCard = ({
 		<div
 			className={clsx(
 				'relative flex w-80 flex-col items-center gap-2 rounded bg-white p-4 text-center',
-				{ 'h-full transform duration-150 md:hover:scale-105': size === 'small' }
+				{ 'h-full transform duration-150 md:hover:scale-105': size === 'small' },
 			)}
 		>
 			{/* Checkmark */}
@@ -81,7 +83,8 @@ const GameCard = ({
 					'h-[135px] w-[288px]': size === 'large',
 				})}
 			>
-				<Image src={logoUrl(gameId)} alt={`${name} logo`} layout="fill" />
+				{/* TODO: Add placeholder Switch image */}
+				<Image src={hasImage ? logoUrl(gameId) : ''} alt={`${name} logo`} layout="fill" />
 			</div>
 
 			{/* Title */}

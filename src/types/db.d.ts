@@ -1,9 +1,10 @@
+type Platform = 'Steam' | 'Xbox' | 'Switch';
 type GameId = string;
 
 type Game = {
 	id: GameId;
 	name: string;
-	platform: 'Steam' | 'Xbox';
+	platform: Platform;
 	playtimeRecent: number; // Minutes
 	playtimeTotal: number; // Minutes
 	achievements: CAchievement[];

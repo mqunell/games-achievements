@@ -25,7 +25,7 @@ export const getStaticProps: GetStaticProps = async () => {
 		.map((game) => generateGameCard(game));
 
 	mergeIds.forEach((mergeId) =>
-		gameCards.push(generateCombinedGameCard(games.filter((game) => game.id === mergeId)))
+		gameCards.push(generateCombinedGameCard(games.filter((game) => game.id === mergeId))),
 	);
 
 	return { props: { games: gameCards }, revalidate: 3600 };
@@ -39,7 +39,11 @@ const Home = ({ games }: { games: GameCard[] }) => {
 	const [showPlaytime, setShowPlaytime] = useState(true);
 
 	// Filter state
-	const [filterPlatforms, setFilterPlatforms] = useState({ Steam: true, Xbox: true });
+	const [filterPlatforms, setFilterPlatforms] = useState({
+		Steam: true,
+		Xbox: true,
+		Switch: true,
+	});
 	const [filterText, setFilterText] = useState('');
 	const [filterPerc, setFilterPerc] = useState(0);
 	const [filterTime, setFilterTime] = useState(0);
@@ -59,7 +63,7 @@ const Home = ({ games }: { games: GameCard[] }) => {
 			.filter((game: GameCard) => {
 				const validPlatform = game.platforms.reduce(
 					(acc, plat) => acc || filterPlatforms[plat],
-					false
+					false,
 				);
 				const validText = game.name.toLowerCase().includes(filterText.toLowerCase());
 				const validPerc = filterPerc > 0 ? calcCompletion(game) >= filterPerc : true; // Show games without achievements when filterPerc is 0
@@ -104,18 +108,16 @@ const Home = ({ games }: { games: GameCard[] }) => {
 					<hr className="mt-3 mb-1" />
 
 					<p className="font-semibold">Filters</p>
-					<Toggle
-						text="Steam games"
-						checked={filterPlatforms.Steam}
-						onClick={() =>
-							setFilterPlatforms((prev) => ({ ...prev, Steam: !prev.Steam }))
-						}
-					/>
-					<Toggle
-						text="Xbox games"
-						checked={filterPlatforms.Xbox}
-						onClick={() => setFilterPlatforms((prev) => ({ ...prev, Xbox: !prev.Xbox }))}
-					/>
+					{['Steam', 'Xbox', 'Switch'].map((plat) => (
+						<Toggle
+							key={`${plat}-toggle`}
+							text={`${plat} games`}
+							checked={filterPlatforms[plat]}
+							onClick={() =>
+								setFilterPlatforms((prev) => ({ ...prev, [plat]: !prev[plat] }))
+							}
+						/>
+					))}
 					<TextFilter filterText={filterText} setFilterText={setFilterText} />
 					<InputRange
 						title="Minimum completion %"

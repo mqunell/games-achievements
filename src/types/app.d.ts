@@ -1,7 +1,7 @@
 type GameCard = {
 	gameId: GameId;
 	name: string;
-	platforms: ('Steam' | 'Xbox')[];
+	platforms: Platform[];
 	playtimes: {
 		total: number;
 		recent: number;
