@@ -1,13 +1,13 @@
 type Platform = 'Steam' | 'Xbox' | 'Switch';
 type GameId = string;
 
-type Game = {
+export type Game = {
 	id: GameId;
 	name: string;
 	platform: Platform;
 	playtimeRecent: number; // Minutes
 	playtimeTotal: number; // Minutes
-	achievements: CAchievement[];
+	achievements: Achievement[];
 };
 
 type Achievement = {

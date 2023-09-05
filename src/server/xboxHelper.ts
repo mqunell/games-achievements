@@ -3,9 +3,11 @@ import dbConnect from '@/data/dbConnect';
 import Game from '@/models/Game';
 import { getGame } from '@/data/dbHelper';
 
+import fs from 'fs';
+import { Game as GameType } from '@/types/db';
+import 'dotenv/config'; // Only necessary for tsx
+
 /**
- * -- Move this to pages/api/ for usage --
- *
  * This file helps with managing Xbox games since Microsoft doesn't provide APIs. Most of a game's data can be retrieved from Steam and
  * formatted automatically, so that only total playtime and achievements' completed status need to be manually entered.
  *
@@ -23,7 +25,13 @@ const userAchsUrl = (userId: string, gameId: string) =>
 const globalAchsUrl = (gameId: string) =>
 	`http://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v0002/?gameid=${gameId}&l=english`;
 
-const fetchSteamGame = async ({ userId, gameId }): Promise<Game> => {
+const writeGameToJson = (game: GameType, source: string): void => {
+	fs.writeFileSync('temp.json', JSON.stringify(game, null, '\t'));
+	console.log(`${game.name} written to json from ${source}`);
+};
+
+// Write a Steam game and achievements to JSON for editing
+const steamToJson = async ({ userId, gameId }): Promise<GameType> => {
 	try {
 		const userAchsRes = await fetch(userAchsUrl(userId, gameId));
 		const globalAchsRes = await fetch(globalAchsUrl(gameId));
@@ -31,11 +39,16 @@ const fetchSteamGame = async ({ userId, gameId }): Promise<Game> => {
 		const userAchsData = await userAchsRes.json();
 		const globalAchsData = await globalAchsRes.json();
 
-		const apiUserAchs: ApiUserAchievement[] = userAchsData.playerstats.achievements;
-		const apiGlobalAchs: ApiGlobalAchievement[] =
-			globalAchsData.achievementpercentages.achievements;
+		if (userAchsData?.playerstats?.error) {
+			throw new Error('game appears to not have achievements');
+		}
 
-		return {
+		const apiUserAchs: ApiUserAchievement[] =
+			userAchsData?.playerstats?.achievements || [];
+		const apiGlobalAchs: ApiGlobalAchievement[] =
+			globalAchsData?.achievementpercentages?.achievements || [];
+
+		const newGame: GameType = {
 			id: gameId,
 			name: userAchsData.playerstats.gameName,
 			platform: 'Xbox',
@@ -52,18 +65,24 @@ const fetchSteamGame = async ({ userId, gameId }): Promise<Game> => {
 				).percent,
 			})),
 		};
+
+		writeGameToJson(newGame, 'steam');
 	} catch (e) {
 		console.log('api error', e);
 		return null;
 	}
 };
 
-const fetchDatabaseGame = async ({ gameId }): Promise<Game> => {
-	const game: Game = await getGame(gameId);
-	return game;
+// Write a database game and achievements to JSON for editing
+const dbToJson = async ({ gameId }): Promise<void> => {
+	const game: GameType = await getGame(gameId);
+	writeGameToJson(game, 'db');
 };
 
-const upsertDatabaseGame = async (game: Game) => {
+// Upsert the JSON game and achievements to the database
+const jsonToDb = async () => {
+	const game: GameType = JSON.parse(fs.readFileSync('temp.json').toString());
+
 	await dbConnect();
 
 	// @ts-ignore
@@ -73,26 +92,9 @@ const upsertDatabaseGame = async (game: Game) => {
 		.then(() => `${game.name} upserted`)
 		.catch((err) => err);
 
-	return result;
+	console.log(result);
 };
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-	const { task, userId, gameId, game } = req.body;
-	console.log(req.body);
-
-	let response;
-
-	if (task === 'fetchSteamGame') {
-		response = await fetchSteamGame({ userId, gameId });
-	} else if (task === 'fetchDatabaseGame') {
-		response = await fetchDatabaseGame({ gameId });
-	} else if (task === 'upsertDatabaseGame') {
-		response = await upsertDatabaseGame(game);
-	} else {
-		res.status(400).json('Invalid task');
-	}
-
-	res.status(200).json(response);
-};
-
-export default handler;
+steamToJson({ userId: '76561198092862237', gameId: '17410' });
+// dbToJson({ gameId: '361420' });
+// jsonToDb()

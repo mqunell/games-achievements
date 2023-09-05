@@ -1,14 +1,14 @@
 import dbConnect from '@/data/dbConnect';
 import Game from '@/models/Game';
+import { Game as GameType } from '@/types/db';
 
 /**
  * Manually add a Switch game to the database
  * 1. Update the game object
- * 2. Move this file to /pages/api
- * 3. Hit the endpoint
+ * 2. `npm run switchHelper`
  */
 
-const game: Game = {
+const game: GameType = {
 	id: 'Pikmin4',
 	name: 'Pikmin 4',
 	platform: 'Switch',
@@ -17,7 +17,7 @@ const game: Game = {
 	achievements: [],
 };
 
-const handler = async () => {
+(async () => {
 	await dbConnect();
 
 	// @ts-ignore
@@ -26,6 +26,4 @@ const handler = async () => {
 	})
 		.then(() => console.log(`${game.name} upserted`))
 		.catch((err) => console.log(err));
-};
-
-export default handler;
+})();
