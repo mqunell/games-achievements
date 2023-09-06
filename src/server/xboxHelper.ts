@@ -4,7 +4,7 @@ import Game from '@/models/Game';
 import { getGame } from '@/data/dbHelper';
 
 import fs from 'fs';
-import { Game as GameType } from '@/types/db';
+import { GameType } from './types'; // Copied from db.d.ts
 import 'dotenv/config'; // Only necessary for tsx
 
 /**

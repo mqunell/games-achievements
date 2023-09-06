@@ -1,6 +1,6 @@
 import dbConnect from '@/data/dbConnect';
 import Game from '@/models/Game';
-import { Game as GameType } from '@/types/db';
+import { GameType } from './types'; // Copied from db.d.ts
 
 /**
  * Manually add a Switch game to the database

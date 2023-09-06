@@ -1,7 +1,7 @@
 type Platform = 'Steam' | 'Xbox' | 'Switch';
 type GameId = string;
 
-type Game = {
+export type GameType = {
 	id: GameId;
 	name: string;
 	platform: Platform;
