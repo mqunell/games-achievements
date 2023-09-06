@@ -19,8 +19,11 @@ type IconTextProps = {
 	italic?: boolean;
 };
 
-const logoUrl = (gameId: GameId) =>
-	`https://steamcdn-a.akamaihd.net/steam/apps/${gameId}/header.jpg`;
+const logoUrl = (gameId: GameId, platforms: Platform[]) => {
+	return !platforms.includes('Switch')
+		? `https://steamcdn-a.akamaihd.net/steam/apps/${gameId}/header.jpg`
+		: `/Switch/${gameId}.jpg`;
+};
 
 const formatTime = (minutes: number) => {
 	const hours = Math.trunc(minutes / 60).toString();
@@ -58,8 +61,6 @@ const GameCard = ({
 		setShowPlaytime(displayOptions.showPlaytime);
 	}, [displayOptions]);
 
-	const hasImage = platforms.includes('Steam') || platforms.includes('Xbox');
-
 	// Show one decimal place unless x.0%
 	let percentage = ((achCounts.completed / achCounts.total) * 100).toFixed(1);
 	if (percentage.endsWith('.0')) percentage = percentage.slice(0, -2);
@@ -83,8 +84,12 @@ const GameCard = ({
 					'h-[135px] w-[288px]': size === 'large',
 				})}
 			>
-				{/* TODO: Add placeholder Switch image */}
-				<Image src={hasImage ? logoUrl(gameId) : ''} alt={`${name} logo`} layout="fill" />
+				<Image
+					src={logoUrl(gameId, platforms)}
+					className="object-cover"
+					alt={`${name} logo`}
+					layout="fill"
+				/>
 			</div>
 
 			{/* Title */}
