@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -22,19 +22,7 @@ type Props = {
 
 const mergeIds = ['361420'];
 
-export const getStaticPaths: GetStaticPaths = async () => {
-	const games: Game[] = await getGames();
-
-	const paths = games
-		.filter((game) => !mergeIds.includes(game.id))
-		.map(({ id }) => ({ params: { gameId: id } }));
-
-	mergeIds.forEach((gameId) => paths.push({ params: { gameId } }));
-
-	return { paths, fallback: false };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 	const gameId = params.gameId as GameId;
 	let gameCard: GameCard;
 	let achCards: AchCard[];
@@ -51,7 +39,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 		achCards = games.find((game) => game.platform === 'Steam').achievements;
 	}
 
-	return { props: { gameCard, achCards }, revalidate: 3600 };
+	return { props: { gameCard, achCards } };
 };
 
 const GameAchievements = ({ gameCard, achCards }: Props) => {

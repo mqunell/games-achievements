@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import { AnimatePresence, motion } from 'framer-motion';
 import Layout from '@/components/Layout';
 import DisplayOptions from '@/components/DisplayOptions';
@@ -17,7 +17,7 @@ import { compare, defaultSortOption, sortOptions } from '@/lib/sortGames';
 
 const mergeIds = ['361420'];
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
 	const games: Game[] = await getGames();
 
 	const gameCards: GameCard[] = games
@@ -28,7 +28,7 @@ export const getStaticProps: GetStaticProps = async () => {
 		gameCards.push(generateCombinedGameCard(games.filter((game) => game.id === mergeId))),
 	);
 
-	return { props: { games: gameCards }, revalidate: 3600 };
+	return { props: { games: gameCards } };
 };
 
 const Home = ({ games }: { games: GameCard[] }) => {
