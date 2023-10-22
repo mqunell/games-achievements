@@ -52,6 +52,8 @@ const GameCard = ({
 }: Props) => {
 	const { gameId, name, platforms, playtimes, achievementCounts: achCounts } = game;
 
+	const [poster, setPoster] = useState(logoUrl(gameId, platforms));
+
 	// displayOptions state
 	const [showProgress, setShowProgress] = useState(displayOptions.showProgress);
 	const [showPlaytime, setShowPlaytime] = useState(displayOptions.showPlaytime);
@@ -85,10 +87,11 @@ const GameCard = ({
 				})}
 			>
 				<Image
-					src={logoUrl(gameId, platforms)}
+					src={poster}
 					className="object-cover"
 					alt={`${name} logo`}
 					layout="fill"
+					onError={() => setPoster(`/Switch/placeholder.jpg`)}
 				/>
 			</div>
 
