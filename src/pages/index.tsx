@@ -15,7 +15,7 @@ import { generateCombinedGameCard, generateGameCard } from '@/lib/generateGameCa
 import { calcCompletion } from '@/lib/percentage';
 import { compare, defaultSortOption, sortOptions } from '@/lib/sortGames';
 
-const mergeIds = ['361420'];
+const mergeIds = ['361420', '976730']; // TODO: Handle this automatically
 
 export const getServerSideProps: GetServerSideProps = async () => {
 	const games: Game[] = await getGames();
@@ -143,6 +143,7 @@ const Home = ({ games }: { games: GameCard[] }) => {
 					{displayedGames &&
 						displayedGames.map((game: GameCard) => (
 							<Link
+								legacyBehavior // TODO: Migrate to new behavior
 								href={`/games/${game.gameId}`}
 								passHref
 								scroll={false}

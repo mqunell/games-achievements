@@ -13,7 +13,11 @@ const Footer = () => (
 		transition={{ type: 'linear', duration: 0.5 }}
 		className="grid w-full place-items-center bg-footer p-2 text-sm text-white"
 	>
-		<Link href="https://github.com/mqunell/games-achievements" passHref>
+		<Link
+			legacyBehavior // TODO: Migrate to new behavior
+			href="https://github.com/mqunell/games-achievements"
+			passHref
+		>
 			<a target="_blank" rel="noopener noreferrer">
 				GitHub
 			</a>

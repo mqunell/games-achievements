@@ -20,7 +20,7 @@ type Props = {
 	achCards: AchCard[];
 };
 
-const mergeIds = ['361420'];
+const mergeIds = ['361420', '976730']; // TODO: Handle this automatically
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 	const gameId = params.gameId as GameId;
@@ -150,7 +150,11 @@ const GameAchievements = ({ gameCard, achCards }: Props) => {
 			</Layout.Content>
 
 			{/* Floating back button - separate motion component from Layout.Container and the parent <a> due to fixed positioning */}
-			<Link href="/" scroll={false}>
+			<Link
+				legacyBehavior // TODO: Migrate to new behavior
+				href="/"
+				scroll={false}
+			>
 				<a className="fixed left-6 bottom-6 md:left-8 md:bottom-8">
 					<motion.div
 						initial={{ opacity: 0, x: 40 }}
