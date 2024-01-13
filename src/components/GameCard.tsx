@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 import clsx from 'clsx';
 import { CheckCircleIcon, ClockIcon } from '@heroicons/react/solid';
 import CompletedBadge from './CompletedBadge';
@@ -70,7 +70,7 @@ const GameCard = ({
 	return (
 		<div
 			className={clsx(
-				'relative flex w-80 flex-col items-center gap-2 rounded bg-white p-4 text-center',
+				'flex w-80 flex-col items-center gap-2 rounded bg-white p-4 text-center',
 				{ 'h-full transform duration-150 md:hover:scale-105': size === 'small' },
 			)}
 		>
@@ -80,20 +80,14 @@ const GameCard = ({
 			)}
 
 			{/* Logo image */}
-			<div
-				className={clsx('relative shadow-md', {
-					'h-[86px] w-[184px]': size === 'small',
-					'h-[135px] w-[288px]': size === 'large',
-				})}
-			>
-				<Image
-					src={poster}
-					className="object-cover"
-					alt={`${name} logo`}
-					layout="fill"
-					onError={() => setPoster(`/Switch/placeholder.jpg`)}
-				/>
-			</div>
+			<Image
+				src={poster}
+				className="shadow-md object-cover"
+				width={size === 'small' ? 184 : 288}
+				height={size === 'small' ? 86 : 135}
+				alt={`${name} logo`}
+				onError={() => setPoster(`/Switch/placeholder.jpg`)}
+			/>
 
 			{/* Title */}
 			<div className="mt-1 flex max-w-full items-center gap-1">
