@@ -1,6 +1,11 @@
 module.exports = {
-	reactStrictMode: true,
+	reactStrictMode: false, // TODO
 	images: {
-		domains: ['steamcdn-a.akamaihd.net'],
+		remotePatterns: [
+			{
+				protocol: 'https',
+				hostname: 'steamcdn-a.akamaihd.net',
+			},
+		],
 	},
 };
