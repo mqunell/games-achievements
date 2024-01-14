@@ -14,13 +14,11 @@ const Footer = () => (
 		className="grid w-full place-items-center bg-footer p-2 text-sm text-white"
 	>
 		<Link
-			legacyBehavior // TODO: Migrate to new behavior
 			href="https://github.com/mqunell/games-achievements"
-			passHref
+			target="_blank"
+			rel="noopener noreferrer"
 		>
-			<a target="_blank" rel="noopener noreferrer">
-				GitHub
-			</a>
+			GitHub
 		</Link>
 	</motion.footer>
 );

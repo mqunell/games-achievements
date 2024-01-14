@@ -150,22 +150,16 @@ const GameAchievements = ({ gameCard, achCards }: Props) => {
 			</Layout.Content>
 
 			{/* Floating back button - separate motion component from Layout.Container and the parent <a> due to fixed positioning */}
-			<Link
-				legacyBehavior // TODO: Migrate to new behavior
-				href="/"
-				scroll={false}
-			>
-				<a className="fixed left-6 bottom-6 md:left-8 md:bottom-8">
-					<motion.div
-						initial={{ opacity: 0, x: 40 }}
-						animate={{ opacity: 1, x: 0 }}
-						exit={{ opacity: 0, x: 40 }}
-						transition={{ type: 'linear', duration: 0.5, delay: 0.5 }}
-						className="relative rounded border border-black bg-white px-4 py-3 shadow"
-					>
-						<ArrowLeftIcon className="h-4 w-4" />
-					</motion.div>
-				</a>
+			<Link href="/" className="fixed left-6 bottom-6 md:left-8 md:bottom-8">
+				<motion.div
+					initial={{ opacity: 0, x: 40 }}
+					animate={{ opacity: 1, x: 0 }}
+					exit={{ opacity: 0, x: 40 }}
+					transition={{ type: 'linear', duration: 0.5, delay: 0.5 }}
+					className="relative rounded border border-black bg-white px-4 py-3 shadow"
+				>
+					<ArrowLeftIcon className="h-4 w-4" />
+				</motion.div>
 			</Link>
 		</Layout.Container>
 	);

@@ -142,14 +142,8 @@ const Home = ({ games }: { games: GameCard[] }) => {
 				<AnimatePresence>
 					{displayedGames &&
 						displayedGames.map((game: GameCard) => (
-							<Link
-								legacyBehavior // TODO: Migrate to new behavior
-								href={`/games/${game.gameId}`}
-								passHref
-								scroll={false}
-								key={game.gameId}
-							>
-								<motion.a
+							<Link href={`/games/${game.gameId}`} key={game.gameId}>
+								<motion.div
 									className="cursor-pointer"
 									layout="position"
 									initial={{ opacity: 0 }}
@@ -162,7 +156,7 @@ const Home = ({ games }: { games: GameCard[] }) => {
 										size="small"
 										displayOptions={{ showProgress, showPlaytime }}
 									/>
-								</motion.a>
+								</motion.div>
 							</Link>
 						))}
 				</AnimatePresence>
