@@ -80,14 +80,19 @@ const GameCard = ({
 			)}
 
 			{/* Logo image */}
-			<Image
-				src={poster}
-				className="shadow-md object-cover"
-				width={size === 'small' ? 184 : 288}
-				height={size === 'small' ? 86 : 135}
-				alt={`${name} logo`}
-				onError={() => setPoster(`/Switch/placeholder.jpg`)}
-			/>
+			<div
+				className={clsx('relative shadow-md object-cover', {
+					'w-[184px] h-[86px]': size === 'small',
+					'w-[288px] h-[135px]': size === 'large',
+				})}
+			>
+				<Image
+					src={poster}
+					alt={`${name} logo`}
+					fill={true}
+					onError={() => setPoster(`/Switch/placeholder.jpg`)}
+				/>
+			</div>
 
 			{/* Title */}
 			<div className="mt-1 flex max-w-full items-center gap-1">
@@ -99,7 +104,7 @@ const GameCard = ({
 							'h-6 w-6': size === 'large',
 						})}
 					>
-						<Image src={`/${platform}.svg`} alt={`${platform} logo`} layout="fill" />
+						<Image src={`/${platform}.svg`} alt={`${platform} logo`} fill={true} />
 					</div>
 				))}
 				<h1
