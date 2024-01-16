@@ -56,11 +56,6 @@ const GameAchievementsClient = ({ gameCard, achCards }: Props) => {
 
 	return (
 		<Layout.Container fromDirection="right">
-			<Head>
-				<title>{`${gameCard.name} Achievements`}</title>
-				<meta name="description" content={`${gameCard.name} achievements`} />
-			</Head>
-
 			<Layout.TitleOptions>
 				{/* Heading image and data */}
 				<GameCard game={gameCard} size="large" />

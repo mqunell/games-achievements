@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Head from 'next/head';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import Layout from '@/components/Layout';
@@ -61,11 +60,6 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 
 	return (
 		<Layout.Container fromDirection="left">
-			<Head>
-				<title>Games and Achievements</title>
-				<meta name="description" content="Steam and Xbox games and achievements" />
-			</Head>
-
 			<Layout.TitleOptions>
 				{/* Heading */}
 				<div className="w-full rounded bg-white p-4">
