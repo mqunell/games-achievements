@@ -102,7 +102,7 @@ const GameCard = (
 							'h-6 w-6': size === 'large',
 						})}
 					>
-						{/* <Image src={`/${platform}.svg`} alt={`${platform} logo`} fill={true} /> */}
+						<Image src={`/${platform}.svg`} alt={`${platform} logo`} fill={true} />
 					</div>
 				))}
 				<h1
