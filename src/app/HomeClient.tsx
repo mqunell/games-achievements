@@ -1,7 +1,8 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { GetServerSideProps } from 'next';
 import { AnimatePresence, motion } from 'framer-motion';
 import Layout from '@/components/Layout';
 import DisplayOptions from '@/components/DisplayOptions';
@@ -10,28 +11,10 @@ import InputRange from '@/components/InputRange';
 import Select from '@/components/Select';
 import Toggle from '@/components/Toggle';
 import TextFilter from '@/components/TextFilter';
-import { getGames } from '@/data/dbHelper';
-import { generateCombinedGameCard, generateGameCard } from '@/lib/generateGameCard';
 import { calcCompletion } from '@/lib/percentage';
 import { compare, defaultSortOption, sortOptions } from '@/lib/sortGames';
 
-const mergeIds = ['361420', '976730']; // TODO: Handle this automatically
-
-export const getServerSideProps: GetServerSideProps = async () => {
-	const games: Game[] = await getGames();
-
-	const gameCards: GameCard[] = games
-		.filter((game) => !mergeIds.includes(game.id))
-		.map((game) => generateGameCard(game));
-
-	mergeIds.forEach((mergeId) =>
-		gameCards.push(generateCombinedGameCard(games.filter((game) => game.id === mergeId))),
-	);
-
-	return { props: { games: gameCards } };
-};
-
-const Home = ({ games }: { games: GameCard[] }) => {
+const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 	const [displayedGames, setDisplayedGames] = useState([]);
 
 	// Display state
@@ -59,7 +42,7 @@ const Home = ({ games }: { games: GameCard[] }) => {
 		}
 
 		// Filter and sort the games
-		const displayed = games
+		const displayed = gameCards
 			.filter((game: GameCard) => {
 				const validPlatform = game.platforms.reduce(
 					(acc, plat) => acc || filterPlatforms[plat],
@@ -74,7 +57,7 @@ const Home = ({ games }: { games: GameCard[] }) => {
 			.sort((a: GameCard, b: GameCard) => compare(a, b, sortBy));
 
 		setDisplayedGames(displayed);
-	}, [games, filterPlatforms, filterText, filterPerc, filterTime, sortBy]);
+	}, [gameCards, filterPlatforms, filterText, filterPerc, filterTime, sortBy]);
 
 	return (
 		<Layout.Container fromDirection="left">
@@ -87,7 +70,7 @@ const Home = ({ games }: { games: GameCard[] }) => {
 				{/* Heading */}
 				<div className="w-full rounded bg-white p-4">
 					<h1 className="text-center text-2xl font-bold">
-						{displayedGames.length}/{games.length} Games
+						{displayedGames.length}/{gameCards.length} Games
 					</h1>
 				</div>
 
@@ -105,7 +88,7 @@ const Home = ({ games }: { games: GameCard[] }) => {
 						onClick={() => setShowPlaytime(!showPlaytime)}
 					/>
 
-					<hr className="mt-3 mb-1" />
+					<hr className="mb-1 mt-3" />
 
 					<p className="font-semibold">Filters</p>
 					{['Steam', 'Xbox', 'Switch'].map((plat) => (
@@ -130,7 +113,7 @@ const Home = ({ games }: { games: GameCard[] }) => {
 						setValue={setFilterTime}
 					/>
 
-					<hr className="mt-3 mb-1" />
+					<hr className="mb-1 mt-3" />
 
 					<p className="font-semibold">Sorting</p>
 					<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={sortOptions} />
@@ -165,4 +148,4 @@ const Home = ({ games }: { games: GameCard[] }) => {
 	);
 };
 
-export default Home;
+export default HomeClient;

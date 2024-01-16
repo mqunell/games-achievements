@@ -45,11 +45,9 @@ const IconText = ({ icon, text, italic = false }: IconTextProps) => {
 	);
 };
 
-const GameCard = ({
-	game,
-	size,
-	displayOptions = { showProgress: true, showPlaytime: true },
-}: Props) => {
+const GameCard = (
+	{ game, size, displayOptions = { showProgress: true, showPlaytime: true } }: Props,
+) => {
 	const { gameId, name, platforms, playtimes, achievementCounts: achCounts } = game;
 
 	const [poster, setPoster] = useState(logoUrl(gameId, platforms));
@@ -81,9 +79,9 @@ const GameCard = ({
 
 			{/* Logo image */}
 			<div
-				className={clsx('relative shadow-md object-cover', {
-					'w-[184px] h-[86px]': size === 'small',
-					'w-[288px] h-[135px]': size === 'large',
+				className={clsx('relative object-cover shadow-md', {
+					'h-[86px] w-[184px]': size === 'small',
+					'h-[135px] w-[288px]': size === 'large',
 				})}
 			>
 				<Image
@@ -104,7 +102,7 @@ const GameCard = ({
 							'h-6 w-6': size === 'large',
 						})}
 					>
-						<Image src={`/${platform}.svg`} alt={`${platform} logo`} fill={true} />
+						{/* <Image src={`/${platform}.svg`} alt={`${platform} logo`} fill={true} /> */}
 					</div>
 				))}
 				<h1
