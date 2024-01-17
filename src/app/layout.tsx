@@ -1,5 +1,6 @@
 import { Anek_Gujarati, Poppins } from 'next/font/google';
 import clsx from 'clsx';
+import Footer from '@/components/Footer';
 import '@/styles/globals.css';
 
 const anek_gujarati = Anek_Gujarati({
@@ -22,7 +23,10 @@ export const metadata = {
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<html lang="en" className={clsx(anek_gujarati.variable, poppins.variable)}>
-			<body>{children}</body>
+			<body>
+				{children}
+				<Footer />
+			</body>
 		</html>
 	);
 };

@@ -36,7 +36,7 @@ const GameAchievementsClient = ({ gameCard, achCards }: Props) => {
 	// Filtering and sorting
 	useEffect(() => {
 		const displayed = achCards
-			.filter((ach) => {
+			?.filter((ach) => {
 				const validCompleted = ach.completed ? showCompleted : showUncompleted;
 				const validText = ach.name.toLowerCase().includes(filterText.toLowerCase());
 
@@ -98,7 +98,7 @@ const GameAchievementsClient = ({ gameCard, achCards }: Props) => {
 			{/* Achievements */}
 			<Layout.Content>
 				<AnimatePresence>
-					{displayedAchievements ? (
+					{displayedAchievements &&
 						displayedAchievements.map((achCard: AchCard) => (
 							<motion.div
 								layout="position"
@@ -113,10 +113,7 @@ const GameAchievementsClient = ({ gameCard, achCards }: Props) => {
 									displayOptions={{ showTime, showGlobal }}
 								/>
 							</motion.div>
-						))
-					) : (
-						<p>None</p>
-					)}
+						))}
 				</AnimatePresence>
 			</Layout.Content>
 
