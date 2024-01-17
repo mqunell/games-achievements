@@ -3,13 +3,12 @@
 @tailwind utilities;
 
 body {
-	font-family: 'Anek Gujarati', sans-serif;
-	font-weight: 400;
-	@apply bg-body overflow-x-hidden;
+	font-family: var(--font-anek);
+	@apply overflow-x-hidden bg-body font-normal;
 }
 
 h1,
 h2 {
-	font-family: 'Poppins', sans-serif;
-	font-weight: 500;
+	font-family: var(--font-poppins);
+	@apply font-medium;
 }

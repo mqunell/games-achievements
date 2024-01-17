@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
@@ -13,10 +15,12 @@ const Footer = () => (
 		transition={{ type: 'linear', duration: 0.5 }}
 		className="grid w-full place-items-center bg-footer p-2 text-sm text-white"
 	>
-		<Link href="https://github.com/mqunell/games-achievements" passHref>
-			<a target="_blank" rel="noopener noreferrer">
-				GitHub
-			</a>
+		<Link
+			href="https://github.com/mqunell/games-achievements"
+			target="_blank"
+			rel="noopener noreferrer"
+		>
+			GitHub
 		</Link>
 	</motion.footer>
 );
