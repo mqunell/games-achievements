@@ -6,6 +6,7 @@ type GameCard = {
 		total: number;
 		recent: number;
 	};
+	achievements: AchCard[];
 	achievementCounts: {
 		total: number;
 		completed: number;

@@ -15,10 +15,9 @@ import { compare, defaultSortOption, sortOptions } from '@/lib/sortAchievements'
 
 type Props = {
 	gameCard: GameCard;
-	achCards: AchCard[];
 };
 
-const GameAchievementsClient = ({ gameCard, achCards }: Props) => {
+const GameAchievementsClient = ({ gameCard }: Props) => {
 	const [displayedAchievements, setDisplayedAchievements] = useState<AchCard[]>([]);
 
 	// Display state
@@ -35,7 +34,7 @@ const GameAchievementsClient = ({ gameCard, achCards }: Props) => {
 
 	// Filtering and sorting
 	useEffect(() => {
-		const displayed = achCards
+		const displayed = gameCard.achievements
 			?.filter((ach) => {
 				const validCompleted = ach.completed ? showCompleted : showUncompleted;
 				const validText = ach.name.toLowerCase().includes(filterText.toLowerCase());
@@ -45,7 +44,7 @@ const GameAchievementsClient = ({ gameCard, achCards }: Props) => {
 			.sort((a, b) => compare(a, b, sortBy));
 
 		setDisplayedAchievements(displayed);
-	}, [sortBy, showCompleted, showUncompleted, filterText, achCards]);
+	}, [sortBy, showCompleted, showUncompleted, filterText, gameCard]);
 
 	// Set the toggles based on sort field (separate useEffect hook so they can be changed manually afterward)
 	useEffect(() => {

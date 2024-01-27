@@ -1,4 +1,3 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import dbConnect from '@/data/dbConnect';
 import Game from '@/models/Game';
 import { getGame } from '@/data/dbHelper';
@@ -75,7 +74,8 @@ const steamToJson = async ({ userId, gameId }): Promise<GameType> => {
 
 // Write a database game and achievements to JSON for editing
 const dbToJson = async ({ gameId }): Promise<void> => {
-	const game: GameType = await getGame(gameId);
+	const games: GameType[] = await getGame(gameId);
+	const game = games.find((game) => game.platform === 'Xbox') || games[0];
 	writeGameToJson(game, 'db');
 };
 
