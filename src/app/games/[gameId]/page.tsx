@@ -4,6 +4,12 @@ import GameAchievementsClient from './GameAchievementsClient';
 
 const mergeIds = ['361420', '976730']; // TODO: Handle this automatically
 
+export const generateMetadata = async ({ params }: { params: { gameId: GameId } }) => {
+	const game: Game = await getGame(params.gameId);
+
+	return { title: game.name };
+};
+
 const getGameAndAchCards = async (gameId: GameId) => {
 	let gameCard: GameCard;
 	let achCards: AchCard[];
