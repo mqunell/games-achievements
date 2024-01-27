@@ -15,23 +15,16 @@ const generateGameCard = (game: Game): GameCard => ({
 	},
 });
 
-// Hard-coded for Steam and Xbox, and prioritizes Steam data
+// TODO: Need something (database flag?) for determining which game has priority when there are multiple
 const generateCombinedGameCard = (games: Game[]): GameCard => {
-	const steamGame = games.find((game) => game.platform === 'Steam');
-	const xboxGame = games.find((game) => game.platform === 'Xbox');
+	const priorityGame = games.find((game) => game.platform === 'Steam') || games[0];
 
 	return {
-		gameId: steamGame.id,
-		name: steamGame.name,
-		platforms: ['Steam', 'Xbox'],
+		...generateGameCard(priorityGame),
+		platforms: games.map((game) => game.platform),
 		playtimes: {
-			recent: steamGame.playtimeRecent,
-			total: steamGame.playtimeTotal + xboxGame.playtimeTotal,
-		},
-		achievements: steamGame.achievements || [],
-		achievementCounts: {
-			total: steamGame.achievements?.length || 0,
-			completed: steamGame.achievements?.filter((ach) => ach.completed).length || 0,
+			recent: priorityGame.playtimeRecent,
+			total: games.reduce((acc, game) => acc + game.playtimeTotal, 0),
 		},
 	};
 };
