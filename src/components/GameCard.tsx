@@ -94,8 +94,8 @@ const GameCard = ({
 					<div
 						key={platform}
 						className={clsx('relative shrink-0', {
-							'h-5 w-5': size === 'small',
-							'h-6 w-6': size === 'large',
+							'size-5': size === 'small',
+							'size-6': size === 'large',
 						})}
 					>
 						<Image src={`/${platform}.svg`} alt={`${platform} logo`} fill={true} />

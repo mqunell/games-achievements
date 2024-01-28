@@ -29,7 +29,7 @@ const Select = ({ sortBy, setSortBy, sortOptions }: Props) => (
 				<Listbox.Option key={option} value={option} as={Fragment}>
 					<li className="flex cursor-pointer items-center justify-between px-2 py-1 ui-active:bg-green-600 ui-not-active:bg-green-500">
 						<span>{option}</span>
-						<CheckIcon className="hidden h-4 w-4 ui-selected:block" />
+						<CheckIcon className="hidden size-4 ui-selected:block" />
 					</li>
 				</Listbox.Option>
 			))}

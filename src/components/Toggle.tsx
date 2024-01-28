@@ -23,7 +23,7 @@ const Toggle = ({ text, checked, onClick }: Props) => (
 				<span
 					className={`${
 						checked ? 'translate-x-5' : 'translate-x-1'
-					} inline-block h-4 w-4 transform rounded-full bg-white transition duration-500`}
+					} inline-block size-4 transform rounded-full bg-white transition duration-500`}
 				/>
 			</Switch>
 			<Switch.Label>{text}</Switch.Label>

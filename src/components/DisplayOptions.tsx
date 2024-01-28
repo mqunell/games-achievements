@@ -9,7 +9,7 @@ const DisplayOptions = ({ children }) => (
 		<Disclosure>
 			<Disclosure.Button className="flex w-full items-center justify-between rounded bg-blue-600 px-3 py-2 text-white">
 				<h2>Display options</h2>
-				<ChevronUpIcon className="h-5 w-5 transform transition-transform ease-out ui-open:rotate-180 ui-open:duration-500 ui-not-open:rotate-0 ui-not-open:duration-300" />
+				<ChevronUpIcon className="size-5 transform transition-transform ease-out ui-open:rotate-180 ui-open:duration-500 ui-not-open:rotate-0 ui-not-open:duration-300" />
 			</Disclosure.Button>
 
 			<Transition

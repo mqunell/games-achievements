@@ -2,7 +2,7 @@ const svgV1Props = (className: string) => ({
 	xmlns: 'http://www.w3.org/2000/svg',
 	viewBox: '0 0 20 20',
 	fill: 'currentColor',
-	className: className || 'h-5 w-5',
+	className: className || 'size-5',
 });
 
 const svgV2Props = (className: string) => ({
@@ -11,7 +11,7 @@ const svgV2Props = (className: string) => ({
 	fill: 'none',
 	stroke: 'currentColor',
 	strokeWidth: 2,
-	className: className || 'h-5 w-5',
+	className: className || 'size-5',
 });
 
 // arrow-left solid v1.0.6
