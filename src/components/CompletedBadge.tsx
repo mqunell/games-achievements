@@ -1,14 +1,14 @@
 import { motion } from 'framer-motion';
-import { BadgeCheckIcon } from '@heroicons/react/solid';
+import { TrophyIcon } from './HeroIcons';
 
 const CompletedBadge = () => (
 	<motion.div
 		initial={{ scale: 0 }}
 		animate={{ scale: 1 }}
 		transition={{ duration: 0.5, delay: 0.5 }}
-		className="absolute -top-3 -right-4 z-10 h-max w-max rounded-full bg-green-500 p-1.5"
+		className="absolute -right-4 -top-3 z-10 h-max w-max rounded-full bg-green-500 p-2"
 	>
-		<BadgeCheckIcon className="h-8 w-8 text-white" />
+		<TrophyIcon className="h-8 w-8 text-white" />
 	</motion.div>
 );
 

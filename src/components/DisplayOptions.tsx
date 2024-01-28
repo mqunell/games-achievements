@@ -1,5 +1,5 @@
 import { Disclosure, Transition } from '@headlessui/react';
-import { ChevronUpIcon } from '@heroicons/react/solid';
+import { ChevronUpIcon } from './HeroIcons';
 
 /**
  * Styled and specific implementation of Headless UI's Disclosure

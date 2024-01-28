@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import clsx from 'clsx';
-import { CheckCircleIcon, ClockIcon } from '@heroicons/react/solid';
+import { CheckCircleIcon, ClockIcon } from './HeroIcons';
 import CompletedBadge from './CompletedBadge';
 
 type Props = {
@@ -14,7 +14,7 @@ type Props = {
 };
 
 type IconTextProps = {
-	icon: React.ElementType;
+	icon: React.ReactNode;
 	text: string;
 	italic?: boolean;
 };
@@ -32,22 +32,18 @@ const formatTime = (minutes: number) => {
 	return `${hours}:${mins}`;
 };
 
-const IconText = ({ icon, text, italic = false }: IconTextProps) => {
-	const Icon = icon;
+const IconText = ({ icon, text, italic = false }: IconTextProps) => (
+	<div className="flex items-center gap-1.5">
+		<div className="rounded-full bg-green-500 p-0.5 text-white">{icon}</div>
+		<p className={clsx('text-lg', { italic: italic })}>{text}</p>
+	</div>
+);
 
-	return (
-		<div className="flex items-center gap-1.5">
-			<div className="rounded-full bg-green-500 p-0.5">
-				<Icon className="h-5 w-5 text-white" />
-			</div>
-			<p className={clsx('text-lg', { italic: italic })}>{text}</p>
-		</div>
-	);
-};
-
-const GameCard = (
-	{ game, size, displayOptions = { showProgress: true, showPlaytime: true } }: Props,
-) => {
+const GameCard = ({
+	game,
+	size,
+	displayOptions = { showProgress: true, showPlaytime: true },
+}: Props) => {
 	const { gameId, name, platforms, playtimes, achievementCounts: achCounts } = game;
 
 	const [poster, setPoster] = useState(logoUrl(gameId, platforms));
@@ -68,7 +64,7 @@ const GameCard = (
 	return (
 		<div
 			className={clsx(
-				'flex w-80 flex-col items-center gap-2 rounded bg-white p-4 text-center',
+				'relative flex w-80 flex-col items-center gap-2 rounded bg-white p-4 text-center',
 				{ 'h-full transform duration-150 md:hover:scale-105': size === 'small' },
 			)}
 		>
@@ -120,7 +116,7 @@ const GameCard = (
 			{/* Achievements */}
 			{showProgress && (
 				<IconText
-					icon={CheckCircleIcon}
+					icon={<CheckCircleIcon />}
 					text={
 						achCounts.total > 0
 							? `${achCounts.completed}/${achCounts.total} - ${percentage}%`
@@ -133,10 +129,13 @@ const GameCard = (
 			{/* Playtime */}
 			{showPlaytime && (
 				<div className="flex flex-col items-center">
-					<IconText icon={ClockIcon} text={`Total: ${formatTime(playtimes.total)}`} />
+					<IconText icon={<ClockIcon />} text={`Total: ${formatTime(playtimes.total)}`} />
 
 					{playtimes.recent > 0 && (
-						<IconText icon={ClockIcon} text={`Recent: ${formatTime(playtimes.recent)}`} />
+						<IconText
+							icon={<ClockIcon />}
+							text={`Recent: ${formatTime(playtimes.recent)}`}
+						/>
 					)}
 				</div>
 			)}

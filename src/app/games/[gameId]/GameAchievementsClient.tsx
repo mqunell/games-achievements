@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowLeftIcon } from '@heroicons/react/solid';
+import { ArrowLeftIcon } from '@/components/HeroIcons';
 import Layout from '@/components/Layout';
 import AchievementCard from '@/components/AchievementCard';
 import DisplayOptions from '@/components/DisplayOptions';
