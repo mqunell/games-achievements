@@ -1,6 +1,7 @@
 {
 	"endOfLine": "auto",
-	"plugins": ["prettier-plugin-tailwindcss"],
+	"importOrder": ["^react", "^next", "<THIRD_PARTY_MODULES>", "^@/(.*)$", "^[./]"],
+	"plugins": ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
 	"printWidth": 90,
 	"singleQuote": true,
 	"useTabs": true

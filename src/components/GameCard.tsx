@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import clsx from 'clsx';
-import { CheckCircleIcon, ClockIcon } from './HeroIcons';
 import CompletedBadge from './CompletedBadge';
+import { CheckCircleIcon, ClockIcon } from './HeroIcons';
 
 type Props = {
 	game: GameCard;

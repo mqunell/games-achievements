@@ -3,13 +3,13 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
-import Layout from '@/components/Layout';
 import DisplayOptions from '@/components/DisplayOptions';
 import GameCard from '@/components/GameCard';
 import InputRange from '@/components/InputRange';
+import Layout from '@/components/Layout';
 import Select from '@/components/Select';
-import Toggle from '@/components/Toggle';
 import TextFilter from '@/components/TextFilter';
+import Toggle from '@/components/Toggle';
 import { calcCompletion } from '@/lib/percentage';
 import { compare, defaultSortOption, sortOptions } from '@/lib/sortGames';
 

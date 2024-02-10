@@ -1,6 +1,6 @@
 import dbConnect from '@/data/dbConnect';
-import Game from '@/models/Game';
 import { getGame } from '@/data/dbHelper';
+import Game from '@/models/Game';
 
 import fs from 'fs';
 import { GameType } from './types'; // Copied from db.d.ts

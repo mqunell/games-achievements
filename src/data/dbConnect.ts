@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
 import 'dotenv/config'; // Only necessary for tsx
+import mongoose from 'mongoose';
 
 const MONGODB_URI: string | any = process.env.MONGODB_URI;
 
