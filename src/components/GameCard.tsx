@@ -84,6 +84,7 @@ const GameCard = ({
 					src={poster}
 					alt={`${name} logo`}
 					fill={true}
+					className="object-cover"
 					onError={() => setPoster(`/Switch/placeholder.jpg`)}
 				/>
 			</div>
