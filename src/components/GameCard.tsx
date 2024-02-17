@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import clsx from 'clsx';
 import CompletedBadge from './CompletedBadge';
@@ -45,17 +45,9 @@ const GameCard = ({
 	displayOptions = { showProgress: true, showPlaytime: true },
 }: Props) => {
 	const { gameId, name, platforms, playtimes, achievementCounts: achCounts } = game;
+	const { showProgress, showPlaytime } = displayOptions;
 
 	const [poster, setPoster] = useState(logoUrl(gameId, platforms));
-
-	// displayOptions state
-	const [showProgress, setShowProgress] = useState(displayOptions.showProgress);
-	const [showPlaytime, setShowPlaytime] = useState(displayOptions.showPlaytime);
-
-	useEffect(() => {
-		setShowProgress(displayOptions.showProgress);
-		setShowPlaytime(displayOptions.showPlaytime);
-	}, [displayOptions]);
 
 	// Show one decimal place unless x.0%
 	let percentage = ((achCounts.completed / achCounts.total) * 100).toFixed(1);
