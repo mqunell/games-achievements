@@ -20,15 +20,13 @@ export const metadata = {
 	description: 'Steam, Xbox, and Switch games and achievements',
 };
 
-const RootLayout = ({ children }: { children: React.ReactNode }) => {
-	return (
-		<html lang="en" className={clsx(anek_gujarati.variable, poppins.variable)}>
-			<body>
-				{children}
-				<Footer />
-			</body>
-		</html>
-	);
-};
+const RootLayout = ({ children }: { children: React.ReactNode }) => (
+	<html lang="en" className={clsx(anek_gujarati.variable, poppins.variable)}>
+		<body>
+			{children}
+			<Footer />
+		</body>
+	</html>
+);
 
 export default RootLayout;

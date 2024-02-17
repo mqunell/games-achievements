@@ -70,7 +70,7 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 
 				{/* Display options */}
 				<DisplayOptions>
-					<p className="font-semibold">Display</p>
+					<h3 className="font-semibold">Display</h3>
 					<Toggle
 						text="Achievement progress"
 						checked={showProgress}
@@ -84,7 +84,7 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 
 					<hr className="mb-1 mt-3" />
 
-					<p className="font-semibold">Filters</p>
+					<h3 className="font-semibold">Filters</h3>
 					{['Steam', 'Xbox', 'Switch'].map((plat) => (
 						<Toggle
 							key={`${plat}-toggle`}
@@ -109,7 +109,7 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 
 					<hr className="mb-1 mt-3" />
 
-					<p className="font-semibold">Sorting</p>
+					<h3 className="font-semibold">Sorting</h3>
 					<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={sortOptions} />
 				</DisplayOptions>
 			</Layout.TitleOptions>

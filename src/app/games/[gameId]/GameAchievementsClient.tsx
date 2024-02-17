@@ -60,7 +60,7 @@ const GameAchievementsClient = ({ gameCard }: Props) => {
 
 				{/* Display options */}
 				<DisplayOptions>
-					<p className="font-semibold">Display</p>
+					<h3 className="font-semibold">Display</h3>
 					<Toggle
 						text="Completion time"
 						checked={showTime}
@@ -74,7 +74,7 @@ const GameAchievementsClient = ({ gameCard }: Props) => {
 
 					<hr className="mb-1 mt-3" />
 
-					<p className="font-semibold">Filters</p>
+					<h3 className="font-semibold">Filters</h3>
 					<Toggle
 						text="Completed achievements"
 						checked={showCompleted}
@@ -89,7 +89,7 @@ const GameAchievementsClient = ({ gameCard }: Props) => {
 
 					<hr className="mb-1 mt-3" />
 
-					<p className="font-semibold">Sorting</p>
+					<h3 className="font-semibold">Sorting</h3>
 					<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={sortOptions} />
 				</DisplayOptions>
 			</Layout.TitleOptions>
