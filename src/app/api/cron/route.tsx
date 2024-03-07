@@ -11,7 +11,7 @@ const { CRON_SECRET } = process.env;
  * updated. This is determined by checking if the recent playtime differs from the game's
  * entry in the database and if the game ID is valid.
  */
-export const getApiGamesToUpdate = async (): Promise<ApiGame[]> => {
+const getApiGamesToUpdate = async (): Promise<ApiGame[]> => {
 	const invalidIds = ['218620', '359050', '365720', '469820', '489830', '1053680'];
 	const dbRecentGames: Game[] = await getRecentSteamGames();
 
