@@ -70,6 +70,8 @@ const steamToJson = async ({ userId, gameId }): Promise<GameType> => {
 		console.log('api error', e);
 		return null;
 	}
+
+	process.exit();
 };
 
 // Write a database game and achievements to JSON for editing
@@ -77,6 +79,7 @@ const dbToJson = async ({ gameId }): Promise<void> => {
 	const games: GameType[] = await getGame(gameId);
 	const game = games.find((game) => game.platform === 'Xbox') || games[0];
 	writeGameToJson(game, 'db');
+	process.exit();
 };
 
 // Upsert the JSON game and achievements to the database
@@ -86,13 +89,14 @@ const jsonToDb = async () => {
 	await dbConnect();
 
 	// @ts-ignore
-	const result = await Game.findOneAndUpdate({ id: game.id }, game, {
+	const result = await Game.findOneAndUpdate({ id: game.id, platform: 'Xbox' }, game, {
 		upsert: true,
 	})
 		.then(() => `${game.name} upserted`)
 		.catch((err) => err);
 
 	console.log(result);
+	process.exit();
 };
 
 steamToJson({ userId: '76561198092862237', gameId: '17410' });

@@ -8,7 +8,7 @@ type ApiGame = {
 };
 
 type ApiUserAchievement = {
-	apiname: string;
+	apiname: string; // ID
 	achieved: number;
 	unlocktime: number;
 	name: string;
@@ -16,6 +16,6 @@ type ApiUserAchievement = {
 };
 
 type ApiGlobalAchievement = {
-	name: string;
+	name: string; // ID
 	percent: number;
 };
