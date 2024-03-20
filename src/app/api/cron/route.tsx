@@ -30,14 +30,38 @@ const getApiGamesToUpdate = async (): Promise<ApiGame[]> => {
 };
 
 /**
- * Fetch, parse, and format the updated Game and Achievement[] data
+ * Fetch, parse, and format the updated Game data
  */
 const buildUpdatedGame = async (game: ApiGame): Promise<Game> => {
 	const gameId: GameId = String(game.appid);
-	const userAchs: ApiUserAchievement[] = await getUserAchs(gameId);
+
+	let achs: Achievement[] | null = null;
+	try {
+		achs = await buildUpdatedAchievements(gameId);
+	} catch (err) {
+		console.error(`Error in buildUpdatedAchievements for ${game.name}:`, err);
+	}
+
+	return {
+		id: gameId,
+		name: game.name,
+		platform: 'Steam',
+		playtimeRecent: game.playtime_2weeks,
+		playtimeTotal: game.playtime_forever,
+		achievements: achs,
+	};
+};
+
+/**
+ * Fetch, parse, and format the updated Achievement[] data
+ */
+const buildUpdatedAchievements = async (gameId: GameId): Promise<Achievement[]> => {
+	const userAchs: ApiUserAchievement[] | undefined = await getUserAchs(gameId);
+	if (!userAchs) return null;
+
 	const globalAchs: ApiGlobalAchievement[] = await getGlobalAchs(gameId);
 
-	const dbAchs: Achievement[] = userAchs.map((userAch: ApiUserAchievement) => {
+	const updatedAchs: Achievement[] = userAchs.map((userAch: ApiUserAchievement) => {
 		const globalAch: ApiGlobalAchievement = globalAchs.find(
 			(globalAch) => globalAch.name === userAch.apiname,
 		);
@@ -52,16 +76,12 @@ const buildUpdatedGame = async (game: ApiGame): Promise<Game> => {
 		};
 	});
 
-	return {
-		id: gameId,
-		name: game.name,
-		platform: 'Steam',
-		playtimeRecent: game.playtime_2weeks,
-		playtimeTotal: game.playtime_forever,
-		achievements: dbAchs,
-	};
+	return updatedAchs;
 };
 
+/**
+ * The route handler that the cron job makes a daily request to
+ */
 export const GET = async (request: NextRequest) => {
 	const authHeader = request.headers.get('authorization');
 	if (authHeader !== `Bearer ${CRON_SECRET}`) {
