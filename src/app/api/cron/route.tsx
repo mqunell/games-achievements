@@ -46,7 +46,7 @@ const buildUpdatedGame = async (game: ApiGame): Promise<Game> => {
 		id: gameId,
 		name: game.name,
 		platform: 'Steam',
-		playtimeRecent: game.playtime_2weeks,
+		playtimeRecent: game.playtime_2weeks ?? 0,
 		playtimeTotal: game.playtime_forever,
 		achievements: achs,
 	};
