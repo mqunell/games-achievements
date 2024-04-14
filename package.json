@@ -2,9 +2,10 @@
 	"name": "my-app",
 	"private": true,
 	"scripts": {
-		"dev": "next dev",
+		"dev": "next dev --turbo",
 		"build": "next build",
 		"start": "next start",
+		"format": "prettier --write ./src",
 		"lint": "next lint",
 		"switchHelper": "./node_modules/.bin/tsx src/server/switchHelper.ts",
 		"xboxHelper": "./node_modules/.bin/tsx src/server/xboxHelper.ts"
@@ -21,19 +22,29 @@
 		"sharp": "^0.32.3"
 	},
 	"devDependencies": {
+		"@testing-library/jest-dom": "^6.4.2",
+		"@testing-library/react": "^15.0.2",
+		"@testing-library/user-event": "^14.5.2",
 		"@trivago/prettier-plugin-sort-imports": "^4.3.0",
 		"@types/node": "^20.4.2",
 		"@types/react": "^18.2.15",
+		"@types/react-dom": "^18.2.25",
+		"@vitejs/plugin-react": "^4.2.1",
 		"autoprefixer": "^10.4.17",
 		"dotenv": "^16.3.1",
 		"eslint": "^8.45.0",
 		"eslint-config-next": "^14.0.4",
 		"eslint-config-prettier": "^8.8.0",
+		"eslint-plugin-jest-dom": "^5.2.0",
+		"eslint-plugin-testing-library": "^6.2.1",
+		"jsdom": "^24.0.0",
+		"msw": "^2.2.13",
 		"postcss": "^8.4.33",
 		"prettier": "^3.2.4",
 		"prettier-plugin-tailwindcss": "^0.5.11",
 		"tailwindcss": "^3.4.1",
 		"tsx": "^3.12.8",
-		"typescript": "^5.1.6"
+		"typescript": "^5.1.6",
+		"vitest": "^1.5.0"
 	}
 }

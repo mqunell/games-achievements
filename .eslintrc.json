@@ -1,3 +1,10 @@
 {
-	"extends": ["next", "prettier"]
+	"plugins": ["jest-dom", "testing-library"],
+	"extends": ["next", "prettier"],
+	"overrides": [
+		{
+			"files": ["**/*.test.tsx"],
+			"extends": ["plugin:jest-dom/recommended", "plugin:testing-library/react"]
+		}
+	]
 }
