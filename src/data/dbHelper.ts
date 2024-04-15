@@ -14,7 +14,7 @@ export const getAllGames = async (): Promise<Game[]> => {
 	return data;
 };
 
-export const getRecentSteamGames = async (): Promise<Game[]> => {
+export const getRecentSteamGames = async (): Promise<RecentGame[]> => {
 	await dbConnect();
 
 	// @ts-ignore

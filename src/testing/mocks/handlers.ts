@@ -1,7 +1,15 @@
-import { delay, http, HttpResponse } from 'msw';
+import { http, HttpResponse } from 'msw';
 
 export const handlers = [
-	http.get('/api/placeholder', async () => {
-		return HttpResponse.json({});
-	}),
+	http.get(
+		'http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/',
+		async () => {
+			return HttpResponse.json({
+				response: {
+					game_count: 6,
+					games: [], // Need to think about what should be mocked here
+				},
+			});
+		},
+	),
 ];

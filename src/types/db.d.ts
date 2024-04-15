@@ -10,6 +10,11 @@ type Game = {
 	achievements: Achievement[];
 };
 
+type RecentGame = {
+	id: Game.id;
+	playtimeRecent: Game.playtimeRecent;
+};
+
 type Achievement = {
 	id: string;
 	name: string;

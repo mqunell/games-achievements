@@ -1,19 +1,14 @@
-import { NextRequest } from 'next/server';
-import dbConnect from '@/data/dbConnect';
 import { getRecentSteamGames } from '@/data/dbHelper';
 import { getGlobalAchs, getUserAchs, getUserGames } from '@/data/steamApi';
-import Game from '@/models/Game';
-
-const { CRON_SECRET } = process.env;
 
 /**
  * Get all database and Steam games, then filter the Steam games to those that need to be
  * updated. This is determined by checking if the recent playtime differs from the game's
  * entry in the database and if the game ID is valid.
  */
-const getApiGamesToUpdate = async (): Promise<ApiGame[]> => {
+export const getApiGamesToUpdate = async (): Promise<ApiGame[]> => {
 	const invalidIds = ['218620', '359050', '365720', '469820', '489830', '1053680'];
-	const dbRecentGames: Game[] = await getRecentSteamGames();
+	const dbRecentGames: RecentGame[] = await getRecentSteamGames();
 
 	const steamGames: ApiGame[] = await getUserGames();
 	const steamGamesToUpdate: ApiGame[] = steamGames.filter((game: ApiGame) => {
@@ -32,7 +27,7 @@ const getApiGamesToUpdate = async (): Promise<ApiGame[]> => {
 /**
  * Fetch, parse, and format the updated Game data
  */
-const buildUpdatedGame = async (game: ApiGame): Promise<Game> => {
+export const buildUpdatedGame = async (game: ApiGame): Promise<Game> => {
 	const gameId: GameId = String(game.appid);
 
 	let achs: Achievement[] | null = null;
@@ -77,33 +72,4 @@ const buildUpdatedAchievements = async (gameId: GameId): Promise<Achievement[]> 
 	});
 
 	return updatedAchs;
-};
-
-/**
- * The route handler that the cron job makes a daily request to
- */
-export const GET = async (request: NextRequest) => {
-	const authHeader = request.headers.get('authorization');
-	if (authHeader !== `Bearer ${CRON_SECRET}`) {
-		return new Response('Unauthorized', { status: 401 });
-	}
-
-	const apiGamesToUpdate: ApiGame[] = await getApiGamesToUpdate();
-	const updatedGameNames: string[] = [];
-
-	await dbConnect();
-	for (let apiGame of apiGamesToUpdate) {
-		const game: Game = await buildUpdatedGame(apiGame);
-
-		// @ts-ignore
-		await Game.findOneAndUpdate({ id: game.id, platform: 'Steam' }, game, {
-			upsert: true,
-		});
-
-		updatedGameNames.push(apiGame.name);
-	}
-
-	return new Response(
-		`Updated ${updatedGameNames.length} game(s): ${updatedGameNames.join(', ')}`,
-	);
 };

@@ -13,6 +13,6 @@ export default defineConfig({
 		css: true,
 		environment: 'jsdom',
 		globals: true,
-		setupFiles: './src/testing/setupTests.ts',
+		setupFiles: ['dotenv/config', './src/testing/setupTests.ts'],
 	},
 });

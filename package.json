@@ -7,6 +7,7 @@
 		"start": "next start",
 		"format": "prettier --write ./src",
 		"lint": "next lint",
+		"test": "vitest",
 		"switchHelper": "./node_modules/.bin/tsx src/server/switchHelper.ts",
 		"xboxHelper": "./node_modules/.bin/tsx src/server/xboxHelper.ts"
 	},
