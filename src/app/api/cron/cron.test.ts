@@ -1,7 +1,7 @@
 import { HttpResponse, http } from 'msw';
 import * as dbHelper from '@/data/dbHelper';
 import { server } from '@/testing/mocks/server';
-import { getApiGamesToUpdate } from './cron';
+import { buildUpdatedGame, getApiGamesToUpdate } from './cron';
 
 const mockApi1: ApiGame = {
 	appid: 1,
@@ -83,6 +83,79 @@ describe('cron', () => {
 				{ ...mockApi2, playtime_2weeks: 240 },
 				{ ...mockApi3, playtime_2weeks: undefined },
 			]);
+		});
+	});
+
+	describe('buildUpdatedGame', () => {
+		it('works', async () => {
+			expect(await buildUpdatedGame({ ...mockApi1, playtime_2weeks: 100 })).toEqual({
+				id: '1',
+				name: 'Game 1',
+				platform: 'Steam',
+				playtimeRecent: 100,
+				playtimeTotal: 100,
+				achievements: [
+					{
+						id: 'ACHIEVEMENT_1A',
+						name: 'Achievement 1A',
+						description: 'Achievement 1A description',
+						completed: true,
+						completedTime: 1394586261,
+						globalCompleted: 82.5,
+					},
+					{
+						id: 'ACHIEVEMENT_1B',
+						name: 'Achievement 1B',
+						description: 'Achievement 1B description',
+						completed: true,
+						completedTime: 1394586261,
+						globalCompleted: 50,
+					},
+					{
+						id: 'ACHIEVEMENT_1C',
+						name: 'Achievement 1C',
+						description: '',
+						completed: false,
+						completedTime: 0,
+						globalCompleted: 18.6,
+					},
+				],
+			});
+
+			expect(await buildUpdatedGame({ ...mockApi2, playtime_2weeks: 60 })).toEqual({
+				id: '2',
+				name: 'Game 2',
+				platform: 'Steam',
+				playtimeRecent: 60,
+				playtimeTotal: 200,
+				achievements: [
+					{
+						id: 'ACHIEVEMENT_2A',
+						name: 'Achievement 2A',
+						description: 'Achievement 2A description',
+						completed: true,
+						completedTime: 1394586261,
+						globalCompleted: 93,
+					},
+					{
+						id: 'ACHIEVEMENT_2B',
+						name: 'Achievement 2B',
+						description: 'Achievement 2B description',
+						completed: false,
+						completedTime: 0,
+						globalCompleted: 0.6,
+					},
+				],
+			});
+
+			expect(await buildUpdatedGame(mockApi3)).toEqual({
+				id: '3',
+				name: 'Game 3',
+				platform: 'Steam',
+				playtimeRecent: 0,
+				playtimeTotal: 300,
+				achievements: null,
+			});
 		});
 	});
 });
