@@ -7,6 +7,7 @@ import DisplayOptions from '@/components/DisplayOptions';
 import GameCard from '@/components/GameCard';
 import InputRange from '@/components/InputRange';
 import Layout from '@/components/Layout';
+import PlatformIcon from '@/components/PlatformIcon';
 import Select from '@/components/Select';
 import TextFilter from '@/components/TextFilter';
 import Toggle from '@/components/Toggle';
@@ -72,12 +73,14 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 				<DisplayOptions>
 					<h3 className="font-semibold">Display</h3>
 					<Toggle
-						text="Achievement progress"
+						key="achievement-progress"
+						label="Achievement progress"
 						checked={showProgress}
 						onClick={() => setShowProgress(!showProgress)}
 					/>
 					<Toggle
-						text="Playtime"
+						key="playtime"
+						label="Playtime"
 						checked={showPlaytime}
 						onClick={() => setShowPlaytime(!showPlaytime)}
 					/>
@@ -85,16 +88,18 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 					<hr className="mb-1 mt-3" />
 
 					<h3 className="font-semibold">Filters</h3>
-					{['Steam', 'Xbox', 'Switch'].map((plat) => (
-						<Toggle
-							key={`${plat}-toggle`}
-							text={`${plat} games`}
-							checked={filterPlatforms[plat]}
-							onClick={() =>
-								setFilterPlatforms((prev) => ({ ...prev, [plat]: !prev[plat] }))
-							}
-						/>
-					))}
+					<div className="flex gap-6">
+						{['Steam', 'Xbox', 'Switch'].map((platform: Platform) => (
+							<Toggle
+								key={platform}
+								label={<PlatformIcon platform={platform} size="small" />}
+								checked={filterPlatforms[platform]}
+								onClick={() =>
+									setFilterPlatforms((prev) => ({ ...prev, [platform]: !prev[platform] }))
+								}
+							/>
+						))}
+					</div>
 					<TextFilter filterText={filterText} setFilterText={setFilterText} />
 					<InputRange
 						title="Minimum completion %"

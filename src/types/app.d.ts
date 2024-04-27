@@ -21,6 +21,7 @@ type AchCard = {
 	globalCompleted: number;
 };
 
+type Size = 'small' | 'large';
 type GameSortOption = 'Name' | 'Playtime' | 'Completion';
 type AchSortOption = 'Name' | 'Completion time' | 'Global completion';
 type SortOption = GameSortOption | AchSortOption;

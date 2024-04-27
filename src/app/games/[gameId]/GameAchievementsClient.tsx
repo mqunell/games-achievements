@@ -62,12 +62,14 @@ const GameAchievementsClient = ({ gameCard }: Props) => {
 				<DisplayOptions>
 					<h3 className="font-semibold">Display</h3>
 					<Toggle
-						text="Completion time"
+						key="completion-time"
+						label="Completion time"
 						checked={showTime}
 						onClick={() => setShowTime(!showTime)}
 					/>
 					<Toggle
-						text="Global completion %"
+						key="global-completion"
+						label="Global completion %"
 						checked={showGlobal}
 						onClick={() => setShowGlobal(!showGlobal)}
 					/>
@@ -76,12 +78,14 @@ const GameAchievementsClient = ({ gameCard }: Props) => {
 
 					<h3 className="font-semibold">Filters</h3>
 					<Toggle
-						text="Completed achievements"
+						key="completed-achievements"
+						label="Completed achievements"
 						checked={showCompleted}
 						onClick={() => setShowCompleted(!showCompleted)}
 					/>
 					<Toggle
-						text="Uncompleted achievements"
+						key="uncompleted-achievements"
+						label="Uncompleted achievements"
 						checked={showUncompleted}
 						onClick={() => setShowUncompleted(!showUncompleted)}
 					/>

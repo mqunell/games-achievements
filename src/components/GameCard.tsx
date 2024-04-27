@@ -3,10 +3,11 @@ import Image from 'next/image';
 import clsx from 'clsx';
 import CompletedBadge from './CompletedBadge';
 import { CheckCircleIcon, ClockIcon } from './HeroIcons';
+import PlatformIcon from './PlatformIcon';
 
 type Props = {
 	game: GameCard;
-	size: 'small' | 'large';
+	size: Size;
 	displayOptions?: {
 		showProgress: boolean;
 		showPlaytime: boolean;
@@ -83,16 +84,8 @@ const GameCard = ({
 
 			{/* Title */}
 			<div className="mt-1 flex max-w-full items-center gap-1">
-				{platforms.sort().map((platform) => (
-					<div
-						key={platform}
-						className={clsx('relative shrink-0', {
-							'size-5': size === 'small',
-							'size-6': size === 'large',
-						})}
-					>
-						<Image src={`/${platform}.svg`} alt={`${platform} logo`} fill={true} />
-					</div>
+				{platforms.sort().map((platform: Platform) => (
+					<PlatformIcon key={platform} platform={platform} size={size} />
 				))}
 				<h1
 					className={clsx('ml-1', {
