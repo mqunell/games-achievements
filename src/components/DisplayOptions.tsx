@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { Disclosure, Transition } from '@headlessui/react';
 import { ChevronUpIcon } from './HeroIcons';
 
@@ -33,10 +34,10 @@ const Container = ({
 				<Disclosure.Panel className="pt-2">
 					<div className="flex w-full flex-col gap-2 border-b border-b-blue-800 pb-4 lg:flex-row lg:justify-between">
 						{children.map((child: React.ReactNode, index: number) => (
-							<>
+							<Fragment key={`display-option-group-${index}`}>
 								{child}
 								{index < children.length - 1 && <hr className="mb-1 mt-3 lg:hidden" />}
-							</>
+							</Fragment>
 						))}
 					</div>
 				</Disclosure.Panel>
