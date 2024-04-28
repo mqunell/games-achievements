@@ -15,7 +15,7 @@ const AchievementCard = ({ achCard, displayOptions }: Props) => {
 
 	return (
 		/* Container - Card and CompletedBadge are separated for overflow-hidden on the completion bar */
-		<div className="grid h-full">
+		<div className="grid h-full w-80">
 			{/* Checkmark */}
 			{completed && (
 				<div className="relative col-start-1 row-start-1">

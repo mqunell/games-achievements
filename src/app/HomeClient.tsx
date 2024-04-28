@@ -61,16 +61,10 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 
 	return (
 		<Layout.Container fromDirection="left">
-			<Layout.TitleOptions>
-				{/* Heading */}
-				<div className="w-full rounded bg-white p-4">
-					<h1 className="text-center text-2xl font-bold">
-						{displayedGames.length}/{gameCards.length} Games
-					</h1>
-				</div>
-
-				{/* Display options */}
-				<DisplayOptions>
+			<DisplayOptions.Container
+				bottomText={`Displaying ${displayedGames.length}/${gameCards.length} Games`}
+			>
+				<DisplayOptions.Group>
 					<h3 className="font-semibold">Display</h3>
 					<Toggle
 						key="achievement-progress"
@@ -84,9 +78,9 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 						checked={showPlaytime}
 						onClick={() => setShowPlaytime(!showPlaytime)}
 					/>
+				</DisplayOptions.Group>
 
-					<hr className="mb-1 mt-3" />
-
+				<DisplayOptions.Group>
 					<h3 className="font-semibold">Filters</h3>
 					<div className="flex gap-6">
 						{['Steam', 'Xbox', 'Switch'].map((platform: Platform) => (
@@ -95,7 +89,10 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 								label={<PlatformIcon platform={platform} size="small" />}
 								checked={filterPlatforms[platform]}
 								onClick={() =>
-									setFilterPlatforms((prev) => ({ ...prev, [platform]: !prev[platform] }))
+									setFilterPlatforms((prev) => ({
+										...prev,
+										[platform]: !prev[platform],
+									}))
 								}
 							/>
 						))}
@@ -111,13 +108,13 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 						value={filterTime}
 						setValue={setFilterTime}
 					/>
+				</DisplayOptions.Group>
 
-					<hr className="mb-1 mt-3" />
-
+				<DisplayOptions.Group>
 					<h3 className="font-semibold">Sorting</h3>
 					<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={sortOptions} />
-				</DisplayOptions>
-			</Layout.TitleOptions>
+				</DisplayOptions.Group>
+			</DisplayOptions.Container>
 
 			{/* GameCards */}
 			<Layout.Content>

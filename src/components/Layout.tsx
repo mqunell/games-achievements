@@ -11,24 +11,17 @@ const Container = ({ fromDirection, children }) => {
 			exit={{ opacity: 0, x }}
 			transition={{ type: 'linear', duration: 0.5 }}
 		>
-			<div className="flex min-h-layout flex-col items-center gap-6 p-8 md:flex-row md:items-start">
-				{children}
-			</div>
+			<div className="flex min-h-layout flex-col items-center gap-6 p-8">{children}</div>
 		</motion.div>
 	);
 };
 
-// Heading, DisplayOptions
-const TitleOptions = ({ children }) => (
-	<div className="flex w-80 flex-col gap-6">{children}</div>
-);
-
 // Game/achievement cards
 const Content = ({ children }) => (
-	<div className="flex w-80 flex-col gap-8 md:grid md:flex-grow md:grid-cols-cards md:justify-center">
+	<div className="flex w-full flex-col items-center gap-8 md:grid md:grid-cols-cards md:justify-center">
 		{children}
 	</div>
 );
 
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
-export default { Container, TitleOptions, Content };
+export default { Container, Content };

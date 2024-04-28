@@ -54,49 +54,51 @@ const GameAchievementsClient = ({ gameCard }: Props) => {
 
 	return (
 		<Layout.Container fromDirection="right">
-			<Layout.TitleOptions>
-				{/* Heading image and data */}
+			<div className="flex w-full flex-wrap items-start justify-center gap-8">
 				<GameCard game={gameCard} size="large" />
 
-				{/* Display options */}
-				<DisplayOptions>
-					<h3 className="font-semibold">Display</h3>
-					<Toggle
-						key="completion-time"
-						label="Completion time"
-						checked={showTime}
-						onClick={() => setShowTime(!showTime)}
-					/>
-					<Toggle
-						key="global-completion"
-						label="Global completion %"
-						checked={showGlobal}
-						onClick={() => setShowGlobal(!showGlobal)}
-					/>
+				<DisplayOptions.Container
+					bottomText={`Displaying ${displayedAchievements.length}/${gameCard.achievements.length} achievements`}
+				>
+					<DisplayOptions.Group>
+						<h3 className="font-semibold">Display</h3>
+						<Toggle
+							key="completion-time"
+							label="Completion time"
+							checked={showTime}
+							onClick={() => setShowTime(!showTime)}
+						/>
+						<Toggle
+							key="global-completion"
+							label="Global completion %"
+							checked={showGlobal}
+							onClick={() => setShowGlobal(!showGlobal)}
+						/>
+					</DisplayOptions.Group>
 
-					<hr className="mb-1 mt-3" />
+					<DisplayOptions.Group>
+						<h3 className="font-semibold">Filters</h3>
+						<Toggle
+							key="completed-achievements"
+							label="Completed achievements"
+							checked={showCompleted}
+							onClick={() => setShowCompleted(!showCompleted)}
+						/>
+						<Toggle
+							key="uncompleted-achievements"
+							label="Uncompleted achievements"
+							checked={showUncompleted}
+							onClick={() => setShowUncompleted(!showUncompleted)}
+						/>
+						<TextFilter filterText={filterText} setFilterText={setFilterText} />
+					</DisplayOptions.Group>
 
-					<h3 className="font-semibold">Filters</h3>
-					<Toggle
-						key="completed-achievements"
-						label="Completed achievements"
-						checked={showCompleted}
-						onClick={() => setShowCompleted(!showCompleted)}
-					/>
-					<Toggle
-						key="uncompleted-achievements"
-						label="Uncompleted achievements"
-						checked={showUncompleted}
-						onClick={() => setShowUncompleted(!showUncompleted)}
-					/>
-					<TextFilter filterText={filterText} setFilterText={setFilterText} />
-
-					<hr className="mb-1 mt-3" />
-
-					<h3 className="font-semibold">Sorting</h3>
-					<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={sortOptions} />
-				</DisplayOptions>
-			</Layout.TitleOptions>
+					<DisplayOptions.Group>
+						<h3 className="font-semibold">Sorting</h3>
+						<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={sortOptions} />
+					</DisplayOptions.Group>
+				</DisplayOptions.Container>
+			</div>
 
 			{/* Achievements */}
 			<Layout.Content>
