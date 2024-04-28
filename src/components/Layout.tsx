@@ -18,9 +18,7 @@ const Container = ({ fromDirection, children }) => {
 
 // Game/achievement cards
 const Content = ({ children }) => (
-	<div className="flex w-full flex-col items-center gap-8 md:grid md:grid-cols-cards md:justify-center">
-		{children}
-	</div>
+	<div className="flex w-full flex-wrap justify-center gap-8">{children}</div>
 );
 
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
