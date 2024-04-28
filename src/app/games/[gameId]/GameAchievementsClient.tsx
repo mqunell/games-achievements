@@ -103,26 +103,25 @@ const GameAchievementsClient = ({ gameCard }: Props) => {
 			{/* Achievements */}
 			<Layout.Content>
 				<AnimatePresence>
-					{displayedAchievements &&
-						displayedAchievements.map((achCard: AchCard) => (
-							<motion.div
-								layout="position"
-								initial={{ opacity: 0 }}
-								animate={{ opacity: 1 }}
-								exit={{ opacity: 0 }}
-								transition={{ duration: 0.5 }}
-								key={achCard.name}
-							>
-								<AchievementCard
-									achCard={achCard}
-									displayOptions={{ showTime, showGlobal }}
-								/>
-							</motion.div>
-						))}
+					{displayedAchievements.map((achCard: AchCard) => (
+						<motion.div
+							layout="position"
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
+							transition={{ duration: 0.5 }}
+							key={achCard.name}
+						>
+							<AchievementCard
+								achCard={achCard}
+								displayOptions={{ showTime, showGlobal }}
+							/>
+						</motion.div>
+					))}
 				</AnimatePresence>
 			</Layout.Content>
 
-			{/* Floating back button - separate motion component from Layout.Container and the parent <a> due to fixed positioning */}
+			{/* Floating back button */}
 			<Link href="/" className="fixed bottom-6 left-6 md:bottom-8 md:left-8">
 				<motion.div
 					initial={{ opacity: 0, x: 40 }}

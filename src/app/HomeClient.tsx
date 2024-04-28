@@ -119,25 +119,24 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 			{/* GameCards */}
 			<Layout.Content>
 				<AnimatePresence>
-					{displayedGames &&
-						displayedGames.map((game: GameCard) => (
-							<Link href={`/games/${game.gameId}`} key={game.gameId}>
-								<motion.div
-									className="cursor-pointer"
-									layout="position"
-									initial={{ opacity: 0 }}
-									animate={{ opacity: 1 }}
-									exit={{ opacity: 0 }}
-									transition={{ duration: 0.5 }}
-								>
-									<GameCard
-										game={game}
-										size="small"
-										displayOptions={{ showProgress, showPlaytime }}
-									/>
-								</motion.div>
-							</Link>
-						))}
+					{displayedGames.map((game: GameCard) => (
+						<Link href={`/games/${game.gameId}`} key={game.gameId}>
+							<motion.div
+								className="cursor-pointer"
+								layout="position"
+								initial={{ opacity: 0 }}
+								animate={{ opacity: 1 }}
+								exit={{ opacity: 0 }}
+								transition={{ duration: 0.5 }}
+							>
+								<GameCard
+									game={game}
+									size="small"
+									displayOptions={{ showProgress, showPlaytime }}
+								/>
+							</motion.div>
+						</Link>
+					))}
 				</AnimatePresence>
 			</Layout.Content>
 		</Layout.Container>
