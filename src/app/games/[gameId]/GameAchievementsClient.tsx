@@ -49,12 +49,12 @@ const GameAchievementsClient = ({ gameCard }: Props) => {
 	// Set the toggles based on sort field (separate useEffect hook so they can be changed manually afterward)
 	useEffect(() => {
 		if (sortBy === 'Completion time') setShowTime(true);
-		if (sortBy === 'Global completion') setShowGlobal(true);
+		else if (sortBy === 'Global completion') setShowGlobal(true);
 	}, [sortBy]);
 
 	return (
 		<Layout.Container fromDirection="right">
-			<div className="flex w-full flex-wrap items-start justify-center gap-8">
+			<div className="flex w-full flex-wrap items-start justify-center gap-6 md:gap-8">
 				<GameCard game={gameCard} size="large" />
 
 				<DisplayOptions.Container
