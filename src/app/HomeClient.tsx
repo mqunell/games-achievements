@@ -82,6 +82,7 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 
 				<DisplayOptions.Group>
 					<h3 className="font-semibold">Filters</h3>
+					<TextFilter filterText={filterText} setFilterText={setFilterText} />
 					<div className="flex gap-6">
 						{['Steam', 'Xbox', 'Switch'].map((platform: Platform) => (
 							<Toggle
@@ -97,7 +98,6 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 							/>
 						))}
 					</div>
-					<TextFilter filterText={filterText} setFilterText={setFilterText} />
 					<InputRange
 						title="Minimum completion %"
 						value={filterPerc}

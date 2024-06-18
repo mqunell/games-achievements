@@ -78,6 +78,7 @@ const GameAchievementsClient = ({ gameCard }: Props) => {
 
 					<DisplayOptions.Group>
 						<h3 className="font-semibold">Filters</h3>
+						<TextFilter filterText={filterText} setFilterText={setFilterText} />
 						<Toggle
 							key="completed-achievements"
 							label="Completed achievements"
@@ -90,7 +91,6 @@ const GameAchievementsClient = ({ gameCard }: Props) => {
 							checked={showUncompleted}
 							onClick={() => setShowUncompleted(!showUncompleted)}
 						/>
-						<TextFilter filterText={filterText} setFilterText={setFilterText} />
 					</DisplayOptions.Group>
 
 					<DisplayOptions.Group>
