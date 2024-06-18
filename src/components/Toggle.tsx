@@ -1,7 +1,6 @@
 import { Switch } from '@headlessui/react';
 
 type Props = {
-	key: string;
 	label: React.ReactNode;
 	checked: boolean;
 	onClick: Function;
@@ -10,8 +9,8 @@ type Props = {
 /**
  * Styled implementation of Headless UI's Switch
  */
-const Toggle = ({ key, label, checked, onClick }: Props) => (
-	<Switch.Group key={`toggle-${key}`}>
+const Toggle = ({ label, checked, onClick }: Props) => (
+	<Switch.Group>
 		<div className="flex items-center gap-1">
 			<Switch
 				checked={checked}
@@ -20,7 +19,6 @@ const Toggle = ({ key, label, checked, onClick }: Props) => (
 					checked ? 'bg-green-500' : 'bg-black'
 				} relative inline-flex h-6 w-10 items-center rounded-full transition-colors duration-500`}
 			>
-				<span className="sr-only">{`toggle-${key}`}</span>
 				<span
 					className={`${
 						checked ? 'translate-x-5' : 'translate-x-1'

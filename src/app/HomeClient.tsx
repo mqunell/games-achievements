@@ -68,13 +68,11 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 					<DisplayOptions.Group>
 						<h3 className="font-semibold">Display</h3>
 						<Toggle
-							key="achievement-progress"
 							label="Achievement progress"
 							checked={showProgress}
 							onClick={() => setShowProgress(!showProgress)}
 						/>
 						<Toggle
-							key="playtime"
 							label="Playtime"
 							checked={showPlaytime}
 							onClick={() => setShowPlaytime(!showPlaytime)}
