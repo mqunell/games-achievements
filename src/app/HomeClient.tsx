@@ -3,10 +3,10 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
-import DisplayOptions from '@/components/DisplayOptions';
+import * as DisplayOptions from '@/components/DisplayOptions';
 import GameCard from '@/components/GameCard';
 import InputRange from '@/components/InputRange';
-import Layout from '@/components/Layout';
+import * as Layout from '@/components/Layout';
 import PlatformIcon from '@/components/PlatformIcon';
 import Select from '@/components/Select';
 import TextFilter from '@/components/TextFilter';
@@ -61,60 +61,62 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 
 	return (
 		<Layout.Container fromDirection="left">
-			<DisplayOptions.Container
-				bottomText={`Displaying ${displayedGames.length}/${gameCards.length} Games`}
-			>
-				<DisplayOptions.Group>
-					<h3 className="font-semibold">Display</h3>
-					<Toggle
-						key="achievement-progress"
-						label="Achievement progress"
-						checked={showProgress}
-						onClick={() => setShowProgress(!showProgress)}
-					/>
-					<Toggle
-						key="playtime"
-						label="Playtime"
-						checked={showPlaytime}
-						onClick={() => setShowPlaytime(!showPlaytime)}
-					/>
-				</DisplayOptions.Group>
+			<Layout.Sidebar>
+				<DisplayOptions.Container
+					bottomText={`Displaying ${displayedGames.length}/${gameCards.length} Games`}
+				>
+					<DisplayOptions.Group>
+						<h3 className="font-semibold">Display</h3>
+						<Toggle
+							key="achievement-progress"
+							label="Achievement progress"
+							checked={showProgress}
+							onClick={() => setShowProgress(!showProgress)}
+						/>
+						<Toggle
+							key="playtime"
+							label="Playtime"
+							checked={showPlaytime}
+							onClick={() => setShowPlaytime(!showPlaytime)}
+						/>
+					</DisplayOptions.Group>
 
-				<DisplayOptions.Group>
-					<h3 className="font-semibold">Filters</h3>
-					<TextFilter filterText={filterText} setFilterText={setFilterText} />
-					<div className="flex gap-6">
-						{['Steam', 'Xbox', 'Switch'].map((platform: Platform) => (
-							<Toggle
-								key={platform}
-								label={<PlatformIcon platform={platform} size="small" />}
-								checked={filterPlatforms[platform]}
-								onClick={() =>
-									setFilterPlatforms((prev) => ({
-										...prev,
-										[platform]: !prev[platform],
-									}))
-								}
-							/>
-						))}
-					</div>
-					<InputRange
-						title="Minimum completion %"
-						value={filterPerc}
-						setValue={setFilterPerc}
-					/>
-					<InputRange
-						title="Minimum total playtime (hours)"
-						value={filterTime}
-						setValue={setFilterTime}
-					/>
-				</DisplayOptions.Group>
+					<DisplayOptions.Group>
+						<h3 className="font-semibold">Filters</h3>
+						<TextFilter filterText={filterText} setFilterText={setFilterText} />
+						<div className="flex gap-6">
+							{['Steam', 'Xbox', 'Switch'].map((platform: Platform) => (
+								<Toggle
+									key={platform}
+									label={<PlatformIcon platform={platform} size="small" />}
+									checked={filterPlatforms[platform]}
+									onClick={() =>
+										setFilterPlatforms((prev) => ({
+											...prev,
+											[platform]: !prev[platform],
+										}))
+									}
+								/>
+							))}
+						</div>
+						<InputRange
+							title="Minimum completion %"
+							value={filterPerc}
+							setValue={setFilterPerc}
+						/>
+						<InputRange
+							title="Minimum total playtime (hours)"
+							value={filterTime}
+							setValue={setFilterTime}
+						/>
+					</DisplayOptions.Group>
 
-				<DisplayOptions.Group>
-					<h3 className="font-semibold">Sorting</h3>
-					<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={sortOptions} />
-				</DisplayOptions.Group>
-			</DisplayOptions.Container>
+					<DisplayOptions.Group>
+						<h3 className="font-semibold">Sorting</h3>
+						<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={sortOptions} />
+					</DisplayOptions.Group>
+				</DisplayOptions.Container>
+			</Layout.Sidebar>
 
 			{/* GameCards */}
 			<Layout.Content>

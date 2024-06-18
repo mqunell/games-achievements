@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import AchievementCard from '@/components/AchievementCard';
-import DisplayOptions from '@/components/DisplayOptions';
+import * as DisplayOptions from '@/components/DisplayOptions';
 import GameCard from '@/components/GameCard';
 import { ArrowLeftIcon } from '@/components/HeroIcons';
-import Layout from '@/components/Layout';
+import * as Layout from '@/components/Layout';
 import Select from '@/components/Select';
 import TextFilter from '@/components/TextFilter';
 import Toggle from '@/components/Toggle';
@@ -54,7 +54,7 @@ const GameAchievementsClient = ({ gameCard }: Props) => {
 
 	return (
 		<Layout.Container fromDirection="right">
-			<div className="flex w-full flex-wrap items-start justify-center gap-6 md:gap-8">
+			<Layout.Sidebar>
 				<GameCard game={gameCard} size="large" />
 
 				<DisplayOptions.Container
@@ -98,7 +98,7 @@ const GameAchievementsClient = ({ gameCard }: Props) => {
 						<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={sortOptions} />
 					</DisplayOptions.Group>
 				</DisplayOptions.Container>
-			</div>
+			</Layout.Sidebar>
 
 			{/* Achievements */}
 			<Layout.Content>
