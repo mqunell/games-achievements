@@ -1,7 +1,7 @@
 import { Switch } from '@headlessui/react';
 
 type Props = {
-	label: React.ReactNode;
+	label: string | React.ReactNode;
 	checked: boolean;
 	onClick: Function;
 };
