@@ -1,11 +1,16 @@
+import { Fragment } from 'react';
 import { Disclosure, Transition } from '@headlessui/react';
 import { ChevronUpIcon } from './HeroIcons';
 
-/**
- * Styled and specific implementation of Headless UI's Disclosure
- */
-const DisplayOptions = ({ children }) => (
-	<div className="w-full rounded bg-white p-3">
+// Styled and specific implementation of Headless UI's Disclosure
+export const Container = ({
+	bottomText,
+	children,
+}: {
+	bottomText: string;
+	children: React.ReactNode[];
+}) => (
+	<div className="flex w-80 flex-col gap-2 rounded bg-white p-3">
 		<Disclosure>
 			<Disclosure.Button className="flex w-full items-center justify-between rounded bg-blue-600 px-3 py-2 text-white">
 				<h2>Display options</h2>
@@ -21,11 +26,22 @@ const DisplayOptions = ({ children }) => (
 				leaveTo="-translate-y-2 opacity-0"
 			>
 				<Disclosure.Panel className="pt-2">
-					<div className="flex w-full flex-col gap-2">{children}</div>
+					<div className="flex w-full flex-col gap-2 border-b border-b-blue-800 pb-4">
+						{children.map((child: React.ReactNode, index: number) => (
+							<Fragment key={`display-option-group-${index}`}>
+								{child}
+								{index < children.length - 1 && <hr className="mb-1 mt-3" />}
+							</Fragment>
+						))}
+					</div>
 				</Disclosure.Panel>
 			</Transition>
+
+			<span className="text-center italic">{bottomText}</span>
 		</Disclosure>
 	</div>
 );
 
-export default DisplayOptions;
+export const Group = ({ children }: { children: React.ReactNode }) => (
+	<div className="flex w-full flex-col gap-2">{children}</div>
+);

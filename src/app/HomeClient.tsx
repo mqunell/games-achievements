@@ -3,10 +3,11 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
-import DisplayOptions from '@/components/DisplayOptions';
+import * as DisplayOptions from '@/components/DisplayOptions';
 import GameCard from '@/components/GameCard';
 import InputRange from '@/components/InputRange';
-import Layout from '@/components/Layout';
+import * as Layout from '@/components/Layout';
+import PlatformIcon from '@/components/PlatformIcon';
 import Select from '@/components/Select';
 import TextFilter from '@/components/TextFilter';
 import Toggle from '@/components/Toggle';
@@ -60,82 +61,82 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 
 	return (
 		<Layout.Container fromDirection="left">
-			<Layout.TitleOptions>
-				{/* Heading */}
-				<div className="w-full rounded bg-white p-4">
-					<h1 className="text-center text-2xl font-bold">
-						{displayedGames.length}/{gameCards.length} Games
-					</h1>
-				</div>
-
-				{/* Display options */}
-				<DisplayOptions>
-					<h3 className="font-semibold">Display</h3>
-					<Toggle
-						text="Achievement progress"
-						checked={showProgress}
-						onClick={() => setShowProgress(!showProgress)}
-					/>
-					<Toggle
-						text="Playtime"
-						checked={showPlaytime}
-						onClick={() => setShowPlaytime(!showPlaytime)}
-					/>
-
-					<hr className="mb-1 mt-3" />
-
-					<h3 className="font-semibold">Filters</h3>
-					{['Steam', 'Xbox', 'Switch'].map((plat) => (
+			<Layout.Sidebar>
+				<DisplayOptions.Container
+					bottomText={`Displaying ${displayedGames.length}/${gameCards.length} Games`}
+				>
+					<DisplayOptions.Group>
+						<h3 className="font-semibold">Display</h3>
 						<Toggle
-							key={`${plat}-toggle`}
-							text={`${plat} games`}
-							checked={filterPlatforms[plat]}
-							onClick={() =>
-								setFilterPlatforms((prev) => ({ ...prev, [plat]: !prev[plat] }))
-							}
+							label="Achievement progress"
+							checked={showProgress}
+							onClick={() => setShowProgress(!showProgress)}
 						/>
-					))}
-					<TextFilter filterText={filterText} setFilterText={setFilterText} />
-					<InputRange
-						title="Minimum completion %"
-						value={filterPerc}
-						setValue={setFilterPerc}
-					/>
-					<InputRange
-						title="Minimum total playtime (hours)"
-						value={filterTime}
-						setValue={setFilterTime}
-					/>
+						<Toggle
+							label="Playtime"
+							checked={showPlaytime}
+							onClick={() => setShowPlaytime(!showPlaytime)}
+						/>
+					</DisplayOptions.Group>
 
-					<hr className="mb-1 mt-3" />
+					<DisplayOptions.Group>
+						<h3 className="font-semibold">Filters</h3>
+						<TextFilter filterText={filterText} setFilterText={setFilterText} />
+						<div className="flex gap-6">
+							{['Steam', 'Xbox', 'Switch'].map((platform: Platform) => (
+								<Toggle
+									key={platform}
+									label={<PlatformIcon platform={platform} size="small" />}
+									checked={filterPlatforms[platform]}
+									onClick={() =>
+										setFilterPlatforms((prev) => ({
+											...prev,
+											[platform]: !prev[platform],
+										}))
+									}
+								/>
+							))}
+						</div>
+						<InputRange
+							title="Minimum completion %"
+							value={filterPerc}
+							setValue={setFilterPerc}
+						/>
+						<InputRange
+							title="Minimum total playtime (hours)"
+							value={filterTime}
+							setValue={setFilterTime}
+						/>
+					</DisplayOptions.Group>
 
-					<h3 className="font-semibold">Sorting</h3>
-					<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={sortOptions} />
-				</DisplayOptions>
-			</Layout.TitleOptions>
+					<DisplayOptions.Group>
+						<h3 className="font-semibold">Sorting</h3>
+						<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={sortOptions} />
+					</DisplayOptions.Group>
+				</DisplayOptions.Container>
+			</Layout.Sidebar>
 
 			{/* GameCards */}
 			<Layout.Content>
 				<AnimatePresence>
-					{displayedGames &&
-						displayedGames.map((game: GameCard) => (
-							<Link href={`/games/${game.gameId}`} key={game.gameId}>
-								<motion.div
-									className="cursor-pointer"
-									layout="position"
-									initial={{ opacity: 0 }}
-									animate={{ opacity: 1 }}
-									exit={{ opacity: 0 }}
-									transition={{ duration: 0.5 }}
-								>
-									<GameCard
-										game={game}
-										size="small"
-										displayOptions={{ showProgress, showPlaytime }}
-									/>
-								</motion.div>
-							</Link>
-						))}
+					{displayedGames.map((game: GameCard) => (
+						<Link href={`/games/${game.gameId}`} key={game.gameId}>
+							<motion.div
+								className="cursor-pointer"
+								layout="position"
+								initial={{ opacity: 0 }}
+								animate={{ opacity: 1 }}
+								exit={{ opacity: 0 }}
+								transition={{ duration: 0.5 }}
+							>
+								<GameCard
+									game={game}
+									size="small"
+									displayOptions={{ showProgress, showPlaytime }}
+								/>
+							</motion.div>
+						</Link>
+					))}
 				</AnimatePresence>
 			</Layout.Content>
 		</Layout.Container>

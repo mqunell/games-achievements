@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import AchievementCard from '@/components/AchievementCard';
-import DisplayOptions from '@/components/DisplayOptions';
+import * as DisplayOptions from '@/components/DisplayOptions';
 import GameCard from '@/components/GameCard';
 import { ArrowLeftIcon } from '@/components/HeroIcons';
-import Layout from '@/components/Layout';
+import * as Layout from '@/components/Layout';
 import Select from '@/components/Select';
 import TextFilter from '@/components/TextFilter';
 import Toggle from '@/components/Toggle';
@@ -49,74 +49,75 @@ const GameAchievementsClient = ({ gameCard }: Props) => {
 	// Set the toggles based on sort field (separate useEffect hook so they can be changed manually afterward)
 	useEffect(() => {
 		if (sortBy === 'Completion time') setShowTime(true);
-		if (sortBy === 'Global completion') setShowGlobal(true);
+		else if (sortBy === 'Global completion') setShowGlobal(true);
 	}, [sortBy]);
 
 	return (
 		<Layout.Container fromDirection="right">
-			<Layout.TitleOptions>
-				{/* Heading image and data */}
+			<Layout.Sidebar>
 				<GameCard game={gameCard} size="large" />
 
-				{/* Display options */}
-				<DisplayOptions>
-					<h3 className="font-semibold">Display</h3>
-					<Toggle
-						text="Completion time"
-						checked={showTime}
-						onClick={() => setShowTime(!showTime)}
-					/>
-					<Toggle
-						text="Global completion %"
-						checked={showGlobal}
-						onClick={() => setShowGlobal(!showGlobal)}
-					/>
+				<DisplayOptions.Container
+					bottomText={`Displaying ${displayedAchievements.length}/${gameCard.achievements.length} achievements`}
+				>
+					<DisplayOptions.Group>
+						<h3 className="font-semibold">Display</h3>
+						<Toggle
+							label="Completion time"
+							checked={showTime}
+							onClick={() => setShowTime(!showTime)}
+						/>
+						<Toggle
+							label="Global completion %"
+							checked={showGlobal}
+							onClick={() => setShowGlobal(!showGlobal)}
+						/>
+					</DisplayOptions.Group>
 
-					<hr className="mb-1 mt-3" />
+					<DisplayOptions.Group>
+						<h3 className="font-semibold">Filters</h3>
+						<TextFilter filterText={filterText} setFilterText={setFilterText} />
+						<Toggle
+							label="Completed achievements"
+							checked={showCompleted}
+							onClick={() => setShowCompleted(!showCompleted)}
+						/>
+						<Toggle
+							label="Uncompleted achievements"
+							checked={showUncompleted}
+							onClick={() => setShowUncompleted(!showUncompleted)}
+						/>
+					</DisplayOptions.Group>
 
-					<h3 className="font-semibold">Filters</h3>
-					<Toggle
-						text="Completed achievements"
-						checked={showCompleted}
-						onClick={() => setShowCompleted(!showCompleted)}
-					/>
-					<Toggle
-						text="Uncompleted achievements"
-						checked={showUncompleted}
-						onClick={() => setShowUncompleted(!showUncompleted)}
-					/>
-					<TextFilter filterText={filterText} setFilterText={setFilterText} />
-
-					<hr className="mb-1 mt-3" />
-
-					<h3 className="font-semibold">Sorting</h3>
-					<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={sortOptions} />
-				</DisplayOptions>
-			</Layout.TitleOptions>
+					<DisplayOptions.Group>
+						<h3 className="font-semibold">Sorting</h3>
+						<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={sortOptions} />
+					</DisplayOptions.Group>
+				</DisplayOptions.Container>
+			</Layout.Sidebar>
 
 			{/* Achievements */}
 			<Layout.Content>
 				<AnimatePresence>
-					{displayedAchievements &&
-						displayedAchievements.map((achCard: AchCard) => (
-							<motion.div
-								layout="position"
-								initial={{ opacity: 0 }}
-								animate={{ opacity: 1 }}
-								exit={{ opacity: 0 }}
-								transition={{ duration: 0.5 }}
-								key={achCard.name}
-							>
-								<AchievementCard
-									achCard={achCard}
-									displayOptions={{ showTime, showGlobal }}
-								/>
-							</motion.div>
-						))}
+					{displayedAchievements.map((achCard: AchCard) => (
+						<motion.div
+							layout="position"
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
+							transition={{ duration: 0.5 }}
+							key={achCard.name}
+						>
+							<AchievementCard
+								achCard={achCard}
+								displayOptions={{ showTime, showGlobal }}
+							/>
+						</motion.div>
+					))}
 				</AnimatePresence>
 			</Layout.Content>
 
-			{/* Floating back button - separate motion component from Layout.Container and the parent <a> due to fixed positioning */}
+			{/* Floating back button */}
 			<Link href="/" className="fixed bottom-6 left-6 md:bottom-8 md:left-8">
 				<motion.div
 					initial={{ opacity: 0, x: 40 }}

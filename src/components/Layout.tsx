@@ -1,7 +1,13 @@
 import { motion } from 'framer-motion';
 
 // Page - motion and fromDirection are used for page transitions
-const Container = ({ fromDirection, children }) => {
+export const Container = ({
+	fromDirection,
+	children,
+}: {
+	fromDirection: 'left' | 'right';
+	children: React.ReactNode;
+}) => {
 	const x = fromDirection === 'left' ? -200 : 200;
 
 	return (
@@ -18,17 +24,10 @@ const Container = ({ fromDirection, children }) => {
 	);
 };
 
-// Heading, DisplayOptions
-const TitleOptions = ({ children }) => (
-	<div className="flex w-80 flex-col gap-6">{children}</div>
+export const Sidebar = ({ children }: { children: React.ReactNode }) => (
+	<div className="flex flex-col gap-8">{children}</div>
 );
 
-// Game/achievement cards
-const Content = ({ children }) => (
-	<div className="flex w-80 flex-col gap-8 md:grid md:flex-grow md:grid-cols-cards md:justify-center">
-		{children}
-	</div>
+export const Content = ({ children }: { children: React.ReactNode }) => (
+	<div className="flex w-full flex-wrap justify-center gap-8">{children}</div>
 );
-
-/* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
-export default { Container, TitleOptions, Content };
