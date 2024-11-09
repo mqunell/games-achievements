@@ -1,4 +1,4 @@
-import { Switch } from '@headlessui/react';
+import { Field, Label, Switch } from '@headlessui/react';
 
 type Props = {
 	label: string | React.ReactNode;
@@ -10,7 +10,7 @@ type Props = {
  * Styled implementation of Headless UI's Switch
  */
 const Toggle = ({ label, checked, onClick }: Props) => (
-	<Switch.Group>
+	<Field>
 		<div className="flex items-center gap-1">
 			<Switch
 				checked={checked}
@@ -25,9 +25,9 @@ const Toggle = ({ label, checked, onClick }: Props) => (
 					} inline-block size-4 transform rounded-full bg-white transition duration-500`}
 				/>
 			</Switch>
-			<Switch.Label>{label}</Switch.Label>
+			<Label>{label}</Label>
 		</div>
-	</Switch.Group>
+	</Field>
 );
 
 export default Toggle;
