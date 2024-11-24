@@ -1,16 +1,33 @@
 import { getRecentSteamGames } from '@/data/dbHelper';
-import { getGlobalAchs, getUserAchs, getUserGames } from '@/data/steamApi';
+import {
+	getGlobalAchs,
+	getUserAchs,
+	getUserGames,
+	getUserRecentGames,
+} from '@/data/steamApi';
 
 /**
- * Get all database and Steam games, then filter the Steam games to those that need to be
- * updated. This is determined by checking if the recent playtime differs from the game's
- * entry in the database and if the game ID is valid.
+ * Determine which ApiGames need to be updated. This optimizes the overall process by only updating
+ * games with new recent playtimes (typically <5) rather than every game (>80).
+ *
+ * 1. Get all games from the database that have a recent playtime
+ * 2. Get all games from the Steam user's library and recently played, and merge them into one list
+ * 3. Filter the Steam games to those that have a different recent playtime than their database
+ *    counterpart (meaning the recent playtime changed, including becoming 0), or do not have a
+ *    database counterpart (meaning the recent playtime became non-0)
  */
 export const getApiGamesToUpdate = async (): Promise<ApiGame[]> => {
 	const invalidIds = ['218620', '359050', '365720', '469820', '489830', '1053680'];
 	const dbRecentGames: RecentGame[] = await getRecentSteamGames();
 
 	const steamGames: ApiGame[] = await getUserGames();
+	const steamRecentGames: ApiGame[] = await getUserRecentGames();
+	steamRecentGames.forEach((recentGame) => {
+		if (!steamGames.find((game) => game.appid === recentGame.appid)) {
+			steamGames.push(recentGame);
+		}
+	});
+
 	const steamGamesToUpdate: ApiGame[] = steamGames.filter((game: ApiGame) => {
 		const gameId = String(game.appid);
 		const dbGame = dbRecentGames.find((dbGame: Game) => dbGame.id === gameId);
