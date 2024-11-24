@@ -1,56 +1,56 @@
-'use client';
+'use client'
 
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { AnimatePresence, motion } from 'framer-motion';
-import AchievementCard from '@/components/AchievementCard';
-import * as DisplayOptions from '@/components/DisplayOptions';
-import GameCard from '@/components/GameCard';
-import { ArrowLeftIcon } from '@/components/HeroIcons';
-import * as Layout from '@/components/Layout';
-import Select from '@/components/Select';
-import TextFilter from '@/components/TextFilter';
-import Toggle from '@/components/Toggle';
-import { compare, defaultSortOption, sortOptions } from '@/lib/sortAchievements';
+import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import { AnimatePresence, motion } from 'framer-motion'
+import AchievementCard from '@/components/AchievementCard'
+import * as DisplayOptions from '@/components/DisplayOptions'
+import GameCard from '@/components/GameCard'
+import { ArrowLeftIcon } from '@/components/HeroIcons'
+import * as Layout from '@/components/Layout'
+import Select from '@/components/Select'
+import TextFilter from '@/components/TextFilter'
+import Toggle from '@/components/Toggle'
+import { compare, defaultSortOption, sortOptions } from '@/lib/sortAchievements'
 
 type Props = {
-	gameCard: GameCard;
-};
+	gameCard: GameCard
+}
 
 const GameAchievementsClient = ({ gameCard }: Props) => {
-	const [displayedAchievements, setDisplayedAchievements] = useState<AchCard[]>([]);
+	const [displayedAchievements, setDisplayedAchievements] = useState<AchCard[]>([])
 
 	// Display state
-	const [showTime, setShowTime] = useState(true); // Xbox achievements don't have completion dates - todo: only show times if the default list is Steam
-	const [showGlobal, setShowGlobal] = useState(true);
+	const [showTime, setShowTime] = useState(true) // Xbox achievements don't have completion dates - todo: only show times if the default list is Steam
+	const [showGlobal, setShowGlobal] = useState(true)
 
 	// Filter state
-	const [showCompleted, setShowCompleted] = useState(true);
-	const [showUncompleted, setShowUncompleted] = useState(true);
-	const [filterText, setFilterText] = useState('');
+	const [showCompleted, setShowCompleted] = useState(true)
+	const [showUncompleted, setShowUncompleted] = useState(true)
+	const [filterText, setFilterText] = useState('')
 
 	// Sort state
-	const [sortBy, setSortBy] = useState<AchSortOption>(defaultSortOption);
+	const [sortBy, setSortBy] = useState<AchSortOption>(defaultSortOption)
 
 	// Filtering and sorting
 	useEffect(() => {
 		const displayed = gameCard.achievements
 			?.filter((ach) => {
-				const validCompleted = ach.completed ? showCompleted : showUncompleted;
-				const validText = ach.name.toLowerCase().includes(filterText.toLowerCase());
+				const validCompleted = ach.completed ? showCompleted : showUncompleted
+				const validText = ach.name.toLowerCase().includes(filterText.toLowerCase())
 
-				return validCompleted && validText;
+				return validCompleted && validText
 			})
-			.sort((a, b) => compare(a, b, sortBy));
+			.sort((a, b) => compare(a, b, sortBy))
 
-		setDisplayedAchievements(displayed);
-	}, [sortBy, showCompleted, showUncompleted, filterText, gameCard]);
+		setDisplayedAchievements(displayed)
+	}, [sortBy, showCompleted, showUncompleted, filterText, gameCard])
 
 	// Set the toggles based on sort field (separate useEffect hook so they can be changed manually afterward)
 	useEffect(() => {
-		if (sortBy === 'Completion time') setShowTime(true);
-		else if (sortBy === 'Global completion') setShowGlobal(true);
-	}, [sortBy]);
+		if (sortBy === 'Completion time') setShowTime(true)
+		else if (sortBy === 'Global completion') setShowGlobal(true)
+	}, [sortBy])
 
 	return (
 		<Layout.Container fromDirection="right">
@@ -108,10 +108,7 @@ const GameAchievementsClient = ({ gameCard }: Props) => {
 							transition={{ duration: 0.5 }}
 							key={achCard.name}
 						>
-							<AchievementCard
-								achCard={achCard}
-								displayOptions={{ showTime, showGlobal }}
-							/>
+							<AchievementCard achCard={achCard} displayOptions={{ showTime, showGlobal }} />
 						</motion.div>
 					))}
 				</AnimatePresence>
@@ -130,7 +127,7 @@ const GameAchievementsClient = ({ gameCard }: Props) => {
 				</motion.div>
 			</Link>
 		</Layout.Container>
-	);
-};
+	)
+}
 
-export default GameAchievementsClient;
+export default GameAchievementsClient

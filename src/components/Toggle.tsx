@@ -1,10 +1,10 @@
-import { Field, Label, Switch } from '@headlessui/react';
+import { Field, Label, Switch } from '@headlessui/react'
 
 type Props = {
-	label: string | React.ReactNode;
-	checked: boolean;
-	onClick: Function;
-};
+	label: string | React.ReactNode
+	checked: boolean
+	onClick: Function
+}
 
 /**
  * Styled implementation of Headless UI's Switch
@@ -28,6 +28,6 @@ const Toggle = ({ label, checked, onClick }: Props) => (
 			<Label>{label}</Label>
 		</div>
 	</Field>
-);
+)
 
-export default Toggle;
+export default Toggle

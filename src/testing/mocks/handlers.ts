@@ -1,23 +1,20 @@
-import { http, HttpResponse } from 'msw';
+import { http, HttpResponse } from 'msw'
 
 export const handlers = [
-	http.get(
-		'http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/',
-		async () => {
-			return HttpResponse.json({
-				response: {
-					game_count: 6,
-					games: [], // Need to think about what should be mocked here
-				},
-			});
-		},
-	),
+	http.get('http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/', async () => {
+		return HttpResponse.json({
+			response: {
+				game_count: 6,
+				games: [], // Need to think about what should be mocked here
+			},
+		})
+	}),
 
 	http.get(
 		'http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/',
 		async ({ request }) => {
-			const url = new URL(request.url);
-			const gameId = url.searchParams.get('appid');
+			const url = new URL(request.url)
+			const gameId = url.searchParams.get('appid')
 
 			const mockUserAchievements = {
 				1: {
@@ -74,19 +71,19 @@ export const handlers = [
 					gameName: 'Game 3',
 					success: true,
 				},
-			};
+			}
 
 			return HttpResponse.json({
 				playerstats: mockUserAchievements[gameId],
-			});
+			})
 		},
 	),
 
 	http.get(
 		'http://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v0002/',
 		async ({ request }) => {
-			const url = new URL(request.url);
-			const gameId = url.searchParams.get('gameid');
+			const url = new URL(request.url)
+			const gameId = url.searchParams.get('gameid')
 
 			const mockGlobalAchievements = {
 				1: [
@@ -99,13 +96,13 @@ export const handlers = [
 					{ name: 'ACHIEVEMENT_2B', percent: 0.60000002384185791 },
 				],
 				3: [],
-			};
+			}
 
 			return HttpResponse.json({
 				achievementpercentages: {
 					achievements: mockGlobalAchievements[gameId],
 				},
-			});
+			})
 		},
 	),
-];
+]

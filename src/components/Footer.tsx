@@ -1,7 +1,7 @@
-'use client';
+'use client'
 
-import Link from 'next/link';
-import { motion } from 'framer-motion';
+import Link from 'next/link'
+import { motion } from 'framer-motion'
 
 /**
  * Footer that shows up on all pages. The motion animation prevents visual oddities during page
@@ -23,6 +23,6 @@ const Footer = () => (
 			GitHub
 		</Link>
 	</motion.footer>
-);
+)
 
-export default Footer;
+export default Footer

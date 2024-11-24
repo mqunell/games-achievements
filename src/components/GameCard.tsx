@@ -1,58 +1,58 @@
-import { useState } from 'react';
-import Image from 'next/image';
-import clsx from 'clsx';
-import CompletedBadge from './CompletedBadge';
-import { CheckCircleIcon, ClockIcon } from './HeroIcons';
-import PlatformIcon from './PlatformIcon';
+import { useState } from 'react'
+import Image from 'next/image'
+import clsx from 'clsx'
+import CompletedBadge from './CompletedBadge'
+import { CheckCircleIcon, ClockIcon } from './HeroIcons'
+import PlatformIcon from './PlatformIcon'
 
 type Props = {
-	game: GameCard;
-	size: Size;
+	game: GameCard
+	size: Size
 	displayOptions?: {
-		showProgress: boolean;
-		showPlaytime: boolean;
-	};
-};
+		showProgress: boolean
+		showPlaytime: boolean
+	}
+}
 
 type IconTextProps = {
-	icon: React.ReactNode;
-	text: string;
-	italic?: boolean;
-};
+	icon: React.ReactNode
+	text: string
+	italic?: boolean
+}
 
 const logoUrl = (gameId: GameId, platforms: Platform[]) => {
 	return !platforms.includes('Switch')
 		? `https://steamcdn-a.akamaihd.net/steam/apps/${gameId}/header.jpg`
-		: `/Switch/${gameId}.jpg`;
-};
+		: `/Switch/${gameId}.jpg`
+}
 
 const formatTime = (minutes: number) => {
-	const hours = Math.trunc(minutes / 60).toString();
-	const mins = (minutes % 60).toString().padStart(2, '0');
+	const hours = Math.trunc(minutes / 60).toString()
+	const mins = (minutes % 60).toString().padStart(2, '0')
 
-	return `${hours}:${mins}`;
-};
+	return `${hours}:${mins}`
+}
 
 const IconText = ({ icon, text, italic = false }: IconTextProps) => (
 	<div className="flex items-center gap-1.5">
 		<div className="rounded-full bg-green-500 p-0.5 text-white">{icon}</div>
 		<p className={clsx('text-lg', { italic: italic })}>{text}</p>
 	</div>
-);
+)
 
 const GameCard = ({
 	game,
 	size,
 	displayOptions = { showProgress: true, showPlaytime: true },
 }: Props) => {
-	const { gameId, name, platforms, playtimes, achievementCounts: achCounts } = game;
-	const { showProgress, showPlaytime } = displayOptions;
+	const { gameId, name, platforms, playtimes, achievementCounts: achCounts } = game
+	const { showProgress, showPlaytime } = displayOptions
 
-	const [poster, setPoster] = useState(logoUrl(gameId, platforms));
+	const [poster, setPoster] = useState(logoUrl(gameId, platforms))
 
 	// Show one decimal place unless x.0%
-	let percentage = ((achCounts.completed / achCounts.total) * 100).toFixed(1);
-	if (percentage.endsWith('.0')) percentage = percentage.slice(0, -2);
+	let percentage = ((achCounts.completed / achCounts.total) * 100).toFixed(1)
+	if (percentage.endsWith('.0')) percentage = percentage.slice(0, -2)
 
 	return (
 		<div
@@ -62,9 +62,7 @@ const GameCard = ({
 			)}
 		>
 			{/* Checkmark */}
-			{achCounts.total > 0 && achCounts.completed === achCounts.total && (
-				<CompletedBadge />
-			)}
+			{achCounts.total > 0 && achCounts.completed === achCounts.total && <CompletedBadge />}
 
 			{/* Logo image */}
 			<div
@@ -118,15 +116,12 @@ const GameCard = ({
 					<IconText icon={<ClockIcon />} text={`Total: ${formatTime(playtimes.total)}`} />
 
 					{playtimes.recent > 0 && (
-						<IconText
-							icon={<ClockIcon />}
-							text={`Recent: ${formatTime(playtimes.recent)}`}
-						/>
+						<IconText icon={<ClockIcon />} text={`Recent: ${formatTime(playtimes.recent)}`} />
 					)}
 				</div>
 			)}
 		</div>
-	);
-};
+	)
+}
 
-export default GameCard;
+export default GameCard

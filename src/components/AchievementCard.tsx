@@ -1,17 +1,17 @@
-import clsx from 'clsx';
-import { motion } from 'framer-motion';
-import CompletedBadge from './CompletedBadge';
+import clsx from 'clsx'
+import { motion } from 'framer-motion'
+import CompletedBadge from './CompletedBadge'
 
 type Props = {
-	achCard: AchCard;
+	achCard: AchCard
 	displayOptions: {
-		showTime: boolean;
-		showGlobal: boolean;
-	};
-};
+		showTime: boolean
+		showGlobal: boolean
+	}
+}
 
 const AchievementCard = ({ achCard, displayOptions }: Props) => {
-	const { name, description, globalCompleted, completed, completedTime } = achCard;
+	const { name, description, globalCompleted, completed, completedTime } = achCard
 
 	return (
 		<div className="relative flex h-full w-80 flex-col rounded bg-white text-center">
@@ -21,9 +21,7 @@ const AchievementCard = ({ achCard, displayOptions }: Props) => {
 			{/* Text */}
 			<div className="flex h-full flex-col items-center gap-1 p-4">
 				<h2 className="text-xl">{name}</h2>
-				<p className={clsx('mb-auto', { italic: !description })}>
-					{description || 'Hidden'}
-				</p>
+				<p className={clsx('mb-auto', { italic: !description })}>{description || 'Hidden'}</p>
 
 				{completed && displayOptions.showTime && (
 					<>
@@ -54,7 +52,7 @@ const AchievementCard = ({ achCard, displayOptions }: Props) => {
 				</div>
 			)}
 		</div>
-	);
-};
+	)
+}
 
-export default AchievementCard;
+export default AchievementCard

@@ -1,19 +1,14 @@
-import { Fragment } from 'react';
-import {
-	Disclosure,
-	DisclosureButton,
-	DisclosurePanel,
-	Transition,
-} from '@headlessui/react';
-import { ChevronUpIcon } from './HeroIcons';
+import { Fragment } from 'react'
+import { Disclosure, DisclosureButton, DisclosurePanel, Transition } from '@headlessui/react'
+import { ChevronUpIcon } from './HeroIcons'
 
 // Styled and specific implementation of Headless UI's Disclosure
 export const Container = ({
 	bottomText,
 	children,
 }: {
-	bottomText: string;
-	children: React.ReactNode[];
+	bottomText: string
+	children: React.ReactNode[]
 }) => (
 	<div className="flex w-80 flex-col gap-2 rounded bg-white p-3">
 		<Disclosure>
@@ -45,8 +40,8 @@ export const Container = ({
 			<span className="text-center italic">{bottomText}</span>
 		</Disclosure>
 	</div>
-);
+)
 
 export const Group = ({ children }: { children: React.ReactNode }) => (
 	<div className="flex w-full flex-col gap-2">{children}</div>
-);
+)

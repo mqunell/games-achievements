@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { TrophyIcon } from './HeroIcons';
+import { motion } from 'framer-motion'
+import { TrophyIcon } from './HeroIcons'
 
 const CompletedBadge = () => (
 	<motion.div
@@ -10,6 +10,6 @@ const CompletedBadge = () => (
 	>
 		<TrophyIcon className="size-8 text-white" />
 	</motion.div>
-);
+)
 
-export default CompletedBadge;
+export default CompletedBadge

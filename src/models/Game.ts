@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
 const GameSchema = new mongoose.Schema(
 	{
@@ -26,10 +26,9 @@ const GameSchema = new mongoose.Schema(
 			},
 		],
 	},
-	{ _id: false }
-);
+	{ _id: false },
+)
 
-GameSchema.index({ id: 1, platform: 1 }, { unique: true });
+GameSchema.index({ id: 1, platform: 1 }, { unique: true })
 
-export default (mongoose.models.Game as mongoose.Model<Game>) ||
-	mongoose.model('Game', GameSchema);
+export default (mongoose.models.Game as mongoose.Model<Game>) || mongoose.model('Game', GameSchema)

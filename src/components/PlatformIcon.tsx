@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import clsx from 'clsx';
+import Image from 'next/image'
+import clsx from 'clsx'
 
 const PlatformIcon = ({ platform, size }: { platform: Platform; size: Size }) => (
 	<div
@@ -11,6 +11,6 @@ const PlatformIcon = ({ platform, size }: { platform: Platform; size: Size }) =>
 	>
 		<Image src={`/${platform}.svg`} alt={`${platform} logo`} fill={true} />
 	</div>
-);
+)
 
-export default PlatformIcon;
+export default PlatformIcon

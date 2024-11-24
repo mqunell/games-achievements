@@ -1,9 +1,9 @@
-import clsx from 'clsx';
+import clsx from 'clsx'
 
 type Props = {
-	filterText: string;
-	setFilterText: Function;
-};
+	filterText: string
+	setFilterText: Function
+}
 
 const TextFilter = ({ filterText, setFilterText }: Props) => (
 	<input
@@ -15,6 +15,6 @@ const TextFilter = ({ filterText, setFilterText }: Props) => (
 		placeholder="Name"
 		onChange={(e) => setFilterText(e.target.value)}
 	/>
-);
+)
 
-export default TextFilter;
+export default TextFilter

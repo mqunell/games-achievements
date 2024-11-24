@@ -1,14 +1,14 @@
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion'
 
 // Page - motion and fromDirection are used for page transitions
 export const Container = ({
 	fromDirection,
 	children,
 }: {
-	fromDirection: 'left' | 'right';
-	children: React.ReactNode;
+	fromDirection: 'left' | 'right'
+	children: React.ReactNode
 }) => {
-	const x = fromDirection === 'left' ? -200 : 200;
+	const x = fromDirection === 'left' ? -200 : 200
 
 	return (
 		<motion.div
@@ -21,13 +21,13 @@ export const Container = ({
 				{children}
 			</div>
 		</motion.div>
-	);
-};
+	)
+}
 
 export const Sidebar = ({ children }: { children: React.ReactNode }) => (
 	<div className="flex flex-col gap-8">{children}</div>
-);
+)
 
 export const Content = ({ children }: { children: React.ReactNode }) => (
 	<div className="flex w-full flex-wrap justify-center gap-8">{children}</div>
-);
+)

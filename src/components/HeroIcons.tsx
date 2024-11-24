@@ -3,7 +3,7 @@ const svgV1Props = (className: string) => ({
 	viewBox: '0 0 20 20',
 	fill: 'currentColor',
 	className: className || 'size-5',
-});
+})
 
 const svgV2Props = (className: string) => ({
 	xmlns: 'http://www.w3.org/2000/svg',
@@ -12,7 +12,7 @@ const svgV2Props = (className: string) => ({
 	stroke: 'currentColor',
 	strokeWidth: 2,
 	className: className || 'size-5',
-});
+})
 
 // arrow-left solid v1.0.6
 export const ArrowLeftIcon = ({ className }: { className?: string }) => (
@@ -23,7 +23,7 @@ export const ArrowLeftIcon = ({ className }: { className?: string }) => (
 			clipRule="evenodd"
 		/>
 	</svg>
-);
+)
 
 // check solid v1.0.6
 export const CheckIcon = ({ className }: { className?: string }) => (
@@ -34,7 +34,7 @@ export const CheckIcon = ({ className }: { className?: string }) => (
 			clipRule="evenodd"
 		/>
 	</svg>
-);
+)
 
 // check-circle solid v1.0.6
 export const CheckCircleIcon = ({ className }: { className?: string }) => (
@@ -45,7 +45,7 @@ export const CheckCircleIcon = ({ className }: { className?: string }) => (
 			clipRule="evenodd"
 		/>
 	</svg>
-);
+)
 
 // chevron-up solid v1.0.6
 export const ChevronUpIcon = ({ className }: { className?: string }) => (
@@ -56,7 +56,7 @@ export const ChevronUpIcon = ({ className }: { className?: string }) => (
 			clipRule="evenodd"
 		/>
 	</svg>
-);
+)
 
 // clock solid v1.0.6
 export const ClockIcon = ({ className }: { className?: string }) => (
@@ -67,7 +67,7 @@ export const ClockIcon = ({ className }: { className?: string }) => (
 			clipRule="evenodd"
 		/>
 	</svg>
-);
+)
 
 // selector solid v1.0.6
 export const SelectorIcon = ({ className }: { className?: string }) => (
@@ -78,7 +78,7 @@ export const SelectorIcon = ({ className }: { className?: string }) => (
 			clipRule="evenodd"
 		/>
 	</svg>
-);
+)
 
 // trophy outline v2.1.1
 export const TrophyIcon = ({ className }: { className?: string }) => (
@@ -89,4 +89,4 @@ export const TrophyIcon = ({ className }: { className?: string }) => (
 			d="M16.5 18.75h-9m9 0a3 3 0 0 1 3 3h-15a3 3 0 0 1 3-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 0 1-.982-3.172M9.497 14.25a7.454 7.454 0 0 0 .981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 0 0 7.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 0 0 2.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 0 1 2.916.52 6.003 6.003 0 0 1-5.395 4.972m0 0a6.726 6.726 0 0 1-2.749 1.35m0 0a6.772 6.772 0 0 1-3.044 0"
 		/>
 	</svg>
-);
+)
