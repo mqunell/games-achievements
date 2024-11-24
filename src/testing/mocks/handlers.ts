@@ -10,6 +10,15 @@ export const handlers = [
 		})
 	}),
 
+	http.get('http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/', async () => {
+		return HttpResponse.json({
+			response: {
+				total_count: 0,
+				games: [],
+			},
+		})
+	}),
+
 	http.get(
 		'http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/',
 		async ({ request }) => {
