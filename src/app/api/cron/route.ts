@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server'
 import dbConnect from '@/data/dbConnect'
 import Game from '@/models/Game'
-import { buildUpdatedGame, getApiGamesToUpdate } from './cron'
+import { getGamesToUpdate } from './cron'
 
 const { CRON_SECRET } = process.env
 
@@ -14,19 +14,17 @@ export const GET = async (request: NextRequest) => {
 		return new Response('Unauthorized', { status: 401 })
 	}
 
-	const apiGamesToUpdate: ApiGame[] = await getApiGamesToUpdate()
+	const gamesToUpdate: Game[] = await getGamesToUpdate()
 	const updatedGameNames: string[] = []
 
 	await dbConnect()
-	for (let apiGame of apiGamesToUpdate) {
-		const game: Game = await buildUpdatedGame(apiGame)
-
+	for (const game of gamesToUpdate) {
 		// @ts-ignore
 		await Game.findOneAndUpdate({ id: game.id, platform: 'Steam' }, game, {
 			upsert: true,
 		})
 
-		updatedGameNames.push(apiGame.name)
+		updatedGameNames.push(game.name)
 	}
 
 	return new Response(`Updated ${updatedGameNames.length} game(s): ${updatedGameNames.join(', ')}`)

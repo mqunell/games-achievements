@@ -3,7 +3,7 @@ type ApiGame = {
 	name: string
 	playtime_2weeks?: number // Minutes; not included by API if 0
 	playtime_forever: number // Minutes
-	[key: string]: any // Others are irrelevant
+	// Others are irrelevant
 }
 
 type ApiUserAchievement = {

@@ -1,15 +1,6 @@
 import { http, HttpResponse } from 'msw'
 
 export const handlers = [
-	http.get('http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/', async () => {
-		return HttpResponse.json({
-			response: {
-				game_count: 6,
-				games: [], // Need to think about what should be mocked here
-			},
-		})
-	}),
-
 	http.get('http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/', async () => {
 		return HttpResponse.json({
 			response: {
@@ -75,15 +66,13 @@ export const handlers = [
 					],
 					success: true,
 				},
-				3: {
-					steamid: 3,
-					gameName: 'Game 3',
-					success: true,
-				},
 			}
 
 			return HttpResponse.json({
-				playerstats: mockUserAchievements[gameId],
+				playerstats: mockUserAchievements[gameId] ?? {
+					error: 'Requested app has no stats',
+					success: false,
+				},
 			})
 		},
 	),

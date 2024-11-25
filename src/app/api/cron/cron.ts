@@ -1,39 +1,50 @@
 import { getRecentSteamGames } from '@/data/dbHelper'
-import { getGlobalAchs, getUserAchs, getUserGames, getUserRecentGames } from '@/data/steamApi'
+import { getGlobalAchs, getUserAchs, getUserRecentGames } from '@/data/steamApi'
+
+const invalidGameIds = ['218620', '359050', '365720', '469820', '489830', '1053680']
 
 /**
  * Determine which ApiGames need to be updated. This optimizes the overall process by only updating
  * games with new recent playtimes (typically <5) rather than every game (>80).
  *
- * 1. Get all games from the database that have a recent playtime
- * 2. Get all games from the Steam user's library and recently played, and merge them into one list
- * 3. Filter the Steam games to those that have a different recent playtime than their database
- *    counterpart (meaning the recent playtime changed, including becoming 0), or do not have a
- *    database counterpart (meaning the recent playtime became non-0)
+ * 1. Get games from Steam that have been a recent playtime
+ * 2. Get games from the database that have a recent playtime
+ * 3. Determine which games need to be updated by comparing recent playtimes.
+ *    - Game in both with the same recent playtimes: Skip
+ *    - Game in both with different recent playtimes: buildUpdatedGame()
+ *    - Game only in Steam: buildUpdatedGame()
+ *    - Game only in database: Set playtimeRecent to 0
  */
-export const getApiGamesToUpdate = async (): Promise<ApiGame[]> => {
-	const invalidIds = ['218620', '359050', '365720', '469820', '489830', '1053680']
-	const dbRecentGames: RecentGame[] = await getRecentSteamGames()
-
-	const steamGames: ApiGame[] = await getUserGames()
+export const getGamesToUpdate = async (): Promise<Game[]> => {
 	const steamRecentGames: ApiGame[] = await getUserRecentGames()
-	steamRecentGames.forEach((recentGame) => {
-		if (!steamGames.find((game) => game.appid === recentGame.appid)) {
-			steamGames.push(recentGame)
+	const dbRecentGames: Game[] = await getRecentSteamGames()
+
+	const gamesToUpdate: Game[] = []
+
+	// Recent Steam games - potentially no recent database counterpart
+	for (const apiGame of steamRecentGames) {
+		const appId = String(apiGame.appid)
+		if (invalidGameIds.includes(appId)) continue
+
+		const dbGame: Game = dbRecentGames.find(({ id }) => id === appId)
+		if (apiGame.playtime_2weeks !== dbGame?.playtimeRecent) {
+			const updatedGame = await buildUpdatedGame(apiGame)
+			gamesToUpdate.push(updatedGame)
 		}
-	})
+	}
 
-	const steamGamesToUpdate: ApiGame[] = steamGames.filter((game: ApiGame) => {
-		const gameId = String(game.appid)
-		const dbGame = dbRecentGames.find((dbGame: Game) => dbGame.id === gameId)
+	// Recent database games - potentially no recent Steam counterpart
+	for (const dbGame of dbRecentGames) {
+		if (invalidGameIds.includes(dbGame.id)) continue
+		if (gamesToUpdate.find(({ id }) => id === dbGame.id)) continue
 
-		const diffPlaytimeRecent = game.playtime_2weeks !== dbGame?.playtimeRecent
-		const isInvalid = invalidIds.includes(gameId)
+		const apiGame: ApiGame = steamRecentGames.find(({ appid }) => String(appid) === dbGame.id)
+		if (!apiGame) {
+			gamesToUpdate.push({ ...dbGame, playtimeRecent: 0 })
+		}
+	}
 
-		return diffPlaytimeRecent && !isInvalid
-	})
-
-	return steamGamesToUpdate
+	return gamesToUpdate
 }
 
 /**
