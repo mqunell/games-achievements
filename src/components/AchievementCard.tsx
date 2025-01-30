@@ -14,7 +14,7 @@ const AchievementCard = ({ achCard, displayOptions }: Props) => {
 	const { name, description, globalCompleted, completed, completedTime } = achCard
 
 	return (
-		<div className="relative flex h-full w-80 flex-col rounded bg-white text-center">
+		<div className="relative flex h-full w-80 flex-col rounded-sm bg-white text-center">
 			{/* Checkmark */}
 			{completed && <CompletedBadge />}
 
@@ -45,7 +45,7 @@ const AchievementCard = ({ achCard, displayOptions }: Props) => {
 						className="origin-left bg-blue-600 p-1.5"
 						style={{ width: globalCompleted + '%' }}
 					>
-						<p className="w-max rounded border border-black bg-white px-1.5 py-0.5 text-xs">
+						<p className="w-max rounded-sm border border-black bg-white px-1.5 py-0.5 text-xs">
 							{globalCompleted.toFixed(1)}%
 						</p>
 					</motion.div>

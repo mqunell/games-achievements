@@ -12,12 +12,12 @@ type Props = {
  */
 const Select = ({ sortBy, setSortBy, sortOptions }: Props) => (
 	<Listbox as="div" className="flex w-full flex-col gap-1" value={sortBy} onChange={setSortBy}>
-		<ListboxButton className="flex items-center justify-between rounded bg-green-500 px-2 py-1 text-white">
+		<ListboxButton className="flex items-center justify-between rounded-sm bg-green-500 px-2 py-1 text-white">
 			<span>{sortBy}</span>
 			<SelectorIcon />
 		</ListboxButton>
 
-		<ListboxOptions className="flex flex-col divide-y overflow-hidden rounded border border-green-500 text-white">
+		<ListboxOptions className="flex flex-col divide-y overflow-hidden rounded-sm border border-green-500 text-white">
 			{sortOptions.map((option) => (
 				<ListboxOption
 					key={option}

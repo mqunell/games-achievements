@@ -1,6 +1,13 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@plugin '@headlessui/tailwindcss';
+
+@theme {
+  --color-body: rgb(36, 40, 47);
+  --color-footer: rgb(22, 25, 29);
+
+  --min-height-layout: calc(100vh - 36px);
+}
 
 body {
 	font-family: var(--font-anek);

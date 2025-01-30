@@ -121,7 +121,7 @@ const GameAchievementsClient = ({ gameCard }: Props) => {
 					animate={{ opacity: 1, x: 0 }}
 					exit={{ opacity: 0, x: 40 }}
 					transition={{ type: 'linear', duration: 0.5, delay: 0.5 }}
-					className="relative rounded border border-black bg-white px-4 py-3 shadow"
+					className="relative rounded-sm border border-black bg-white px-4 py-3 shadow-sm"
 				>
 					<ArrowLeftIcon className="size-4" />
 				</motion.div>

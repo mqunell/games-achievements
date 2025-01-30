@@ -57,7 +57,7 @@ const GameCard = ({
 	return (
 		<div
 			className={clsx(
-				'relative flex w-80 flex-col items-center gap-2 rounded bg-white p-4 text-center',
+				'relative flex w-80 flex-col items-center gap-2 rounded-sm bg-white p-4 text-center',
 				{ 'transform duration-150 md:hover:scale-105': size === 'small' },
 			)}
 		>
