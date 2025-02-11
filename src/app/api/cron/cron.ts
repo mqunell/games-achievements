@@ -9,7 +9,7 @@ const invalidGameIds = ['218620', '359050', '365720', '469820', '489830', '10536
  *
  * 1. Get games from Steam that have been a recent playtime
  * 2. Get games from the database that have a recent playtime
- * 3. Determine which games need to be updated by comparing recent playtimes.
+ * 3. Determine which games need to be updated by comparing recent playtimes
  *    - Game in both with the same recent playtimes: Skip
  *    - Game in both with different recent playtimes: buildUpdatedGame()
  *    - Game only in Steam: buildUpdatedGame()
@@ -90,7 +90,7 @@ const buildUpdatedAchievements = async (gameId: GameId): Promise<Achievement[]> 
 			description: userAch.description,
 			completed: userAch.unlocktime !== 0,
 			completedTime: userAch.unlocktime,
-			globalCompleted: Number(globalAch.percent.toFixed(2)),
+			globalCompleted: Number(Number(globalAch.percent).toFixed(2)),
 		}
 	})
 

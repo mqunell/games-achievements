@@ -16,5 +16,5 @@ type ApiUserAchievement = {
 
 type ApiGlobalAchievement = {
 	name: string // ID
-	percent: number
+	percent: number | string
 }
