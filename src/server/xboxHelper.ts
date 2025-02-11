@@ -59,9 +59,9 @@ const steamToJson = async ({ userId, gameId }): Promise<GameType> => {
 				description: apiAch.description,
 				completed: false,
 				completedTime: 0,
-				globalCompleted: apiGlobalAchs.find(
+				globalCompleted: Number(apiGlobalAchs.find(
 					(globalAch) => globalAch.name === apiAch.apiname,
-				).percent,
+				).percent),
 			})),
 		};
 
