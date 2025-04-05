@@ -65,7 +65,7 @@ export const buildUpdatedGame = async (game: ApiGame): Promise<Game> => {
 		name: game.name,
 		platform: 'Steam',
 		playtimeRecent: game.playtime_2weeks ?? 0,
-		playtimeTotal: game.playtime_forever,
+		playtimeTotal: game.playtime_forever + (game.playtime_disconnected ?? 0),
 		achievements: achs,
 	}
 }
