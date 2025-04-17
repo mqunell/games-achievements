@@ -5,7 +5,7 @@ import { GameType } from './types'; // Copied from db.d.ts
 /**
  * Manually add a Switch game to the database
  * 1. Update the game object
- * 2. `npm run switchHelper`
+ * 2. `p switchHelper`
  */
 
 const game: GameType = {

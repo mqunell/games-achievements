@@ -17,7 +17,10 @@ const generateGameCard = (game: Game): GameCard => ({
 
 // TODO: Need something (database flag?) for determining which game has priority when there are multiple
 const generateCombinedGameCard = (games: Game[]): GameCard => {
-	const priorityGame = games.find((game) => game.platform === 'Steam') || games[0]
+	const priorityGame =
+		games.find((game) => game.platform === 'Steam') ||
+		games.find((game) => game.platform === 'Xbox') ||
+		games[0]
 
 	return {
 		...generateGameCard(priorityGame),

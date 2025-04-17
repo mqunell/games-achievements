@@ -21,9 +21,11 @@ type IconTextProps = {
 }
 
 const logoUrl = (gameId: GameId, platforms: Platform[]) => {
-	return !platforms.includes('Switch')
-		? `https://steamcdn-a.akamaihd.net/steam/apps/${gameId}/header.jpg`
-		: `/Switch/${gameId}.jpg`
+	const switchOnly = platforms.length === 1 && platforms[0] === 'Switch'
+
+	return switchOnly
+		? `/Switch/${gameId}.jpg`
+		: `https://steamcdn-a.akamaihd.net/steam/apps/${gameId}/header.jpg`
 }
 
 const formatTime = (minutes: number) => {
