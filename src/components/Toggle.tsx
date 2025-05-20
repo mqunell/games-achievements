@@ -17,7 +17,7 @@ const Toggle = ({ label, checked, onClick }: Props) => (
 				onChange={() => onClick()}
 				className={`${
 					checked ? 'bg-green-500' : 'bg-black'
-				} relative inline-flex h-6 w-10 items-center rounded-full transition-colors duration-500`}
+				} relative inline-flex h-6 w-10 cursor-pointer items-center rounded-full transition-colors duration-500`}
 			>
 				<span
 					className={`${

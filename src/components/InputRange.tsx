@@ -8,7 +8,7 @@ const InputRange = ({ title, value, setValue }: Props) => (
 	<label className="grid grid-cols-[1fr_28px] gap-x-2">
 		<span className="col-span-2">{title}</span>
 		<input
-			className="w-full accent-green-500"
+			className="w-full cursor-pointer accent-green-500"
 			type="range"
 			min="0"
 			max="100"

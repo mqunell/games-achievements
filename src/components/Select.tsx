@@ -12,7 +12,7 @@ type Props = {
  */
 const Select = ({ sortBy, setSortBy, sortOptions }: Props) => (
 	<Listbox as="div" className="flex w-full flex-col gap-1" value={sortBy} onChange={setSortBy}>
-		<ListboxButton className="flex items-center justify-between rounded-sm bg-green-500 px-2 py-1 text-white">
+		<ListboxButton className="flex cursor-pointer items-center justify-between rounded-sm bg-green-500 px-2 py-1 text-white">
 			<span>{sortBy}</span>
 			<SelectorIcon />
 		</ListboxButton>
@@ -22,10 +22,10 @@ const Select = ({ sortBy, setSortBy, sortOptions }: Props) => (
 				<ListboxOption
 					key={option}
 					value={option}
-					className="flex cursor-pointer items-center justify-between px-2 py-1 ui-active:bg-green-600 ui-not-active:bg-green-500"
+					className="ui-active:bg-green-600 ui-not-active:bg-green-500 flex cursor-pointer items-center justify-between px-2 py-1"
 				>
 					<span>{option}</span>
-					<CheckIcon className="hidden size-4 ui-selected:block" />
+					<CheckIcon className="ui-selected:block hidden size-4" />
 				</ListboxOption>
 			))}
 		</ListboxOptions>
