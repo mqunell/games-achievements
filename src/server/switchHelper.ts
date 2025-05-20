@@ -9,7 +9,7 @@ import { GameType } from './types'; // Copied from db.d.ts
  */
 
 const game: GameType = {
-	id: 'Pikmin4',
+	id: 'Pikmin4',  // Needs to match the Steam ID for merging playtimes in the UI
 	name: 'Pikmin 4',
 	platform: 'Switch',
 	playtimeRecent: 0,
