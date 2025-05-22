@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { cloneElement, useState } from 'react'
 import Image from 'next/image'
 import clsx from 'clsx'
 import CompletedBadge from './CompletedBadge'
@@ -15,7 +15,7 @@ type Props = {
 }
 
 type IconTextProps = {
-	icon: React.ReactNode
+	icon: JSX.Element
 	text: string
 	italic?: boolean
 }
@@ -37,7 +37,7 @@ const formatTime = (minutes: number) => {
 
 const IconText = ({ icon, text, italic = false }: IconTextProps) => (
 	<div className="flex items-center gap-1.5">
-		<div className="rounded-full bg-green-500 p-0.5 text-white">{icon}</div>
+		{cloneElement(icon, { className: 'size-6 text-green-500' })}
 		<p className={clsx('text-lg', { italic: italic })}>{text}</p>
 	</div>
 )

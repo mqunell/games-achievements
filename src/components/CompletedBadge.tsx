@@ -6,9 +6,9 @@ const CompletedBadge = () => (
 		initial={{ scale: 0 }}
 		animate={{ scale: 1 }}
 		transition={{ duration: 0.5, delay: 0.5 }}
-		className="absolute -right-4 -top-3 z-10 h-max w-max rounded-full bg-green-500 p-2"
+		className="absolute -top-3 -right-4 z-10"
 	>
-		<TrophyIcon className="size-8 text-white" />
+		<TrophyIcon className="size-12 rounded-full bg-green-500 p-2 text-white" />
 	</motion.div>
 )
 
