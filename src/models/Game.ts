@@ -11,10 +11,11 @@ const GameSchema = new mongoose.Schema(
 			required: [true, 'Game name is required'],
 		},
 		platform: {
-			enum: ['Steam', 'Xbox'],
+			enum: ['Steam', 'Xbox', 'Switch'],
 		},
 		playtimeRecent: Number,
 		playtimeTotal: Number,
+		timeLastPlayed: Date,
 		achievements: [
 			{
 				id: String,

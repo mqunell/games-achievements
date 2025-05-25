@@ -1,6 +1,5 @@
-import dbConnect from '@/data/dbConnect';
-import Game from '@/models/Game';
-import { GameType } from './types'; // Copied from db.d.ts
+import dbConnect from '@/data/dbConnect'
+import Game from '@/models/Game'
 
 /**
  * Manually add a Switch game to the database
@@ -8,22 +7,27 @@ import { GameType } from './types'; // Copied from db.d.ts
  * 2. `p switchHelper`
  */
 
-const game: GameType = {
-	id: 'Pikmin4',  // Needs to match the Steam ID for merging playtimes in the UI
+const game: Game = {
+	id: 'Pikmin4', // Needs to match the Steam ID for merging playtimes in the UI
 	name: 'Pikmin 4',
 	platform: 'Switch',
 	playtimeRecent: 0,
 	playtimeTotal: 0,
+	timeLastPlayed: null,
 	achievements: [],
-};
+}
 
-(async () => {
-	await dbConnect();
+const addSwitchGame = async () => {
+	await dbConnect()
 
 	// @ts-ignore
 	await Game.findOneAndUpdate({ id: game.id }, game, {
 		upsert: true,
 	})
 		.then(() => console.log(`${game.name} upserted`))
-		.catch((err) => console.log(err));
-})();
+		.catch((err) => console.log(err))
+
+	process.exit()
+}
+
+addSwitchGame()

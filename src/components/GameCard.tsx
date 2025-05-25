@@ -2,7 +2,7 @@ import { cloneElement, useState } from 'react'
 import Image from 'next/image'
 import clsx from 'clsx'
 import CompletedBadge from './CompletedBadge'
-import { CheckCircleIcon, ClockIcon } from './HeroIcons'
+import { CalendarIcon, CheckCircleIcon, ClockIcon } from './HeroIcons'
 import PlatformIcon from './PlatformIcon'
 
 type Props = {
@@ -47,7 +47,7 @@ const GameCard = ({
 	size,
 	displayOptions = { showProgress: true, showPlaytime: true },
 }: Props) => {
-	const { gameId, name, platforms, playtimes, achievementCounts: achCounts } = game
+	const { gameId, name, platforms, playtimes, achievementCounts: achCounts, timeLastPlayed } = game
 	const { showProgress, showPlaytime } = displayOptions
 
 	const [poster, setPoster] = useState(logoUrl(gameId, platforms))
@@ -121,6 +121,17 @@ const GameCard = ({
 						<IconText icon={<ClockIcon />} text={`Recent: ${formatTime(playtimes.recent)}`} />
 					)}
 				</div>
+			)}
+
+			{/* Time last played */}
+			{timeLastPlayed && (
+				<IconText
+					icon={<CalendarIcon />}
+					text={`Last played: ${new Date(timeLastPlayed).toLocaleDateString('en-US', {
+						month: 'numeric',
+						year: '2-digit',
+					})}`}
+				/>
 			)}
 		</div>
 	)

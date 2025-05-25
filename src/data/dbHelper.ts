@@ -9,7 +9,8 @@ export const getAllGames = async (): Promise<Game[]> => {
 	const res = await Game.find({}, '-_id -__v')
 	const data = res.map((doc) => doc.toObject())
 
-	// fs.writeFileSync(`games-backup-${Date.now()}.json`, JSON.stringify(data, null, '\t'))
+	// const timestamp = new Date().toISOString().slice(0, 10)
+	// fs.writeFileSync(`games-backup-${timestamp}.json`, JSON.stringify(data, null, '\t'))
 
 	return data
 }

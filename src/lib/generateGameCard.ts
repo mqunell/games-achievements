@@ -8,6 +8,7 @@ const generateGameCard = (game: Game): GameCard => ({
 		recent: game.playtimeRecent,
 		total: game.playtimeTotal,
 	},
+	timeLastPlayed: game.timeLastPlayed,
 	achievements: game.achievements || [],
 	achievementCounts: {
 		total: game.achievements?.length || 0,

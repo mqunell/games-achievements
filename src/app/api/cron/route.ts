@@ -20,9 +20,7 @@ export const GET = async (request: NextRequest) => {
 	await dbConnect()
 	for (const game of gamesToUpdate) {
 		// @ts-ignore
-		await Game.findOneAndUpdate({ id: game.id, platform: 'Steam' }, game, {
-			upsert: true,
-		})
+		await Game.findOneAndUpdate({ id: game.id, platform: 'Steam' }, game, { upsert: true })
 
 		updatedGameNames.push(game.name)
 	}
