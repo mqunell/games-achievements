@@ -4,10 +4,10 @@ import { ChevronUpIcon } from './HeroIcons'
 
 // Styled and specific implementation of Headless UI's Disclosure
 export const Container = ({
-	bottomText,
+	footer,
 	children,
 }: {
-	bottomText: string
+	footer: string
 	children: React.ReactNode[]
 }) => (
 	<div className="flex w-80 flex-col gap-2 rounded-sm bg-white p-3">
@@ -37,11 +37,14 @@ export const Container = ({
 				</DisclosurePanel>
 			</Transition>
 
-			<span className="text-center italic">{bottomText}</span>
+			<span className="text-center italic">{footer}</span>
 		</Disclosure>
 	</div>
 )
 
-export const Group = ({ children }: { children: React.ReactNode }) => (
-	<div className="flex w-full flex-col gap-2">{children}</div>
+export const Group = ({ header, children }: { header: string; children: React.ReactNode }) => (
+	<div className="flex w-full flex-col gap-2">
+		<h3 className="font-semibold">{header}</h3>
+		{children}
+	</div>
 )

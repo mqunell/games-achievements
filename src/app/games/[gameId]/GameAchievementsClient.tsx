@@ -58,10 +58,9 @@ const GameAchievementsClient = ({ gameCard }: Props) => {
 				<GameCard game={gameCard} size="large" />
 
 				<DisplayOptions.Container
-					bottomText={`Displaying ${displayedAchievements.length}/${gameCard.achievements.length} achievements`}
+					footer={`Displaying ${displayedAchievements.length}/${gameCard.achievements.length} achievements`}
 				>
-					<DisplayOptions.Group>
-						<h3 className="font-semibold">Display</h3>
+					<DisplayOptions.Group header="Display">
 						<Toggle
 							label="Completion time"
 							checked={showTime}
@@ -74,8 +73,7 @@ const GameAchievementsClient = ({ gameCard }: Props) => {
 						/>
 					</DisplayOptions.Group>
 
-					<DisplayOptions.Group>
-						<h3 className="font-semibold">Filters</h3>
+					<DisplayOptions.Group header="Filters">
 						<TextFilter filterText={filterText} setFilterText={setFilterText} />
 						<Toggle
 							label="Completed achievements"
@@ -89,8 +87,7 @@ const GameAchievementsClient = ({ gameCard }: Props) => {
 						/>
 					</DisplayOptions.Group>
 
-					<DisplayOptions.Group>
-						<h3 className="font-semibold">Sorting</h3>
+					<DisplayOptions.Group header="Sorting">
 						<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={sortOptions} />
 					</DisplayOptions.Group>
 				</DisplayOptions.Container>

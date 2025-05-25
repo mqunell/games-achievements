@@ -63,10 +63,9 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 		<Layout.Container fromDirection="left">
 			<Layout.Sidebar>
 				<DisplayOptions.Container
-					bottomText={`Displaying ${displayedGames.length}/${gameCards.length} Games`}
+					footer={`Displaying ${displayedGames.length}/${gameCards.length} Games`}
 				>
-					<DisplayOptions.Group>
-						<h3 className="font-semibold">Display</h3>
+					<DisplayOptions.Group header="Display">
 						<Toggle
 							label="Achievement progress"
 							checked={showProgress}
@@ -79,8 +78,7 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 						/>
 					</DisplayOptions.Group>
 
-					<DisplayOptions.Group>
-						<h3 className="font-semibold">Filters</h3>
+					<DisplayOptions.Group header="Filters">
 						<TextFilter filterText={filterText} setFilterText={setFilterText} />
 						<div className="flex gap-6">
 							{['Steam', 'Xbox', 'Switch'].map((platform: Platform) => (
@@ -105,8 +103,7 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 						/>
 					</DisplayOptions.Group>
 
-					<DisplayOptions.Group>
-						<h3 className="font-semibold">Sorting</h3>
+					<DisplayOptions.Group header="Sorting">
 						<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={sortOptions} />
 					</DisplayOptions.Group>
 				</DisplayOptions.Container>
