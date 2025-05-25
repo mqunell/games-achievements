@@ -20,6 +20,7 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 	// Display state
 	const [showProgress, setShowProgress] = useState(true)
 	const [showPlaytime, setShowPlaytime] = useState(true)
+	const [showTimeLastPlayed, setShowTimeLastPlayed] = useState(true)
 
 	// Filter state
 	const [filterPlatforms, setFilterPlatforms] = useState({
@@ -76,6 +77,11 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 							checked={showPlaytime}
 							onClick={() => setShowPlaytime(!showPlaytime)}
 						/>
+						<Toggle
+							label="Time last played"
+							checked={showTimeLastPlayed}
+							onClick={() => setShowTimeLastPlayed(!showTimeLastPlayed)}
+						/>
 					</DisplayOptions.Group>
 
 					<DisplayOptions.Group header="Filters">
@@ -125,7 +131,7 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 								<GameCard
 									game={game}
 									size="small"
-									displayOptions={{ showProgress, showPlaytime }}
+									displayOptions={{ showProgress, showPlaytime, showTimeLastPlayed }}
 								/>
 							</motion.div>
 						</Link>

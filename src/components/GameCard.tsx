@@ -11,6 +11,7 @@ type Props = {
 	displayOptions?: {
 		showProgress: boolean
 		showPlaytime: boolean
+		showTimeLastPlayed: boolean
 	}
 }
 
@@ -45,10 +46,10 @@ const IconText = ({ icon, text, italic = false }: IconTextProps) => (
 const GameCard = ({
 	game,
 	size,
-	displayOptions = { showProgress: true, showPlaytime: true },
+	displayOptions = { showProgress: true, showPlaytime: true, showTimeLastPlayed: true },
 }: Props) => {
 	const { gameId, name, platforms, playtimes, achievementCounts: achCounts, timeLastPlayed } = game
-	const { showProgress, showPlaytime } = displayOptions
+	const { showProgress, showPlaytime, showTimeLastPlayed } = displayOptions
 
 	const [poster, setPoster] = useState(logoUrl(gameId, platforms))
 
@@ -97,7 +98,7 @@ const GameCard = ({
 				</h1>
 			</div>
 
-			{(showProgress || showPlaytime) && <hr className="my-1 w-full" />}
+			{(showProgress || showPlaytime || showTimeLastPlayed) && <hr className="my-1 w-full" />}
 
 			{/* Achievements */}
 			{showProgress && (
@@ -124,13 +125,18 @@ const GameCard = ({
 			)}
 
 			{/* Time last played */}
-			{timeLastPlayed && (
+			{showTimeLastPlayed && (
 				<IconText
 					icon={<CalendarIcon />}
-					text={`Last played: ${new Date(timeLastPlayed).toLocaleDateString('en-US', {
-						month: 'numeric',
-						year: '2-digit',
-					})}`}
+					text={
+						timeLastPlayed
+							? `Last played: ${new Date(timeLastPlayed).toLocaleDateString('en-US', {
+									month: 'numeric',
+									year: '2-digit',
+								})}`
+							: 'No Timestamp'
+					}
+					italic={!timeLastPlayed}
 				/>
 			)}
 		</div>
