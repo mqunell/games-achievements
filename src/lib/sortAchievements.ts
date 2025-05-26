@@ -1,7 +1,5 @@
 export const sortOptions: AchSortOption[] = ['Name', 'Completion time', 'Global completion']
 
-export const defaultSortOption = sortOptions[1]
-
 export const compare = (a: AchCard, b: AchCard, sortBy: AchSortOption): number => {
 	if (sortBy === 'Name') {
 		return a.name < b.name ? -1 : 1

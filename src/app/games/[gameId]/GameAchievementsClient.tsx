@@ -11,17 +11,25 @@ import * as Layout from '@/components/Layout'
 import Select from '@/components/Select'
 import TextFilter from '@/components/TextFilter'
 import Toggle from '@/components/Toggle'
-import { compare, defaultSortOption, sortOptions } from '@/lib/sortAchievements'
+import { compare, sortOptions } from '@/lib/sortAchievements'
 
 type Props = {
 	gameCard: GameCard
 }
 
 const GameAchievementsClient = ({ gameCard }: Props) => {
+	const hasAchCompletedTimes = gameCard.achievements?.some(
+		(ach: Achievement) => !!ach.completedTime,
+	)
+
+	const validSortOptions = hasAchCompletedTimes
+		? sortOptions
+		: sortOptions.filter((option) => option !== 'Completion time')
+
 	const [displayedAchievements, setDisplayedAchievements] = useState<AchCard[]>([])
 
 	// Display state
-	const [showTime, setShowTime] = useState(true) // Xbox achievements don't have completion dates - todo: only show times if the default list is Steam
+	const [showTime, setShowTime] = useState(hasAchCompletedTimes) // Xbox achievements don't have completion dates
 	const [showGlobal, setShowGlobal] = useState(true)
 
 	// Filter state
@@ -30,7 +38,9 @@ const GameAchievementsClient = ({ gameCard }: Props) => {
 	const [filterText, setFilterText] = useState('')
 
 	// Sort state
-	const [sortBy, setSortBy] = useState<AchSortOption>(defaultSortOption)
+	const [sortBy, setSortBy] = useState<AchSortOption>(
+		hasAchCompletedTimes ? 'Completion time' : 'Global completion',
+	)
 
 	// Filtering and sorting
 	useEffect(() => {
@@ -88,7 +98,7 @@ const GameAchievementsClient = ({ gameCard }: Props) => {
 					</DisplayOptions.Group>
 
 					<DisplayOptions.Group header="Sorting">
-						<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={sortOptions} />
+						<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={validSortOptions} />
 					</DisplayOptions.Group>
 				</DisplayOptions.Container>
 			</Layout.Sidebar>
