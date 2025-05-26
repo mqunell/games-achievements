@@ -12,7 +12,7 @@ import Select from '@/components/Select'
 import TextFilter from '@/components/TextFilter'
 import Toggle from '@/components/Toggle'
 import { calcCompletion } from '@/lib/percentage'
-import { compare, defaultSortOption, sortOptions } from '@/lib/sortGames'
+import { compare, sortOptions } from '@/lib/sortGames'
 
 const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 	const [displayedGames, setDisplayedGames] = useState([])
@@ -33,7 +33,7 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 	const [filterTime, setFilterTime] = useState(0)
 
 	// Sort state
-	const [sortBy, setSortBy] = useState<GameSortOption>(defaultSortOption)
+	const [sortBy, setSortBy] = useState<GameSortOption>('Playtime')
 
 	// Filtering and sorting (note: merged useEffect works here because it's a display option that is changed, not a filter toggle)
 	useEffect(() => {
@@ -118,24 +118,32 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 			{/* GameCards */}
 			<Layout.Content>
 				<AnimatePresence>
-					{displayedGames.map((game: GameCard) => (
-						<Link href={`/games/${game.gameId}`} key={game.gameId}>
-							<motion.div
-								className="cursor-pointer"
-								layout="position"
-								initial={{ opacity: 0 }}
-								animate={{ opacity: 1 }}
-								exit={{ opacity: 0 }}
-								transition={{ duration: 0.5 }}
-							>
-								<GameCard
-									game={game}
-									size="small"
-									displayOptions={{ showProgress, showPlaytime, showTimeLastPlayed }}
-								/>
-							</motion.div>
-						</Link>
-					))}
+					{displayedGames.map((game: GameCard) => {
+						const clickable = game.achievements.length > 0
+
+						const Wrapper = ({ children }) => {
+							return clickable ? <Link href={`/games/${game.gameId}`}>{children}</Link> : children
+						}
+
+						return (
+							<Wrapper key={game.gameId}>
+								<motion.div
+									className={clickable ? 'cursor-pointer' : 'cursor-not-allowed'}
+									layout="position"
+									initial={{ opacity: 0 }}
+									animate={{ opacity: 1 }}
+									exit={{ opacity: 0 }}
+									transition={{ duration: 0.5 }}
+								>
+									<GameCard
+										game={game}
+										size="small"
+										displayOptions={{ showProgress, showPlaytime, showTimeLastPlayed }}
+									/>
+								</motion.div>
+							</Wrapper>
+						)
+					})}
 				</AnimatePresence>
 			</Layout.Content>
 		</Layout.Container>

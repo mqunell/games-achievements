@@ -54,8 +54,8 @@ const GameCard = ({
 	const [poster, setPoster] = useState(logoUrl(gameId, platforms))
 
 	// Show one decimal place unless x.0%
-	let percentage = ((achCounts.completed / achCounts.total) * 100).toFixed(1)
-	if (percentage.endsWith('.0')) percentage = percentage.slice(0, -2)
+	let achPercentage = ((achCounts.completed / achCounts.total) * 100).toFixed(1)
+	if (achPercentage.endsWith('.0')) achPercentage = achPercentage.slice(0, -2)
 
 	return (
 		<div
@@ -78,6 +78,7 @@ const GameCard = ({
 					src={poster}
 					alt={`${name} logo`}
 					fill={true}
+					sizes="184px 288px"
 					className="object-cover"
 					onError={() => setPoster(`/Switch/placeholder.jpg`)}
 				/>
@@ -106,7 +107,7 @@ const GameCard = ({
 					icon={<CheckCircleIcon />}
 					text={
 						achCounts.total > 0
-							? `${achCounts.completed}/${achCounts.total} - ${percentage}%`
+							? `${achCounts.completed}/${achCounts.total} - ${achPercentage}%`
 							: 'No Achievements'
 					}
 					italic={achCounts.total === 0}
@@ -131,6 +132,7 @@ const GameCard = ({
 					text={
 						timeLastPlayed
 							? `Last played: ${new Date(timeLastPlayed).toLocaleDateString('en-US', {
+									day: 'numeric',
 									month: 'numeric',
 									year: '2-digit',
 								})}`
