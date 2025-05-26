@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { beforeAll, afterEach, afterAll } from 'vitest'
-import '@/styles/globals.css'
+// import '@/styles/globals.css'
 import { server } from './mocks/server'
 
 beforeAll(() => server.listen()) // Enable mocking

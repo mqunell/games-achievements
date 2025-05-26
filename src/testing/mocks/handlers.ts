@@ -1,7 +1,7 @@
 import { http, HttpResponse } from 'msw'
 
 export const handlers = [
-	http.get('http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/', async () => {
+	http.get('http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/', async () => {
 		return HttpResponse.json({
 			response: {
 				total_count: 0,
@@ -103,4 +103,9 @@ export const handlers = [
 			})
 		},
 	),
+
+	http.get('http://api.steampowered.com/*', async () => {
+		console.error('❌ Hitting an unmocked Steam endpoint in tests!')
+		return HttpResponse.json({})
+	}),
 ]

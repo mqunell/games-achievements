@@ -7,21 +7,27 @@ const mockApiGame1: ApiGame = {
 	appid: 1,
 	name: 'Game 1',
 	playtime_forever: 100,
+	playtime_disconnected: 0,
 	playtime_2weeks: 100,
+	rtime_last_played: 1748199600,
 }
 
 const mockApiGame2: ApiGame = {
 	appid: 2,
 	name: 'Game 2',
 	playtime_forever: 200,
+	playtime_disconnected: 0,
 	playtime_2weeks: 200,
+	rtime_last_played: 1748199600,
 }
 
 const mockApiGame3: ApiGame = {
 	appid: 3,
 	name: 'Game 3',
 	playtime_forever: 300,
+	playtime_disconnected: 50,
 	playtime_2weeks: 300,
+	rtime_last_played: 1748199600,
 }
 
 const mockGame1: Game = {
@@ -30,6 +36,7 @@ const mockGame1: Game = {
 	platform: 'Steam',
 	playtimeRecent: 100,
 	playtimeTotal: 100,
+	timeLastPlayed: new Date(1748199600000),
 	achievements: [
 		{
 			id: 'ACHIEVEMENT_1A',
@@ -64,6 +71,7 @@ const mockGame2: Game = {
 	platform: 'Steam',
 	playtimeRecent: 200,
 	playtimeTotal: 200,
+	timeLastPlayed: new Date(1748199600000),
 	achievements: [
 		{
 			id: 'ACHIEVEMENT_2A',
@@ -89,13 +97,14 @@ const mockGame3: Game = {
 	name: 'Game 3',
 	platform: 'Steam',
 	playtimeRecent: 300,
-	playtimeTotal: 300,
+	playtimeTotal: 350,
+	timeLastPlayed: new Date(1748199600000),
 	achievements: null,
 }
 
 const mockSteam = (apiGames: ApiGame[]) => {
 	server.use(
-		http.get('http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/', async () =>
+		http.get('http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/', async () =>
 			HttpResponse.json({ response: { total_count: apiGames.length, games: apiGames } }),
 		),
 	)
