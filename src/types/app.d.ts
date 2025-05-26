@@ -23,6 +23,6 @@ type AchCard = {
 }
 
 type Size = 'small' | 'large'
-type GameSortOption = 'Name' | 'Playtime' | 'Completion'
+type GameSortOption = 'Name' | 'Playtime' | 'Recently played' | 'Completion'
 type AchSortOption = 'Name' | 'Completion time' | 'Global completion'
 type SortOption = GameSortOption | AchSortOption
