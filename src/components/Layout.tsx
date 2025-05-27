@@ -17,7 +17,7 @@ export const Container = ({
 			exit={{ opacity: 0, x }}
 			transition={{ type: 'linear', duration: 0.5 }}
 		>
-			<div className="flex min-h-layout flex-col items-center gap-6 p-8 md:flex-row md:items-start">
+			<div className="flex min-h-screen flex-col items-center gap-6 p-8 md:flex-row md:items-start">
 				{children}
 			</div>
 		</motion.div>

@@ -3,15 +3,13 @@
 @plugin '@headlessui/tailwindcss';
 
 @theme {
-  --color-body: rgb(36, 40, 47);
-  --color-footer: rgb(22, 25, 29);
-
-  --min-height-layout: calc(100vh - 36px);
+	--color-body: rgb(36, 40, 47);
+	--color-footer: rgb(22, 25, 29);
 }
 
 body {
 	font-family: var(--font-anek);
-	@apply overflow-x-hidden bg-body font-normal;
+	@apply bg-body overflow-x-hidden font-normal;
 }
 
 h1,
