@@ -1,6 +1,6 @@
 import { calcCompletion } from './percentage'
 
-export const sortOptions: GameSortOption[] = ['Name', 'Playtime', 'Recently played', 'Completion']
+export const sortOptions: GameSortOption[] = ['Name', 'Playtime', 'Time last played', 'Completion']
 
 export const compare = (a: GameCard, b: GameCard, sortBy: GameSortOption): number => {
 	if (sortBy === 'Name') {
@@ -15,7 +15,7 @@ export const compare = (a: GameCard, b: GameCard, sortBy: GameSortOption): numbe
 		return a.playtimes.recent > b.playtimes.recent ? -1 : 1
 	}
 
-	if (sortBy === 'Recently played') {
+	if (sortBy === 'Time last played') {
 		if (!a.timeLastPlayed) return 1
 		if (!b.timeLastPlayed) return -1
 
