@@ -23,20 +23,23 @@ type Achievement = {
 // ⚡️ Postgres migration: These types are a WIP
 type DbGame = {
 	id: string
-	name: string
 	platform: Platform
+	name: string
 	playtime_total: number // Minutes
 	playtime_recent: number // Minutes
 	time_last_played: Date | null
+	// PK: (id, platform)
 }
 
 type DbAchievement = {
-	game_id: GameId // -> DbGame.id
-	game_platform: Platform // -> DbGame.platform
+	game_id: GameId
+	game_platform: Platform
 	id: string
 	name: string
 	description: string
 	global_completed: number
 	completed: boolean
 	completed_time: Date | null
+	// PK: (game_id, game_platform, id)
+	// FK: (game_id, game_platform) -> (DbGame.id, DbGame.platform)
 }
