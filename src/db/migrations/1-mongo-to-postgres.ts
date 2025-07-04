@@ -1,7 +1,21 @@
 import { buildInsertPlaceholders, db } from '../utils'
-import { astroneers } from './astroneers'
+import { allGames, JsonAchievement, JsonGame } from './1-all-games'
+
+/**
+ * Migration steps
+ * 1. Manually insert a few games and achievements in Postgres for testing
+ * 2. On the mongo-to-postgres branch, refactor the application to use Postgres
+ * 3. Write a .json file of all games and achievements via dbHelper.ts > `getAllGames`
+ * 4. Convert it to .ts and use new types to ensure the data is formatted correctly
+ * 5. Run `createTables`, `insertGames`, and `insertAchievements` sequentially
+ * 6. Delete the Mongo schemas, types, etc and remove the mongoose dependency
+ */
+
+const rateLimit = () => new Promise((resolve) => setTimeout(resolve, 3000))
 
 const createTables = async () => {
+	console.log('⚡️ creating type and tables')
+
 	await db.query(`DROP TYPE IF EXISTS platform CASCADE`)
 	await db.query(`DROP TABLE IF EXISTS games CASCADE`)
 	await db.query(`DROP TABLE IF EXISTS achievements CASCADE`)
@@ -29,21 +43,42 @@ const createTables = async () => {
 		FOREIGN KEY (game_id, game_platform) REFERENCES games (id, platform)
 	)`)
 
-	console.log('⚡️ tables created')
+	console.log('⚡️ created type and tables')
 }
 
 const gameExpressions = 6
-const insertableGame = (game: Game): DbGame => ({
+const insertableGame = (game: JsonGame): DbGame => ({
 	id: game.id,
 	platform: game.platform,
 	name: game.name,
 	playtime_total: game.playtimeTotal,
 	playtime_recent: game.playtimeRecent,
-	time_last_played: game.timeLastPlayed ?? null,
+	time_last_played: game.timeLastPlayed ? new Date(game.timeLastPlayed) : null,
 })
 
+const insertGames = async () => {
+	console.log(`⚡️ inserting ${allGames.length} games`)
+
+	for (let i = 0; i < allGames.length; i += 20) {
+		const gamesBatch: JsonGame[] = allGames.slice(i, i + 20)
+		const insertData: any[] = gamesBatch
+			.map((game: JsonGame) => Object.values(insertableGame(game)))
+			.flat()
+
+		await db.query(
+			`INSERT INTO games VALUES ${buildInsertPlaceholders(gamesBatch.length, gameExpressions)}`,
+			insertData,
+		)
+		console.log(`⚡️ inserted games ${i + 1}-${i + gamesBatch.length}`)
+
+		await rateLimit()
+	}
+
+	console.log(`⚡️ inserted ${allGames.length} games`)
+}
+
 const achievementExpressions = 8
-const insertableAchievement = (game: Game, achievement: Achievement): DbAchievement => ({
+const insertableAchievement = (game: JsonGame, achievement: JsonAchievement): DbAchievement => ({
 	game_id: game.id,
 	game_platform: game.platform,
 	id: achievement.id,
@@ -55,36 +90,35 @@ const insertableAchievement = (game: Game, achievement: Achievement): DbAchievem
 		achievement.completedTime !== 0 ? new Date(achievement.completedTime * 1000) : null,
 })
 
-// TODO: Bulk insert all the games, then bulk insert all the achievements
-const insertData = async () => {
-	for (const game of astroneers) {
-		console.log('⚡️ inserting', game.name)
+const insertAchievements = async () => {
+	const totalAchCount = allGames.reduce((acc, game) => (acc += game.achievements?.length ?? 0), 0)
+	console.log(`⚡️ inserting ${totalAchCount} achievements`)
 
-		// Insert the game
-		await db.query(
-			`INSERT INTO games VALUES ${buildInsertPlaceholders(1, gameExpressions)}`,
-			Object.values(insertableGame(game)),
-		)
+	for (let i = 0; i < allGames.length; i++) {
+		const currentGame = allGames[i]
+		const currentAchs = currentGame.achievements
 
-		// Bulk insert the achievements
-		if (game.achievements.length > 0) {
-			const dbAchievementsValues: any[] = game.achievements
-				.map((achievement: Achievement) => Object.values(insertableAchievement(game, achievement)))
+		for (let j = 0; j < currentAchs.length; j += 20) {
+			const achsBatch: JsonAchievement[] = currentAchs.slice(j, j + 20)
+			const insertData: any[] = achsBatch
+				.map((ach: JsonAchievement) => Object.values(insertableAchievement(currentGame, ach)))
 				.flat()
 
 			await db.query(
-				`INSERT INTO achievements VALUES ${buildInsertPlaceholders(game.achievements.length, achievementExpressions)}`,
-				dbAchievementsValues,
+				`INSERT INTO achievements VALUES ${buildInsertPlaceholders(achsBatch.length, achievementExpressions)}`,
+				insertData,
 			)
+			console.log(`⚡️ inserted ${currentGame.name} achievements ${j + 1}-${j + achsBatch.length}`)
+
+			await rateLimit()
 		}
 	}
 
-	console.log('⚡️ games and achievements inserted')
+	console.log(`⚡️ inserted ${totalAchCount} achievements`)
 }
 
 export const runMigration = async () => {
-	await createTables()
-	await insertData()
-
-	// db.query(`INSERT INTO testing (name) VALUES ${buildInsertPlaceholders(3, 1)}`, ['x', 'y', 'z'])
+	// await createTables()
+	// await insertGames()
+	// await insertAchievements()
 }

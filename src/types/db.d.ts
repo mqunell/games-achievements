@@ -7,7 +7,7 @@ type Game = {
 	platform: Platform
 	playtimeRecent: number // Minutes
 	playtimeTotal: number // Minutes
-	timeLastPlayed: Date | null
+	timeLastPlayed?: Date | null | undefined
 	achievements: Achievement[]
 }
 
