@@ -119,7 +119,7 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 			<Layout.Content>
 				<AnimatePresence>
 					{displayedGames.map((game: GameCard) => {
-						const clickable = game.achievements.length > 0
+						const clickable = game.achievementCounts.total > 0
 
 						const Wrapper = ({ children }) => {
 							return clickable ? <Link href={`/games/${game.gameId}`}>{children}</Link> : children

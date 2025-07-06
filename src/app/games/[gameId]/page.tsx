@@ -7,16 +7,16 @@ type Params = Promise<{
 
 export const generateMetadata = async ({ params }: { params: Params }) => {
 	const { gameId } = await params
-	const gameCard: GameCard = await getGameCard(gameId)
+	const { gameCard } = await getGameCard(gameId)
 
 	return { title: gameCard.name }
 }
 
 const ServerGame = async ({ params }: { params: Params }) => {
 	const { gameId } = await params
-	const gameCard: GameCard = await getGameCard(gameId)
+	const { gameCard, achCards } = await getGameCard(gameId)
 
-	return <GameAchievementsClient gameCard={gameCard} />
+	return <GameAchievementsClient gameCard={gameCard} achCards={achCards} />
 }
 
 export default ServerGame

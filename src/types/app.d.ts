@@ -7,7 +7,6 @@ type GameCard = {
 		recent: number
 	}
 	timeLastPlayed: Date
-	achievements: AchCard[]
 	achievementCounts: {
 		total: number
 		completed: number

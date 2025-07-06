@@ -9,7 +9,6 @@ const generateGameCard = (game: Game): GameCard => ({
 		total: game.playtimeTotal,
 	},
 	timeLastPlayed: game.timeLastPlayed,
-	achievements: game.achievements || [],
 	achievementCounts: {
 		total: game.achievements?.length || 0,
 		completed: game.achievements?.filter((ach) => ach.completed).length || 0,
@@ -19,8 +18,8 @@ const generateGameCard = (game: Game): GameCard => ({
 // TODO: Need something (database flag?) for determining which game has priority when there are multiple
 const generateCombinedGameCard = (games: Game[]): GameCard => {
 	const priorityGame =
-		games.find((game) => game.platform === 'Steam') ||
-		games.find((game) => game.platform === 'Xbox') ||
+		games.find((game) => game.platform === 'Steam') ??
+		games.find((game) => game.platform === 'Xbox') ??
 		games[0]
 
 	return {
@@ -33,6 +32,8 @@ const generateCombinedGameCard = (games: Game[]): GameCard => {
 	}
 }
 
+// ⚡️ This function *does not* need to continue retrieving all data about achievements for
+// each game. It only needs to know the total and completed numbers for each individual game.
 export const getAllGameCards = async (): Promise<GameCard[]> => {
 	const allGames: Game[] = await getAllGames()
 
@@ -48,8 +49,21 @@ export const getAllGameCards = async (): Promise<GameCard[]> => {
 	return gameCards
 }
 
-export const getGameCard = async (gameId: GameId): Promise<GameCard> => {
+// ⚡️ This function *does* still need to retrieve all data about achievements for the game(s),
+// but there will typically only be 1 and never more than 3 unique games being queried for
+// at a time here (one game for each platform).
+export const getGameCard = async (
+	gameId: GameId,
+): Promise<{ gameCard: GameCard; achCards: AchCard[] }> => {
 	const games: Game[] = await getGame(gameId)
+	const gameCard = games.length === 1 ? generateGameCard(games[0]) : generateCombinedGameCard(games)
 
-	return games.length === 1 ? generateGameCard(games[0]) : generateCombinedGameCard(games)
+	// Copied from above - needs additional refactoring
+	const priorityGame =
+		games.find((game) => game.platform === 'Steam') ??
+		games.find((game) => game.platform === 'Xbox') ??
+		games[0]
+	const achCards = priorityGame.achievements
+
+	return { gameCard, achCards }
 }
