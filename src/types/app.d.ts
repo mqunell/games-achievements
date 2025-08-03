@@ -17,7 +17,7 @@ type AchCard = {
 	name: string
 	description: string
 	completed: boolean
-	completedTime: number
+	completedTime: Date
 	globalCompleted: number
 }
 

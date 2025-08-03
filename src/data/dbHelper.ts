@@ -2,6 +2,7 @@
 import dbConnect from '@/data/dbConnect'
 import Game from '@/models/Game'
 
+// This is now unused, but needs to stick around until it's time to run the migration
 export const getAllGames = async (): Promise<Game[]> => {
 	await dbConnect()
 
@@ -20,16 +21,6 @@ export const getRecentSteamGames = async (): Promise<Game[]> => {
 
 	// @ts-ignore
 	const res = await Game.find({ platform: 'Steam', playtimeRecent: { $gt: 0 } }, '-_id -__v')
-	const data = res.map((doc) => doc.toObject())
-
-	return data
-}
-
-export const getGame = async (gameId: GameId): Promise<Game[]> => {
-	await dbConnect()
-
-	// @ts-ignore
-	const res = await Game.find({ id: gameId }, '-_id -__v')
 	const data = res.map((doc) => doc.toObject())
 
 	return data

@@ -75,7 +75,7 @@ const steamToJson = async ({ userId, gameId }): Promise<Game> => {
 
 // Write a database game and achievements to JSON for editing
 const dbToJson = async ({ gameId }): Promise<void> => {
-	const games: Game[] = await getGame(gameId)
+	const games: Game[] = await getGame(gameId) // ⚡️ TODO
 	const game = games.find((game) => game.platform === 'Xbox') || games[0]
 	writeGameToJson(game, 'db')
 	process.exit()

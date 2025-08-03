@@ -27,9 +27,7 @@ const AchievementCard = ({ achCard, displayOptions }: Props) => {
 					<>
 						<hr className="my-2 w-1/6 border-black" />
 						<p className={clsx('text-sm', { italic: !completedTime })}>
-							{completedTime
-								? new Date(completedTime * 1000).toLocaleString('en-US')
-								: 'No date/time provided'}
+							{completedTime ? completedTime.toLocaleString('en-US') : 'No date/time provided'}
 						</p>
 					</>
 				)}

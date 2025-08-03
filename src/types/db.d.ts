@@ -43,3 +43,8 @@ type DbAchievement = {
 	// PK: (game_id, game_platform, id)
 	// FK: (game_id, game_platform) -> (DbGame.id, DbGame.platform)
 }
+
+type DbGameCard = DbGame & {
+	total_achievements: string // COUNT() is returned as a string
+	completed_achievements: string // SUM() is returned as a string
+}
