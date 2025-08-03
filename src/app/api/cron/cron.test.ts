@@ -1,7 +1,7 @@
 import { HttpResponse, http } from 'msw'
 import * as dbHelper from '@/data/dbHelper'
 import { server } from '@/testing/mocks/server'
-import { buildUpdatedGame, getGamesToUpdate } from './cron'
+import { buildUpdatedGame, getGamesToUpsert } from './cron'
 
 const mockApiGame1: ApiGame = {
 	appid: 1,
@@ -30,14 +30,14 @@ const mockApiGame3: ApiGame = {
 	rtime_last_played: 1748199600,
 }
 
-const mockGame1: Game = {
+const mockDbGame1: DbGame = {
 	id: '1',
 	name: 'Game 1',
 	platform: 'Steam',
-	playtimeRecent: 100,
-	playtimeTotal: 100,
-	timeLastPlayed: new Date(1748199600000),
-	achievements: [
+	playtime_recent: 100,
+	playtime_total: 100,
+	time_last_played: new Date(1748199600000),
+	/* achievements: [
 		{
 			id: 'ACHIEVEMENT_1A',
 			name: 'Achievement 1A',
@@ -62,17 +62,17 @@ const mockGame1: Game = {
 			completedTime: 0,
 			globalCompleted: 18.6,
 		},
-	],
+	], */
 }
 
-const mockGame2: Game = {
+const mockDbGame2: DbGame = {
 	id: '2',
 	name: 'Game 2',
 	platform: 'Steam',
-	playtimeRecent: 200,
-	playtimeTotal: 200,
-	timeLastPlayed: new Date(1748199600000),
-	achievements: [
+	playtime_recent: 200,
+	playtime_total: 200,
+	time_last_played: new Date(1748199600000),
+	/* achievements: [
 		{
 			id: 'ACHIEVEMENT_2A',
 			name: 'Achievement 2A',
@@ -89,17 +89,17 @@ const mockGame2: Game = {
 			completedTime: 0,
 			globalCompleted: 0.6,
 		},
-	],
+	], */
 }
 
-const mockGame3: Game = {
+const mockDbGame3: DbGame = {
 	id: '3',
 	name: 'Game 3',
 	platform: 'Steam',
-	playtimeRecent: 300,
-	playtimeTotal: 350,
-	timeLastPlayed: new Date(1748199600000),
-	achievements: null,
+	playtime_recent: 300,
+	playtime_total: 350,
+	time_last_played: new Date(1748199600000),
+	// achievements: null,
 }
 
 const mockSteam = (apiGames: ApiGame[]) => {
@@ -110,15 +110,15 @@ const mockSteam = (apiGames: ApiGame[]) => {
 	)
 }
 
-const mockDatabase = (games: Game[]) => {
-	vi.spyOn(dbHelper, 'getRecentSteamGames').mockResolvedValueOnce(games) // ⚡️ TODO
+const mockDatabase = (games: DbGame[]) => {
+	vi.spyOn(dbHelper, 'getRecentSteamGames').mockResolvedValueOnce(games)
 }
 
 describe('cron', () => {
 	test('buildUpdatedGame', async () => {
-		expect(await buildUpdatedGame(mockApiGame1)).toEqual(mockGame1)
-		expect(await buildUpdatedGame(mockApiGame2)).toEqual(mockGame2)
-		expect(await buildUpdatedGame(mockApiGame3)).toEqual(mockGame3)
+		expect(await buildUpdatedGame(mockApiGame1)).toEqual(mockDbGame1)
+		expect(await buildUpdatedGame(mockApiGame2)).toEqual(mockDbGame2)
+		expect(await buildUpdatedGame(mockApiGame3)).toEqual(mockDbGame3)
 	})
 
 	describe('getGameIdsToUpdate', () => {
@@ -126,24 +126,24 @@ describe('cron', () => {
 			mockSteam([])
 			mockDatabase([])
 
-			expect(await getGamesToUpdate()).toEqual([])
+			expect(await getGamesToUpsert()).toEqual([])
 		})
 
 		test('recent games only in Steam', async () => {
 			mockSteam([mockApiGame1, mockApiGame2, mockApiGame3])
 			mockDatabase([])
 
-			expect(await getGamesToUpdate()).toEqual([mockGame1, mockGame2, mockGame3])
+			expect(await getGamesToUpsert()).toEqual([mockDbGame1, mockDbGame2, mockDbGame3])
 		})
 
 		test('recent games only in database', async () => {
 			mockSteam([])
-			mockDatabase([mockGame1, mockGame2, mockGame3])
+			mockDatabase([mockDbGame1, mockDbGame2, mockDbGame3])
 
-			expect(await getGamesToUpdate()).toEqual([
-				{ ...mockGame1, playtimeRecent: 0 },
-				{ ...mockGame2, playtimeRecent: 0 },
-				{ ...mockGame3, playtimeRecent: 0 },
+			expect(await getGamesToUpsert()).toEqual([
+				{ ...mockDbGame1, playtime_recent: 0 },
+				{ ...mockDbGame2, playtime_recent: 0 },
+				{ ...mockDbGame3, playtime_recent: 0 },
 			])
 		})
 
@@ -153,19 +153,19 @@ describe('cron', () => {
 				{ ...mockApiGame2, playtime_2weeks: 1000 },
 				mockApiGame3,
 			])
-			mockDatabase([mockGame1, mockGame2, mockGame3])
+			mockDatabase([mockDbGame1, mockDbGame2, mockDbGame3])
 
-			expect(await getGamesToUpdate()).toEqual([
-				{ ...mockGame1, playtimeRecent: 10 },
-				{ ...mockGame2, playtimeRecent: 1000 },
+			expect(await getGamesToUpsert()).toEqual([
+				{ ...mockDbGame1, playtime_recent: 10 },
+				{ ...mockDbGame2, playtime_recent: 1000 },
 			])
 		})
 
 		test('recent games in Steam and database with no changes', async () => {
 			mockSteam([mockApiGame1, mockApiGame2, mockApiGame3])
-			mockDatabase([mockGame1, mockGame2, mockGame3])
+			mockDatabase([mockDbGame1, mockDbGame2, mockDbGame3])
 
-			expect(await getGamesToUpdate()).toEqual([])
+			expect(await getGamesToUpsert()).toEqual([])
 		})
 	})
 })

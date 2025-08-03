@@ -37,7 +37,7 @@ type DbAchievement = {
 	id: string
 	name: string
 	description: string
-	global_completed: number
+	global_completion: number
 	completed: boolean
 	completed_time: Date | null
 	// PK: (game_id, game_platform, id)

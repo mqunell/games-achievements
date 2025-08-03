@@ -31,7 +31,7 @@ const ServerGame = async ({ params }: { params: Params }) => {
 	const priorityPlatform: Platform = getPriorityPlatform(gameCard.platforms)
 	const { rows: achRows } = await db.query<Partial<DbAchievement>>(
 		`
-			SELECT name, description, global_completed, completed, completed_time
+			SELECT name, description, global_completion, completed, completed_time
 			FROM achievements
 			WHERE game_id = $1 AND game_platform = $2
 		`,
@@ -42,7 +42,7 @@ const ServerGame = async ({ params }: { params: Params }) => {
 		description: row.description,
 		completed: row.completed,
 		completedTime: row.completed_time,
-		globalCompleted: row.global_completed,
+		globalCompleted: row.global_completion,
 	}))
 
 	return <GameAchievementsClient gameCard={gameCard} achCards={achCards} />

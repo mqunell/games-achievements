@@ -15,85 +15,79 @@ const invalidGameIds = ['218620', '359050', '365720', '469820', '489830', '10536
  *    - Game only in Steam: buildUpdatedGame()
  *    - Game only in database: Set playtimeRecent to 0
  */
-export const getGamesToUpdate = async (): Promise<Game[]> => {
+export const getGamesToUpsert = async (): Promise<DbGame[]> => {
 	const steamRecentGames: ApiGame[] = await getUserRecentGames()
-	const dbRecentGames: Game[] = await getRecentSteamGames()
+	const dbRecentGames: DbGame[] = await getRecentSteamGames()
 
-	const gamesToUpdate: Game[] = []
+	const gamesToUpsert: DbGame[] = []
 
 	// Recent Steam games - potentially no recent database counterpart
 	for (const apiGame of steamRecentGames) {
 		const appId = String(apiGame.appid)
 		if (invalidGameIds.includes(appId)) continue
 
-		const dbGame: Game = dbRecentGames.find(({ id }) => id === appId)
-		if (apiGame.playtime_2weeks !== dbGame?.playtimeRecent) {
+		const dbGame: DbGame = dbRecentGames.find(({ id }) => id === appId)
+		if (apiGame.playtime_2weeks !== dbGame?.playtime_recent) {
 			const updatedGame = await buildUpdatedGame(apiGame)
-			gamesToUpdate.push(updatedGame)
+			gamesToUpsert.push(updatedGame)
 		}
 	}
 
 	// Recent database games - potentially no recent Steam counterpart
 	for (const dbGame of dbRecentGames) {
 		if (invalidGameIds.includes(dbGame.id)) continue
-		if (gamesToUpdate.find(({ id }) => id === dbGame.id)) continue
+		if (gamesToUpsert.find(({ id }) => id === dbGame.id)) continue
 
 		const apiGame: ApiGame = steamRecentGames.find(({ appid }) => String(appid) === dbGame.id)
 		if (!apiGame) {
-			gamesToUpdate.push({ ...dbGame, playtimeRecent: 0 })
+			gamesToUpsert.push({ ...dbGame, playtime_recent: 0 })
 		}
 	}
 
-	return gamesToUpdate
+	return gamesToUpsert
 }
 
 /**
  * Fetch, parse, and format the updated Game data
  */
-export const buildUpdatedGame = async (game: ApiGame): Promise<Game> => {
+export const buildUpdatedGame = async (game: ApiGame): Promise<DbGame> => {
 	const gameId: GameId = String(game.appid)
-
-	let achs: Achievement[] | null = null
-	try {
-		achs = await buildUpdatedAchievements(gameId)
-	} catch (err) {
-		console.error(`Error in buildUpdatedAchievements for ${game.name}:`, err)
-	}
 
 	return {
 		id: gameId,
 		name: game.name,
 		platform: 'Steam',
-		playtimeRecent: game.playtime_2weeks ?? 0,
-		playtimeTotal: game.playtime_forever + (game.playtime_disconnected ?? 0),
-		timeLastPlayed: new Date(game.rtime_last_played * 1000),
-		achievements: achs,
+		playtime_recent: game.playtime_2weeks ?? 0,
+		playtime_total: game.playtime_forever + (game.playtime_disconnected ?? 0),
+		time_last_played: new Date(game.rtime_last_played * 1000),
 	}
 }
 
 /**
- * Fetch, parse, and format the updated Achievement[] data
+ * Fetch, parse, and format the updated DbAchievement[] data for a single DbGame
  */
-const buildUpdatedAchievements = async (gameId: GameId): Promise<Achievement[]> => {
+export const getAchievementsToUpsert = async (gameId: GameId): Promise<DbAchievement[]> => {
 	const userAchs: ApiUserAchievement[] | undefined = await getUserAchs(gameId)
-	if (!userAchs) return null
+	if (!userAchs) return []
 
 	const globalAchs: ApiGlobalAchievement[] = await getGlobalAchs(gameId)
 
-	const updatedAchs: Achievement[] = userAchs.map((userAch: ApiUserAchievement) => {
+	const achsToUpsert: DbAchievement[] = userAchs.map((userAch: ApiUserAchievement) => {
 		const globalAch: ApiGlobalAchievement = globalAchs.find(
 			(globalAch) => globalAch.name === userAch.apiname,
 		)
 
 		return {
+			game_id: gameId,
+			game_platform: 'Steam',
 			id: userAch.apiname,
 			name: userAch.name,
 			description: userAch.description,
+			global_completion: Number(Number(globalAch.percent).toFixed(2)),
 			completed: userAch.unlocktime !== 0,
-			completedTime: userAch.unlocktime,
-			globalCompleted: Number(Number(globalAch.percent).toFixed(2)),
+			completed_time: userAch.unlocktime ? new Date(userAch.unlocktime * 1000) : null,
 		}
 	})
 
-	return updatedAchs
+	return achsToUpsert
 }

@@ -1,3 +1,4 @@
+import { getAllGames } from '@/data/dbHelper'
 import { buildInsertPlaceholders, db } from '../utils'
 import { allGames, JsonAchievement, JsonGame } from './1-all-games'
 
@@ -6,6 +7,7 @@ import { allGames, JsonAchievement, JsonGame } from './1-all-games'
  * 1. Manually insert a few games and achievements in Postgres for testing
  * 2. On the mongo-to-postgres branch, refactor the application to use Postgres
  * 3. Write a .json file of all games and achievements via dbHelper.ts > `getAllGames`
+ *    (which includes Xbox and Switch games - the cron path isn't sufficient here)
  * 4. Convert it to .ts and use new types to ensure the data is formatted correctly
  * 5. Run `createTables`, `insertGames`, and `insertAchievements` sequentially
  * 6. Delete the Mongo schemas, types, etc and remove the mongoose dependency
@@ -36,7 +38,7 @@ const createTables = async () => {
 		id TEXT,
 		name TEXT,
 		description TEXT,
-		global_completed REAL,
+		global_completion REAL,
 		completed BOOLEAN,
 		completed_time TIMESTAMPTZ,
 		PRIMARY KEY (game_id, game_platform, id),
@@ -47,23 +49,31 @@ const createTables = async () => {
 }
 
 const gameExpressions = 6
-const insertableGame = (game: JsonGame): DbGame => ({
-	id: game.id,
-	platform: game.platform,
-	name: game.name,
-	playtime_total: game.playtimeTotal,
-	playtime_recent: game.playtimeRecent,
-	time_last_played: game.timeLastPlayed ? new Date(game.timeLastPlayed) : null,
-})
+const insertableGame = (game: JsonGame): any[] => {
+	const dbGame: DbGame = {
+		id: game.id,
+		platform: game.platform,
+		name: game.name,
+		playtime_total: game.playtimeTotal,
+		playtime_recent: game.playtimeRecent,
+		time_last_played: game.timeLastPlayed ? new Date(game.timeLastPlayed) : null,
+	}
+	return [
+		dbGame.id,
+		dbGame.platform,
+		dbGame.name,
+		dbGame.playtime_total,
+		dbGame.playtime_recent,
+		dbGame.time_last_played,
+	]
+}
 
 const insertGames = async () => {
 	console.log(`⚡️ inserting ${allGames.length} games`)
 
 	for (let i = 0; i < allGames.length; i += 20) {
 		const gamesBatch: JsonGame[] = allGames.slice(i, i + 20)
-		const insertData: any[] = gamesBatch
-			.map((game: JsonGame) => Object.values(insertableGame(game)))
-			.flat()
+		const insertData: any[] = gamesBatch.map((game: JsonGame) => insertableGame(game)).flat()
 
 		await db.query(
 			`INSERT INTO games VALUES ${buildInsertPlaceholders(gamesBatch.length, gameExpressions)}`,
@@ -78,17 +88,29 @@ const insertGames = async () => {
 }
 
 const achievementExpressions = 8
-const insertableAchievement = (game: JsonGame, achievement: JsonAchievement): DbAchievement => ({
-	game_id: game.id,
-	game_platform: game.platform,
-	id: achievement.id,
-	name: achievement.name,
-	description: achievement.description,
-	global_completed: achievement.globalCompleted,
-	completed: achievement.completed,
-	completed_time:
-		achievement.completedTime !== 0 ? new Date(achievement.completedTime * 1000) : null,
-})
+const insertableAchievement = (game: JsonGame, achievement: JsonAchievement): any[] => {
+	const dbAchievement: DbAchievement = {
+		game_id: game.id,
+		game_platform: game.platform,
+		id: achievement.id,
+		name: achievement.name,
+		description: achievement.description,
+		global_completion: achievement.globalCompleted,
+		completed: achievement.completed,
+		completed_time:
+			achievement.completedTime !== 0 ? new Date(achievement.completedTime * 1000) : null,
+	}
+	return [
+		dbAchievement.game_id,
+		dbAchievement.game_platform,
+		dbAchievement.id,
+		dbAchievement.name,
+		dbAchievement.description,
+		dbAchievement.global_completion,
+		dbAchievement.completed,
+		dbAchievement.completed_time,
+	]
+}
 
 const insertAchievements = async () => {
 	const totalAchCount = allGames.reduce((acc, game) => (acc += game.achievements?.length ?? 0), 0)
@@ -101,7 +123,7 @@ const insertAchievements = async () => {
 		for (let j = 0; j < currentAchs.length; j += 20) {
 			const achsBatch: JsonAchievement[] = currentAchs.slice(j, j + 20)
 			const insertData: any[] = achsBatch
-				.map((ach: JsonAchievement) => Object.values(insertableAchievement(currentGame, ach)))
+				.map((ach: JsonAchievement) => insertableAchievement(currentGame, ach))
 				.flat()
 
 			await db.query(
