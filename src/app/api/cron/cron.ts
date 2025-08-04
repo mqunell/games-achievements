@@ -11,8 +11,8 @@ const invalidGameIds = ['218620', '359050', '365720', '469820', '489830', '10536
  * 2. Get games from the database that have a recent playtime
  * 3. Determine which games need to be updated by comparing recent playtimes
  *    - Game in both with the same recent playtimes: Skip
- *    - Game in both with different recent playtimes: buildUpdatedGame()
- *    - Game only in Steam: buildUpdatedGame()
+ *    - Game in both with different recent playtimes: Update via upsert
+ *    - Game only in Steam: Insert via upsert
  *    - Game only in database: Set playtimeRecent to 0
  */
 export const getGamesToUpsert = async (): Promise<DbGame[]> => {
@@ -28,7 +28,7 @@ export const getGamesToUpsert = async (): Promise<DbGame[]> => {
 
 		const dbGame: DbGame = dbRecentGames.find(({ id }) => id === appId)
 		if (apiGame.playtime_2weeks !== dbGame?.playtime_recent) {
-			const updatedGame = await buildUpdatedGame(apiGame)
+			const updatedGame = await convertApiGame(apiGame)
 			gamesToUpsert.push(updatedGame)
 		}
 	}
@@ -47,10 +47,7 @@ export const getGamesToUpsert = async (): Promise<DbGame[]> => {
 	return gamesToUpsert
 }
 
-/**
- * Fetch, parse, and format the updated Game data
- */
-export const buildUpdatedGame = async (game: ApiGame): Promise<DbGame> => ({
+export const convertApiGame = async (game: ApiGame): Promise<DbGame> => ({
 	id: String(game.appid),
 	name: game.name,
 	platform: 'Steam',

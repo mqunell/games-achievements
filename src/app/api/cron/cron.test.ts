@@ -1,7 +1,7 @@
 import { HttpResponse, http } from 'msw'
 import * as dbHelper from '@/data/dbHelper'
 import { server } from '@/testing/mocks/server'
-import { buildUpdatedGame, getGamesToUpsert } from './cron'
+import { convertApiGame, getGamesToUpsert } from './cron'
 
 const mockApiGame1: ApiGame = {
 	appid: 1,
@@ -37,6 +37,7 @@ const mockDbGame1: DbGame = {
 	playtime_recent: 100,
 	playtime_total: 100,
 	time_last_played: new Date(1748199600000),
+	// TODO: Add tests for achievements now that they're separate
 	/* achievements: [
 		{
 			id: 'ACHIEVEMENT_1A',
@@ -115,10 +116,10 @@ const mockDatabase = (games: DbGame[]) => {
 }
 
 describe('cron', () => {
-	test('buildUpdatedGame', async () => {
-		expect(await buildUpdatedGame(mockApiGame1)).toEqual(mockDbGame1)
-		expect(await buildUpdatedGame(mockApiGame2)).toEqual(mockDbGame2)
-		expect(await buildUpdatedGame(mockApiGame3)).toEqual(mockDbGame3)
+	test('convertApiGame', async () => {
+		expect(await convertApiGame(mockApiGame1)).toEqual(mockDbGame1)
+		expect(await convertApiGame(mockApiGame2)).toEqual(mockDbGame2)
+		expect(await convertApiGame(mockApiGame3)).toEqual(mockDbGame3)
 	})
 
 	describe('getGameIdsToUpdate', () => {
