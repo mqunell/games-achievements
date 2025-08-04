@@ -4,7 +4,7 @@ import { getAchievementsToUpsert, getGamesToUpsert } from './cron'
 
 const { CRON_SECRET } = process.env
 
-const rateLimit = () => new Promise((resolve) => setTimeout(resolve, 3000))
+const rateLimit = () => new Promise((resolve) => setTimeout(resolve, 1000))
 
 /**
  * The route handler that the cron job makes a daily request to
