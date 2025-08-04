@@ -71,8 +71,9 @@ const insertableGame = (game: JsonGame): any[] => {
 const insertGames = async () => {
 	console.log(`⚡️ inserting ${allGames.length} games`)
 
-	for (let i = 0; i < allGames.length; i += 20) {
-		const gamesBatch: JsonGame[] = allGames.slice(i, i + 20)
+	const batchSize = 20
+	for (let i = 0; i < allGames.length; i += batchSize) {
+		const gamesBatch: JsonGame[] = allGames.slice(i, i + batchSize)
 		const insertData: any[] = gamesBatch.map((game: JsonGame) => insertableGame(game)).flat()
 
 		await db.query(
@@ -120,8 +121,14 @@ const insertAchievements = async () => {
 		const currentGame = allGames[i]
 		const currentAchs = currentGame.achievements
 
-		for (let j = 0; j < currentAchs.length; j += 20) {
-			const achsBatch: JsonAchievement[] = currentAchs.slice(j, j + 20)
+		if (!Array.isArray(currentAchs) || currentAchs.length === 0) {
+			console.log(`⚡️ skipping ${currentGame.name}, no achievements`)
+			continue
+		}
+
+		const batchSize = 100
+		for (let j = 0; j < currentAchs.length; j += batchSize) {
+			const achsBatch: JsonAchievement[] = currentAchs.slice(j, j + batchSize)
 			const insertData: any[] = achsBatch
 				.map((ach: JsonAchievement) => insertableAchievement(currentGame, ach))
 				.flat()

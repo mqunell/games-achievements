@@ -50,18 +50,14 @@ export const getGamesToUpsert = async (): Promise<DbGame[]> => {
 /**
  * Fetch, parse, and format the updated Game data
  */
-export const buildUpdatedGame = async (game: ApiGame): Promise<DbGame> => {
-	const gameId: GameId = String(game.appid)
-
-	return {
-		id: gameId,
-		name: game.name,
-		platform: 'Steam',
-		playtime_recent: game.playtime_2weeks ?? 0,
-		playtime_total: game.playtime_forever + (game.playtime_disconnected ?? 0),
-		time_last_played: new Date(game.rtime_last_played * 1000),
-	}
-}
+export const buildUpdatedGame = async (game: ApiGame): Promise<DbGame> => ({
+	id: String(game.appid),
+	name: game.name,
+	platform: 'Steam',
+	playtime_recent: game.playtime_2weeks ?? 0,
+	playtime_total: game.playtime_forever + (game.playtime_disconnected ?? 0),
+	time_last_played: new Date(game.rtime_last_played * 1000),
+})
 
 /**
  * Fetch, parse, and format the updated DbAchievement[] data for a single DbGame
