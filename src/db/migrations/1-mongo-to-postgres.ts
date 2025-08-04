@@ -1,4 +1,4 @@
-import { getAllGames } from '@/data/dbHelper'
+// import { getAllGames } from '@/data/dbHelper'
 import { buildInsertPlaceholders, db } from '../utils'
 import { allGames, JsonAchievement, JsonGame } from './1-all-games'
 
