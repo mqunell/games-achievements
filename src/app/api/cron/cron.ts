@@ -1,6 +1,5 @@
 import { getGlobalAchs, getUserAchs, getUserRecentGames } from '@/data/steamApi'
-import { getDbRecentGames } from '@/db/queries'
-import { buildInsertPlaceholders, db, getAchievementValues, getGameValues } from '@/db/utils'
+import { getDbRecentSteamGames, upsertAchievements, upsertGames } from '@/db/queries'
 
 const invalidGameIds = ['218620', '359050', '365720', '469820', '489830', '1053680']
 
@@ -18,7 +17,7 @@ const invalidGameIds = ['218620', '359050', '365720', '469820', '489830', '10536
  */
 export const getGamesToUpsert = async (): Promise<DbGame[]> => {
 	const steamRecentGames: ApiGame[] = await getUserRecentGames()
-	const dbRecentGames: DbGame[] = await getDbRecentGames()
+	const dbRecentGames: DbGame[] = await getDbRecentSteamGames()
 
 	const gamesToUpsert: DbGame[] = []
 
@@ -88,15 +87,7 @@ const rateLimit = () => new Promise((resolve) => setTimeout(resolve, 1000))
 export const upsertGamesAndAchievements = async (): Promise<void> => {
 	// Upsert all of the games in one query
 	const games: DbGame[] = await getGamesToUpsert()
-	await db.query(
-		`
-			INSERT INTO games (id, platform, name, playtime_total, playtime_recent, time_last_played)
-			VALUES ${buildInsertPlaceholders(games.length, 6)}
-			ON CONFLICT (id, platform)
-			DO UPDATE SET playtime_total = EXCLUDED.playtime_total, playtime_recent = EXCLUDED.playtime_recent, time_last_played = EXCLUDED.time_last_played
-		`,
-		games.map(getGameValues).flat(),
-	)
+	await upsertGames(games)
 
 	console.log(`Upserted ${games.length} game(s): ${games.map((game) => game.name).join(', ')}`)
 	await rateLimit()
@@ -106,15 +97,7 @@ export const upsertGamesAndAchievements = async (): Promise<void> => {
 		const achs = await getAchievementsToUpsert(game.id)
 		if (achs.length === 0) continue
 
-		await db.query(
-			`
-				INSERT INTO achievements (game_id, game_platform, id, name, description, global_completion, completed, completed_time)
-				VALUES ${buildInsertPlaceholders(achs.length, 8)}
-				ON CONFLICT (game_id, game_platform, id)
-				DO UPDATE SET global_completion = EXCLUDED.global_completion, completed = EXCLUDED.completed, completed_time = EXCLUDED.completed_time
-			`,
-			achs.map(getAchievementValues).flat(),
-		)
+		await upsertAchievements(achs)
 
 		console.log(`Upserted ${achs.length} achievement(s) for ${game.name}`)
 		await rateLimit()

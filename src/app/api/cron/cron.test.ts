@@ -22,7 +22,7 @@ const mockSteamUserGames = (apiGames: ApiGame[]) => {
 }
 
 const mockDatabase = (games: DbGame[]) => {
-	vi.spyOn(queries, 'getDbRecentGames').mockResolvedValueOnce(games)
+	vi.spyOn(queries, 'getDbRecentSteamGames').mockResolvedValueOnce(games)
 }
 
 describe('cron', () => {
