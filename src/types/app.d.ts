@@ -7,7 +7,6 @@ type GameCard = {
 		recent: number
 	}
 	timeLastPlayed: Date
-	achievements: AchCard[]
 	achievementCounts: {
 		total: number
 		completed: number
@@ -18,7 +17,7 @@ type AchCard = {
 	name: string
 	description: string
 	completed: boolean
-	completedTime: number
+	completedTime: Date
 	globalCompleted: number
 }
 

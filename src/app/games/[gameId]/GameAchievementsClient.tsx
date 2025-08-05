@@ -15,12 +15,13 @@ import { compare, sortOptions } from '@/lib/sortAchievements'
 
 type Props = {
 	gameCard: GameCard
+	achCards: AchCard[]
 }
 
-const GameAchievementsClient = ({ gameCard }: Props) => {
-	const hasAchCompletedTimes = gameCard.achievements?.some(
-		(ach: Achievement) => !!ach.completedTime,
-	)
+// TODO: Default achCards to [] so I don't need ?. throughout
+
+const GameAchievementsClient = ({ gameCard, achCards }: Props) => {
+	const hasAchCompletedTimes = achCards?.some((ach: AchCard) => !!ach.completedTime)
 
 	const validSortOptions = hasAchCompletedTimes
 		? sortOptions
@@ -44,7 +45,7 @@ const GameAchievementsClient = ({ gameCard }: Props) => {
 
 	// Filtering and sorting
 	useEffect(() => {
-		const displayed = gameCard.achievements
+		const displayed: AchCard[] = achCards
 			?.filter((ach) => {
 				const validCompleted = ach.completed ? showCompleted : showUncompleted
 				const validText = ach.name.toLowerCase().includes(filterText.toLowerCase())
@@ -54,7 +55,7 @@ const GameAchievementsClient = ({ gameCard }: Props) => {
 			.sort((a, b) => compare(a, b, sortBy))
 
 		setDisplayedAchievements(displayed)
-	}, [sortBy, showCompleted, showUncompleted, filterText, gameCard])
+	}, [sortBy, showCompleted, showUncompleted, filterText, achCards])
 
 	// Set the toggles based on sort field (separate useEffect hook so they can be changed manually afterward)
 	useEffect(() => {
@@ -68,7 +69,7 @@ const GameAchievementsClient = ({ gameCard }: Props) => {
 				<GameCard game={gameCard} size="large" />
 
 				<DisplayOptions.Container
-					footer={`Displaying ${displayedAchievements.length}/${gameCard.achievements.length} achievements`}
+					footer={`Displaying ${displayedAchievements.length}/${achCards.length} achievements`}
 				>
 					<DisplayOptions.Group header="Display">
 						<Toggle

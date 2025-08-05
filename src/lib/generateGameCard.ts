@@ -1,55 +1,27 @@
-import { getAllGames, getGame } from '@/data/dbHelper'
-
-const generateGameCard = (game: Game): GameCard => ({
-	gameId: game.id,
-	name: game.name,
-	platforms: [game.platform],
-	playtimes: {
-		recent: game.playtimeRecent,
-		total: game.playtimeTotal,
-	},
-	timeLastPlayed: game.timeLastPlayed,
-	achievements: game.achievements || [],
-	achievementCounts: {
-		total: game.achievements?.length || 0,
-		completed: game.achievements?.filter((ach) => ach.completed).length || 0,
-	},
-})
-
 // TODO: Need something (database flag?) for determining which game has priority when there are multiple
-const generateCombinedGameCard = (games: Game[]): GameCard => {
-	const priorityGame =
-		games.find((game) => game.platform === 'Steam') ||
-		games.find((game) => game.platform === 'Xbox') ||
-		games[0]
+export const choosePriorityGame = (dbGameCards: DbGameCard[]): DbGameCard => {
+	return (
+		dbGameCards.find((game) => game.platform === 'Steam') ??
+		dbGameCards.find((game) => game.platform === 'Xbox') ??
+		dbGameCards[0]
+	)
+}
+
+export const generateGameCard = (dbGameCards: DbGameCard[]): GameCard => {
+	const priorityGame = choosePriorityGame(dbGameCards)
 
 	return {
-		...generateGameCard(priorityGame),
-		platforms: games.map((game) => game.platform),
+		gameId: priorityGame.id,
+		platforms: dbGameCards.map((game) => game.platform),
+		name: priorityGame.name,
 		playtimes: {
-			recent: priorityGame.playtimeRecent,
-			total: games.reduce((acc, game) => acc + game.playtimeTotal, 0),
+			recent: priorityGame.playtime_recent,
+			total: dbGameCards.reduce((acc, game) => acc + game.playtime_total, 0),
+		},
+		timeLastPlayed: priorityGame.time_last_played,
+		achievementCounts: {
+			total: parseInt(priorityGame.total_achievements),
+			completed: parseInt(priorityGame.completed_achievements),
 		},
 	}
-}
-
-export const getAllGameCards = async (): Promise<GameCard[]> => {
-	const allGames: Game[] = await getAllGames()
-
-	const allIds = allGames.map((game) => game.id)
-	const uniqueIds = Array.from(new Set(allIds))
-
-	const gameCards: GameCard[] = uniqueIds.map((id) => {
-		const games = allGames.filter((game) => game.id === id)
-
-		return games.length === 1 ? generateGameCard(games[0]) : generateCombinedGameCard(games)
-	})
-
-	return gameCards
-}
-
-export const getGameCard = async (gameId: GameId): Promise<GameCard> => {
-	const games: Game[] = await getGame(gameId)
-
-	return games.length === 1 ? generateGameCard(games[0]) : generateCombinedGameCard(games)
 }
