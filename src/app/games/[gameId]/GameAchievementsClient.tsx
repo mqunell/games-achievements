@@ -18,10 +18,8 @@ type Props = {
 	achCards: AchCard[]
 }
 
-// TODO: Default achCards to [] so I don't need ?. throughout
-
 const GameAchievementsClient = ({ gameCard, achCards }: Props) => {
-	const hasAchCompletedTimes = achCards?.some((ach: AchCard) => !!ach.completedTime)
+	const hasAchCompletedTimes = achCards.some((ach: AchCard) => !!ach.completedTime)
 
 	const validSortOptions = hasAchCompletedTimes
 		? sortOptions
@@ -46,7 +44,7 @@ const GameAchievementsClient = ({ gameCard, achCards }: Props) => {
 	// Filtering and sorting
 	useEffect(() => {
 		const displayed: AchCard[] = achCards
-			?.filter((ach) => {
+			.filter((ach) => {
 				const validCompleted = ach.completed ? showCompleted : showUncompleted
 				const validText = ach.name.toLowerCase().includes(filterText.toLowerCase())
 
