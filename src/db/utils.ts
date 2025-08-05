@@ -6,7 +6,7 @@ if (!POSTGRES_HOST || !POSTGRES_DB || !POSTGRES_USER || !POSTGRES_PASS) {
 	throw new Error('Postgres config missing in .env')
 }
 
-export const db = new Pool({
+export const db: Pool = new Pool({
 	host: POSTGRES_HOST,
 	database: POSTGRES_DB,
 	user: POSTGRES_USER,

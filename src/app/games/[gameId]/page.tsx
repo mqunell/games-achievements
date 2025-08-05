@@ -1,5 +1,5 @@
 import { db } from '@/db/utils'
-import { generateGameCard, getPriorityPlatform } from '@/lib/generateGameCard'
+import { choosePriorityGame, generateGameCard } from '@/lib/generateGameCard'
 import GameAchievementsClient from './GameAchievementsClient'
 
 type Params = Promise<{ gameId: GameId }>
@@ -28,7 +28,7 @@ const ServerGame = async ({ params }: { params: Params }) => {
 	)
 	const gameCard: GameCard = generateGameCard(gameRows)
 
-	const priorityPlatform: Platform = getPriorityPlatform(gameCard.platforms)
+	const priorityPlatform: Platform = choosePriorityGame(gameRows).platform
 	const { rows: achRows } = await db.query<Partial<DbAchievement>>(
 		`
 			SELECT name, description, global_completion, completed, completed_time

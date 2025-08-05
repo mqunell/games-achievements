@@ -1,5 +1,5 @@
-import { getRecentSteamGames } from '@/data/dbHelper'
 import { getGlobalAchs, getUserAchs, getUserRecentGames } from '@/data/steamApi'
+import { getDbRecentGames } from '@/db/queries'
 import { buildInsertPlaceholders, db, getAchievementValues, getGameValues } from '@/db/utils'
 
 const invalidGameIds = ['218620', '359050', '365720', '469820', '489830', '1053680']
@@ -18,7 +18,7 @@ const invalidGameIds = ['218620', '359050', '365720', '469820', '489830', '10536
  */
 export const getGamesToUpsert = async (): Promise<DbGame[]> => {
 	const steamRecentGames: ApiGame[] = await getUserRecentGames()
-	const dbRecentGames: DbGame[] = await getRecentSteamGames()
+	const dbRecentGames: DbGame[] = await getDbRecentGames()
 
 	const gamesToUpsert: DbGame[] = []
 

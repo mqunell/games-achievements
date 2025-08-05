@@ -1,16 +1,14 @@
-// ⚡️ TODO: See if generateGameCard can also use this
-export const getPriorityPlatform = (platforms: Platform[]): Platform => {
-	if (platforms.includes('Steam')) return 'Steam'
-	if (platforms.includes('Xbox')) return 'Xbox'
-	return platforms[0]
-}
-
 // TODO: Need something (database flag?) for determining which game has priority when there are multiple
-export const generateGameCard = (dbGameCards: DbGameCard[]): GameCard => {
-	const priorityGame =
+export const choosePriorityGame = (dbGameCards: DbGameCard[]): DbGameCard => {
+	return (
 		dbGameCards.find((game) => game.platform === 'Steam') ??
 		dbGameCards.find((game) => game.platform === 'Xbox') ??
 		dbGameCards[0]
+	)
+}
+
+export const generateGameCard = (dbGameCards: DbGameCard[]): GameCard => {
+	const priorityGame = choosePriorityGame(dbGameCards)
 
 	return {
 		gameId: priorityGame.id,

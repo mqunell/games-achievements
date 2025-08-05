@@ -1,5 +1,5 @@
 import { HttpResponse, http } from 'msw'
-import * as dbHelper from '@/data/dbHelper'
+import * as queries from '@/db/queries'
 import {
 	mockApiGame1,
 	mockApiGame2,
@@ -22,7 +22,7 @@ const mockSteamUserGames = (apiGames: ApiGame[]) => {
 }
 
 const mockDatabase = (games: DbGame[]) => {
-	vi.spyOn(dbHelper, 'getRecentSteamGames').mockResolvedValueOnce(games)
+	vi.spyOn(queries, 'getDbRecentGames').mockResolvedValueOnce(games)
 }
 
 describe('cron', () => {
