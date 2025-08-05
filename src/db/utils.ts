@@ -33,3 +33,24 @@ export const buildInsertPlaceholders = (rows: number, cols: number): string => {
 
 	return allPlaceholderSets.join(', ')
 }
+
+// getGameValues and getAchievementValues guarantee the order of values for SQL upsertions
+export const getGameValues = (game: DbGame) => [
+	game.id,
+	game.platform,
+	game.name,
+	game.playtime_total,
+	game.playtime_recent,
+	game.time_last_played,
+]
+
+export const getAchievementValues = (ach: DbAchievement) => [
+	ach.game_id,
+	ach.game_platform,
+	ach.id,
+	ach.name,
+	ach.description,
+	ach.global_completion,
+	ach.completed,
+	ach.completed_time,
+]
