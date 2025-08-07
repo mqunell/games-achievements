@@ -67,3 +67,20 @@ export const upsertAchievements = async (achs: DbAchievement[]) => {
 		achs.map(getAchievementValues).flat(),
 	)
 }
+
+export const readLogs = async (): Promise<LogLine[]> => {
+	const { rows } = await db.query<LogLine>(`SELECT * FROM logs ORDER BY timestamp DESC`)
+	return rows
+}
+
+export const writeLog = async (severity: LogSeverity, message: string) => {
+	console.log(message)
+
+	await db.query(
+		`
+			INSERT INTO logs (timestamp, severity, message)
+			VALUES ($1, $2, $3)
+		`,
+		[new Date(), severity, message],
+	)
+}

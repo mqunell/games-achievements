@@ -1,5 +1,5 @@
 import { getGlobalAchs, getUserAchs, getUserRecentGames } from '@/data/steamApi'
-import { getDbRecentSteamGames, upsertAchievements, upsertGames } from '@/db/queries'
+import { getDbRecentSteamGames, upsertAchievements, upsertGames, writeLog } from '@/db/queries'
 
 const invalidGameIds = ['218620', '359050', '365720', '469820', '489830', '1053680']
 
@@ -85,21 +85,40 @@ export const getAchievementsToUpsert = async (gameId: GameId): Promise<DbAchieve
 const rateLimit = () => new Promise((resolve) => setTimeout(resolve, 1000))
 
 export const upsertGamesAndAchievements = async (): Promise<void> => {
-	// Upsert all of the games in one query
 	const games: DbGame[] = await getGamesToUpsert()
-	await upsertGames(games)
+	if (!games.length) {
+		writeLog('info', 'No games to upsert')
+		return
+	}
+	const gameNames = games.map((game) => game.name).join(', ')
 
-	console.log(`Upserted ${games.length} game(s): ${games.map((game) => game.name).join(', ')}`)
+	// Upsert all of the games in one query
+	try {
+		await upsertGames(games)
+		writeLog('info', `Upserted ${games.length} game(s): ${gameNames}`)
+	} catch (error) {
+		writeLog('error', `Failed to upsert game(s): ${gameNames} - ending cron`)
+		return // Don't attempt to upsert achievements if the games failed
+	}
+
 	await rateLimit()
 
 	for (const game of games) {
-		// Upsert all of this game's achievements in one query
 		const achs = await getAchievementsToUpsert(game.id)
-		if (achs.length === 0) continue
+		if (achs.length === 0) {
+			writeLog('info', `No achievements to upsert for ${game.name}`)
+			continue
+		}
 
-		await upsertAchievements(achs)
+		// Upsert all of this game's achievements in one query
+		try {
+			await upsertAchievements(achs)
+			writeLog('info', `Upserted ${achs.length} achievement(s) for ${game.name}`)
+		} catch (error) {
+			writeLog('error', `Failed to upsert achievement(s) for ${game.name}`)
+			// Do attempt to upsert achievements for other games
+		}
 
-		console.log(`Upserted ${achs.length} achievement(s) for ${game.name}`)
 		await rateLimit()
 	}
 }
