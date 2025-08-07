@@ -18,7 +18,7 @@ const LogsPage = async () => {
 				<div className="grid font-mono text-sm md:grid-cols-[auto_1fr] md:gap-x-4">
 					{logs.map((line, index) => (
 						<Fragment key={index}>
-							<div>{line.timestamp.toLocaleString()}</div>
+							<div>{line.timestamp.toLocaleString('en-US')}</div>
 							<div className="mb-2">
 								{severityIcons[line.severity]} {line.message}
 							</div>
