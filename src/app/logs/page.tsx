@@ -1,5 +1,6 @@
 import { Fragment } from 'react'
 import { readLogs } from '@/db/queries'
+import LocalTimestamp from './LocalTimestamp'
 
 const severityIcons: { [K in LogSeverity]: string } = {
 	info: 'ℹ️',
@@ -18,7 +19,9 @@ const LogsPage = async () => {
 				<div className="grid font-mono text-sm md:grid-cols-[auto_1fr] md:gap-x-4">
 					{logs.map((line, index) => (
 						<Fragment key={index}>
-							<div>{line.timestamp.toLocaleString('en-US')}</div>
+							<div>
+								<LocalTimestamp timestamp={line.timestamp} />
+							</div>
 							<div className="mb-2">
 								{severityIcons[line.severity]} {line.message}
 							</div>
