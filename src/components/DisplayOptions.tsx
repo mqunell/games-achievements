@@ -1,50 +1,43 @@
-import { Fragment } from 'react'
-import { Disclosure, DisclosureButton, DisclosurePanel, Transition } from '@headlessui/react'
-import { ChevronUpIcon } from './HeroIcons'
+import React, { Fragment } from 'react'
+import { Popover, PopoverBackdrop, PopoverButton, PopoverPanel } from '@headlessui/react'
+import { SettingsIcon } from './HeroIcons'
 
-// Styled and specific implementation of Headless UI's Disclosure
-export const Container = ({
-	footer,
-	children,
-}: {
-	footer: string
-	children: React.ReactNode[]
-}) => (
-	<div className="flex w-80 flex-col gap-2 rounded-sm bg-white p-3">
-		<Disclosure>
-			<DisclosureButton className="flex w-full cursor-pointer items-center justify-between rounded-sm bg-blue-600 px-3 py-2 text-white">
-				<h2>Display options</h2>
-				<ChevronUpIcon className="ui-open:rotate-180 ui-open:duration-500 ui-not-open:rotate-0 ui-not-open:duration-300 size-5 transform transition-transform ease-out" />
-			</DisclosureButton>
+export const DisplayOptionsContainer = ({ children }: { children: React.ReactNode[] }) => (
+	<Popover>
+		<PopoverButton className="floating-button right-6 z-[4]">
+			<SettingsIcon className="size-5" />
+		</PopoverButton>
 
-			<Transition
-				enter="transform transition duration-500 ease-out"
-				enterFrom="-translate-y-2 opacity-0"
-				enterTo="translate-y-0 opacity-100"
-				leave="transform transition duration-300 ease-in"
-				leaveFrom="translate-y-0 opacity-100"
-				leaveTo="-translate-y-2 opacity-0"
-			>
-				<DisclosurePanel className="pt-2">
-					<div className="flex w-full flex-col gap-2 border-b border-b-blue-800 pb-4">
-						{children.map((child: React.ReactNode, index: number) => (
-							<Fragment key={`display-option-group-${index}`}>
-								{child}
-								{index < children.length - 1 && <hr className="mt-3 mb-1" />}
-							</Fragment>
-						))}
-					</div>
-				</DisclosurePanel>
-			</Transition>
+		<PopoverBackdrop className="fixed inset-0 z-[3] bg-black/20" />
 
-			<span className="text-center italic">{footer}</span>
-		</Disclosure>
-	</div>
+		<PopoverPanel
+			anchor="top end"
+			transition
+			className="border-body z-[4] flex w-80 origin-bottom-right -translate-y-1.5 flex-col rounded-md border bg-white px-4 pt-2 pb-4 shadow transition duration-200 ease-out data-closed:scale-95 data-closed:opacity-0"
+		>
+			{children.map((child, index) => (
+				<Fragment key={`display-option-group-${index}`}>
+					{child}
+					{index < children.length - 1 && <hr className="mt-5 mb-3" />}
+				</Fragment>
+			))}
+		</PopoverPanel>
+	</Popover>
 )
 
-export const Group = ({ header, children }: { header: string; children: React.ReactNode }) => (
+export const DisplayOptionsGroup = ({
+	header,
+	subText,
+	children,
+}: {
+	header: string
+	subText?: string
+	children: React.ReactNode
+}) => (
 	<div className="flex w-full flex-col gap-2">
-		<h3 className="font-semibold">{header}</h3>
+		<h3 className="font-semibold">
+			{header} <span className="text-sm font-normal italic">{subText}</span>
+		</h3>
 		{children}
 	</div>
 )

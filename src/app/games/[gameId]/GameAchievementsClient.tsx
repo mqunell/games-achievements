@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { AnimatePresence, motion } from 'motion/react'
 import AchievementCard from '@/components/AchievementCard'
-import * as DisplayOptions from '@/components/DisplayOptions'
+import { DisplayOptionsContainer, DisplayOptionsGroup } from '@/components/DisplayOptions'
 import GameCard from '@/components/GameCard'
 import { ArrowLeftIcon } from '@/components/HeroIcons'
 import * as Layout from '@/components/Layout'
@@ -63,47 +63,45 @@ const GameAchievementsClient = ({ gameCard, achCards }: Props) => {
 
 	return (
 		<Layout.Container fromDirection="right">
-			<Layout.Sidebar>
-				<GameCard game={gameCard} size="large" />
+			<GameCard game={gameCard} size="large" />
 
-				<DisplayOptions.Container
-					footer={`Displaying ${displayedAchievements.length}/${achCards.length} achievements`}
+			<DisplayOptionsContainer>
+				<DisplayOptionsGroup header="Display">
+					<Toggle
+						label="Completion time"
+						checked={showTime}
+						onClick={() => setShowTime(!showTime)}
+					/>
+					<Toggle
+						label="Global completion %"
+						checked={showGlobal}
+						onClick={() => setShowGlobal(!showGlobal)}
+					/>
+				</DisplayOptionsGroup>
+
+				<DisplayOptionsGroup
+					header="Filters"
+					subText={`(${displayedAchievements.length}/${achCards.length} achievements)`}
 				>
-					<DisplayOptions.Group header="Display">
-						<Toggle
-							label="Completion time"
-							checked={showTime}
-							onClick={() => setShowTime(!showTime)}
-						/>
-						<Toggle
-							label="Global completion %"
-							checked={showGlobal}
-							onClick={() => setShowGlobal(!showGlobal)}
-						/>
-					</DisplayOptions.Group>
+					<TextFilter filterText={filterText} setFilterText={setFilterText} />
+					<Toggle
+						label="Completed achievements"
+						checked={showCompleted}
+						onClick={() => setShowCompleted(!showCompleted)}
+					/>
+					<Toggle
+						label="Uncompleted achievements"
+						checked={showUncompleted}
+						onClick={() => setShowUncompleted(!showUncompleted)}
+					/>
+				</DisplayOptionsGroup>
 
-					<DisplayOptions.Group header="Filters">
-						<TextFilter filterText={filterText} setFilterText={setFilterText} />
-						<Toggle
-							label="Completed achievements"
-							checked={showCompleted}
-							onClick={() => setShowCompleted(!showCompleted)}
-						/>
-						<Toggle
-							label="Uncompleted achievements"
-							checked={showUncompleted}
-							onClick={() => setShowUncompleted(!showUncompleted)}
-						/>
-					</DisplayOptions.Group>
+				<DisplayOptionsGroup header="Sorting">
+					<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={validSortOptions} />
+				</DisplayOptionsGroup>
+			</DisplayOptionsContainer>
 
-					<DisplayOptions.Group header="Sorting">
-						<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={validSortOptions} />
-					</DisplayOptions.Group>
-				</DisplayOptions.Container>
-			</Layout.Sidebar>
-
-			{/* Achievements */}
-			<Layout.Content>
+			<Layout.Cards>
 				<AnimatePresence>
 					{displayedAchievements.map((achCard: AchCard) => (
 						<motion.div
@@ -118,18 +116,17 @@ const GameAchievementsClient = ({ gameCard, achCards }: Props) => {
 						</motion.div>
 					))}
 				</AnimatePresence>
-			</Layout.Content>
+			</Layout.Cards>
 
-			{/* Floating back button */}
-			<Link href="/" className="fixed bottom-6 left-6 md:bottom-8 md:left-8">
+			<Link href="/">
 				<motion.div
 					initial={{ opacity: 0, x: 40 }}
 					animate={{ opacity: 1, x: 0 }}
 					exit={{ opacity: 0, x: 40 }}
 					transition={{ duration: 0.5, delay: 0.5 }}
-					className="relative rounded-sm border border-black bg-white px-4 py-3 shadow-sm"
+					className="floating-button left-6"
 				>
-					<ArrowLeftIcon className="size-4" />
+					<ArrowLeftIcon className="size-5" />
 				</motion.div>
 			</Link>
 		</Layout.Container>

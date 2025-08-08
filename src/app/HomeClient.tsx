@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import ConditionalLink from '@/components/ConditionalLink'
-import * as DisplayOptions from '@/components/DisplayOptions'
+import { DisplayOptionsContainer, DisplayOptionsGroup } from '@/components/DisplayOptions'
 import GameCard from '@/components/GameCard'
 import InputRange from '@/components/InputRange'
 import * as Layout from '@/components/Layout'
@@ -62,61 +62,59 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 
 	return (
 		<Layout.Container fromDirection="left">
-			<Layout.Sidebar>
-				<DisplayOptions.Container
-					footer={`Displaying ${displayedGames.length}/${gameCards.length} Games`}
+			<DisplayOptionsContainer>
+				<DisplayOptionsGroup header="Display">
+					<Toggle
+						label="Achievement progress"
+						checked={showProgress}
+						onClick={() => setShowProgress(!showProgress)}
+					/>
+					<Toggle
+						label="Playtime"
+						checked={showPlaytime}
+						onClick={() => setShowPlaytime(!showPlaytime)}
+					/>
+					<Toggle
+						label="Time last played"
+						checked={showTimeLastPlayed}
+						onClick={() => setShowTimeLastPlayed(!showTimeLastPlayed)}
+					/>
+				</DisplayOptionsGroup>
+
+				<DisplayOptionsGroup
+					header="Filters"
+					subText={`(${displayedGames.length}/${gameCards.length} games)`}
 				>
-					<DisplayOptions.Group header="Display">
-						<Toggle
-							label="Achievement progress"
-							checked={showProgress}
-							onClick={() => setShowProgress(!showProgress)}
-						/>
-						<Toggle
-							label="Playtime"
-							checked={showPlaytime}
-							onClick={() => setShowPlaytime(!showPlaytime)}
-						/>
-						<Toggle
-							label="Time last played"
-							checked={showTimeLastPlayed}
-							onClick={() => setShowTimeLastPlayed(!showTimeLastPlayed)}
-						/>
-					</DisplayOptions.Group>
+					<TextFilter filterText={filterText} setFilterText={setFilterText} />
+					<div className="flex gap-6">
+						{['Steam', 'Xbox', 'Switch'].map((platform: Platform) => (
+							<Toggle
+								key={platform}
+								label={<PlatformIcon platform={platform} size="small" />}
+								checked={filterPlatforms[platform]}
+								onClick={() =>
+									setFilterPlatforms((prev) => ({
+										...prev,
+										[platform]: !prev[platform],
+									}))
+								}
+							/>
+						))}
+					</div>
+					<InputRange title="Minimum completion %" value={filterPerc} setValue={setFilterPerc} />
+					<InputRange
+						title="Minimum total playtime (hours)"
+						value={filterTime}
+						setValue={setFilterTime}
+					/>
+				</DisplayOptionsGroup>
 
-					<DisplayOptions.Group header="Filters">
-						<TextFilter filterText={filterText} setFilterText={setFilterText} />
-						<div className="flex gap-6">
-							{['Steam', 'Xbox', 'Switch'].map((platform: Platform) => (
-								<Toggle
-									key={platform}
-									label={<PlatformIcon platform={platform} size="small" />}
-									checked={filterPlatforms[platform]}
-									onClick={() =>
-										setFilterPlatforms((prev) => ({
-											...prev,
-											[platform]: !prev[platform],
-										}))
-									}
-								/>
-							))}
-						</div>
-						<InputRange title="Minimum completion %" value={filterPerc} setValue={setFilterPerc} />
-						<InputRange
-							title="Minimum total playtime (hours)"
-							value={filterTime}
-							setValue={setFilterTime}
-						/>
-					</DisplayOptions.Group>
+				<DisplayOptionsGroup header="Sorting">
+					<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={sortOptions} />
+				</DisplayOptionsGroup>
+			</DisplayOptionsContainer>
 
-					<DisplayOptions.Group header="Sorting">
-						<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={sortOptions} />
-					</DisplayOptions.Group>
-				</DisplayOptions.Container>
-			</Layout.Sidebar>
-
-			{/* GameCards */}
-			<Layout.Content>
+			<Layout.Cards>
 				<AnimatePresence>
 					{displayedGames.map((game: GameCard) => {
 						const clickable = game.achievementCounts.total > 0
@@ -141,7 +139,7 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 						)
 					})}
 				</AnimatePresence>
-			</Layout.Content>
+			</Layout.Cards>
 		</Layout.Container>
 	)
 }

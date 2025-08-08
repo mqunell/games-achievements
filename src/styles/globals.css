@@ -17,3 +17,7 @@ h2 {
 	font-family: var(--font-poppins);
 	@apply font-medium;
 }
+
+.floating-button {
+	@apply border-body fixed bottom-6 cursor-pointer rounded-md border bg-white px-4 py-3 shadow;
+}
