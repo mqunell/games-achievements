@@ -2,6 +2,8 @@ import { Fragment } from 'react'
 import { readLogs } from '@/db/queries'
 import LocalTimestamp from './LocalTimestamp'
 
+export const revalidate = 600
+
 const severityIcons: { [K in LogSeverity]: string } = {
 	info: 'ℹ️',
 	warn: '⚠️',
