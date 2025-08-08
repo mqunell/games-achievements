@@ -1,4 +1,4 @@
-import { cloneElement, useState } from 'react'
+import { cloneElement, ReactElement, useState } from 'react'
 import Image from 'next/image'
 import clsx from 'clsx'
 import CompletedBadge from './CompletedBadge'
@@ -16,7 +16,7 @@ type Props = {
 }
 
 type IconTextProps = {
-	icon: JSX.Element
+	icon: ReactElement<{ className: string }>
 	text: string
 	italic?: boolean
 }
