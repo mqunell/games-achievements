@@ -46,7 +46,9 @@ const GameAchievementsClient = ({ gameCard, achCards }: Props) => {
 		const displayed: AchCard[] = achCards
 			.filter((ach) => {
 				const validCompleted = ach.completed ? showCompleted : showUncompleted
-				const validText = ach.name.toLowerCase().includes(filterText.toLowerCase())
+				const validText = (ach.name + ach.description)
+					.toLowerCase()
+					.includes(filterText.toLowerCase())
 
 				return validCompleted && validText
 			})
