@@ -1,8 +1,8 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Link from 'next/link'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'motion/react'
+import ConditionalLink from '@/components/ConditionalLink'
 import * as DisplayOptions from '@/components/DisplayOptions'
 import GameCard from '@/components/GameCard'
 import InputRange from '@/components/InputRange'
@@ -121,12 +121,8 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 					{displayedGames.map((game: GameCard) => {
 						const clickable = game.achievementCounts.total > 0
 
-						const Wrapper = ({ children }) => {
-							return clickable ? <Link href={`/games/${game.gameId}`}>{children}</Link> : children
-						}
-
 						return (
-							<Wrapper key={game.gameId}>
+							<ConditionalLink key={game.gameId} href={clickable ? `/games/${game.gameId}` : ''}>
 								<motion.div
 									className={clickable ? 'cursor-pointer' : 'cursor-not-allowed'}
 									layout="position"
@@ -141,7 +137,7 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 										displayOptions={{ showProgress, showPlaytime, showTimeLastPlayed }}
 									/>
 								</motion.div>
-							</Wrapper>
+							</ConditionalLink>
 						)
 					})}
 				</AnimatePresence>

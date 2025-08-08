@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 
 // Page - motion and fromDirection are used for page transitions
 export const Container = ({
@@ -15,7 +15,7 @@ export const Container = ({
 			initial={{ opacity: 0, x }}
 			animate={{ opacity: 1, x: 0 }}
 			exit={{ opacity: 0, x }}
-			transition={{ type: 'linear', duration: 0.5 }}
+			transition={{ duration: 0.5 }}
 		>
 			<div className="flex min-h-screen flex-col items-center gap-6 p-8 md:flex-row md:items-start">
 				{children}

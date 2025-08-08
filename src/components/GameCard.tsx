@@ -51,8 +51,6 @@ const GameCard = ({
 	const { gameId, name, platforms, playtimes, achievementCounts: achCounts, timeLastPlayed } = game
 	const { showProgress, showPlaytime, showTimeLastPlayed } = displayOptions
 
-	const [poster, setPoster] = useState(logoUrl(gameId, platforms))
-
 	// Show one decimal place unless x.0%
 	let achPercentage = ((achCounts.completed / achCounts.total) * 100).toFixed(1)
 	if (achPercentage.endsWith('.0')) achPercentage = achPercentage.slice(0, -2)
@@ -75,12 +73,11 @@ const GameCard = ({
 				})}
 			>
 				<Image
-					src={poster}
+					src={logoUrl(gameId, platforms)}
 					alt={`${name} logo`}
 					fill={true}
 					sizes="184px 288px"
 					className="object-cover"
-					onError={() => setPoster(`/Switch/placeholder.jpg`)}
 				/>
 			</div>
 

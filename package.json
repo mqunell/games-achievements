@@ -16,7 +16,7 @@
 		"@headlessui/react": "^2.2.7",
 		"@headlessui/tailwindcss": "^0.2.1",
 		"clsx": "^2.1.1",
-		"framer-motion": "^11.11.11",
+		"motion": "^12.23.12",
 		"next": "^15.4.6",
 		"pg": "^8.16.3",
 		"react": "^19.1.1",
