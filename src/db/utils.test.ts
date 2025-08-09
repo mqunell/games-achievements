@@ -9,4 +9,6 @@ describe('database utils', () => {
 		expect(() => buildInsertPlaceholders(0, 1)).toThrow()
 		expect(() => buildInsertPlaceholders(1, 0)).toThrow()
 	})
+
+	// convertApiGame and convertApiAchievements are tested via cron tests
 })

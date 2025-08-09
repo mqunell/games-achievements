@@ -1,5 +1,6 @@
 import { getGlobalAchs, getUserAchs, getUserRecentGames } from '@/data/steamApi'
 import { getDbRecentSteamGames, upsertAchievements, upsertGames, writeLog } from '@/db/queries'
+import { convertApiAchievements, convertApiGame } from '@/db/utils'
 
 const invalidGameIds = ['218620', '359050', '365720', '469820', '489830', '1053680']
 
@@ -28,8 +29,7 @@ export const getGamesToUpsert = async (): Promise<DbGame[]> => {
 
 		const dbGame: DbGame = dbRecentGames.find(({ id }) => id === appId)
 		if (apiGame.playtime_2weeks !== dbGame?.playtime_recent) {
-			const updatedGame = await convertApiGame(apiGame)
-			gamesToUpsert.push(updatedGame)
+			gamesToUpsert.push(convertApiGame(apiGame))
 		}
 	}
 
@@ -47,39 +47,13 @@ export const getGamesToUpsert = async (): Promise<DbGame[]> => {
 	return gamesToUpsert
 }
 
-export const convertApiGame = async (game: ApiGame): Promise<DbGame> => ({
-	id: String(game.appid),
-	name: game.name,
-	platform: 'Steam',
-	playtime_recent: game.playtime_2weeks ?? 0,
-	playtime_total: game.playtime_forever + (game.playtime_disconnected ?? 0),
-	time_last_played: new Date(game.rtime_last_played * 1000),
-})
-
 export const getAchievementsToUpsert = async (gameId: GameId): Promise<DbAchievement[]> => {
 	const userAchs: ApiUserAchievement[] | undefined = await getUserAchs(gameId)
 	if (!userAchs) return []
 
 	const globalAchs: ApiGlobalAchievement[] = await getGlobalAchs(gameId)
 
-	const achsToUpsert: DbAchievement[] = userAchs.map((userAch: ApiUserAchievement) => {
-		const globalAch: ApiGlobalAchievement = globalAchs.find(
-			(globalAch) => globalAch.name === userAch.apiname,
-		)
-
-		return {
-			game_id: gameId,
-			game_platform: 'Steam',
-			id: userAch.apiname,
-			name: userAch.name,
-			description: userAch.description,
-			global_completion: Number(Number(globalAch.percent).toFixed(2)),
-			completed: userAch.unlocktime !== 0,
-			completed_time: userAch.unlocktime ? new Date(userAch.unlocktime * 1000) : null,
-		}
-	})
-
-	return achsToUpsert
+	return convertApiAchievements(gameId, userAchs, globalAchs)
 }
 
 const rateLimit = () => new Promise((resolve) => setTimeout(resolve, 1000))

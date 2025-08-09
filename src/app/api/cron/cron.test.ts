@@ -11,7 +11,7 @@ import {
 	mockDbGame3,
 } from '@/testing/mocks/mocks'
 import { server } from '@/testing/mocks/server'
-import { convertApiGame, getAchievementsToUpsert, getGamesToUpsert } from './cron'
+import { getAchievementsToUpsert, getGamesToUpsert } from './cron'
 
 const mockSteamUserGames = (apiGames: ApiGame[]) => {
 	server.use(
@@ -26,12 +26,6 @@ const mockDatabase = (games: DbGame[]) => {
 }
 
 describe('cron', () => {
-	test('convertApiGame', async () => {
-		expect(await convertApiGame(mockApiGame1)).toEqual(mockDbGame1)
-		expect(await convertApiGame(mockApiGame2)).toEqual(mockDbGame2)
-		expect(await convertApiGame(mockApiGame3)).toEqual(mockDbGame3)
-	})
-
 	describe('getGamesToUpsert', () => {
 		test('no recent games in Steam or database', async () => {
 			mockSteamUserGames([])

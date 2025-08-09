@@ -54,3 +54,35 @@ export const getAchievementValues = (ach: DbAchievement) => [
 	ach.completed,
 	ach.completed_time,
 ]
+
+export const convertApiGame = (game: ApiGame): DbGame => ({
+	id: String(game.appid),
+	name: game.name,
+	platform: 'Steam',
+	playtime_recent: game.playtime_2weeks ?? 0,
+	playtime_total: game.playtime_forever + (game.playtime_disconnected ?? 0),
+	time_last_played: new Date(game.rtime_last_played * 1000),
+})
+
+export const convertApiAchievements = (
+	gameId: GameId,
+	apiUserAchs: ApiUserAchievement[],
+	apiGlobalAchs: ApiGlobalAchievement[],
+): DbAchievement[] => {
+	return apiUserAchs.map((userAch: ApiUserAchievement) => {
+		const globalAch: ApiGlobalAchievement = apiGlobalAchs.find(
+			(globalAch) => globalAch.name === userAch.apiname,
+		)
+
+		return {
+			game_id: gameId,
+			game_platform: 'Steam',
+			id: userAch.apiname,
+			name: userAch.name,
+			description: userAch.description,
+			global_completion: Number(Number(globalAch.percent).toFixed(2)),
+			completed: userAch.unlocktime !== 0,
+			completed_time: userAch.unlocktime ? new Date(userAch.unlocktime * 1000) : null,
+		}
+	})
+}

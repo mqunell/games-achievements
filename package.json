@@ -8,9 +8,8 @@
 		"format": "prettier --write ./src",
 		"lint": "next lint",
 		"test": "vitest",
-		"runMigration": "./node_modules/.bin/tsx src/db/migrations/_.ts",
-		"switchHelper": "./node_modules/.bin/tsx src/server/switchHelper.ts",
-		"xboxHelper": "./node_modules/.bin/tsx src/server/xboxHelper.ts"
+		"manualUpsert": "./node_modules/.bin/tsx src/server/manualUpsert.ts",
+		"runMigration": "./node_modules/.bin/tsx src/db/migrations/_.ts"
 	},
 	"dependencies": {
 		"@headlessui/react": "^2.2.7",
