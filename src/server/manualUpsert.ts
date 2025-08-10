@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import { upsertAchievements, upsertGames } from '@/db/queries'
 import { convertApiAchievements, convertApiGame } from '@/db/utils'
 
@@ -16,8 +17,8 @@ import { convertApiAchievements, convertApiGame } from '@/db/utils'
  * - Updating achievements: Use SQL directly (currently not supported in this script)
  */
 
-// Copy/paste the Steam API responses in these variables
-const apiGame: ApiGame = {} as ApiGame
+// Copy/paste the Steam API responses into these variables
+const apiGame: ApiGame = {} as ApiGame // Remove `as ApiGame` when using this
 const apiUserAchs: ApiUserAchievement[] = []
 const apiGlobalAchs: ApiGlobalAchievement[] = []
 
