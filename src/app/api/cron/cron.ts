@@ -27,7 +27,7 @@ export const getGamesToUpsert = async (): Promise<DbGame[]> => {
 		const appId = String(apiGame.appid)
 		if (invalidGameIds.includes(appId)) continue
 
-		const dbGame: DbGame = dbRecentGames.find(({ id }) => id === appId)
+		const dbGame: DbGame | undefined = dbRecentGames.find(({ id }) => id === appId)
 		if (apiGame.playtime_2weeks !== dbGame?.playtime_recent) {
 			gamesToUpsert.push(convertApiGame(apiGame))
 		}
@@ -38,7 +38,9 @@ export const getGamesToUpsert = async (): Promise<DbGame[]> => {
 		if (invalidGameIds.includes(dbGame.id)) continue
 		if (gamesToUpsert.find(({ id }) => id === dbGame.id)) continue
 
-		const apiGame: ApiGame = steamRecentGames.find(({ appid }) => String(appid) === dbGame.id)
+		const apiGame: ApiGame | undefined = steamRecentGames.find(
+			({ appid }) => String(appid) === dbGame.id,
+		)
 		if (!apiGame) {
 			gamesToUpsert.push({ ...dbGame, playtime_recent: 0 })
 		}

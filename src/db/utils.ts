@@ -19,11 +19,11 @@ export const buildInsertPlaceholders = (rows: number, cols: number): string => {
 		throw new Error('rows and cols must both be > 0')
 	}
 
-	const allPlaceholderSets = []
+	const allPlaceholderSets: string[] = []
 	let x = 1
 
 	for (let i = 0; i < rows; i++) {
-		const placeholderSet = []
+		const placeholderSet: string[] = []
 		for (let j = 0; j < cols; j++) {
 			placeholderSet.push(`$${x}`)
 			x++
@@ -70,7 +70,7 @@ export const convertApiAchievements = (
 	apiGlobalAchs: ApiGlobalAchievement[],
 ): DbAchievement[] => {
 	return apiUserAchs.map((userAch: ApiUserAchievement) => {
-		const globalAch: ApiGlobalAchievement = apiGlobalAchs.find(
+		const globalAch: ApiGlobalAchievement | undefined = apiGlobalAchs.find(
 			(globalAch) => globalAch.name === userAch.apiname,
 		)
 
@@ -80,7 +80,7 @@ export const convertApiAchievements = (
 			id: userAch.apiname,
 			name: userAch.name,
 			description: userAch.description,
-			global_completion: Number(Number(globalAch.percent).toFixed(2)),
+			global_completion: Number(Number(globalAch?.percent).toFixed(2)),
 			completed: userAch.unlocktime !== 0,
 			completed_time: userAch.unlocktime ? new Date(userAch.unlocktime * 1000) : null,
 		}

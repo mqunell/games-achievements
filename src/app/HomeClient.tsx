@@ -15,7 +15,7 @@ import { calcCompletion } from '@/lib/percentage'
 import { compare, sortOptions } from '@/lib/sortGames'
 
 const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
-	const [displayedGames, setDisplayedGames] = useState([])
+	const [displayedGames, setDisplayedGames] = useState<GameCard[]>([])
 
 	// Display state
 	const [showProgress, setShowProgress] = useState(true)
@@ -44,13 +44,10 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 
 		// Filter and sort the games
 		const displayed = gameCards
-			.filter((game: GameCard) => {
-				const validPlatform = game.platforms.reduce(
-					(acc, plat) => acc || filterPlatforms[plat],
-					false,
-				)
+			.filter((game: GameCard): boolean => {
+				const validPlatform = game.platforms.reduce((acc, pf) => acc || filterPlatforms[pf], false)
 				const validText = game.name.toLowerCase().includes(filterText.toLowerCase())
-				const validPerc = filterPerc > 0 ? calcCompletion(game) >= filterPerc : true // Show games without achievements when filterPerc is 0
+				const validPerc = calcCompletion(game) >= filterPerc
 				const validTime = game.playtimes.total >= filterTime * 60
 
 				return validPlatform && validText && validPerc && validTime

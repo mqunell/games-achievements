@@ -23,13 +23,9 @@ export const getDbGameCards = async (id?: string): Promise<DbGameCard[]> => {
 export const getDbAchievements = async (
 	gameId: string,
 	gamePlatform: Platform,
-): Promise<Partial<DbAchievement>[]> => {
-	const { rows } = await db.query<Partial<DbAchievement>>(
-		`
-			SELECT name, description, global_completion, completed, completed_time
-			FROM achievements
-			WHERE game_id = $1 AND game_platform = $2
-		`,
+): Promise<DbAchievement[]> => {
+	const { rows } = await db.query<DbAchievement>(
+		`SELECT * FROM achievements WHERE game_id = $1 AND game_platform = $2`,
 		[gameId, gamePlatform],
 	)
 

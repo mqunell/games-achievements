@@ -1,4 +1,4 @@
-// TODO: Need something (database flag?) for determining which game has priority when there are multiple
+// Steam games take priority since they always have more data than Xbox or Switch counterparts
 export const choosePriorityGame = (dbGameCards: DbGameCard[]): DbGameCard => {
 	return (
 		dbGameCards.find((game) => game.platform === 'Steam') ??

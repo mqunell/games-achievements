@@ -17,7 +17,7 @@ const ServerGame = async ({ params }: { params: Params }) => {
 	const gameCard: GameCard = generateGameCard(dbGames)
 
 	const priorityPlatform: Platform = choosePriorityGame(dbGames).platform
-	const dbAchievements: Partial<DbAchievement>[] = await getDbAchievements(gameId, priorityPlatform)
+	const dbAchievements: DbAchievement[] = await getDbAchievements(gameId, priorityPlatform)
 	const achCards: AchCard[] = dbAchievements.map((row) => ({
 		name: row.name,
 		description: row.description,

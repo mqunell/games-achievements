@@ -1,5 +1,5 @@
 module.exports = {
-	reactStrictMode: false, // TODO
+	reactStrictMode: true,
 	images: {
 		remotePatterns: [
 			{
@@ -8,4 +8,4 @@ module.exports = {
 			},
 		],
 	},
-};
+}

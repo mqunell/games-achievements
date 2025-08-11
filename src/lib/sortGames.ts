@@ -22,15 +22,14 @@ export const compare = (a: GameCard, b: GameCard, sortBy: GameSortOption): numbe
 		return a.timeLastPlayed < b.timeLastPlayed ? 1 : -1
 	}
 
-	if (sortBy === 'Completion') {
-		const aPerc = calcCompletion(a)
-		const bPerc = calcCompletion(b)
+	// if (sortBy === 'Completion') {
+	const aPerc = calcCompletion(a)
+	const bPerc = calcCompletion(b)
 
-		// todo: maintain previous sorting (name or playtime) as secondary instead of only total playtime
-		if (aPerc === bPerc) {
-			return a.playtimes.total > b.playtimes.total ? -1 : 1
-		}
-
-		return aPerc > bPerc ? -1 : 1
+	// todo: maintain previous sorting (name or playtime) as secondary instead of only total playtime
+	if (aPerc === bPerc) {
+		return a.playtimes.total > b.playtimes.total ? -1 : 1
 	}
+
+	return aPerc > bPerc ? -1 : 1
 }

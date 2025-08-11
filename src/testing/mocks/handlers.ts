@@ -23,7 +23,7 @@ export const handlers = [
 		'http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/',
 		async ({ request }) => {
 			const url = new URL(request.url)
-			const gameId = url.searchParams.get('appid')
+			const gameId = url.searchParams.get('appid') ?? 0
 
 			const mockUserAchievements = {
 				[mockApiGame1.appid]: {
@@ -54,7 +54,7 @@ export const handlers = [
 		'http://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v0002/',
 		async ({ request }) => {
 			const url = new URL(request.url)
-			const gameId = url.searchParams.get('gameid')
+			const gameId = url.searchParams.get('gameid') ?? 0
 
 			const mockGlobalAchievements = {
 				[mockApiGame1.appid]: mockApiGlobalAchievements1,
