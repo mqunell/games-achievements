@@ -10,7 +10,9 @@ Games and Achievements is an interactive site for viewing stats about the video 
 
 ### Development Overview
 
-This was an important project in my web development career. I upgraded from a barebones MERN stack to many new technologies, including Next.js and static page generation, TypeScript, Tailwind CSS, and Framer Motion. I also worked a lot with the [Steam API](https://developer.valvesoftware.com/wiki/Steam_Web_API 'Steam API') and designed a method of aggregating data across multiple endpoints and caching it in a JSON file, which is then used to build the home page and every individual game page without duplicating API calls.
+This was an important project in my web development career when I first started working on it. I upgraded from a barebones MERN stack to many new technologies, including Next.js with static page generation, TypeScript, Tailwind CSS, and Framer Motion. I also worked a lot with the [Steam API](https://developer.valvesoftware.com/wiki/Steam_Web_API 'Steam API') and designed a method of aggregating data across multiple endpoints and caching it in a JSON file, which was then used to build the home page and every individual game page without duplicating API calls.
+
+There have been some interesting changes over the years since this project was started. Aggregated Steam data has moved from JSON files to MongoDB, and then later to Postgres. There is now a daily cron that intelligently determines which games need to be updated. Tools like msw have been implemented for more robust mocking and testing. I will continue returning to this project and adding new features from time to time.
 
 ---
 
@@ -22,11 +24,13 @@ This was an important project in my web development career. I upgraded from a ba
 - Headless UI components
 - Framer Motion page transitions and other animations
 
-**Backend**: Next.js static generation
+**Backend**: Next.js serverless functions
 
-- Data is aggregated, formatted, and cached during the build process. No other server code is necessary or used
+- Daily cron that aggregates, formats, and upserts data only for games that it determines need to be updated
 
-**Hosting**: Vercel
+**Database**: Neon PostgreSQL
+
+**Hosting**: Vercel with automatic deployments from GitHub
 
 - Automatic deployment from GitHub
 
@@ -49,14 +53,15 @@ The **Steam** API is easy enough to use when considering individual endpoints, b
 
 In order to aggregate the data from Steam, I needed to use three different endpoints and format their returned data more consistently.
 
-**Xbox**, surprisingly, does not have an available API for users' libraries and achievements whatsoever. I resorted to writing an on-demand helper script that retrieves information from Steam and some manual data entry to include Xbox games:
+**Xbox**, surprisingly, does not have an available API for users' libraries and achievements whatsoever. Instead, I pull the metadata from Steam and modify personal fields like total playtime as necessary. The process looks like this:
 
-1. Find the Steam IDs for the Xbox games I wanted to track
-2. Find players who owned those games and have public profiles
-3. Query data similarly to my own profile, but omit user-specific data like completion statuses and times
-4. Generate a JSON file and manually mark achievements as completed to match my Xbox data
+1. Find the Steam ID for an Xbox games I want to pull data for
+2. Find a player who owns that games and has a public profile
+3. Make API calls, verify I get all of the metadata back, and then copy/paste it into `server/manualUpsert.ts`
+4. Update personal fields
+5. Run the script
 
-At this point, Steam data is gathered and formatted completely automatically, and Xbox data is collected manually but structured the same way. Part of the static generation build process is combining these sources of data into one list.
+I used to have more code that assisted with this, but it got to be more trouble than it was worth. Adding Xbox games is such a rare occurence nowadays that it's simpler to use a tool like Bruno for making the requests and leave the script to just formatting and upserting.
 
 #### Animations and Page Transitions
 
