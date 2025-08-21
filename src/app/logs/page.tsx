@@ -1,4 +1,6 @@
 import { Fragment } from 'react'
+import Link from 'next/link'
+import { ArrowLeftIcon } from '@/components/HeroIcons'
 import { readLogs } from '@/db/queries'
 import LocalTimestamp from './LocalTimestamp'
 
@@ -31,6 +33,12 @@ const LogsPage = async () => {
 					))}
 				</div>
 			</section>
+
+			<Link href="/">
+				<div className="floating-button left-6">
+					<ArrowLeftIcon className="size-5" />
+				</div>
+			</Link>
 		</div>
 	)
 }
