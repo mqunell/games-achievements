@@ -1,6 +1,27 @@
 // import { getAllGames } from '@/data/dbHelper'
 import { buildInsertPlaceholders, db } from '../utils'
-import { allGames, JsonAchievement, JsonGame } from './1-all-games'
+
+type JsonGame = {
+	id: GameId
+	name: string
+	platform: Platform
+	playtimeRecent: number // Minutes
+	playtimeTotal: number // Minutes
+	timeLastPlayed?: string
+	achievements: JsonAchievement[] | null
+}
+
+type JsonAchievement = {
+	id: string
+	name: string
+	description: string
+	completed: boolean
+	completedTime: number
+	globalCompleted: number
+}
+
+// Copied from games-backup-2025-08-03.json
+const allGames: JsonGame[] = []
 
 /**
  * Migration steps

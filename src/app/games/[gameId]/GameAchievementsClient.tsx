@@ -64,8 +64,39 @@ const GameAchievementsClient = ({ gameCard, achCards }: Props) => {
 	}, [sortBy])
 
 	return (
-		<Layout.Container fromDirection="right">
-			<GameCard game={gameCard} size="large" />
+		<>
+			<Layout.Container fromDirection="right">
+				<GameCard game={gameCard} size="large" />
+
+				<Layout.Cards>
+					<AnimatePresence>
+						{displayedAchievements.map((achCard: AchCard) => (
+							<motion.div
+								layout="position"
+								initial={{ opacity: 0 }}
+								animate={{ opacity: 1 }}
+								exit={{ opacity: 0 }}
+								transition={{ duration: 0.5 }}
+								key={achCard.name}
+							>
+								<AchievementCard achCard={achCard} displayOptions={{ showTime, showGlobal }} />
+							</motion.div>
+						))}
+					</AnimatePresence>
+				</Layout.Cards>
+			</Layout.Container>
+
+			<Link href="/">
+				<motion.div
+					initial={{ opacity: 0, x: 40 }}
+					animate={{ opacity: 1, x: 0 }}
+					exit={{ opacity: 0, x: 40 }}
+					transition={{ duration: 0.5, delay: 0.5 }}
+					className="floating-button left-6"
+				>
+					<ArrowLeftIcon className="size-5" />
+				</motion.div>
+			</Link>
 
 			<DisplayOptionsContainer>
 				<DisplayOptionsGroup header="Display">
@@ -102,36 +133,7 @@ const GameAchievementsClient = ({ gameCard, achCards }: Props) => {
 					<Select sortBy={sortBy} setSortBy={setSortBy} sortOptions={validSortOptions} />
 				</DisplayOptionsGroup>
 			</DisplayOptionsContainer>
-
-			<Layout.Cards>
-				<AnimatePresence>
-					{displayedAchievements.map((achCard: AchCard) => (
-						<motion.div
-							layout="position"
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							exit={{ opacity: 0 }}
-							transition={{ duration: 0.5 }}
-							key={achCard.name}
-						>
-							<AchievementCard achCard={achCard} displayOptions={{ showTime, showGlobal }} />
-						</motion.div>
-					))}
-				</AnimatePresence>
-			</Layout.Cards>
-
-			<Link href="/">
-				<motion.div
-					initial={{ opacity: 0, x: 40 }}
-					animate={{ opacity: 1, x: 0 }}
-					exit={{ opacity: 0, x: 40 }}
-					transition={{ duration: 0.5, delay: 0.5 }}
-					className="floating-button left-6"
-				>
-					<ArrowLeftIcon className="size-5" />
-				</motion.div>
-			</Link>
-		</Layout.Container>
+		</>
 	)
 }
 
