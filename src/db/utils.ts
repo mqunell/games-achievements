@@ -61,7 +61,7 @@ export const convertApiGame = (game: ApiGame): DbGame => ({
 	platform: 'Steam',
 	playtime_recent: game.playtime_2weeks ?? 0,
 	playtime_total: game.playtime_forever + (game.playtime_disconnected ?? 0),
-	time_last_played: new Date(game.rtime_last_played * 1000),
+	time_last_played: game.rtime_last_played ? new Date(game.rtime_last_played * 1000) : null,
 })
 
 export const convertApiAchievements = (
