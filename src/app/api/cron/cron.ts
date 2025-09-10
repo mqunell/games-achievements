@@ -1,6 +1,7 @@
-import { getGlobalAchs, getUserAchs, getUserRecentGames } from '@/data/steamApi'
+import { getGlobalAchs, getUserAchs } from '@/data/steamApi'
 import { getDbRecentSteamGames, upsertAchievements, upsertGames, writeLog } from '@/db/queries'
 import { convertApiAchievements, convertApiGame } from '@/db/utils'
+import { getAllRecentSteamGames } from './getAllRecentSteamGames'
 
 const invalidGameIds = ['218620', '359050', '365720', '469820', '489830', '1053680']
 
@@ -17,7 +18,7 @@ const invalidGameIds = ['218620', '359050', '365720', '469820', '489830', '10536
  *    - Game only in database: Set playtimeRecent to 0
  */
 export const getGamesToUpsert = async (): Promise<DbGame[]> => {
-	const steamRecentGames: ApiGame[] = await getUserRecentGames()
+	const steamRecentGames: ApiGame[] = await getAllRecentSteamGames()
 	const dbRecentGames: DbGame[] = await getDbRecentSteamGames()
 
 	const gamesToUpsert: DbGame[] = []

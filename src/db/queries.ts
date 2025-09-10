@@ -5,6 +5,9 @@ export const getGameName = async (id: string): Promise<string> => {
 	return rows[0].name
 }
 
+// TODO: If `time_last_played` is undefined but the game has achievements with timestamps, can
+// it be set to the same timestamp as the most recent achievement? This would be better than
+// nothing for games played via Steam Family Sharing that don't have that field
 export const getDbGameCards = async (id?: string): Promise<DbGameCard[]> => {
 	const { rows } = await db.query<DbGameCard>(
 		`

@@ -1,13 +1,24 @@
 const { STEAM_API_KEY, STEAM_USER_ID } = process.env
 
-// Games played in the last two weeks, including unowned games played via Steam Families
-// Have to use GetOwnedGames and not GetRecentlyPlayedGames because the latter does not include `playtime_disconnected`
-export const getUserRecentGames = async (): Promise<ApiGame[]> => {
+// GetOwnedGames lists all of a user's owned games, and includes the `playtime_disconnected` and
+// `rtime_last_played` fields
+export const getUserOwnedGames = async (): Promise<ApiGame[]> => {
 	const url = `http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${STEAM_API_KEY}&steamid=${STEAM_USER_ID}&include_appinfo=true&include_played_free_games=true`
 	const result = await fetch(url)
 	const data = await result.json()
 
-	return data.response.games.filter((apiGame: ApiGame) => apiGame.playtime_2weeks)
+	return data.response.games
+}
+
+// GetRecentlyPlayedGames lists all of a user's recently played games (both owned and shared via
+// Steam Family Sharing), but does not include the `playtime_disconnected` and `rtime_last_played`
+// fields in either scenario
+export const getUserRecentGames = async (): Promise<ApiGame[]> => {
+	const url = `http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=${STEAM_API_KEY}&steamid=${STEAM_USER_ID}`
+	const result = await fetch(url)
+	const data = await result.json()
+
+	return data.response.games
 }
 
 export const getUserAchs = async (gameId: GameId): Promise<ApiUserAchievement[]> => {
