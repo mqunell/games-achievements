@@ -33,7 +33,7 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 	const [filterTime, setFilterTime] = useState(0)
 
 	// Sort state
-	const [sortBy, setSortBy] = useState<GameSortOption>('Playtime')
+	const [sortBy, setSortBy] = useState<GameSortOption>('Time last played')
 
 	// Filtering and sorting (note: merged useEffect works here because it's a display option that is changed, not a filter toggle)
 	useEffect(() => {
