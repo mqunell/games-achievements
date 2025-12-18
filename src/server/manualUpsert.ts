@@ -34,4 +34,12 @@ const upsertApiGameAndAchievements = async () => {
 	process.exit()
 }
 
-upsertApiGameAndAchievements()
+// Copy/paste database json into this variable
+const dbAchievements: DbAchievement[] = []
+
+const upsertDbAchievements = async () => {
+	await upsertAchievements(dbAchievements)
+	process.exit()
+}
+
+upsertDbAchievements()
