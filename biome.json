@@ -17,7 +17,13 @@
 		"enabled": true,
 		"rules": {
 			"nursery": {
-				"useSortedClasses": "error"
+				"useSortedClasses": {
+					"fix": "safe",
+					"level": "warn",
+					"options": {
+						"functions": ["clsx"]
+					}
+				}
 			},
 			"recommended": true
 		}
@@ -26,6 +32,11 @@
 		"formatter": {
 			"quoteStyle": "single",
 			"semicolons": "asNeeded"
+		}
+	},
+	"css": {
+		"parser": {
+			"tailwindDirectives": true
 		}
 	},
 	"assist": {

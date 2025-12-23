@@ -1,8 +1,8 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import Link from 'next/link'
 import { AnimatePresence, motion } from 'motion/react'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import AchievementCard from '@/components/AchievementCard'
 import { DisplayOptionsContainer, DisplayOptionsGroup } from '@/components/DisplayOptions'
 import GameCard from '@/components/GameCard'

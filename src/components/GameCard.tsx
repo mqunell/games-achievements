@@ -1,6 +1,6 @@
-import { cloneElement, ReactElement, useState } from 'react'
-import Image from 'next/image'
 import clsx from 'clsx'
+import Image from 'next/image'
+import { cloneElement, type ReactElement } from 'react'
 import CompletedBadge from './CompletedBadge'
 import { CalendarIcon, CheckCircleIcon, ClockIcon } from './HeroIcons'
 import PlatformIcon from './PlatformIcon'

@@ -1,3 +1,5 @@
+// biome-ignore-all lint: one-time migration
+
 // import { getAllGames } from '@/data/dbHelper'
 import { buildInsertPlaceholders, db } from '../utils'
 

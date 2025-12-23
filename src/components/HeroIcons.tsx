@@ -16,7 +16,7 @@ const svgV2Props = (className?: string) => ({
 
 // arrow-left solid v1.0.6
 export const ArrowLeftIcon = ({ className }: { className?: string }) => (
-	<svg {...svgV1Props(className)}>
+	<svg {...svgV1Props(className)} role="img" aria-label="arrow left">
 		<path
 			fillRule="evenodd"
 			d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
@@ -27,7 +27,7 @@ export const ArrowLeftIcon = ({ className }: { className?: string }) => (
 
 // calendar-days outline v2.1.5
 export const CalendarIcon = ({ className }: { className?: string }) => (
-	<svg {...svgV2Props(className)}>
+	<svg {...svgV2Props(className)} role="img" aria-label="calendar">
 		<path
 			strokeLinecap="round"
 			strokeLinejoin="round"
@@ -38,7 +38,7 @@ export const CalendarIcon = ({ className }: { className?: string }) => (
 
 // check solid v1.0.6
 export const CheckIcon = ({ className }: { className?: string }) => (
-	<svg {...svgV1Props(className)}>
+	<svg {...svgV1Props(className)} role="img" aria-label="check">
 		<path
 			fillRule="evenodd"
 			d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
@@ -49,7 +49,7 @@ export const CheckIcon = ({ className }: { className?: string }) => (
 
 // check-circle outline v2.1.5
 export const CheckCircleIcon = ({ className }: { className?: string }) => (
-	<svg {...svgV2Props(className)}>
+	<svg {...svgV2Props(className)} role="img" aria-label="check circle">
 		<path
 			strokeLinecap="round"
 			strokeLinejoin="round"
@@ -60,7 +60,7 @@ export const CheckCircleIcon = ({ className }: { className?: string }) => (
 
 // chevron-up solid v1.0.6
 export const ChevronUpIcon = ({ className }: { className?: string }) => (
-	<svg {...svgV1Props(className)}>
+	<svg {...svgV1Props(className)} role="img" aria-label="chevron up">
 		<path
 			fillRule="evenodd"
 			d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
@@ -71,7 +71,7 @@ export const ChevronUpIcon = ({ className }: { className?: string }) => (
 
 // clock outline v2.1.5
 export const ClockIcon = ({ className }: { className?: string }) => (
-	<svg {...svgV2Props(className)}>
+	<svg {...svgV2Props(className)} role="img" aria-label="clock">
 		<path
 			strokeLinecap="round"
 			strokeLinejoin="round"
@@ -82,7 +82,7 @@ export const ClockIcon = ({ className }: { className?: string }) => (
 
 // selector solid v1.0.6
 export const SelectorIcon = ({ className }: { className?: string }) => (
-	<svg {...svgV1Props(className)}>
+	<svg {...svgV1Props(className)} role="img" aria-label="selector">
 		<path
 			fillRule="evenodd"
 			d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
@@ -93,7 +93,7 @@ export const SelectorIcon = ({ className }: { className?: string }) => (
 
 // adjustments-horizontal outline v2.1.5
 export const SettingsIcon = ({ className }: { className?: string }) => (
-	<svg {...svgV2Props(className)}>
+	<svg {...svgV2Props(className)} role="img" aria-label="settings">
 		<path
 			strokeLinecap="round"
 			strokeLinejoin="round"
@@ -104,7 +104,7 @@ export const SettingsIcon = ({ className }: { className?: string }) => (
 
 // trophy outline v2.1.1
 export const TrophyIcon = ({ className }: { className?: string }) => (
-	<svg {...svgV2Props(className)}>
+	<svg {...svgV2Props(className)} role="img" aria-label="trophy">
 		<path
 			strokeLinecap="round"
 			strokeLinejoin="round"

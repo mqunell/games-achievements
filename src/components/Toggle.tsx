@@ -4,7 +4,7 @@ import clsx from 'clsx'
 type Props = {
 	label: string | React.ReactNode
 	checked: boolean
-	onClick: Function
+	onClick: () => void
 }
 
 /**

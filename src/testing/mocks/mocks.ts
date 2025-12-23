@@ -95,7 +95,7 @@ export const mockApiUserAchievements2: ApiUserAchievement[] = [
 export const mockApiGlobalAchievements1: ApiGlobalAchievement[] = [
 	{ name: 'ACHIEVEMENT_1A', percent: 82.5 },
 	{ name: 'ACHIEVEMENT_1B', percent: 50 },
-	{ name: 'ACHIEVEMENT_1C', percent: 18.6000003814697266 },
+	{ name: 'ACHIEVEMENT_1C', percent: 18.60000038146972 },
 ]
 export const mockApiGlobalAchievements2: ApiGlobalAchievement[] = [
 	{ name: 'ACHIEVEMENT_2A', percent: 93 },

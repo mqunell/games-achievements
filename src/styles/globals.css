@@ -1,6 +1,6 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
-@plugin '@headlessui/tailwindcss';
+@plugin "@headlessui/tailwindcss";
 
 @theme {
 	--color-body: rgb(36, 40, 47);

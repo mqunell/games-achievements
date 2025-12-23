@@ -22,7 +22,7 @@ const apiGame: ApiGame = {} as ApiGame // Remove `as ApiGame` when using this
 const apiUserAchs: ApiUserAchievement[] = []
 const apiGlobalAchs: ApiGlobalAchievement[] = []
 
-const upsertApiGameAndAchievements = async () => {
+const _upsertApiGameAndAchievements = async () => {
 	const dbGame: DbGame = convertApiGame(apiGame)
 	await upsertGames([dbGame])
 

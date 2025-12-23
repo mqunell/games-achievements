@@ -20,8 +20,8 @@ export const generateGameCard = (dbGameCards: DbGameCard[]): GameCard => {
 		},
 		timeLastPlayed: priorityGame.time_last_played,
 		achievementCounts: {
-			total: parseInt(priorityGame.total_achievements),
-			completed: parseInt(priorityGame.completed_achievements),
+			total: parseInt(priorityGame.total_achievements, 10),
+			completed: parseInt(priorityGame.completed_achievements, 10),
 		},
 	}
 }

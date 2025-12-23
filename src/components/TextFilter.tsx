@@ -2,7 +2,7 @@ import clsx from 'clsx'
 
 type Props = {
 	filterText: string
-	setFilterText: Function
+	setFilterText: React.Dispatch<React.SetStateAction<string>>
 }
 
 const TextFilter = ({ filterText, setFilterText }: Props) => (

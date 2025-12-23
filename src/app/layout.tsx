@@ -1,5 +1,5 @@
-import { Anek_Gujarati, Poppins } from 'next/font/google'
 import clsx from 'clsx'
+import { Anek_Gujarati, Poppins } from 'next/font/google'
 import '@/styles/globals.css'
 
 const anek_gujarati = Anek_Gujarati({

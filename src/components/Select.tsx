@@ -3,7 +3,7 @@ import { CheckIcon, SelectorIcon } from './HeroIcons'
 
 type Props = {
 	sortBy: SortOption
-	setSortBy: (value: SortOption | any) => void
+	setSortBy: React.Dispatch<React.SetStateAction<SortOption>>
 	sortOptions: SortOption[]
 }
 
@@ -22,7 +22,7 @@ const Select = ({ sortBy, setSortBy, sortOptions }: Props) => (
 				<ListboxOption
 					key={option}
 					value={option}
-					className="ui-active:bg-green-600 ui-not-active:bg-green-500 flex cursor-pointer items-center justify-between px-2 py-1"
+					className="flex cursor-pointer items-center justify-between ui-active:bg-green-600 ui-not-active:bg-green-500 px-2 py-1"
 				>
 					<span>{option}</span>
 					<CheckIcon className="ui-selected:block hidden size-4" />

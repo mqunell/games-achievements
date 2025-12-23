@@ -1,7 +1,7 @@
 type Props = {
 	title: string
 	value: number
-	setValue: Function
+	setValue: React.Dispatch<React.SetStateAction<number>>
 }
 
 const InputRange = ({ title, value, setValue }: Props) => (
@@ -14,7 +14,7 @@ const InputRange = ({ title, value, setValue }: Props) => (
 			max="100"
 			step="20"
 			value={value}
-			onChange={(e) => setValue(parseInt(e.target.value))}
+			onChange={(e) => setValue(parseInt(e.target.value, 10))}
 		/>
 		{value}
 	</label>

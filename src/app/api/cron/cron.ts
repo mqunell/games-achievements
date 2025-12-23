@@ -73,7 +73,7 @@ export const upsertGamesAndAchievements = async (): Promise<void> => {
 	try {
 		await upsertGames(games)
 		writeLog('info', `Upserted ${games.length} game(s): ${gameNames}`)
-	} catch (error) {
+	} catch (_error) {
 		writeLog('error', `Failed to upsert game(s): ${gameNames} - ending cron`)
 		return // Don't attempt to upsert achievements if the games failed
 	}
@@ -91,7 +91,7 @@ export const upsertGamesAndAchievements = async (): Promise<void> => {
 		try {
 			await upsertAchievements(achs)
 			writeLog('info', `Upserted ${achs.length} achievement(s) for ${game.name}`)
-		} catch (error) {
+		} catch (_error) {
 			writeLog('error', `Failed to upsert achievement(s) for ${game.name}`)
 			// Do attempt to upsert achievements for other games
 		}

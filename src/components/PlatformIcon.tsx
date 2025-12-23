@@ -1,5 +1,5 @@
-import Image from 'next/image'
 import clsx from 'clsx'
+import Image from 'next/image'
 
 const PlatformIcon = ({ platform, size }: { platform: Platform; size: Size }) => (
 	<div

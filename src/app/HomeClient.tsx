@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
+import { useEffect, useState } from 'react'
 import ConditionalLink from '@/components/ConditionalLink'
 import { DisplayOptionsContainer, DisplayOptionsGroup } from '@/components/DisplayOptions'
 import GameCard from '@/components/GameCard'

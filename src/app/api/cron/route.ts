@@ -1,4 +1,4 @@
-import { NextRequest } from 'next/server'
+import type { NextRequest } from 'next/server'
 import { upsertGamesAndAchievements } from './cron'
 
 const { CRON_SECRET } = process.env

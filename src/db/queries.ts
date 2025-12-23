@@ -51,7 +51,7 @@ export const upsertGames = async (games: DbGame[]) => {
 			ON CONFLICT (id, platform)
 			DO UPDATE SET playtime_total = EXCLUDED.playtime_total, playtime_recent = EXCLUDED.playtime_recent, time_last_played = EXCLUDED.time_last_played
 		`,
-		games.map(getGameValues).flat(),
+		games.flatMap(getGameValues),
 	)
 }
 
@@ -63,7 +63,7 @@ export const upsertAchievements = async (achs: DbAchievement[]) => {
 			ON CONFLICT (game_id, game_platform, id)
 			DO UPDATE SET global_completion = EXCLUDED.global_completion, completed = EXCLUDED.completed, completed_time = EXCLUDED.completed_time
 		`,
-		achs.map(getAchievementValues).flat(),
+		achs.flatMap(getAchievementValues),
 	)
 }
 

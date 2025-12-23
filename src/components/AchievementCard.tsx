@@ -41,7 +41,7 @@ const AchievementCard = ({ achCard, displayOptions }: Props) => {
 						animate={{ scaleX: 1 }}
 						transition={{ duration: 0.5, delay: 0.5 }}
 						className="origin-left bg-blue-600 p-1.5"
-						style={{ width: globalCompleted + '%' }}
+						style={{ width: `${globalCompleted}%` }}
 					>
 						<p className="w-max rounded-sm border border-black bg-white px-1.5 py-0.5 text-xs">
 							{globalCompleted.toFixed(1)}%
