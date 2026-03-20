@@ -13,7 +13,7 @@ export const mockApiGame2: ApiGame = {
 	playtime_forever: 200,
 	playtime_disconnected: 0,
 	playtime_2weeks: 200,
-	rtime_last_played: 1748199600,
+	rtime_last_played: 1748199700,
 }
 export const mockApiGame3: ApiGame = {
 	appid: 3,
@@ -21,7 +21,7 @@ export const mockApiGame3: ApiGame = {
 	playtime_forever: 300,
 	playtime_disconnected: 50,
 	playtime_2weeks: 300,
-	rtime_last_played: 1748199600,
+	rtime_last_played: 1748199800,
 }
 
 // DbGame mocks
@@ -39,7 +39,7 @@ export const mockDbGame2: DbGame = {
 	platform: 'Steam',
 	playtime_recent: 200,
 	playtime_total: 200,
-	time_last_played: new Date(1748199600000),
+	time_last_played: new Date(1748199700000),
 }
 export const mockDbGame3: DbGame = {
 	id: '3',
@@ -47,7 +47,7 @@ export const mockDbGame3: DbGame = {
 	platform: 'Steam',
 	playtime_recent: 300,
 	playtime_total: 350,
-	time_last_played: new Date(1748199600000),
+	time_last_played: new Date(1748199800000),
 }
 
 // ApiUserAchievement mocks

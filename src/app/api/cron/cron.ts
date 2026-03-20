@@ -29,7 +29,20 @@ export const getGamesToUpsert = async (): Promise<DbGame[]> => {
 		if (invalidGameIds.includes(appId)) continue
 
 		const dbGame: DbGame | undefined = dbRecentGames.find(({ id }) => id === appId)
-		if (apiGame.playtime_2weeks !== dbGame?.playtime_recent) {
+
+		// Shared and some free games don't have this field, but it may have been set in the database
+		// automatically in a later part of the cron or manually through direct database edits. Adding
+		// it here makes it persist through the rest of the process
+		if (!apiGame.rtime_last_played && dbGame?.time_last_played) {
+			apiGame.rtime_last_played = Math.round(dbGame.time_last_played.valueOf() / 1000)
+		}
+
+		// Only upsert if necessary
+		const diffPlaytimeRecents = apiGame.playtime_2weeks !== dbGame?.playtime_recent
+		const diffPlaytimeTotals =
+			apiGame.playtime_forever + (apiGame.playtime_disconnected ?? 0) !== dbGame?.playtime_total
+
+		if (diffPlaytimeRecents || diffPlaytimeTotals) {
 			gamesToUpsert.push(convertApiGame(apiGame))
 		}
 	}
@@ -59,6 +72,22 @@ export const getAchievementsToUpsert = async (gameId: GameId): Promise<DbAchieve
 	return convertApiAchievements(gameId, userAchs, globalAchs)
 }
 
+// Derive the most recent timestamp for when a game was played based on it and its achievements.
+// This alleviates a problem where shared and some free games don't come with `rtime_last_played`.
+export const deriveGameTimeLastPlayed = (game: DbGame, achs: DbAchievement[]): Date | null => {
+	const gameTimestamp = game.time_last_played
+
+	const newestAchTimestamp = achs.sort((a, b) =>
+		(a.completed_time ?? 0) > (b.completed_time ?? 0) ? -1 : 1,
+	)[0]?.completed_time
+
+	if (newestAchTimestamp && (!gameTimestamp || gameTimestamp < newestAchTimestamp)) {
+		return newestAchTimestamp
+	}
+
+	return gameTimestamp
+}
+
 const rateLimit = () => new Promise((resolve) => setTimeout(resolve, 1000))
 
 export const upsertGamesAndAchievements = async (): Promise<void> => {
@@ -69,23 +98,16 @@ export const upsertGamesAndAchievements = async (): Promise<void> => {
 	}
 	const gameNames = games.map((game) => game.name).join(', ')
 
-	// Upsert all of the games in one query
-	try {
-		await upsertGames(games)
-		writeLog('info', `Upserted ${games.length} game(s): ${gameNames}`)
-	} catch (_error) {
-		writeLog('error', `Failed to upsert game(s): ${gameNames} - ending cron`)
-		return // Don't attempt to upsert achievements if the games failed
-	}
-
-	await rateLimit()
-
+	// Upsert achievements per game first in case a game's `time_last_played` needs to be derived
 	for (const game of games) {
-		const achs = await getAchievementsToUpsert(game.id)
+		const achs: DbAchievement[] = await getAchievementsToUpsert(game.id)
 		if (achs.length === 0) {
 			writeLog('info', `No achievements to upsert for ${game.name}`)
 			continue
 		}
+
+		// Update the game's `time_last_played` as necessary
+		game.time_last_played = deriveGameTimeLastPlayed(game, achs)
 
 		// Upsert all of this game's achievements in one query
 		try {
@@ -93,9 +115,16 @@ export const upsertGamesAndAchievements = async (): Promise<void> => {
 			writeLog('info', `Upserted ${achs.length} achievement(s) for ${game.name}`)
 		} catch (_error) {
 			writeLog('error', `Failed to upsert achievement(s) for ${game.name}`)
-			// Do attempt to upsert achievements for other games
 		}
 
 		await rateLimit()
+	}
+
+	// Upsert all of the games in one query
+	try {
+		await upsertGames(games)
+		writeLog('info', `Upserted ${games.length} game(s): ${gameNames}`)
+	} catch (_error) {
+		writeLog('error', `Failed to upsert game(s): ${gameNames}`)
 	}
 }
