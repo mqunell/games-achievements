@@ -3,7 +3,7 @@ import { getDbRecentSteamGames, upsertAchievements, upsertGames, writeLog } from
 import { convertApiAchievements, convertApiGame } from '@/db/utils'
 import { getAllRecentSteamGames } from './getAllRecentSteamGames'
 
-const invalidGameIds = ['218620', '359050', '365720', '469820', '489830', '1053680']
+const invalidGameIds = ['218620', '359050', '365720', '469820', '1053680']
 
 /**
  * Determine which ApiGames need to be updated. This optimizes the overall process by only updating
@@ -96,9 +96,9 @@ export const upsertGamesAndAchievements = async (): Promise<void> => {
 		writeLog('info', 'No games to upsert')
 		return
 	}
-	const gameNames = games.map((game) => game.name).join(', ')
 
-	// Upsert achievements per game first in case a game's `time_last_played` needs to be derived
+	// Update each game's `time_last_played` and batch achievements by game
+	const achsMap: Record<DbGame['name'], DbAchievement[]> = {}
 	for (const game of games) {
 		const achs: DbAchievement[] = await getAchievementsToUpsert(game.id)
 		if (achs.length === 0) {
@@ -106,25 +106,32 @@ export const upsertGamesAndAchievements = async (): Promise<void> => {
 			continue
 		}
 
-		// Update the game's `time_last_played` as necessary
 		game.time_last_played = deriveGameTimeLastPlayed(game, achs)
-
-		// Upsert all of this game's achievements in one query
-		try {
-			await upsertAchievements(achs)
-			writeLog('info', `Upserted ${achs.length} achievement(s) for ${game.name}`)
-		} catch (_error) {
-			writeLog('error', `Failed to upsert achievement(s) for ${game.name}`)
-		}
+		achsMap[game.name] = achs
 
 		await rateLimit()
 	}
 
 	// Upsert all of the games in one query
+	const gameNames = games.map((game) => game.name).join(', ')
 	try {
 		await upsertGames(games)
 		writeLog('info', `Upserted ${games.length} game(s): ${gameNames}`)
 	} catch (_error) {
 		writeLog('error', `Failed to upsert game(s): ${gameNames}`)
+	} finally {
+		await rateLimit()
+	}
+
+	// Upsert all of each game's achievements in one query per game
+	for (const [gameName, achs] of Object.entries(achsMap)) {
+		try {
+			await upsertAchievements(achs)
+			writeLog('info', `Upserted ${achs.length} achievement(s) for ${gameName}`)
+		} catch (_error) {
+			writeLog('error', `Failed to upsert achievement(s) for ${gameName}`)
+		} finally {
+			await rateLimit()
+		}
 	}
 }
