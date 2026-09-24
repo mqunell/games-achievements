@@ -19,6 +19,7 @@ const ServerGame = async ({ params }: { params: Params }) => {
 	const priorityPlatform: Platform = choosePriorityGame(dbGames).platform
 	const dbAchievements: DbAchievement[] = await getDbAchievements(gameId, priorityPlatform)
 	const achCards: AchCard[] = dbAchievements.map((row) => ({
+		id: row.id,
 		name: row.name,
 		description: row.description,
 		completed: row.completed,

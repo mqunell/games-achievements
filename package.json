@@ -8,6 +8,7 @@
 		"biome-check": "biome check",
 		"biome-fix": "biome check --write",
 		"test": "vitest",
+		"typecheck": "npx tsc --noEmit",
 		"manualUpsert": "./node_modules/.bin/tsx src/server/manualUpsert.ts",
 		"runMigration": "./node_modules/.bin/tsx src/db/migrations/_.ts"
 	},

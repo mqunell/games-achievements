@@ -14,6 +14,7 @@ type GameCard = {
 }
 
 type AchCard = {
+	id: string
 	name: string
 	description: string
 	completed: boolean

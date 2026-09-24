@@ -77,7 +77,7 @@ const GameAchievementsClient = ({ gameCard, achCards }: Props) => {
 								animate={{ opacity: 1 }}
 								exit={{ opacity: 0 }}
 								transition={{ duration: 0.5 }}
-								key={achCard.name}
+								key={achCard.id}
 							>
 								<AchievementCard achCard={achCard} displayOptions={{ showTime, showGlobal }} />
 							</motion.div>
