@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { type ComponentType, useState } from 'react'
 import { formatDate, formatDuration } from '@/lib/time'
 import CompletedBadge from './CompletedBadge'
+import Divider from './Divider'
 import { CalendarIcon, CheckCircleIcon, ClockIcon, TrophyIcon } from './HeroIcons'
 import PlatformIcon from './PlatformIcon'
 
@@ -105,7 +106,7 @@ const GameCard = ({
 
 				{(showProgress || showPlaytime || showTimeLastPlayed) && (
 					<>
-						<hr className="my-1 w-full border-body opacity-50" />
+						<Divider className="my-1" />
 
 						<div className="flex flex-col">
 							{showProgress &&

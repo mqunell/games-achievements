@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import { motion } from 'motion/react'
 import { formatDateTime } from '@/lib/time'
 import CompletedBadge from './CompletedBadge'
+import Divider from './Divider'
 
 type Props = {
 	achCard: AchCard
@@ -26,7 +27,7 @@ const AchievementCard = ({ achCard, displayOptions }: Props) => {
 
 				{completed && displayOptions.showTime && (
 					<>
-						<hr className="my-2 w-full border-body opacity-50" />
+						<Divider className="my-2" />
 						<p className={clsx('text-sm', { italic: !completedTime })}>
 							{completedTime ? formatDateTime(completedTime) : 'No date/time provided'}
 						</p>

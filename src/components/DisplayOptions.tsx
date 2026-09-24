@@ -1,5 +1,6 @@
 import { Popover, PopoverBackdrop, PopoverButton, PopoverPanel } from '@headlessui/react'
 import { Fragment } from 'react'
+import Divider from './Divider'
 import { SettingsIcon } from './HeroIcons'
 
 export const DisplayOptionsContainer = ({ children }: { children: React.ReactNode[] }) => (
@@ -19,7 +20,7 @@ export const DisplayOptionsContainer = ({ children }: { children: React.ReactNod
 				/* biome-ignore lint: list doesn't change, index is okay */
 				<Fragment key={`display-option-group-${index}`}>
 					{child}
-					{index < children.length - 1 && <hr className="mt-5 mb-3" />}
+					{index < children.length - 1 && <Divider className="mt-5 mb-3" />}
 				</Fragment>
 			))}
 		</PopoverPanel>
