@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { motion } from 'motion/react'
+import { formatDateTime } from '@/lib/time'
 import CompletedBadge from './CompletedBadge'
 
 type Props = {
@@ -25,9 +26,9 @@ const AchievementCard = ({ achCard, displayOptions }: Props) => {
 
 				{completed && displayOptions.showTime && (
 					<>
-						<hr className="my-2 w-1/6 border-black" />
+						<hr className="my-2 w-full border-body opacity-50" />
 						<p className={clsx('text-sm', { italic: !completedTime })}>
-							{completedTime ? completedTime.toLocaleString('en-US') : 'No date/time provided'}
+							{completedTime ? formatDateTime(completedTime) : 'No date/time provided'}
 						</p>
 					</>
 				)}
@@ -40,7 +41,7 @@ const AchievementCard = ({ achCard, displayOptions }: Props) => {
 						initial={{ scaleX: 0 }}
 						animate={{ scaleX: 1 }}
 						transition={{ duration: 0.5, delay: 0.5 }}
-						className="origin-left bg-blue-600 p-1.5"
+						className="origin-left bg-blue-500 p-1.5"
 						style={{ width: `${globalCompleted}%` }}
 					>
 						<p className="w-max rounded-sm border border-black bg-white px-1.5 py-0.5 text-xs">
