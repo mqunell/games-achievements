@@ -1,11 +1,6 @@
 import Link from 'next/link'
 
-type Props = {
-	href: string
-	children: React.ReactNode
-}
-
-const ConditionalLink = ({ href, children }: Props) => {
+const ConditionalLink = ({ href, children }: { href: string; children: React.ReactNode }) => {
 	if (!href) {
 		return <>{children}</>
 	}

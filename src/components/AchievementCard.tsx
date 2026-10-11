@@ -4,15 +4,16 @@ import { formatDateTime } from '@/lib/time'
 import CompletedBadge from './CompletedBadge'
 import Divider from './Divider'
 
-type Props = {
+const AchievementCard = ({
+	achCard,
+	displayOptions,
+}: {
 	achCard: AchCard
 	displayOptions: {
 		showTime: boolean
 		showGlobal: boolean
 	}
-}
-
-const AchievementCard = ({ achCard, displayOptions }: Props) => {
+}) => {
 	const { name, description, globalCompleted, completed, completedTime } = achCard
 
 	return (

@@ -13,12 +13,13 @@ import TextFilter from '@/components/TextFilter'
 import Toggle from '@/components/Toggle'
 import { compare, sortOptions } from '@/lib/sortAchievements'
 
-type Props = {
+const GameAchievementsClient = ({
+	gameCard,
+	achCards,
+}: {
 	gameCard: GameCard
 	achCards: AchCard[]
-}
-
-const GameAchievementsClient = ({ gameCard, achCards }: Props) => {
+}) => {
 	const hasAchCompletedTimes = achCards.some((ach: AchCard) => !!ach.completedTime)
 
 	const validSortOptions = hasAchCompletedTimes

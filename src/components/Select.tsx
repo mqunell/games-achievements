@@ -1,16 +1,18 @@
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from './HeroIcons'
 
-type Props = {
-	sortBy: SortOption
-	setSortBy: React.Dispatch<React.SetStateAction<SortOption>>
-	sortOptions: SortOption[]
-}
-
 /**
  * Styled implementation of Headless UI's Listbox
  */
-const Select = ({ sortBy, setSortBy, sortOptions }: Props) => (
+const Select = ({
+	sortBy,
+	setSortBy,
+	sortOptions,
+}: {
+	sortBy: SortOption
+	setSortBy: React.Dispatch<React.SetStateAction<SortOption>>
+	sortOptions: SortOption[]
+}) => (
 	<Listbox as="div" className="flex w-full flex-col gap-1" value={sortBy} onChange={setSortBy}>
 		<ListboxButton className="flex cursor-pointer items-center justify-between rounded-sm bg-green-500 px-2 py-1 text-white">
 			<span>{sortBy}</span>

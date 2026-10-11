@@ -1,11 +1,12 @@
 import clsx from 'clsx'
 
-type Props = {
+const TextFilter = ({
+	filterText,
+	setFilterText,
+}: {
 	filterText: string
 	setFilterText: React.Dispatch<React.SetStateAction<string>>
-}
-
-const TextFilter = ({ filterText, setFilterText }: Props) => (
+}) => (
 	<input
 		type="text"
 		className={clsx(

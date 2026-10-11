@@ -7,16 +7,6 @@ import Divider from './Divider'
 import { CalendarIcon, CheckCircleIcon, ClockIcon, TrophyIcon } from './HeroIcons'
 import PlatformIcon from './PlatformIcon'
 
-type Props = {
-	game: GameCard
-	size: Size
-	displayOptions?: {
-		showProgress: boolean
-		showPlaytime: boolean
-		showTimeLastPlayed: boolean
-	}
-}
-
 const logoUrl = (gameId: GameId, platforms: Platform[]) => {
 	const switchOnly = platforms.length === 1 && platforms[0] === 'Switch'
 
@@ -56,7 +46,15 @@ const GameCard = ({
 	game,
 	size,
 	displayOptions = { showProgress: true, showPlaytime: true, showTimeLastPlayed: true },
-}: Props) => {
+}: {
+	game: GameCard
+	size: Size
+	displayOptions?: {
+		showProgress: boolean
+		showPlaytime: boolean
+		showTimeLastPlayed: boolean
+	}
+}) => {
 	const { gameId, name, platforms, playtimes, achievementCounts: achCounts, timeLastPlayed } = game
 	const { showProgress, showPlaytime, showTimeLastPlayed } = displayOptions
 

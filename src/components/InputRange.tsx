@@ -1,10 +1,12 @@
-type Props = {
+const InputRange = ({
+	title,
+	value,
+	setValue,
+}: {
 	title: string
 	value: number
 	setValue: React.Dispatch<React.SetStateAction<number>>
-}
-
-const InputRange = ({ title, value, setValue }: Props) => (
+}) => (
 	<label className="grid grid-cols-[1fr_28px] gap-x-2">
 		<span className="col-span-2">{title}</span>
 		<input

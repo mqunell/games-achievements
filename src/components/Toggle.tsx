@@ -1,16 +1,18 @@
 import { Field, Label, Switch } from '@headlessui/react'
 import clsx from 'clsx'
 
-type Props = {
-	label: string | React.ReactNode
-	checked: boolean
-	onClick: () => void
-}
-
 /**
  * Styled implementation of Headless UI's Switch
  */
-const Toggle = ({ label, checked, onClick }: Props) => (
+const Toggle = ({
+	label,
+	checked,
+	onClick,
+}: {
+	label: string | React.ReactNode
+	checked: boolean
+	onClick: () => void
+}) => (
 	<Field>
 		<div className="flex items-center gap-1">
 			<Switch
