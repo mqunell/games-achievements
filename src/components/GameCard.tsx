@@ -10,10 +10,10 @@ import { CalendarIcon, CheckCircleIcon, ClockIcon, TrophyIcon } from './HeroIcon
 import PlatformIcon from './PlatformIcon'
 
 const logoUrl = (gameId: GameId, platforms: Platform[]) => {
-	const switchOnly = platforms.length === 1 && platforms[0] === 'Switch'
+	const switchOnly = platforms.length === 1 && platforms[0] === 'Nintendo'
 
 	return switchOnly
-		? `/Switch/${gameId}.jpg`
+		? `/Nintendo/${gameId}.jpg`
 		: `https://steamcdn-a.akamaihd.net/steam/apps/${gameId}/header.jpg`
 }
 
@@ -84,7 +84,7 @@ const GameCard = ({
 					alt={`${name} poster`}
 					fill={true}
 					sizes="320px"
-					onError={() => setPoster('/Switch/placeholder.jpg')}
+					onError={() => setPoster('/Nintendo/placeholder.jpg')}
 				/>
 			</div>
 

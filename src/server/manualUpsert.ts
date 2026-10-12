@@ -5,9 +5,9 @@ import type { ApiGame, ApiGlobalAchievement, ApiUserAchievement } from '@/types/
 import type { DbAchievement, DbGame } from '@/types/db'
 
 /**
- * Manually add an Xbox or Switch game and its achievements to the database
+ * Manually add an Xbox or Nintendo game and its achievements to the database
  *
- * Microsoft and Nintendo don't provide public APIs, so Xbox and Switch games need to be upserted
+ * Microsoft and Nintendo don't provide public APIs, so Xbox and Nintendo games need to be upserted
  * manually. If the game is on Steam then most of the data can be fetched automatically, and only
  * fields like `total_playtime` and `completed` need to be entered manually. Steam doesn't support
  * querying games directly for their basic data and achievements, however, so a user with a public
@@ -15,7 +15,7 @@ import type { DbAchievement, DbGame } from '@/types/db'
  *
  * - Gathering data from Steam: Use a tool like Bruno to make API calls then copy/paste the results
  *   into the variables in this file
- * - Adding a basic Switch game: Manually fill out the ApiGame variable or use SQL directly
+ * - Adding a basic Nintendo game: Manually fill out the ApiGame variable or use SQL directly
  * - Updating achievements: Use SQL directly (currently not supported in this script)
  */
 

@@ -1,5 +1,7 @@
-export type Platform = 'Steam' | 'Xbox' | 'Switch'
 export type GameId = string
+
+export const PLATFORMS = ['Steam', 'Xbox', 'Nintendo'] as const
+export type Platform = (typeof PLATFORMS)[number]
 
 export type DbGame = {
 	id: string

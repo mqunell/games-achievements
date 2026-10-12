@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import type { Metadata } from 'next'
 import { Anek_Gujarati, Poppins } from 'next/font/google'
 import '@/styles/globals.css'
 
@@ -14,9 +15,9 @@ const poppins = Poppins({
 	variable: '--font-poppins',
 })
 
-export const metadata = {
+export const metadata: Metadata = {
 	title: 'Games and Achievements',
-	description: 'Steam, Xbox, and Switch games and achievements',
+	description: 'Steam, Xbox, and Nintendo games and achievements',
 }
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (

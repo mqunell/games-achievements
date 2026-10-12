@@ -25,10 +25,10 @@ const HomeClient = ({ gameCards }: { gameCards: GameCardData[] }) => {
 	const [showTimeLastPlayed, setShowTimeLastPlayed] = useState(true)
 
 	// Filter state
-	const [filterPlatforms, setFilterPlatforms] = useState({
+	const [filterPlatforms, setFilterPlatforms] = useState<Record<Platform, boolean>>({
 		Steam: true,
 		Xbox: true,
-		Switch: true,
+		Nintendo: true,
 	})
 	const [filterText, setFilterText] = useState('')
 	const [filterPerc, setFilterPerc] = useState(0)
@@ -59,6 +59,8 @@ const HomeClient = ({ gameCards }: { gameCards: GameCardData[] }) => {
 		setDisplayedGames(displayed)
 	}, [gameCards, filterPlatforms, filterText, filterPerc, filterTime, sortBy])
 
+	const platforms: Platform[] = ['Steam', 'Xbox', 'Nintendo']
+
 	return (
 		<Layout.Container fromDirection="left">
 			<DisplayOptionsContainer>
@@ -86,7 +88,7 @@ const HomeClient = ({ gameCards }: { gameCards: GameCardData[] }) => {
 				>
 					<TextFilter filterText={filterText} setFilterText={setFilterText} />
 					<div className="flex gap-6">
-						{['Steam', 'Xbox', 'Switch'].map((platform: Platform) => (
+						{platforms.map((platform: Platform) => (
 							<Toggle
 								key={platform}
 								label={<PlatformIcon platform={platform} size="small" />}

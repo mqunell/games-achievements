@@ -1,7 +1,7 @@
 import type { GameCardData } from '@/types/app'
 import type { DbGameWithCounts } from '@/types/db'
 
-// Steam games take priority since they always have more data than Xbox or Switch counterparts
+// Steam games take priority since they always have more data than Xbox or Nintendo counterparts
 export const choosePriorityGame = (dbGameCards: DbGameWithCounts[]): DbGameWithCounts => {
 	return (
 		dbGameCards.find((game) => game.platform === 'Steam') ??
