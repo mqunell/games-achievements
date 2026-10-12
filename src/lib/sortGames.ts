@@ -1,8 +1,9 @@
+import type { GameCardData, GameSortOption } from '@/types/app'
 import { calcCompletion } from './percentage'
 
 export const sortOptions: GameSortOption[] = ['Name', 'Playtime', 'Time last played', 'Completion']
 
-export const compare = (a: GameCard, b: GameCard, sortBy: GameSortOption): number => {
+export const compare = (a: GameCardData, b: GameCardData, sortBy: GameSortOption): number => {
 	if (sortBy === 'Name') {
 		return a.name < b.name ? -1 : 1
 	}

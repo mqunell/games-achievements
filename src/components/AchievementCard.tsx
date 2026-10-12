@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { motion } from 'motion/react'
 import { formatDateTime } from '@/lib/time'
+import type { AchievementCardData } from '@/types/app'
 import CompletedBadge from './CompletedBadge'
 import Divider from './Divider'
 
@@ -8,7 +9,7 @@ const AchievementCard = ({
 	achCard,
 	displayOptions,
 }: {
-	achCard: AchCard
+	achCard: AchievementCardData
 	displayOptions: {
 		showTime: boolean
 		showGlobal: boolean

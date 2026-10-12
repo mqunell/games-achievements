@@ -9,6 +9,8 @@ import {
 	mockDbGame2,
 	mockDbGame3,
 } from '@/testing/mocks/mocks'
+import type { ApiGame } from '@/types/api'
+import type { DbAchievement, DbGame } from '@/types/db'
 import { deriveGameTimeLastPlayed, getAchievementsToUpsert, getGamesToUpsert } from './cron'
 import * as getAllRecentSteamGames from './getAllRecentSteamGames'
 

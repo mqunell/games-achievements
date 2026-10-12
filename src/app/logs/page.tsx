@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { Fragment } from 'react'
 import { ArrowLeftIcon } from '@/components/HeroIcons'
 import { readLogs } from '@/db/queries'
+import type { LogLine, LogSeverity } from '@/types/logs'
 import LocalTimestamp from './LocalTimestamp'
 
 export const revalidate = 600

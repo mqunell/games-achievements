@@ -1,5 +1,7 @@
 import clsx from 'clsx'
 import Image from 'next/image'
+import type { Size } from '@/types/app'
+import type { Platform } from '@/types/db'
 
 const PlatformIcon = ({ platform, size }: { platform: Platform; size: Size }) => (
 	<div

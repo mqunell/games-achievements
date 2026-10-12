@@ -1,4 +1,6 @@
 import { Pool } from 'pg'
+import type { ApiGame, ApiGlobalAchievement, ApiUserAchievement } from '@/types/api'
+import type { DbAchievement, DbGame, GameId } from '@/types/db'
 
 const { POSTGRES_HOST, POSTGRES_DB, POSTGRES_USER, POSTGRES_PASS } = process.env
 

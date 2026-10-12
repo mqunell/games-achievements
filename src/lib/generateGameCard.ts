@@ -1,5 +1,8 @@
+import type { GameCardData } from '@/types/app'
+import type { DbGameWithCounts } from '@/types/db'
+
 // Steam games take priority since they always have more data than Xbox or Switch counterparts
-export const choosePriorityGame = (dbGameCards: DbGameCard[]): DbGameCard => {
+export const choosePriorityGame = (dbGameCards: DbGameWithCounts[]): DbGameWithCounts => {
 	return (
 		dbGameCards.find((game) => game.platform === 'Steam') ??
 		dbGameCards.find((game) => game.platform === 'Xbox') ??
@@ -7,7 +10,7 @@ export const choosePriorityGame = (dbGameCards: DbGameCard[]): DbGameCard => {
 	)
 }
 
-export const generateGameCard = (dbGameCards: DbGameCard[]): GameCard => {
+export const generateGameCard = (dbGameCards: DbGameWithCounts[]): GameCardData => {
 	const priorityGame = choosePriorityGame(dbGameCards)
 
 	return {
@@ -20,8 +23,8 @@ export const generateGameCard = (dbGameCards: DbGameCard[]): GameCard => {
 		},
 		timeLastPlayed: priorityGame.time_last_played,
 		achievementCounts: {
-			total: parseInt(priorityGame.total_achievements, 10),
-			completed: parseInt(priorityGame.completed_achievements, 10),
+			total: priorityGame.total_achievements,
+			completed: priorityGame.completed_achievements,
 		},
 	}
 }

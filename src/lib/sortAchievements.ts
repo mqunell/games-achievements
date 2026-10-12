@@ -1,6 +1,12 @@
+import type { AchievementCardData, AchSortOption } from '@/types/app'
+
 export const sortOptions: AchSortOption[] = ['Name', 'Completion time', 'Global completion']
 
-export const compare = (a: AchCard, b: AchCard, sortBy: AchSortOption): number => {
+export const compare = (
+	a: AchievementCardData,
+	b: AchievementCardData,
+	sortBy: AchSortOption,
+): number => {
 	if (sortBy === 'Name') {
 		return a.name < b.name ? -1 : 1
 	}

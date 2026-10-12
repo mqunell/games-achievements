@@ -1,7 +1,7 @@
-type Platform = 'Steam' | 'Xbox' | 'Switch'
-type GameId = string
+export type Platform = 'Steam' | 'Xbox' | 'Switch'
+export type GameId = string
 
-type DbGame = {
+export type DbGame = {
 	id: string
 	platform: Platform
 	name: string
@@ -11,7 +11,7 @@ type DbGame = {
 	// PK: (id, platform)
 }
 
-type DbAchievement = {
+export type DbAchievement = {
 	game_id: GameId
 	game_platform: Platform
 	id: string
@@ -24,7 +24,7 @@ type DbAchievement = {
 	// FK: (game_id, game_platform) -> (DbGame.id, DbGame.platform)
 }
 
-type DbGameCard = DbGame & {
-	total_achievements: string // COUNT() is returned as a string
-	completed_achievements: string // SUM() is returned as a string
+export type DbGameWithCounts = DbGame & {
+	total_achievements: number
+	completed_achievements: number
 }

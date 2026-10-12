@@ -1,6 +1,7 @@
 // biome-ignore-all lint: one-time migration
 
 // import { getAllGames } from '@/data/dbHelper'
+import type { DbAchievement, DbGame, GameId, Platform } from '@/types/db'
 import { buildInsertPlaceholders, db } from '../utils'
 
 type JsonGame = {

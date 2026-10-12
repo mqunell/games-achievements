@@ -1,5 +1,7 @@
-import { getDbAchievements, getDbGameCards, getGameName } from '@/db/queries'
+import { getDbAchievements, getDbGamesWithCounts, getGameName } from '@/db/queries'
 import { choosePriorityGame, generateGameCard } from '@/lib/generateGameCard'
+import type { AchievementCardData, GameCardData } from '@/types/app'
+import type { DbAchievement, DbGameWithCounts, GameId, Platform } from '@/types/db'
 import GameAchievementsClient from './GameAchievementsClient'
 
 type Params = Promise<{ gameId: GameId }>
@@ -13,12 +15,12 @@ export const generateMetadata = async ({ params }: { params: Params }) => {
 
 const ServerGame = async ({ params }: { params: Params }) => {
 	const { gameId } = await params
-	const dbGames: DbGameCard[] = await getDbGameCards(gameId)
-	const gameCard: GameCard = generateGameCard(dbGames)
+	const dbGames: DbGameWithCounts[] = await getDbGamesWithCounts(gameId)
+	const gameCard: GameCardData = generateGameCard(dbGames)
 
 	const priorityPlatform: Platform = choosePriorityGame(dbGames).platform
 	const dbAchievements: DbAchievement[] = await getDbAchievements(gameId, priorityPlatform)
-	const achCards: AchCard[] = dbAchievements.map((row) => ({
+	const achCards: AchievementCardData[] = dbAchievements.map((row) => ({
 		id: row.id,
 		name: row.name,
 		description: row.description,

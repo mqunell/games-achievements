@@ -1,5 +1,6 @@
 import { HttpResponse, http } from 'msw'
 import { server } from '@/testing/mocks/server'
+import type { ApiGame } from '@/types/api'
 import { getAllRecentSteamGames } from './getAllRecentSteamGames'
 
 const mockSteamUserOwnedGames = (apiGames: ApiGame[]) => {

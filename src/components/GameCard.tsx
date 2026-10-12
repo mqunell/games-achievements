@@ -2,6 +2,8 @@ import clsx from 'clsx'
 import Image from 'next/image'
 import { type ComponentType, useState } from 'react'
 import { formatDate, formatDuration } from '@/lib/time'
+import type { GameCardData, Size } from '@/types/app'
+import type { GameId, Platform } from '@/types/db'
 import CompletedBadge from './CompletedBadge'
 import Divider from './Divider'
 import { CalendarIcon, CheckCircleIcon, ClockIcon, TrophyIcon } from './HeroIcons'
@@ -47,7 +49,7 @@ const GameCard = ({
 	size,
 	displayOptions = { showProgress: true, showPlaytime: true, showTimeLastPlayed: true },
 }: {
-	game: GameCard
+	game: GameCardData
 	size: Size
 	displayOptions?: {
 		showProgress: boolean

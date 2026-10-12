@@ -1,3 +1,5 @@
+import type { DbAchievement, DbGame, DbGameWithCounts, Platform } from '@/types/db'
+import type { LogLine, LogSeverity } from '@/types/logs'
 import { buildInsertPlaceholders, db, getAchievementValues, getGameValues } from './utils'
 
 export const getGameName = async (id: string): Promise<string> => {
@@ -8,14 +10,17 @@ export const getGameName = async (id: string): Promise<string> => {
 // TODO: If `time_last_played` is undefined but the game has achievements with timestamps, can
 // it be set to the same timestamp as the most recent achievement? This would be better than
 // nothing for games played via Steam Family Sharing that don't have that field
-export const getDbGameCards = async (id?: string): Promise<DbGameCard[]> => {
-	const { rows } = await db.query<DbGameCard>(
+export const getDbGamesWithCounts = async (id?: string): Promise<DbGameWithCounts[]> => {
+	const { rows } = await db.query<DbGameWithCounts>(
 		`
-			SELECT g.id, g.platform, g.name, g.playtime_total, g.playtime_recent, g.time_last_played, COUNT(a.id) AS total_achievements, SUM(CASE WHEN a.completed THEN 1 ELSE 0 END) AS completed_achievements
+			SELECT
+				g.id, g.platform, g.name, g.playtime_total, g.playtime_recent, g.time_last_played,
+				COUNT(a.id)::int AS total_achievements,
+				(COUNT(*) FILTER (WHERE a.completed))::int AS completed_achievements
 			FROM games g
 			LEFT JOIN achievements a ON g.id = a.game_id AND g.platform = a.game_platform
 			${id ? `WHERE g.id = $1` : ``}
-			GROUP BY g.id, g.platform, g.name
+			GROUP BY g.id, g.platform
 		`,
 		id ? [id] : [],
 	)

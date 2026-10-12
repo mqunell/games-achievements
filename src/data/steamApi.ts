@@ -1,3 +1,6 @@
+import type { ApiGame, ApiGlobalAchievement, ApiUserAchievement } from '@/types/api'
+import type { GameId } from '@/types/db'
+
 const { STEAM_API_KEY, STEAM_USER_ID } = process.env
 
 // GetOwnedGames lists all of a user's owned games, and includes the `playtime_disconnected` and

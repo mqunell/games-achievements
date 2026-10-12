@@ -13,9 +13,11 @@ import TextFilter from '@/components/TextFilter'
 import Toggle from '@/components/Toggle'
 import { calcCompletion } from '@/lib/percentage'
 import { compare, sortOptions } from '@/lib/sortGames'
+import type { GameCardData, GameSortOption } from '@/types/app'
+import type { Platform } from '@/types/db'
 
-const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
-	const [displayedGames, setDisplayedGames] = useState<GameCard[]>([])
+const HomeClient = ({ gameCards }: { gameCards: GameCardData[] }) => {
+	const [displayedGames, setDisplayedGames] = useState<GameCardData[]>([])
 
 	// Display state
 	const [showProgress, setShowProgress] = useState(true)
@@ -44,7 +46,7 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 
 		// Filter and sort the games
 		const displayed = gameCards
-			.filter((game: GameCard): boolean => {
+			.filter((game: GameCardData): boolean => {
 				const validPlatform = game.platforms.reduce((acc, pf) => acc || filterPlatforms[pf], false)
 				const validText = game.name.toLowerCase().includes(filterText.toLowerCase())
 				const validPerc = calcCompletion(game) >= filterPerc
@@ -52,7 +54,7 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 
 				return validPlatform && validText && validPerc && validTime
 			})
-			.sort((a: GameCard, b: GameCard) => compare(a, b, sortBy))
+			.sort((a: GameCardData, b: GameCardData) => compare(a, b, sortBy))
 
 		setDisplayedGames(displayed)
 	}, [gameCards, filterPlatforms, filterText, filterPerc, filterTime, sortBy])
@@ -113,7 +115,7 @@ const HomeClient = ({ gameCards }: { gameCards: GameCard[] }) => {
 
 			<Layout.Cards>
 				<AnimatePresence>
-					{displayedGames.map((game: GameCard) => {
+					{displayedGames.map((game: GameCardData) => {
 						const clickable = game.achievementCounts.total > 0
 
 						return (

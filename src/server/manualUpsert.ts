@@ -1,6 +1,8 @@
 import 'dotenv/config'
 import { upsertAchievements, upsertGames } from '@/db/queries'
 import { convertApiAchievements, convertApiGame } from '@/db/utils'
+import type { ApiGame, ApiGlobalAchievement, ApiUserAchievement } from '@/types/api'
+import type { DbAchievement, DbGame } from '@/types/db'
 
 /**
  * Manually add an Xbox or Switch game and its achievements to the database

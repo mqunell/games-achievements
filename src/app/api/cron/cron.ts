@@ -1,6 +1,8 @@
 import { getGlobalAchs, getUserAchs } from '@/data/steamApi'
 import { getDbRecentSteamGames, upsertAchievements, upsertGames, writeLog } from '@/db/queries'
 import { convertApiAchievements, convertApiGame } from '@/db/utils'
+import type { ApiGame, ApiGlobalAchievement, ApiUserAchievement } from '@/types/api'
+import type { DbAchievement, DbGame, GameId } from '@/types/db'
 import { getAllRecentSteamGames } from './getAllRecentSteamGames'
 
 const invalidGameIds = ['218620', '359050', '365720', '469820', '1053680']

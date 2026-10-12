@@ -12,21 +12,22 @@ import Select from '@/components/Select'
 import TextFilter from '@/components/TextFilter'
 import Toggle from '@/components/Toggle'
 import { compare, sortOptions } from '@/lib/sortAchievements'
+import type { AchievementCardData, AchSortOption, GameCardData } from '@/types/app'
 
 const GameAchievementsClient = ({
 	gameCard,
 	achCards,
 }: {
-	gameCard: GameCard
-	achCards: AchCard[]
+	gameCard: GameCardData
+	achCards: AchievementCardData[]
 }) => {
-	const hasAchCompletedTimes = achCards.some((ach: AchCard) => !!ach.completedTime)
+	const hasAchCompletedTimes = achCards.some((ach: AchievementCardData) => !!ach.completedTime)
 
 	const validSortOptions = hasAchCompletedTimes
 		? sortOptions
 		: sortOptions.filter((option) => option !== 'Completion time')
 
-	const [displayedAchievements, setDisplayedAchievements] = useState<AchCard[]>([])
+	const [displayedAchievements, setDisplayedAchievements] = useState<AchievementCardData[]>([])
 
 	// Display state
 	const [showTime, setShowTime] = useState(hasAchCompletedTimes) // Xbox achievements don't have completion dates
@@ -44,7 +45,7 @@ const GameAchievementsClient = ({
 
 	// Filtering and sorting
 	useEffect(() => {
-		const displayed: AchCard[] = achCards
+		const displayed: AchievementCardData[] = achCards
 			.filter((ach) => {
 				const validCompleted = ach.completed ? showCompleted : showUncompleted
 				const validText = (ach.name + ach.description)
@@ -71,7 +72,7 @@ const GameAchievementsClient = ({
 
 				<Layout.Cards>
 					<AnimatePresence>
-						{displayedAchievements.map((achCard: AchCard) => (
+						{displayedAchievements.map((achCard: AchievementCardData) => (
 							<motion.div
 								layout="position"
 								initial={{ opacity: 0 }}

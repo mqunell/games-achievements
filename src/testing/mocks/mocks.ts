@@ -1,3 +1,6 @@
+import type { ApiGame, ApiGlobalAchievement, ApiUserAchievement } from '@/types/api'
+import type { DbAchievement, DbGame } from '@/types/db'
+
 // ApiGame mocks
 export const mockApiGame1: ApiGame = {
 	appid: 1,

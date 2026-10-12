@@ -1,4 +1,5 @@
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
+import type { SortOption } from '@/types/app'
 import { CheckIcon, SelectorIcon } from './HeroIcons'
 
 /**

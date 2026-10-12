@@ -1,4 +1,4 @@
-type ApiGame = {
+export type ApiGame = {
 	appid: number
 	name: string
 	playtime_2weeks?: number // Minutes; not included by API if 0
@@ -8,7 +8,7 @@ type ApiGame = {
 	// Others are irrelevant
 }
 
-type ApiUserAchievement = {
+export type ApiUserAchievement = {
 	apiname: string // ID
 	achieved: number
 	unlocktime: number
@@ -16,7 +16,7 @@ type ApiUserAchievement = {
 	description: string
 }
 
-type ApiGlobalAchievement = {
+export type ApiGlobalAchievement = {
 	name: string // ID
 	percent: number | string
 }

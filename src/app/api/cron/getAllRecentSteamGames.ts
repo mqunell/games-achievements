@@ -1,4 +1,5 @@
 import { getUserOwnedGames, getUserRecentGames } from '@/data/steamApi'
+import type { ApiGame } from '@/types/api'
 
 /**
  * Combine data from two different Steam endpoints to generate a list of recently played games with
