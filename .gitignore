@@ -37,3 +37,5 @@ yarn-error.log*
 # Project
 /.vscode
 /backups
+next-env.d.ts
+tsconfig.tsbuildinfo

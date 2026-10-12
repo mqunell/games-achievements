@@ -5,12 +5,12 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"biome-check": "biome check",
-		"biome-fix": "biome check --write",
+		"db:migrate": "tsx src/db/migrations/3-update-platform-enum.ts",
+		"db:upsert": "tsx src/server/manualUpsert.ts",
+		"lint": "biome check",
+		"lint:fix": "biome check --write",
 		"test": "vitest",
-		"typecheck": "npx tsc --noEmit",
-		"manualUpsert": "./node_modules/.bin/tsx src/server/manualUpsert.ts",
-		"runMigration": "./node_modules/.bin/tsx src/db/migrations/_.ts"
+		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
 		"@headlessui/react": "^2.2.7",
