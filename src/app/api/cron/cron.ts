@@ -121,6 +121,7 @@ export const upsertGamesAndAchievements = async (): Promise<void> => {
 		writeLog('info', `Upserted ${games.length} game(s): ${gameNames}`)
 	} catch (_error) {
 		writeLog('error', `Failed to upsert game(s): ${gameNames}`)
+		return
 	} finally {
 		await rateLimit()
 	}
