@@ -84,6 +84,7 @@ const GameCard = ({
 					alt={`${name} poster`}
 					fill={true}
 					sizes="320px"
+					unoptimized={poster.startsWith('https://steamcdn-a.akamaihd.net')} // Steam images are already small and don't need to be optimized
 					onError={() => setPoster('/Nintendo/placeholder.jpg')}
 				/>
 			</div>
