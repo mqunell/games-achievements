@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { getDbAchievements, getDbGamesWithCounts, getGameName } from '@/db/queries'
 import { choosePriorityGame, generateGameCard } from '@/lib/generateGameCard'
 import type { AchievementCardData, GameCardData } from '@/types/app'
@@ -6,7 +7,7 @@ import GameAchievementsClient from './GameAchievementsClient'
 
 type Params = Promise<{ gameId: GameId }>
 
-export const generateMetadata = async ({ params }: { params: Params }) => {
+export const generateMetadata = async ({ params }: { params: Params }): Promise<Metadata> => {
 	const { gameId } = await params
 	const gameName = await getGameName(gameId)
 
